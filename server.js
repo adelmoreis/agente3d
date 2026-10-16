@@ -90,6 +90,18 @@ app.all('/api.php', (req, res) => {
     res.json({ status: 'online', api: '3Dígitos Node.js API' });
 });
 
+const { exec } = require('child_process');
+
+// 4. Sincronização Instantânea com o GitHub
+app.all('/api/sync-github', (req, res) => {
+    exec('git fetch origin main && git reset --hard origin/main', { cwd: __dirname }, (err, stdout, stderr) => {
+        if (err) {
+            return res.status(500).json({ success: false, error: err.message, stderr });
+        }
+        res.json({ success: true, message: 'Site sincronizado com o GitHub!', output: stdout.trim() });
+    });
+});
+
 app.use(express.static(__dirname));
 
 app.listen(PORT, () => {
