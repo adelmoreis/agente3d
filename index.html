@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portal - Vitrine de Projetos</title>
+    <!-- Tailwind CSS para estilização rápida e moderna -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuração de cores personalizadas do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandGreen: '#10b981', /* Emerald 500 */
+                        brandGreenDark: '#047857', /* Emerald 700 */
+                        brandOrange: '#f97316', /* Orange 500 */
+                        brandOrangeDark: '#c2410c', /* Orange 700 */
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="site-sync.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-padding-top: 7.5rem;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #047857 0%, #10b981 50%, #f97316 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Barra de Alerta Superior (Gerenciada pelo Admin) -->
+    <div id="topAnnouncementBanner" class="hidden bg-gradient-to-r from-brandOrange to-orange-600 text-white py-2 px-4 text-center text-xs sm:text-sm font-bold relative z-50 shadow-sm">
+        <span id="topAnnouncementText">🔥 Comunicado Importante</span>
+        <a id="topAnnouncementLink" href="#" class="ml-2 underline font-extrabold hover:text-orange-100">Saiba mais &rarr;</a>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-2">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center py-1">
+                        <img src="logo.png" alt="3Dígitos Logo" class="h-[84px] sm:h-[105px] w-auto object-contain transition-all hover:scale-105 duration-300">
+                    </a>
+                </div>
+                <div class="flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
+                    <a href="#solucoes" class="text-gray-600 hover:text-brandOrange font-bold transition hidden md:block">Consultoria & Cursos</a>
+                    <a href="#projetos" class="text-gray-600 hover:text-brandOrange font-bold transition hidden lg:block">Vitrine</a>
+                    
+                    <a href="#blog" class="text-gray-600 hover:text-brandOrange font-bold transition hidden lg:block">Blog</a>
+                    <a href="login.html" class="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-brandOrange text-brandOrange hover:bg-brandOrange hover:text-white rounded-lg transition font-semibold">Área Restrita</a>
+                    <a href="#contato" class="px-3 sm:px-4 py-2 text-xs sm:text-sm bg-brandGreen text-white rounded-lg hover:bg-brandGreenDark transition shadow-lg font-bold">Contato</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Moderna e Alegre -->
+    <section class="relative pt-36 pb-16 lg:pt-44 lg:pb-24 overflow-hidden bg-brandGreenDark">
+        <!-- Fundo com imagem e sobreposição -->
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Equipe de tecnologia alegre" class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-br from-brandGreenDark via-brandGreen to-brandOrange opacity-90 mix-blend-multiply"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center">
+            <!-- Textos e Call to Action -->
+            <div class="lg:w-1/2 text-center lg:text-left text-white z-10">
+                <span id="heroTag" class="inline-block py-1.5 px-4 rounded-full bg-white/20 text-white text-sm font-bold tracking-wider mb-6 shadow-sm backdrop-blur-sm border border-white/30">
+                    🚀 IMPULSIONE SEU NEGÓCIO
+                </span>
+                <h1 id="heroTitle" class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight drop-shadow-lg">
+                    Ideias Criativas, <br>
+                    <span class="text-brandOrange drop-shadow-md">Resultados Reais</span>
+                </h1>
+                <p id="heroDesc" class="text-lg md:text-xl font-medium mb-10 text-gray-100 max-w-2xl mx-auto lg:mx-0 drop-shadow">
+                    Desenvolvemos soluções inteligentes em Tecnologia, Sistemas e Automação com IA. Transforme a visão da sua empresa em resultados fantásticos!
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a id="heroCtaBtn" href="https://wa.me/5599999999999?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento!" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-brandOrange text-white font-bold rounded-full shadow-2xl hover:bg-orange-500 hover:scale-105 transition transform duration-300 flex items-center justify-center ring-4 ring-orange-500/30">
+                        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.082 19.165c-1.63 0-3.122-.411-4.437-1.109l-4.908 1.287 1.309-4.781c-.767-1.34-1.208-2.893-1.208-4.55 0-5.068 4.108-9.176 9.176-9.176s9.176 4.108 9.176 9.176c0 5.068-4.108 9.176-9.176 9.176z"/></svg>
+                        <span>Fazer um Orçamento</span>
+                    </a>
+                    <a href="#projetos" class="w-full sm:w-auto px-8 py-4 bg-white text-brandGreenDark font-bold rounded-full shadow-lg hover:bg-gray-100 transition transform duration-300">
+                        Ver Vitrine
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Destaque de Projetos Flutuantes (Vitrine Premium na Hero) -->
+            <div class="lg:w-1/2 mt-16 lg:mt-0 hidden md:flex flex-col justify-center items-end z-10 space-y-4 pr-4 lg:pr-10 relative">
+                <!-- Efeito de brilho ambiente de fundo -->
+                <div class="absolute -top-10 -right-10 w-80 h-80 bg-brandOrange/20 blur-3xl rounded-full pointer-events-none"></div>
+
+                <!-- Selo de Status do Portfólio -->
+                <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-xs font-extrabold border border-white/30 shadow-lg mb-1 mr-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="tracking-wider uppercase">Projetos em Destaque</span>
+                </div>
+                
+                <!-- Card Projeto 1: RHINOVA -->
+                <a href="http://localhost:8081" data-project="rhinova" target="_blank" rel="noopener noreferrer" title="Abrir projeto RHINOVA ao vivo" class="group flex items-center justify-between bg-white/95 backdrop-blur-xl border border-white/80 rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.25)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)] hover:scale-105 hover:-translate-x-3 transition-all duration-300 w-[320px] sm:w-[360px] lg:w-[390px] relative cursor-pointer">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden shadow-md shrink-0 ring-2 ring-orange-200">
+                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=200&q=80" alt="RHINOVA" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-orange-100 text-brandOrange border border-orange-200">
+                                    RH & Inovação
+                                </span>
+                            </div>
+                            <h3 class="text-gray-900 font-extrabold text-lg sm:text-xl group-hover:text-brandOrange transition">RHINOVA</h3>
+                            <p class="text-xs text-gray-500 font-medium">Gestão Inteligente de Pessoas</p>
+                        </div>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandOrange text-gray-400 group-hover:text-white flex items-center justify-center transition-all duration-300 shrink-0 shadow-inner ml-2">
+                        <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </a>
+
+                <!-- Card Projeto 2: Sistema Clínica -->
+                <a href="clinica.html" class="group flex items-center justify-between bg-white/95 backdrop-blur-xl border border-white/80 rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.25)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)] hover:scale-105 hover:-translate-x-3 transition-all duration-300 w-[320px] sm:w-[360px] lg:w-[390px] relative cursor-pointer transform md:translate-x-6 lg:translate-x-10">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden shadow-md shrink-0 ring-2 ring-blue-200">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=200&q=80" alt="Sistema Clínica" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-blue-500 border-2 border-white rounded-full"></span>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-blue-100 text-blue-700 border border-blue-200">
+                                    Saúde Digital
+                                </span>
+                            </div>
+                            <h3 class="text-gray-900 font-extrabold text-lg sm:text-xl group-hover:text-blue-600 transition">Sistema Clínica</h3>
+                            <p class="text-xs text-gray-500 font-medium">Prontuário & Agendamentos</p>
+                        </div>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-blue-600 text-gray-400 group-hover:text-white flex items-center justify-center transition-all duration-300 shrink-0 shadow-inner ml-2">
+                        <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </a>
+
+                <!-- Card Projeto 3: Luke Stilo Kids -->
+                <a href="luke.html" class="group flex items-center justify-between bg-white/95 backdrop-blur-xl border border-white/80 rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.25)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)] hover:scale-105 hover:-translate-x-3 transition-all duration-300 w-[320px] sm:w-[360px] lg:w-[390px] relative cursor-pointer transform md:translate-x-12 lg:translate-x-20">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden shadow-md shrink-0 ring-2 ring-amber-200">
+                            <img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=200&q=80" alt="Luke Stilo Kids" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-amber-500 border-2 border-white rounded-full"></span>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-amber-100 text-amber-800 border border-amber-200">
+                                    Moda & E-Commerce
+                                </span>
+                            </div>
+                            <h3 class="text-gray-900 font-extrabold text-lg sm:text-xl group-hover:text-brandOrange transition">Luke Stilo Kids</h3>
+                            <p class="text-xs text-gray-500 font-medium">Vitrine Infantil & Vendas</p>
+                        </div>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandOrange text-gray-400 group-hover:text-white flex items-center justify-center transition-all duration-300 shrink-0 shadow-inner ml-2">
+                        <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Elemento decorativo de onda no final -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-10 md:h-16 text-white" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C52.16,112.44,105.17,112.5,157.9,101.68,212.8,90.43,264.44,67.11,321.39,56.44Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Nova Seção: Soluções e Treinamentos -->
+    <section id="solucoes" class="pt-6 pb-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-brandOrange font-bold tracking-wider uppercase text-sm drop-shadow-sm">O que nós fazemos</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-2 mb-4">Transformação Digital & Capacitação</h2>
+                <div class="h-1 w-24 bg-brandGreen mx-auto rounded mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ajudamos empresas a otimizarem seu tempo com tecnologias de ponta e ensinamos profissionais a dominarem o futuro do mercado.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Bloco: Para Empresas -->
+                <div class="bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brandGreen opacity-10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-125 duration-500"></div>
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 bg-brandGreen text-white rounded-2xl flex items-center justify-center shadow-lg mr-5">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-900">Para Empresas</h3>
+                    </div>
+                    <p class="text-gray-600 mb-8 font-medium text-lg">Consultoria corporativa e implementação de sistemas para organizar processos e eliminar o trabalho manual da sua equipe.</p>
+                    
+                    <div class="space-y-6 z-10 relative">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start hover:border-brandGreen transition duration-300">
+                            <div class="text-brandOrange mt-1 mr-4">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Atendimento Inteligente (Chatwoot)</h4>
+                                <p class="text-gray-600 text-sm leading-relaxed">Centralizamos seu WhatsApp, Instagram e E-mail em uma única tela. Implementamos a plataforma e treinamos sua equipe para não perder mais nenhuma venda por demora no atendimento.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start hover:border-brandGreen transition duration-300">
+                            <div class="text-brandOrange mt-1 mr-4">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Engenharia de Automações</h4>
+                                <p class="text-gray-600 text-sm leading-relaxed">Criamos fluxos inteligentes que conectam seus sistemas. Nossas Automações trabalham em segundo plano gerenciando dados para que sua equipe foque na estratégia.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloco: Cursos -->
+                <div class="bg-gray-900 rounded-3xl p-8 md:p-12 border border-gray-800 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brandOrange opacity-10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-125 duration-500"></div>
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 bg-brandOrange text-white rounded-2xl flex items-center justify-center shadow-lg mr-5">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white">Para Você (Cursos)</h3>
+                    </div>
+                    <p class="text-gray-400 mb-8 font-medium text-lg">Aprenda com nossos especialistas e domine as ferramentas que estão moldando o futuro das empresas.</p>
+                    
+                    <div class="space-y-6 z-10 relative">
+                        <div class="bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-700 flex items-start hover:border-brandOrange transition duration-300">
+                            <div class="text-brandGreen mt-1 mr-4">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white mb-2">Domine o Chatwoot</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">Do zero ao avançado. Aprenda a configurar, gerenciar e criar caixas de entrada omnichannel imbatíveis para o seu ou qualquer outro negócio.</p>
+                                <a href="javascript:alert('Página do curso em breve!');" class="inline-block mt-4 text-sm text-brandOrange font-bold hover:text-white transition flex items-center">Saiba mais e inscreva-se <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                            </div>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-700 flex items-start hover:border-brandOrange transition duration-300">
+                            <div class="text-brandGreen mt-1 mr-4">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white mb-2">Mestre em Automações</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">Aprenda a criar fluxos visuais que conectam centenas de aplicativos. Construa sistemas no piloto automático sem precisar saber programar código pesado.</p>
+                                <a href="javascript:alert('Página do curso em breve!');" class="inline-block mt-4 text-sm text-brandOrange font-bold hover:text-white transition flex items-center">Saiba mais e inscreva-se <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projetos Section -->
+    <section id="projetos" class="pt-12 pb-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Meus Trabalhos Recentes</h2>
+                <div class="h-1 w-24 bg-brandOrange mx-auto rounded"></div>
+            </div>
+
+            <!-- Grid de Projetos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- Projeto 1: RHINOVA -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group">
+                    <div class="h-52 bg-gray-200 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-brandGreen opacity-10 group-hover:opacity-0 transition duration-300"></div>
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="RHINOVA - Recursos Humanos & Gestão de Pessoas" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8">
+                        <div class="uppercase tracking-wide text-sm text-brandOrange font-bold mb-1">Recursos Humanos & Gestão</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">RHINOVA</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Uma solução moderna e inovadora para Recursos Humanos (RH). Desenvolvida para transformar a gestão de pessoas, otimizar processos de recrutamento e seleção, admissão digital e potencializar o capital humano da sua empresa.
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <a href="http://localhost:8081" target="_blank" rel="noopener noreferrer" class="text-brandGreen font-bold hover:text-brandGreenDark flex items-center transition">
+                                Acessar Projeto ao Vivo
+                                <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                            <a href="rhinova.html" class="text-xs text-gray-400 hover:text-brandOrange font-semibold transition">
+                                Ver apresentação
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 2: Clínica -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group">
+                    <div class="h-52 bg-gray-200 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-blue-500 opacity-10 group-hover:opacity-0 transition duration-300"></div>
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="Sistema Clínica" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8">
+                        <div class="uppercase tracking-wide text-sm text-brandOrange font-bold mb-1">Saúde & Bem-estar</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Sistema Clínica</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Uma plataforma dedicada à área da saúde. Facilita a gestão de pacientes, organização inteligente de agendamentos e prontuários digitais, proporcionando uma experiência humanizada e eficiente.
+                        </p>
+                        <a href="clinica.html" class="text-brandGreen font-bold hover:text-brandGreenDark flex items-center transition">
+                            Ver detalhes do projeto
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projeto 3: Luke Stilo Kids -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group">
+                    <div class="h-52 bg-gray-200 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-yellow-400 opacity-10 group-hover:opacity-0 transition duration-300"></div>
+                        <img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=800&q=80" alt="Luke Stilo Kids" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8">
+                        <div class="uppercase tracking-wide text-sm text-brandOrange font-bold mb-1">Moda & E-commerce</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Luke Stilo Kids</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Um espaço digital vibrante, moderno e cheio de estilo voltado para a moda infantil. O site combina vitrines interativas, tendências atuais, muito conforto e alegria para os pequenos.
+                        </p>
+                        <a href="luke.html" class="text-brandGreen font-bold hover:text-brandGreenDark flex items-center transition">
+                            Ver detalhes do projeto
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de E-books & Materiais Educativos (Leitura Online e Captação de Leads) -->
+    <section id="ebooks" class="py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-orange-100 text-brandOrange border border-orange-200 shadow-sm mb-3">
+                    📚 Biblioteca Digital Gratuita
+                </span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">E-books Práticos para Alavancar sua Empresa</h2>
+                <div class="h-1.5 w-24 bg-brandGreen mx-auto rounded-full mt-4 mb-4"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Materiais aprofundados com metodologias comprovadas de automação, gestão de canais de atendimento e inovação. Leia diretamente no navegador pelo nosso <strong>Leitor Online Interativo</strong> ou baixe o PDF completo sem custos.
+                </p>
+            </div>
+
+            <!-- Barra de Ações Rápidas: Livro Vivo & Logins -->
+            <div class="mb-10 max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-gradient-to-r from-blue-950 via-slate-900 to-emerald-950 rounded-2xl border border-blue-700/40 text-white shadow-xl">
+                <div class="flex items-center space-x-3 text-center sm:text-left">
+                    <span class="text-3xl">📖</span>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                Livro Vivo & Interativo
+                            </span>
+                            <span class="text-xs text-slate-400">20 Páginas com Vídeos</span>
+                        </div>
+                        <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5">Domine o Chatwoot & Automações com IA</h4>
+                        <p class="text-xs text-slate-300">Formato dinâmico com vídeos explicativos, dicas do especialista e simulador de faturamento.</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2.5 w-full sm:w-auto justify-center shrink-0">
+                    <a href="ebook-chatwoot-automacoes.html?unlocked=true" class="px-5 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-xs font-extrabold rounded-xl shadow-md transition flex items-center space-x-1.5">
+                        <span>🚀 Acessar Livro Vivo</span>
+                    </a>
+                    <a href="admin.html#leads" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold rounded-xl shadow-md transition flex items-center space-x-1.5" title="Ver leads que entraram com Nome e WhatsApp">
+                        <span>👥 Ver Logins</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Grid de E-books Dinâmicos -->
+            <div id="ebooksGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <!-- Preenchido dinamicamente via JS a partir de portal_ebooks -->
+            </div>
+
+            <!-- Banner Informativo de Diagnóstico -->
+            <div class="mt-16 bg-gradient-to-r from-brandGreenDark to-brandGreen rounded-3xl p-8 md:p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 max-w-5xl mx-auto border border-white/20">
+                <div class="flex items-center space-x-5">
+                    <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl shrink-0 backdrop-blur-md border border-white/20">
+                        ⚡
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-bold">Quer um diagnóstico do seu negócio?</h4>
+                        <p class="text-white/80 text-sm mt-1">Converse com nossos especialistas para implementar essas estratégias na prática.</p>
+                    </div>
+                </div>
+                <a href="#contato" class="px-8 py-3.5 bg-brandOrange hover:bg-orange-500 text-white font-bold rounded-xl shadow-lg transition duration-300 shrink-0 text-center">
+                    Solicitar Análise Gratuita
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Blog & Dicas -->
+    <section id="blog" class="pt-12 pb-20 bg-white relative border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 border-b border-gray-200 pb-6">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">Notícias e Dicas</h2>
+                <p class="text-lg text-gray-500">Todas as matérias e tutoriais publicados sobre tecnologia e inovação.</p>
+            </div>
+
+            <!-- Matéria Principal (Última Postada em Destaque) -->
+            <div id="blogFeaturedContainer" class="mb-16">
+                <!-- Preenchido dinamicamente via JS -->
+            </div>
+
+            <!-- Grid de Outras Matérias (Estilo Horizontal) -->
+            <div id="blogGridContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
+                <!-- Preenchido dinamicamente via JS -->
+            </div>
+            
+            <!-- Botão Ver Mais -->
+            <div class="mt-16 text-center">
+                <a href="javascript:alert('Página com todas as matérias em breve!')" class="inline-block px-10 py-4 bg-white border-2 border-gray-200 text-gray-700 font-bold rounded-xl hover:border-brandGreen hover:text-brandGreen transition duration-300 shadow-sm">
+                    Carregar matérias antigas
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato & Análise de Projetos -->
+    <section id="contato" class="py-20 bg-gray-50 relative border-t border-gray-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brandOrange font-bold tracking-wider uppercase text-sm drop-shadow-sm">Fale Conosco</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-2 mb-4">Solicite uma Consultoria ou Análise de Projeto</h2>
+                <div class="h-1 w-24 bg-brandGreen mx-auto rounded mb-4"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Precisa de uma avaliação técnica? Preencha os campos abaixo e anexe seu arquivo (código, JSON, banco de dados, fluxo de automação ou imagem do projeto) para uma análise especializada.
+                </p>
+            </div>
+
+            <!-- Card do Formulário -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-gray-100">
+                <form id="contactAnalysisForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Seu Nome / Empresa *</label>
+                            <input type="text" id="contactName" required placeholder="Ex: João Silva ou Empresa XYZ" class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">E-mail Profissional *</label>
+                            <input type="email" id="contactEmail" required placeholder="seuemail@empresa.com" class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">WhatsApp / Telefone *</label>
+                            <input type="tel" id="contactPhone" required placeholder="(00) 90000-0000" class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Tipo de Consultoria / Demanda *</label>
+                            <select id="contactService" required class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800">
+                                <option value="" disabled selected>Selecione o tipo de demanda</option>
+                                <option value="Analise de Codigo ou Banco">Análise de Código, Banco de Dados ou JSON</option>
+                                <option value="Engenharia de Automacoes">Engenharia de Automações para Empresas</option>
+                                <option value="Implantacao Chatwoot">Implantação & Consultoria Chatwoot</option>
+                                <option value="Desenvolvimento de Projeto">Desenvolvimento de Novo Projeto Sob Medida</option>
+                                <option value="Cursos e Treinamentos">Cursos e Treinamentos</option>
+                                <option value="Outro">Outro Assunto</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Descreva seu Desafio ou Dúvida *</label>
+                        <textarea id="contactMessage" rows="4" required placeholder="Conte detalhes sobre o que você precisa: melhoria de performance, correção de erros, criação de automação, etc..." class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800"></textarea>
+                    </div>
+
+                    <!-- Campo de Anexo Drag & Drop -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            Anexar Arquivo para Análise <span class="text-gray-400 font-normal">(Opcional)</span>
+                        </label>
+                        <div class="relative border-2 border-dashed border-gray-300 hover:border-brandOrange rounded-2xl p-6 text-center transition cursor-pointer bg-gray-50/50 hover:bg-orange-50/30 group" id="dropArea">
+                            <input type="file" id="fileAttachment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept=".json,.sql,.zip,.pdf,.png,.jpg,.jpeg,.txt,.csv,.js,.py,.doc,.docx">
+                            <div class="flex flex-col items-center justify-center space-y-2 pointer-events-none">
+                                <div class="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center text-brandOrange group-hover:scale-110 transition duration-300">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                </div>
+                                <p class="text-sm font-semibold text-gray-700">
+                                    <span class="text-brandOrange underline">Clique para selecionar</span> ou arraste o arquivo até aqui
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    Formatos aceitos: JSON, SQL, ZIP, PDF, JPG, PNG, TXT, PY, JS (Máx: 25MB)
+                                </p>
+                                <div id="fileNameDisplay" class="hidden mt-2 text-xs font-bold text-brandGreen bg-green-50 px-3 py-1.5 rounded-full border border-green-200"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mensagem de Sucesso -->
+                    <div id="formSuccessAlert" class="hidden bg-emerald-50 border border-emerald-300 text-emerald-800 px-6 py-4 rounded-xl text-center font-medium">
+                        🎉 Sua solicitação foi recebida com sucesso! Nossa equipe técnica analisará o arquivo e os detalhes para entrar em contato com você via WhatsApp ou E-mail.
+                    </div>
+
+                    <!-- Botão de Envio -->
+                    <div class="pt-2">
+                        <button type="submit" id="btnSubmitForm" class="w-full py-4 px-8 bg-gradient-to-r from-brandGreen to-brandGreenDark hover:from-emerald-600 hover:to-emerald-800 text-white font-extrabold text-lg rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-0.5 flex items-center justify-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Enviar Solicitação para Análise
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <span class="text-2xl font-bold text-brandGreen">3Dígitos</span>
+                <p class="text-gray-400 mt-2 text-sm">Construindo soluções digitais de impacto.</p>
+            </div>
+            <div class="flex space-x-6 text-sm">
+                <a href="#solucoes" class="text-gray-400 hover:text-brandOrange transition">Serviços</a>
+                <a href="#projetos" class="text-gray-400 hover:text-brandOrange transition">Vitrine</a>
+                <a href="#blog" class="text-gray-400 hover:text-brandOrange transition">Blog</a>
+                <a href="#contato" class="text-gray-400 hover:text-brandOrange transition">Contato</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+            &copy; 2026 3Dígitos Tecnologia e Automações IA. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante do WhatsApp com Mascote 3D -->
+    <a href="https://wa.me/5599999999999?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%203Dígitos!" target="_blank" class="fixed bottom-6 right-6 z-50 flex items-center justify-center group transition-all duration-300 hover:scale-110" title="Fale conosco no WhatsApp">
+        <img src="whatsapp-icon.png" alt="WhatsApp 3Dígitos" class="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-2xl animate-bounce group-hover:animate-none">
+        <span class="absolute right-full mr-3 bg-white text-gray-800 px-4 py-2 rounded-xl shadow-2xl text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none border border-gray-100 after:content-[''] after:absolute after:top-1/2 after:right-[-6px] after:-translate-y-1/2 after:border-t-8 after:border-t-transparent after:border-l-8 after:border-l-white after:border-b-8 after:border-b-transparent">
+            Fale conosco no WhatsApp!
+        </span>
+    </a>
+
+    <!-- Script de Interação do Formulário -->
+    <script>
+        const fileInput = document.getElementById('fileAttachment');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const contactForm = document.getElementById('contactAnalysisForm');
+        const successAlert = document.getElementById('formSuccessAlert');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+                const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+                fileNameDisplay.textContent = `📎 Arquivo anexado: ${file.name} (${sizeMb} MB)`;
+                fileNameDisplay.classList.remove('hidden');
+            } else {
+                fileNameDisplay.classList.add('hidden');
+            }
+        });
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitForm');
+            const originalText = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Enviando dados e anexo...`;
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                successAlert.classList.remove('hidden');
+                contactForm.reset();
+                fileNameDisplay.classList.add('hidden');
+
+                // Rolar suavemente até o alerta de sucesso
+                successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1200);
+        });
+
+        // ==========================================
+        // RENDERIZADOR DINÂMICO DO BLOG (SINCRONIZADO)
+        // ==========================================
+        function getYoutubeId(url) {
+            if (!url) return null;
+            const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+            return match ? match[1] : null;
+        }
+
+        const INITIAL_BLOG_POSTS = [
+            {
+                id: '1',
+                title: 'Dominando sua Caixa de Entrada com o Chatwoot',
+                category: 'Tutorial em Vídeo',
+                author: 'Adelmo Reis',
+                date: 'Hoje',
+                mediaType: 'video',
+                mediaUrl: 'https://www.youtube.com/watch?v=Y7-TU9vooLI',
+                summary: 'Sua operação de atendimento está uma bagunça? Assista a este vídeo essencial que mostra o passo a passo de como estruturar, configurar e extrair o máximo das caixas de entrada unificadas dentro da plataforma Chatwoot de forma altamente profissional.'
+            },
+            {
+                id: '2',
+                title: 'Por que a Automação de Processos é o Segredo do Crescimento?',
+                category: 'Automações',
+                author: 'Adelmo Reis',
+                date: '28 Set 2026',
+                mediaType: 'image',
+                mediaUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80',
+                summary: 'Chega de trabalhos manuais. Veja como dobrar a produtividade conectando sistemas e delegando tarefas repetitivas para robôs silenciosos (sem precisar de programação complexa).'
+            },
+            {
+                id: '3',
+                title: 'Como a IA está transformando o atendimento ao cliente no Brasil',
+                category: 'Inteligência Artificial',
+                author: 'Adelmo Reis',
+                date: '25 Set 2026',
+                mediaType: 'image',
+                mediaUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80',
+                summary: 'Entenda os impactos de robôs conversacionais treinados com os próprios dados da sua empresa para responder dúvidas e fechar vendas 24h por dia.'
+            },
+            {
+                id: '4',
+                title: '5 sinais de que sua equipe perde vendas por falta de organização',
+                category: 'Gestão Corporativa',
+                author: 'Equipe 3Dígitos',
+                date: '20 Set 2026',
+                mediaType: 'image',
+                mediaUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
+                summary: 'Sua equipe esquece de responder clientes? Saiba quando é a hora certa de migrar para uma plataforma omnichannel integrada.'
+            },
+            {
+                id: '5',
+                title: 'O futuro dos sistemas internos: Por que abandonar as planilhas?',
+                category: 'Tecnologia & Web',
+                author: 'Equipe 3Dígitos',
+                date: '15 Set 2026',
+                mediaType: 'image',
+                mediaUrl: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80',
+                summary: 'Planilhas são lentas e propensas a falhas. Veja por que criar um painel administrativo inteligente é muito mais viável hoje.'
+            }
+        ];
+
+        function getLiveBlogPosts() {
+            const raw = localStorage.getItem('portal_blog_posts');
+            if (!raw) {
+                localStorage.setItem('portal_blog_posts', JSON.stringify(INITIAL_BLOG_POSTS));
+                return INITIAL_BLOG_POSTS;
+            }
+            return JSON.parse(raw);
+        }
+
+        function renderLiveBlog() {
+            const posts = getLiveBlogPosts();
+            const featuredContainer = document.getElementById('blogFeaturedContainer');
+            const gridContainer = document.getElementById('blogGridContainer');
+
+            if (!featuredContainer || !gridContainer) return;
+
+            if (!posts || posts.length === 0) {
+                featuredContainer.innerHTML = '<p class="text-center text-gray-500 py-8 bg-gray-50 rounded-2xl border border-gray-100">Nenhuma matéria publicada no momento.</p>';
+                gridContainer.innerHTML = '';
+                return;
+            }
+
+            // Post 0: Destaque Superior
+            const featured = posts[0];
+            const ytId = getYoutubeId(featured.mediaUrl);
+            let featuredMediaHtml = '';
+            
+            if (featured.mediaType === 'video' && ytId) {
+                featuredMediaHtml = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${ytId}" title="${featured.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="absolute inset-0 z-10"></iframe>`;
+            } else {
+                featuredMediaHtml = `<img src="${featured.mediaUrl || 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80'}" alt="${featured.title}" class="w-full h-full object-cover">`;
+            }
+
+            featuredContainer.innerHTML = `
+                <article class="bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition duration-300 group flex flex-col md:flex-row cursor-pointer">
+                    <div class="md:w-1/2 relative h-64 md:h-[400px] bg-black overflow-hidden">
+                        ${featuredMediaHtml}
+                    </div>
+                    <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white">
+                        <span class="text-brandGreen font-bold text-sm tracking-widest uppercase mb-3 drop-shadow-sm">${featured.category || 'Destaque'}</span>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 group-hover:text-brandOrange transition leading-tight">${featured.title}</h3>
+                        <p class="text-gray-600 mb-6 text-lg leading-relaxed line-clamp-4">${featured.summary}</p>
+                        <div class="flex items-center text-gray-400 text-sm mt-auto pt-4 border-t border-gray-100">
+                            <span class="font-bold text-gray-700 mr-2">${featured.author || 'Equipe 3Dígitos'}</span> • <span class="ml-2 font-medium">${featured.date || 'Recente'}</span>
+                        </div>
+                    </div>
+                </article>
+            `;
+
+            // Posts 1 em diante: Grid Horizontal
+            let gridHtml = '';
+            for (let i = 1; i < posts.length; i++) {
+                const p = posts[i];
+                const pYtId = getYoutubeId(p.mediaUrl);
+                let pThumb = p.mediaUrl;
+                if (p.mediaType === 'video' && pYtId) {
+                    pThumb = `https://img.youtube.com/vi/${pYtId}/hqdefault.jpg`;
+                }
+
+                gridHtml += `
+                    <article class="flex flex-col sm:flex-row gap-6 group cursor-pointer border-b sm:border-b-0 border-gray-100 pb-6 sm:pb-0">
+                        <div class="sm:w-2/5 shrink-0 h-56 sm:h-36 overflow-hidden rounded-xl relative shadow-sm bg-gray-100">
+                            <img src="${pThumb || 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80'}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            ${p.mediaType === 'video' ? '<div class="absolute inset-0 bg-black/30 flex items-center justify-center text-white"><svg class="w-10 h-10 drop-shadow-lg text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' : ''}
+                        </div>
+                        <div class="sm:w-3/5 flex flex-col justify-center">
+                            <span class="text-brandGreen font-bold text-xs tracking-wider uppercase mb-2">${p.category || 'Artigo'}</span>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-brandOrange transition leading-snug">${p.title}</h3>
+                            <p class="text-gray-500 text-sm line-clamp-2 mb-3">${p.summary}</p>
+                            <span class="text-gray-400 text-xs font-medium">${p.author || '3Dígitos'} • ${p.date || 'Recente'}</span>
+                        </div>
+                    </article>
+                `;
+            }
+
+            gridContainer.innerHTML = gridHtml;
+        }
+
+        renderLiveBlog();
+        window.addEventListener('storage', renderLiveBlog);
+
+        // ==========================================
+        // BIBLIOTECA DE E-BOOKS & CAPTAÇÃO DE LEADS
+        // ==========================================
+        const INITIAL_EBOOKS = [
+            {
+                id: 'ebook-chatwoot-ia',
+                title: 'Domine o Chatwoot & Automações com IA',
+                category: 'Atendimento & IA',
+                author: 'Adelmo Reis',
+                pages: '20 páginas',
+                readTime: '25 min de leitura',
+                coverUrl: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&q=80',
+                pdfUrl: 'ebook-chatwoot-automacoes.html',
+                synopsis: 'O manual definitivo para centralizar canais de atendimento, hospedar sua infraestrutura em VPS com Docker e criar uma máquina de vendas com transbordo humano e IA 24/7.',
+                chapters: [
+                    {
+                        title: 'Módulo 1: Visão Geral e Infraestrutura (Págs 1 a 5)',
+                        content: `<p class="mb-4">O <strong>Chatwoot</strong> é a principal plataforma open source do mundo para atendimento colaborativo e suporte ao cliente omnichannel. Criado como alternativa direta a sistemas de alto custo (Zendesk, Intercom), ele devolve a soberania de dados para sua empresa sob conformidade total com a LGPD.</p>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Arquitetura em 3 Pilares Desacoplados:</h4>
+                        <ul class="list-disc pl-5 space-y-2 mb-4 text-gray-700">
+                            <li><strong>Mensageria (WhatsApp API):</strong> Evolution API, Z-API ou Meta Cloud API enviando mensagens em milissegundos.</li>
+                            <li><strong>Cérebro Lógico (Automações & Agentes IA):</strong> Conectado via Webhooks para triagem inteligente e consulta a bancos de dados.</li>
+                            <li><strong>Painel de Controle Humano (Chatwoot):</strong> Onde os operadores visualizam toda a conversa e assumem o chamado sem trabalhar no escuro.</li>
+                        </ul>
+                        <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl my-4">
+                            <p class="text-sm font-semibold text-blue-900">💡 Deploy Rápido: Em servidores VPS (Hostinger, Contabo ou Hetzner) com 4 vCPUs e 8 GB RAM, o painel Easypanel/Docker instala o Chatwoot, Redis, PostgreSQL e SSL automático em menos de 5 minutos.</p>
+                        </div>`
+                    },
+                    {
+                        title: 'Módulo 2: Gestão Multi-Tenant e SaaS (Págs 6 a 10)',
+                        content: `<p class="mb-4">Com o console de <strong>Super Admin</strong> (acessado via <code>/super_admin</code>), sua instalação se transforma em uma plataforma SaaS Multi-Tenant. Em uma única máquina é possível hospedar dezenas de empresas clientes com total isolamento de dados.</p>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Passo a Passo de Provisionamento:</h4>
+                        <ol class="list-decimal pl-5 space-y-2 mb-4 text-gray-700">
+                            <li>Criar Conta (Create Account): Defina o nome da empresa e idioma (Português do Brasil).</li>
+                            <li>Limites de Uso: Estipule limites de agentes humanos e caixas de entrada permitidas.</li>
+                            <li>Vínculo Gestor: Adicione o usuário do cliente como administrador local.</li>
+                        </ol>
+                        <div class="p-4 bg-emerald-50 border-l-4 border-brandGreen rounded-r-xl my-4">
+                            <p class="text-sm font-semibold text-emerald-900">💰 Oportunidade de Recorrência: Cobrando mensalidades entre R$ 180 e R$ 600/mês por empresa cliente, você constrói uma carteira com receita previsível e margens acima de 80%.</p>
+                        </div>`
+                    },
+                    {
+                        title: 'Módulo 3: Recursos de CRM e Produtividade (Págs 11 a 14)',
+                        content: `<p class="mb-4">O Chatwoot opera como um CRM integrado com <strong>Atributos Personalizados</strong>:</p>
+                        <ul class="list-disc pl-5 space-y-2 mb-4 text-gray-700">
+                            <li><strong>Nível de Contato:</strong> Dados perenes (origem do lead, documento CPF/CNPJ, segmento).</li>
+                            <li><strong>Nível de Conversa:</strong> Dados voláteis da oportunidade (valor do orçamento, interesse do chamado).</li>
+                        </ul>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Agilidade com Atalhos e Macros:</h4>
+                        <p class="mb-3">Digitando uma barra (<code>/</code>), o atendente dispara respostas rápidas (ex: <code>/pix</code>, <code>/horario</code>, <code>/boasvindas</code>). Com as <strong>Macros</strong>, um clique insere nota interna privada, adiciona a tag <em>resolvido</em> e encerra o ticket, permitindo que cada atendente gerencie de 3 a 5 conversas simultâneas.</p>`
+                    },
+                    {
+                        title: 'Módulo 4: Automação, IA e Transbordo Humano (Págs 15 a 18)',
+                        content: `<p class="mb-4">A ponte de <strong>Webhooks</strong> liga o Chatwoot ao motor de automação através dos eventos <code>message_created</code> e <code>message_updated</code> em tempo real.</p>
+                        <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl my-4">
+                            <p class="text-sm font-semibold text-amber-900">⚠️ Prevenção de IA Descontrolada: Para evitar que o robô fale por cima do atendente, utilize o nó de transbordo no motor de automações:</p>
+                            <p class="text-xs text-amber-800 mt-1">1. Por Atribuição: Se <code>assignee_id != null</code>, a IA desliga automaticamente.<br>2. Por Etiqueta: Se a tag <code>humano</code> estiver ativa, a IA silencia e o operador assume 100%.</p>
+                        </div>
+                        <p class="mb-4">O módulo <strong>Captain</strong> adiciona uma Central de Ajuda com base vetorial RAG, sugestões preditivas de resposta e resumo executivo de conversas longas em 3 linhas.</p>`
+                    },
+                    {
+                        title: 'Módulo 5: Métricas, SLAs e Modelo de Negócio (Págs 19 e 20)',
+                        content: `<p class="mb-4">Mensure sua operação com relatórios de <strong>Primeira Resposta (FRT)</strong>, <strong>Tempo de Resolução (MTTR)</strong> e o <strong>Mapa de Calor por Horário (Heatmap)</strong>. Exporte tudo para Power BI ou planilhas analíticas.</p>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Plano de Ação Comercial:</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
+                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                                <strong class="text-brandOrange">Setup Inicial:</strong>
+                                <p class="text-xs text-gray-600">R$ 1.500 a R$ 5.000 para implantação da VPS, agentes de IA e treinamento.</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                                <strong class="text-brandGreen">Mensalidade SaaS:</strong>
+                                <p class="text-xs text-gray-600">R$ 180 a R$ 600/mês por cliente de hospedagem e suporte.</p>
+                            </div>
+                        </div>
+                        <p class="font-bold text-brandGreenDark">Nichos Recomendados: Clínicas Médicas/Odontológicas, Imobiliárias, E-commerce e Escritórios de Advocacia/Contabilidade.</p>`
+                    }
+                ]
+            },
+            {
+                id: 'ebook-1',
+                title: 'Guia Definitivo de Automações para Empresas',
+                category: 'Automações',
+                author: 'Adelmo Reis',
+                pages: '38 páginas',
+                readTime: '15 min de leitura',
+                coverUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80',
+                pdfUrl: '#',
+                synopsis: 'Descubra como estruturar fluxos inteligentes, conectar sistemas legados e eliminar mais de 20 horas semanais de digitação e retrabalho manual na sua operação.',
+                chapters: [
+                    {
+                        title: 'Capítulo 1: O Fim do Trabalho Manual e Repetitivo',
+                        content: `<p class="mb-4">Vivemos na era da agilidade. Empresas que ainda dependem de funcionários copiando e colando dados de planilhas para sistemas ERP estão perdendo dinheiro, tempo e a motivação de seus talentos.</p>
+                        <p class="mb-4">As <strong>Automações de Processos</strong> surgiram para mudar esse paradigma. Ao conectar suas ferramentas através de APIs e gatilhos inteligentes, você cria uma engrenagem invisível que opera 24 horas por dia, 7 dias por semana, sem falhas e sem fadiga.</p>
+                        <div class="p-5 bg-emerald-50 border-l-4 border-brandGreen rounded-r-2xl my-6">
+                            <p class="text-sm font-bold text-emerald-950">💡 Insight Prático: Uma única automação conectando seu formulário de contato ao seu sistema de atendimento e ao WhatsApp comercial pode aumentar as conversões de vendas em até 40% pela agilidade no primeiro contato.</p>
+                        </div>
+                        <p class="mb-4">Quando o cliente aguarda menos de 5 minutos, a sensação de profissionalismo é multiplicada exponencialmente.</p>`
+                    },
+                    {
+                        title: 'Capítulo 2: Mapeando os Gargalos da sua Operação',
+                        content: `<p class="mb-4">Antes de criar qualquer fluxo automatizado, é fundamental realizar um diagnóstico preciso. Quais tarefas de rotina sua equipe realiza mais de 3 vezes por dia?</p>
+                        <ul class="list-disc pl-5 space-y-2 mb-4 text-gray-700 font-medium">
+                            <li>Envio de comprovantes ou notificações por mensagem</li>
+                            <li>Sincronização de leads entre landing pages e planilhas</li>
+                            <li>Emissão de relatórios semanais de desempenho</li>
+                            <li>Cobranças automáticas e atualização de status de pedidos</li>
+                        </ul>
+                        <p class="mb-4">Se a sua resposta para qualquer um desses pontos for positiva, sua empresa está pronta para o próximo nível de maturidade operacional com automação de alto nível.</p>`
+                    },
+                    {
+                        title: 'Capítulo 3: Criando Fluxos Robustos com IA Integrada',
+                        content: `<p class="mb-4">O grande diferencial moderno é aliar a automação tradicional à Inteligência Artificial. Com robôs inteligentes analisando o conteúdo das mensagens, é possível classificar prioridades de atendimento, gerar resumos automáticos e tomar decisões em milissegundos.</p>
+                        <p class="mb-4">Na 3Dígitos, nossa consultoria desenha arquiteturas resilientes que garantem segurança de dados, alta disponibilidade e relatórios em tempo real para a diretoria executiva.</p>
+                        <p class="mb-4 font-semibold text-brandGreenDark">Pronto para dar o próximo passo? Entre em contato com a equipe 3Dígitos e agende uma consultoria especializada.</p>`
+                    }
+                ]
+            },
+            {
+                id: 'ebook-2',
+                title: 'O Manual do Atendimento Omnichannel com Chatwoot',
+                category: 'Atendimento & Chatwoot',
+                author: 'Adelmo Reis',
+                pages: '45 páginas',
+                readTime: '20 min de leitura',
+                coverUrl: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=600&q=80',
+                pdfUrl: '#',
+                synopsis: 'Aprenda o passo a passo para unificar canais de WhatsApp, Instagram, Telegram e E-mail em uma única tela de comando, reduzindo o tempo de resposta e multiplicando as vendas.',
+                chapters: [
+                    {
+                        title: 'Capítulo 1: O Caos dos Telefones Descentralizados',
+                        content: `<p class="mb-4">Quantas vezes um cliente em potencial enviou mensagem no WhatsApp da sua empresa e esperou horas por um retorno porque o aparelho celular estava com outro colaborador?</p>
+                        <p class="mb-4">O <strong>Chatwoot</strong> é a plataforma open-source líder mundial em atendimento colaborativo. Ele permite que dezenas de operadores atendam ao mesmo tempo com o mesmo número oficial de WhatsApp, com histórico unificado e filas inteligentes.</p>
+                        <div class="p-5 bg-orange-50 border-l-4 border-brandOrange rounded-r-2xl my-6">
+                            <p class="text-sm font-bold text-orange-950">🎯 Regra de Ouro: Leads atendidos com agilidade nos primeiros instantes têm chances incomparavelmente maiores de fechar negócio. O Chatwoot centraliza tudo para que nenhum cliente fique no vácuo.</p>
+                        </div>`
+                    },
+                    {
+                        title: 'Capítulo 2: Configuração de Caixas de Entrada & Departamentos',
+                        content: `<p class="mb-4">No Chatwoot, você pode segmentar sua operação por departamentos: Vendas, Suporte Financeiro, Pós-Venda ou Consultoria Técnica.</p>
+                        <p class="mb-4">Cada operador visualiza apenas as conversas atribuídas a ele ou ao seu setor, enquanto os supervisores acompanham o tempo médio de espera e métricas de satisfação (CSAT) em tempo real no painel administrativo.</p>
+                        <p class="mb-4">Isso garante organização impecável, sigilo nas conversas e métricas transparentes para a gestão.</p>`
+                    },
+                    {
+                        title: 'Capítulo 3: Integração com Robôs e Chatbots',
+                        content: `<p class="mb-4">A verdadeira mágica acontece ao conectar o Chatwoot com motores de automação. Você pode implementar menus interativos, consulta automática de dados em banco SQL e transição suave do robô para o atendente humano sempre que necessário.</p>
+                        <p class="mb-4">Nossa equipe implanta o servidor dedicado com alta segurança, backup diário e treinamento completo para todo o seu time comercial.</p>`
+                    }
+                ]
+            }
+        ];
+
+        let activeEbook = null;
+        let activeChapterIndex = 0;
+
+        function getStoredEbooks() {
+            const raw = localStorage.getItem('portal_ebooks');
+            if (!raw) {
+                localStorage.setItem('portal_ebooks', JSON.stringify(INITIAL_EBOOKS));
+                return INITIAL_EBOOKS;
+            }
+            const parsed = JSON.parse(raw);
+            if (!parsed.some(b => b.id === 'ebook-chatwoot-ia')) {
+                parsed.unshift(INITIAL_EBOOKS[0]);
+                localStorage.setItem('portal_ebooks', JSON.stringify(parsed));
+            }
+            return parsed;
+        }
+
+        function renderEbooks() {
+            const container = document.getElementById('ebooksGridContainer');
+            if (!container) return;
+
+            const ebooks = getStoredEbooks();
+            if (!ebooks || ebooks.length === 0) {
+                container.innerHTML = '<p class="col-span-2 text-center text-gray-500 py-12 bg-white rounded-3xl border border-gray-100">Nenhum e-book publicado no momento. Novos materiais serão lançados em breve!</p>';
+                return;
+            }
+
+            let html = '';
+            ebooks.forEach(book => {
+                html += `
+                    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col group">
+                        <div class="p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-gradient-to-br from-gray-50/70 to-white">
+                            <!-- E-book Cover 3D Style -->
+                            <div class="relative w-36 sm:w-44 h-52 shrink-0 rounded-xl overflow-hidden shadow-[0_12px_28px_rgba(0,0,0,0.2)] group-hover:scale-105 group-hover:-rotate-1 transition-transform duration-500 border border-gray-200">
+                                <img src="${book.coverUrl || 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80'}" alt="${book.title}" class="w-full h-full object-cover">
+                                <div class="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/40 to-transparent"></div>
+                                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-brandOrange text-white uppercase shadow">
+                                    Grátis
+                                </span>
+                            </div>
+
+                            <!-- Informações do E-book -->
+                            <div class="flex-1 flex flex-col justify-between text-center sm:text-left">
+                                <div>
+                                    <div class="flex items-center justify-center sm:justify-start space-x-2 mb-2">
+                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase bg-emerald-100 text-brandGreenDark border border-emerald-200">
+                                            ${book.category}
+                                        </span>
+                                        <span class="text-xs text-gray-400 font-semibold">${book.readTime || 'Leitura Rápida'}</span>
+                                    </div>
+                                    <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 group-hover:text-brandOrange transition leading-snug mb-2">
+                                        ${book.title}
+                                    </h3>
+                                    <p class="text-xs text-gray-500 font-bold mb-3">Autor: ${book.author || '3Dígitos'}</p>
+                                    <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-4">
+                                        ${book.synopsis}
+                                    </p>
+                                </div>
+
+                                <div class="space-y-1 text-xs text-gray-500 mb-4 text-left hidden sm:block">
+                                    <div class="flex items-center text-emerald-700 font-semibold">
+                                        <svg class="w-4 h-4 mr-1.5 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        Leitura online imediata no navegador
+                                    </div>
+                                    <div class="flex items-center text-emerald-700 font-semibold">
+                                        <svg class="w-4 h-4 mr-1.5 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        Download do PDF completo sem custos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rodapé com Botão de Ação -->
+                        <div class="p-6 bg-white border-t border-gray-100 mt-auto flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-400">
+                                📖 ${(book.chapters && book.chapters.length) || 3} Capítulos
+                            </span>
+                            <button onclick="handleAccessEbook('${book.id}')" class="px-6 py-3 bg-brandOrange hover:bg-orange-600 text-white font-extrabold text-sm rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5 flex items-center space-x-2">
+                                <span>Ler Online / Baixar</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // FLUXO DE ACESSO: CAPTURA DE LEAD & LEITOR
+        // ==========================================
+        function handleAccessEbook(ebookId) {
+            const ebooks = getStoredEbooks();
+            activeEbook = ebooks.find(b => b.id === ebookId);
+            if (!activeEbook) return;
+
+            // Verificar se usuário já informou nome e whatsapp nesta sessão
+            const savedLead = sessionStorage.getItem('portal_user_lead');
+            if (savedLead) {
+                // Já cadastrado: abre direto o leitor
+                openEbookReader(activeEbook);
+            } else {
+                // Abre o modal de captura
+                document.getElementById('captureEbookId').value = activeEbook.id;
+                document.getElementById('modalEbookTitle').textContent = activeEbook.title;
+                document.getElementById('modalEbookCategory').textContent = activeEbook.category;
+                
+                const modal = document.getElementById('leadCaptureModal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeLeadModal() {
+            const modal = document.getElementById('leadCaptureModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('leadCaptureForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('leadName').value.trim();
+            const whatsapp = document.getElementById('leadWhatsapp').value.trim();
+            const ebookId = document.getElementById('captureEbookId').value;
+
+            if (!name || !whatsapp) {
+                alert('Por favor, informe seu nome e seu WhatsApp para liberar o material.');
+                return;
+            }
+
+            // Salvar Lead no localStorage (para a área de membros / admin)
+            const leadData = {
+                id: Date.now().toString(),
+                name: name,
+                whatsapp: whatsapp,
+                ebookId: activeEbook ? activeEbook.id : ebookId,
+                ebookTitle: activeEbook ? activeEbook.title : 'E-book do Portal',
+                date: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                timestamp: Date.now()
+            };
+
+            const rawLeads = localStorage.getItem('portal_leads');
+            const leads = rawLeads ? JSON.parse(rawLeads) : [];
+            leads.unshift(leadData); // Mais recente no topo
+            localStorage.setItem('portal_leads', JSON.stringify(leads));
+
+            // Salvar na sessão para não pedir de novo
+            sessionStorage.setItem('portal_user_lead', JSON.stringify({ name, whatsapp }));
+
+            // Fechar modal de captura e abrir o leitor digital interativo
+            closeLeadModal();
+            openEbookReader(activeEbook);
+        });
+
+        // ==========================================
+        // LEITOR DIGITAL INTERATIVO
+        // ==========================================
+        function openEbookReader(ebook) {
+            if (!ebook) return;
+            activeEbook = ebook;
+            activeChapterIndex = 0;
+
+            document.getElementById('readerTitle').textContent = ebook.title;
+            document.getElementById('readerCategory').textContent = ebook.category;
+            document.getElementById('readerAuthor').textContent = 'Por ' + (ebook.author || 'Adelmo Reis');
+
+            renderChapterNav();
+            renderActiveChapter();
+
+            const modal = document.getElementById('ebookReaderModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeReaderModal() {
+            const modal = document.getElementById('ebookReaderModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function renderChapterNav() {
+            const nav = document.getElementById('readerChapterNav');
+            if (!nav || !activeEbook || !activeEbook.chapters) return;
+
+            let html = '';
+            activeEbook.chapters.forEach((chap, idx) => {
+                const isActive = idx === activeChapterIndex;
+                html += `
+                    <button onclick="changeChapter(${idx})" class="w-full text-left p-3 rounded-xl text-xs md:text-sm font-semibold transition ${
+                        isActive 
+                        ? 'bg-brandGreen text-white shadow-sm font-bold' 
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    }">
+                        <div class="text-[10px] uppercase tracking-wider ${isActive ? 'text-emerald-100' : 'text-gray-400'}">Capítulo ${idx + 1}</div>
+                        <div class="truncate mt-0.5">${chap.title.replace(/^Capítulo \d+:\s*/, '')}</div>
+                    </button>
+                `;
+            });
+            nav.innerHTML = html;
+        }
+
+        function changeChapter(index) {
+            activeChapterIndex = index;
+            renderChapterNav();
+            renderActiveChapter();
+            const mainReading = document.querySelector('#ebookReaderModal main');
+            if (mainReading) mainReading.scrollTop = 0;
+        }
+
+        function renderActiveChapter() {
+            if (!activeEbook || !activeEbook.chapters || !activeEbook.chapters[activeChapterIndex]) return;
+            const chapter = activeEbook.chapters[activeChapterIndex];
+
+            document.getElementById('readerCurrentChapterTag').textContent = `Capítulo ${activeChapterIndex + 1} de ${activeEbook.chapters.length}`;
+            document.getElementById('readerCurrentChapterTitle').textContent = chapter.title;
+            document.getElementById('readerContentBody').innerHTML = chapter.content;
+        }
+
+        function downloadActiveEbookPdf() {
+            if (!activeEbook) return;
+
+            if (activeEbook.pdfUrl && activeEbook.pdfUrl !== '#') {
+                window.open(activeEbook.pdfUrl, '_blank');
+            } else {
+                // Feedback moderno simulando geração do PDF
+                const alertBox = document.createElement('div');
+                alertBox.className = 'fixed top-6 right-6 z-[200] bg-emerald-600 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-3 text-sm font-bold animate-bounce';
+                alertBox.innerHTML = `
+                    <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span>Download iniciado! O arquivo "${activeEbook.title}.pdf" foi liberado.</span>
+                `;
+                document.body.appendChild(alertBox);
+                setTimeout(() => alertBox.remove(), 4000);
+            }
+        }
+
+        // Renderizar inicial dos e-books
+        renderEbooks();
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'portal_ebooks') renderEbooks();
+        });
+    </script>
+
+    <!-- Modal de Captura de Lead para E-book -->
+    <div id="leadCaptureModal" class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-gray-100 transform transition-all animate-fadeIn">
+            <!-- Topo do Modal -->
+            <div class="bg-gradient-to-r from-brandGreen to-brandGreenDark p-6 text-white relative">
+                <button onclick="closeLeadModal()" class="absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 hover:bg-black/30 rounded-full w-8 h-8 flex items-center justify-center transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-white/20 text-white tracking-wider">
+                        Acesso Gratuito
+                    </span>
+                    <span class="text-xs text-white/80" id="modalEbookCategory">Automações</span>
+                </div>
+                <h3 class="text-2xl font-extrabold text-white leading-tight" id="modalEbookTitle">Nome do E-book</h3>
+                <p class="text-xs text-white/90 mt-1">Informe seu nome e WhatsApp para desbloquear o leitor digital e baixar o PDF completo.</p>
+            </div>
+
+            <!-- Formulário -->
+            <form id="leadCaptureForm" class="p-6 md:p-8 space-y-4">
+                <input type="hidden" id="captureEbookId">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">Seu Nome Completo *</label>
+                    <input type="text" id="leadName" required placeholder="Ex: Roberto Carlos Silva" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800 text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">WhatsApp / Celular com DDD *</label>
+                    <div class="relative">
+                        <input type="tel" id="leadWhatsapp" required placeholder="(11) 98765-4321" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800 text-sm">
+                        <span class="absolute right-3 top-3 text-brandGreen">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.082 19.165c-1.63 0-3.122-.411-4.437-1.109l-4.908 1.287 1.309-4.781c-.767-1.34-1.208-2.893-1.208-4.55 0-5.068 4.108-9.176 9.176-9.176s9.176 4.108 9.176 9.176c0 5.068-4.108 9.176-9.176 9.176z"/></svg>
+                        </span>
+                    </div>
+                    <p class="text-[11px] text-gray-500 mt-1">Seu contato está seguro. Nós odiamos spam tanto quanto você.</p>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="btnSubmitLead" class="w-full py-4 bg-gradient-to-r from-brandOrange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-extrabold rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 flex items-center justify-center space-x-2">
+                        <span>📖 Desbloquear Leitor & Baixar PDF</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal do Leitor Digital Interativo de E-books -->
+    <div id="ebookReaderModal" class="fixed inset-0 bg-gray-950/85 backdrop-blur-md z-[100] hidden items-center justify-center p-2 sm:p-4 md:p-6">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full h-[92vh] flex flex-col overflow-hidden border border-gray-100">
+            <!-- Barra Superior do Leitor -->
+            <header class="bg-gray-900 text-white px-6 py-4 flex items-center justify-between border-b border-gray-800 shrink-0">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-brandOrange text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-md">
+                        📖
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-brandGreen font-bold uppercase tracking-wider" id="readerCategory">Automações</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="text-xs text-gray-400" id="readerAuthor">Por Adelmo Reis</span>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-bold truncate max-w-md md:max-w-xl text-white" id="readerTitle">Título do E-book</h3>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <button onclick="downloadActiveEbookPdf()" class="px-4 py-2 bg-brandGreen hover:bg-brandGreenDark text-white text-xs md:text-sm font-bold rounded-xl transition shadow flex items-center space-x-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <span>Baixar PDF</span>
+                    </button>
+                    <button onclick="closeReaderModal()" class="w-9 h-9 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white flex items-center justify-center transition" title="Fechar leitor">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Corpo do Leitor com Sumário Lateral e Conteúdo -->
+            <div class="flex-1 flex flex-col md:flex-row overflow-hidden bg-gray-50">
+                <!-- Sumário Lateral (Capítulos) -->
+                <aside class="md:w-72 bg-white border-r border-gray-200 flex flex-col shrink-0 overflow-y-auto p-4 md:p-6">
+                    <p class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Sumário dos Capítulos</p>
+                    <nav id="readerChapterNav" class="space-y-2">
+                        <!-- Botões de capítulos gerados dinamicamente -->
+                    </nav>
+
+                    <div class="mt-auto pt-6 border-t border-gray-100 hidden md:block">
+                        <div class="bg-orange-50 rounded-2xl p-4 border border-orange-200 text-center">
+                            <p class="text-xs font-bold text-brandOrange">Gostou deste conteúdo?</p>
+                            <p class="text-[11px] text-gray-600 mt-1 mb-3">Implemente essa solução personalizada na sua empresa com a equipe 3Dígitos.</p>
+                            <a href="https://wa.me/5599999999999?text=Olá,%20li%20o%20e-book%20e%20gostaria%20de%20um%20orçamento!" target="_blank" class="block w-full py-2 bg-brandOrange hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow transition">
+                                Falar no WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Área de Leitura Principal -->
+                <main class="flex-1 overflow-y-auto p-6 md:p-12 bg-white">
+                    <div class="max-w-2xl mx-auto prose prose-emerald text-gray-800">
+                        <div id="readerChapterHeader" class="mb-8 pb-4 border-b border-gray-100">
+                            <span class="text-xs font-extrabold text-brandGreen uppercase tracking-widest" id="readerCurrentChapterTag">Capítulo 1</span>
+                            <h2 class="text-3xl font-extrabold text-gray-900 mt-1" id="readerCurrentChapterTitle">Título do Capítulo</h2>
+                        </div>
+                        <div id="readerContentBody" class="leading-relaxed text-base text-gray-700 space-y-4">
+                            <!-- Conteúdo do capítulo selecionado -->
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

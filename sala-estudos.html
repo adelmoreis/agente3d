@@ -1,0 +1,2990 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sala de Estudos & Mentoria Colaborativa - 3Dígitos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandGreen: '#10b981',
+                        brandOrange: '#f97316',
+                        brandBlue: '#2781F6',
+                        brandBlueDark: '#1a6cd3',
+                        chatwootBg: '#F4F6FB',
+                        chatwootBorder: '#E2E8F0',
+                        chatwootBubble: '#F0F4F8'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        code, kbd { font-family: 'JetBrains Mono', monospace; }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-gray-100 text-slate-800 antialiased h-full flex flex-col overflow-hidden selection:bg-brandBlue selection:text-white">
+
+    <!-- BARRA SUPERIOR DE CONTEXTO EDUCACIONAL & CONTROLE DE PAPEL -->
+    <header class="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-between z-30 shrink-0 shadow-sm">
+        <div class="flex items-center space-x-3">
+            <a href="index.html" class="flex items-center space-x-2 text-gray-500 hover:text-gray-900 text-xs font-bold transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <span class="hidden sm:inline">Portal 3Dígitos</span>
+            </a>
+            <span class="text-gray-300">|</span>
+            <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <h1 class="text-sm font-extrabold text-gray-900 tracking-tight flex items-center space-x-1.5">
+                    <span>🎓</span>
+                    <span>Sala de Estudos em Grupo & Mentoria ao Vivo</span>
+                </h1>
+                <span class="hidden md:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-blue-100 text-blue-700 border border-blue-200">
+                    Ambiente Acadêmico
+                </span>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-2 sm:space-x-3">
+            <!-- Alternador de Visão: Professor vs Aluno -->
+            <div class="flex items-center bg-gray-100 p-1 rounded-xl border border-gray-200 text-xs">
+                <button onclick="setUserRole('professor')" id="btnRoleProfessor" class="px-3 py-1 rounded-lg font-bold transition bg-white text-brandBlue shadow-sm">
+                    👨‍🏫 Visão do Professor
+                </button>
+                <button onclick="setUserRole('student')" id="btnRoleStudent" class="px-3 py-1 rounded-lg font-semibold text-gray-600 hover:text-gray-900 transition">
+                    👨‍🎓 Visão do Aluno
+                </button>
+            </div>
+
+            <!-- Botão de Trava Rápida do Chat (Apenas Professor) -->
+            <button onclick="toggleGlobalChatLock()" id="btnGlobalChatLock" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow-sm bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100" title="Controlar permissão de mensagens dos alunos">
+                <span id="chatLockIcon">🔓</span>
+                <span id="chatLockLabel">Chat Liberado</span>
+            </button>
+
+            <!-- Links Rápidos -->
+            <a href="drive.html" target="_blank" class="hidden lg:flex items-center space-x-1 px-3 py-1.5 text-xs font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition border border-gray-200" title="Buscar arquivos no Drive">
+                <span>📁</span>
+                <span>Drive</span>
+            </a>
+            <a href="admin.html#leads" class="hidden sm:flex items-center space-x-1 px-3 py-1.5 text-xs font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition border border-gray-200" title="Ver leads e alunos">
+                <span>👥</span>
+                <span>Alunos</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTAINER PRINCIPAL: LAYOUT DE 4 COLUNAS INSPIRADO NO CHATWOOT -->
+    <div class="flex-1 flex overflow-hidden">
+
+        <!-- ======================================================== -->
+        <!-- COLUNA 1: SIDEBAR LATERAL ESQUERDA (Módulos, Turmas e Tags) -->
+        <!-- ======================================================== -->
+        <aside class="w-16 md:w-56 bg-white border-r border-gray-200 flex flex-col shrink-0 select-none z-20">
+            <!-- Barra de Busca Rápida -->
+            <div class="p-3 border-b border-gray-100 hidden md:block">
+                <div class="relative">
+                    <input type="text" id="searchRoomsInput" oninput="filterRoomsList(this.value)" placeholder="Pesquisar sala..." class="w-full pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-brandBlue focus:bg-white transition">
+                    <svg class="w-4 h-4 text-gray-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </div>
+
+            <!-- Navegação Vertical Estilo Chatwoot -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar py-2 space-y-4">
+                
+                <!-- Grupo 1: Salas de Estudo -->
+                <div class="px-2">
+                    <div class="px-2 pb-1 text-[11px] font-extrabold uppercase tracking-wider text-gray-400 hidden md:flex items-center justify-between">
+                        <span>Salas de Estudo</span>
+                        <span class="w-5 h-5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold flex items-center justify-center">4</span>
+                    </div>
+                    <nav class="space-y-0.5 text-xs font-semibold">
+                        <button onclick="filterRoomsByCategory('all')" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-brandBlue bg-blue-50 font-bold transition">
+                            <span class="text-base">💬</span>
+                            <span class="truncate hidden md:inline">Todas as Salas</span>
+                        </button>
+                        <button onclick="filterRoomsByCategory('mentions')" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition">
+                            <span class="text-base">@</span>
+                            <span class="truncate hidden md:inline">Menções ao Tutor</span>
+                        </button>
+                        <button onclick="filterRoomsByCategory('submissions')" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition">
+                            <span class="text-base">📎</span>
+                            <span class="truncate hidden md:inline">Trabalhos Pendentes</span>
+                        </button>
+                        <button onclick="filterRoomsByCategory('unanswered')" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition">
+                            <span class="text-base">⏳</span>
+                            <span class="truncate hidden md:inline">Dúvidas sem Resposta</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Grupo 2: Tópicos e Tags de Aprendizado -->
+                <div class="px-2 pt-2 border-t border-gray-100 hidden md:block">
+                    <div class="px-2 pb-1 text-[11px] font-extrabold uppercase tracking-wider text-gray-400 flex items-center justify-between">
+                        <span>Tópicos & Tags</span>
+                        <span class="text-xs">🏷️</span>
+                    </div>
+                    <nav class="space-y-1 text-xs">
+                        <a href="javascript:void(0)" onclick="filterRoomsByTag('tecnico')" class="flex items-center space-x-2 px-2.5 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                            <span>Técnico & VPS</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="filterRoomsByTag('automacoes')" class="flex items-center space-x-2 px-2.5 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            <span>Automações com IA</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="filterRoomsByTag('chatwoot')" class="flex items-center space-x-2 px-2.5 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                            <span>Chatwoot & Inboxes</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="filterRoomsByTag('trabalho')" class="flex items-center space-x-2 px-2.5 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition">
+                            <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+                            <span>Entrega de Projeto</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Grupo 3: Times & Grupos de Mentoria -->
+                <div class="px-2 pt-2 border-t border-gray-100 hidden md:block">
+                    <div class="px-2 pb-1 text-[11px] font-extrabold uppercase tracking-wider text-gray-400 flex items-center justify-between">
+                        <span>Turmas Ativas</span>
+                        <span class="text-xs">👥</span>
+                    </div>
+                    <nav class="space-y-1 text-xs">
+                        <div class="flex items-center justify-between px-2.5 py-1.5 text-gray-700 font-semibold rounded-lg hover:bg-gray-100">
+                            <span class="truncate">🚀 Turma Alpha 2026</span>
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        </div>
+                        <div class="flex items-center justify-between px-2.5 py-1.5 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <span class="truncate">⚡ Mentoria VIP</span>
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Rodapé do Usuário Logado (Professor Adelmo) com Botão de Super Administrador -->
+            <div class="p-3 border-t border-gray-200 flex items-center justify-between bg-gray-50/70">
+                <div class="flex items-center space-x-2.5 truncate">
+                    <div class="relative shrink-0 cursor-pointer" onclick="openSuperAdminModal()" title="Abrir Console de Super Administrador">
+                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-brandOrange to-orange-500 text-white font-extrabold flex items-center justify-center text-xs shadow-sm ring-2 ring-white" id="currentUserAvatar">
+                            AR
+                        </div>
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+                    </div>
+                    <div class="truncate hidden md:block cursor-pointer" onclick="openSuperAdminModal()">
+                        <div class="flex items-center space-x-1.5">
+                            <p class="text-xs font-bold text-gray-900 truncate" id="currentUserName">Adelmo Reis</p>
+                            <span class="px-1.5 py-0.2 text-[9px] bg-indigo-100 text-indigo-700 font-extrabold rounded-md uppercase tracking-wider">Admin</span>
+                        </div>
+                        <p class="text-[10px] text-brandBlue font-semibold truncate" id="currentUserRoleDesc">Tutor Master • 3Dígitos</p>
+                    </div>
+                </div>
+
+                <!-- Botão Menu Super Administrador -->
+                <button onclick="openSuperAdminModal()" class="p-2 rounded-xl bg-gradient-to-r from-brandBlue to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-sm hover:shadow transition flex items-center space-x-1.5 shrink-0 group" title="Console de Super Administrador: Alunos, Turmas, Classes e Integrações">
+                    <svg class="w-4 h-4 text-white group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span class="text-[10px] font-extrabold hidden lg:inline tracking-wide uppercase">Super Admin</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ======================================================== -->
+        <!-- COLUNA 2: FEED DE CONVERSAS / SALAS DE ESTUDO (Lista de Alunos & Tópicos) -->
+        <!-- ======================================================== -->
+        <section class="w-72 sm:w-80 md:w-88 bg-white border-r border-gray-200 flex flex-col shrink-0 z-10">
+            <!-- Abas do Feed de Conversas (Igual ao modelo do Chatwoot) -->
+            <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
+                <div class="flex space-x-3 text-xs font-bold text-gray-500">
+                    <button onclick="setConversationFilter('my')" id="feedTabMy" class="hover:text-gray-900 transition">
+                        Minhas <span class="text-[11px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full font-bold ml-0.5">2</span>
+                    </button>
+                    <button onclick="setConversationFilter('unassigned')" id="feedTabUnassigned" class="hover:text-gray-900 transition">
+                        Dúvidas <span class="text-[11px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full font-bold ml-0.5">1</span>
+                    </button>
+                    <button onclick="setConversationFilter('all')" id="feedTabAll" class="text-brandBlue border-b-2 border-brandBlue pb-1 font-extrabold transition">
+                        Todos <span class="text-[11px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full font-bold ml-0.5" id="feedCountBadge">5</span>
+                    </button>
+                </div>
+                
+                <button onclick="openNewStudyTopicModal()" class="p-1.5 rounded-lg bg-gray-100 hover:bg-brandBlue hover:text-white text-gray-600 transition" title="Criar Nova Discussão / Tópico de Estudo">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+            </div>
+
+            <!-- Lista de Discussões e Alunos -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar divide-y divide-gray-100" id="studyRoomsFeedList">
+                <!-- Preenchido dinamicamente via JS -->
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- COLUNA 3: ÁREA PRINCIPAL DA SALA (Vídeo/Material + Chat ao Vivo + Entregas) -->
+        <!-- ======================================================== -->
+        <main class="flex-1 flex flex-col bg-chatwootBg relative overflow-hidden">
+            
+            <!-- Topbar da Conversa com Aluno/Turma Selecionada -->
+            <div class="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shrink-0 shadow-sm z-10">
+                <div class="flex items-center space-x-3 overflow-hidden">
+                    <div class="relative shrink-0">
+                        <img id="activeRoomAvatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-10 h-10 rounded-full object-cover border border-gray-200 shadow-sm">
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
+                    </div>
+                    <div class="truncate">
+                        <div class="flex items-center space-x-2">
+                            <h2 class="text-base font-extrabold text-gray-900 truncate" id="activeRoomStudentName">Helena Carvalho</h2>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-emerald-100 text-emerald-800" id="activeRoomStatusBadge">
+                                Aluna Matriculada
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-500 truncate mt-0.5" id="activeRoomTopicSubject">
+                            Módulo 4: Estrutura de Transbordo Humano no Chatwoot
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Abas da Área Central (Mensagens | Material da Aula | Trabalhos) -->
+                <div class="flex items-center space-x-1 sm:space-x-2 text-xs font-bold">
+                    <button onclick="setActiveMainTab('messages')" id="mainTabMessages" class="px-3.5 py-1.5 rounded-xl transition bg-blue-50 text-brandBlue font-extrabold border border-blue-200">
+                        💬 Mensagens & Chat
+                    </button>
+                    <button onclick="setActiveMainTab('material')" id="mainTabMaterial" class="px-3.5 py-1.5 rounded-xl transition text-gray-600 hover:bg-gray-100 border border-transparent">
+                        🎬 Vídeo & Material
+                    </button>
+                    <button onclick="setActiveMainTab('submissions')" id="mainTabSubmissions" class="px-3.5 py-1.5 rounded-xl transition text-gray-600 hover:bg-gray-100 border border-transparent flex items-center space-x-1">
+                        <span>📎 Trabalhos</span>
+                        <span class="w-4 h-4 rounded-full bg-brandOrange text-white text-[10px] flex items-center justify-center font-extrabold" id="submissionsCountBadge">2</span>
+                    </button>
+                    <button onclick="setActiveMainTab('professor')" id="mainTabProfessor" class="px-3.5 py-1.5 rounded-xl transition text-gray-600 hover:bg-gray-100 border border-transparent flex items-center space-x-1">
+                        <span>🧑‍🏫 Painel do Professor</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAINEL 1: VÍDEO & MATERIAL EXPLICATIVO (EXPANSÍVEL) -->
+            <div id="materialContentPanel" class="hidden p-6 bg-slate-900 border-b border-slate-800 text-white shrink-0 overflow-y-auto max-h-96 custom-scrollbar animate-fadeIn">
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                                Aula em Foco
+                            </span>
+                            <h3 class="font-extrabold text-white text-base" id="activeLessonTitle">
+                                Dominando Caixas de Entrada e Atendimento Omnichannel
+                            </h3>
+                        </div>
+                        <div class="flex items-center space-x-2" id="professorVideoEditControls">
+                            <button onclick="promptChangeVideoUrl()" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-amber-400 rounded-lg border border-amber-500/30 transition">
+                                ✏️ Trocar Vídeo / Aula
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Player de Vídeo Responsivo 16:9 -->
+                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl border border-slate-800">
+                        <iframe id="activeLessonVideoIframe" class="w-full h-full" src="https://www.youtube.com/embed/Y7-TU9vooLI" title="Aula da Mentoria" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Materiais Complementares para Download -->
+                    <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">📚</span>
+                            <div>
+                                <h5 class="font-bold text-white">Apostila Oficial & Arquitetura em PDF</h5>
+                                <p class="text-slate-400">Manual prático de implantação para estudo individual.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <a href="ebook-chatwoot-automacoes.html?unlocked=true" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition flex items-center space-x-1.5 shadow">
+                                <span>📖 Abrir E-book Oficial</span>
+                            </a>
+                            <a href="drive.html" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition border border-slate-700 flex items-center space-x-1.5">
+                                <span>📁 Ver no Drive</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAINEL 2: LISTA DE TRABALHOS ENTREGUES DA SALA -->
+            <div id="submissionsContentPanel" class="hidden p-6 bg-white border-b border-gray-200 overflow-y-auto max-h-96 custom-scrollbar animate-fadeIn">
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-base">Trabalhos & Projetos Submetidos pelos Alunos</h3>
+                            <p class="text-xs text-gray-500">Arquivos anexados pelos alunos para análise e nota do tutor.</p>
+                        </div>
+                        <button onclick="promptSubmitHomework()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow flex items-center space-x-1.5">
+                            <span>📤 Submeter Meu Trabalho</span>
+                        </button>
+                    </div>
+
+                    <div id="roomSubmissionsList" class="space-y-3">
+                        <!-- Trabalhos renderizados dinamicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAINEL 3: PAINEL DO PROFESSOR (visível só para o professor) -->
+            <div id="professorContentPanel" class="hidden p-6 bg-white border-b border-gray-200 overflow-y-auto max-h-[28rem] custom-scrollbar animate-fadeIn">
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-base">🧑‍🏫 Painel do Professor</h3>
+                        <p class="text-xs text-gray-500">Controle o chat de cada sala, registre presença e lance notas por turma.</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <h4 class="font-bold text-xs uppercase tracking-wider text-gray-700">💬 Chat por sala</h4>
+                            <div class="space-x-2">
+                                <button onclick="profSetAllChats(true)" class="px-3 py-1 text-[11px] font-bold rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100">🔒 Silenciar todas</button>
+                                <button onclick="profSetAllChats(false)" class="px-3 py-1 text-[11px] font-bold rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100">🔓 Liberar todas</button>
+                            </div>
+                        </div>
+                        <div id="profChatControls" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-gray-700">✅ Presença &amp; Notas finais</h4>
+                        <div class="flex items-end gap-3 flex-wrap text-xs">
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">Turma</label>
+                                <select id="profTurmaSelect" onchange="renderProfAttendance()" class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-semibold"></select>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">Data da aula</label>
+                                <input type="date" id="profAttendanceDate" onchange="renderProfAttendance()" class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl">
+                            </div>
+                            <button onclick="profSaveAttendanceAndGrades()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow">💾 Salvar</button>
+                            <button onclick="profExportAttendanceCsv()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold rounded-xl border border-gray-200">⬇️ Exportar CSV</button>
+                        </div>
+                        <div id="profAttendanceList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÁREA DO CHAT / MENSAGENS AO VIVO -->
+            <div id="chatMessagesContainer" class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 space-y-4">
+                <!-- Mensagens da conversa renderizadas dinamicamente -->
+            </div>
+
+            <!-- AVISO DE CHAT BLOQUEADO (Visível apenas para Aluno quando o professor silencia) -->
+            <div id="chatLockedBanner" class="hidden bg-amber-50 border-t border-amber-200 p-3 text-center text-xs font-bold text-amber-800 animate-fadeIn">
+                🔒 O Professor Adelmo silenciou temporariamente o chat durante a explicação do vídeo. Aguarde a liberação para dúvidas.
+            </div>
+
+            <!-- CAIXA DE COMPOSIÇÃO DE RESPOSTA ESTILO CHATWOOT -->
+            <div class="bg-white border-t border-gray-200 p-3 sm:p-4 shrink-0 shadow-lg relative" id="chatComposerCard">
+                
+                <!-- Abas do Compositor: Responder à Turma vs Nota Pedagógica Privada (Fundo Amarelo) -->
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center space-x-2 text-xs font-bold">
+                        <button onclick="setComposerMode('reply')" id="composerModeReply" class="px-3 py-1 rounded-lg bg-gray-100 text-gray-800 font-extrabold transition">
+                            Responder à Turma
+                        </button>
+                        <button onclick="setComposerMode('private')" id="composerModePrivate" class="px-3 py-1 rounded-lg text-amber-700 hover:bg-amber-50 font-bold transition flex items-center space-x-1" title="Mensagem visível apenas para o Professor e Monitores">
+                            <span>🔒</span>
+                            <span>Nota Pedagógica Privada</span>
+                        </button>
+                    </div>
+
+                    <!-- Comandos Rápidos do Professor -->
+                    <div class="hidden sm:flex items-center space-x-1.5 text-[11px] text-gray-400">
+                        <span>Digite <code>/</code> para respostas prontas</span>
+                    </div>
+                </div>
+
+                <!-- Formulário de Envio -->
+                <form id="chatMessageForm" class="space-y-2">
+                    <div class="relative rounded-2xl border transition-all duration-200 p-2" id="composerInputWrapper">
+                        <textarea id="chatInputMessage" rows="2" placeholder="Shift + Enter para nova linha. Digite sua dúvida, contribuição ou feedback..." class="w-full bg-transparent text-sm text-gray-800 placeholder-gray-400 focus:outline-none resize-none"></textarea>
+
+                        <!-- Barra de Ferramentas Inferior do Compositor -->
+                        <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-1">
+                            <div class="flex items-center space-x-2">
+                                <!-- Botão Anexar Arquivo / Trabalho -->
+                                <label class="p-1.5 rounded-lg text-gray-500 hover:text-brandBlue hover:bg-blue-50 transition cursor-pointer" title="Anexar Arquivo ou Trabalho">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                                    <input type="file" id="chatAttachmentInput" class="hidden" onchange="handleChatAttachment(event)">
+                                </label>
+
+                                <!-- Botão Emoji / Emoticons -->
+                                <button type="button" onclick="insertEmoji('👏')" class="p-1.5 rounded-lg text-gray-500 hover:text-amber-500 hover:bg-amber-50 transition" title="Aplausos">👏</button>
+                                <button type="button" onclick="insertEmoji('💡')" class="p-1.5 rounded-lg text-gray-500 hover:text-amber-500 hover:bg-amber-50 transition" title="Insight">💡</button>
+                                <button type="button" onclick="insertEmoji('🚀')" class="p-1.5 rounded-lg text-gray-500 hover:text-blue-500 hover:bg-blue-50 transition" title="Foguete">🚀</button>
+
+                                <!-- Indicador de Anexo Selecionado -->
+                                <span id="attachedFileIndicator" class="hidden px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-100 text-blue-700 flex items-center space-x-1">
+                                    <span id="attachedFileName">arquivo.pdf</span>
+                                    <button type="button" onclick="clearAttachment()" class="text-blue-900 font-bold ml-1">✕</button>
+                                </span>
+                            </div>
+
+                            <div class="flex items-center space-x-2">
+                                <button type="submit" id="btnSendMessage" class="px-5 py-2 bg-gradient-to-r from-brandBlue to-brandBlueDark hover:from-blue-600 hover:to-blue-700 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center space-x-1.5">
+                                    <span>Enviar</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- ======================================================== -->
+        <!-- COLUNA 4: PAINEL LATERAL DIREITO (Perfil do Aluno + Controles do Tutor) -->
+        <!-- ======================================================== -->
+        <aside class="w-72 lg:w-80 bg-white border-l border-gray-200 flex flex-col shrink-0 overflow-y-auto custom-scrollbar z-10 hidden xl:flex">
+            
+            <!-- Card de Perfil do Aluno Selecionado (Exatamente igual ao Chatwoot) -->
+            <div class="p-6 border-b border-gray-200 text-center">
+                <div class="relative w-20 h-20 mx-auto mb-3">
+                    <img id="sideStudentAvatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Estudante" class="w-full h-full rounded-2xl object-cover shadow-md border-2 border-gray-100">
+                    <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full"></span>
+                </div>
+
+                <div class="flex items-center justify-center space-x-1.5">
+                    <h3 class="text-lg font-extrabold text-gray-900" id="sideStudentName">Helena Carvalho</h3>
+                    <button class="text-gray-400 hover:text-gray-600">ℹ️</button>
+                </div>
+
+                <p class="text-xs text-gray-500 font-medium mt-0.5" id="sideStudentRole">
+                    Líder de Operações • Estudante da Turma Alpha 2026
+                </p>
+
+                <!-- Informações de Contato do Aluno -->
+                <div class="mt-4 pt-4 border-t border-gray-100 space-y-2 text-left text-xs text-gray-600">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-gray-400">✉️</span>
+                        <span class="truncate" id="sideStudentEmail">helena@aurora.inc</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-emerald-500">📱</span>
+                        <span id="sideStudentPhone">+55 (11) 95550-0100</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-gray-400">📍</span>
+                        <span>São Paulo, Brasil 🇧🇷</span>
+                    </div>
+                </div>
+
+                <!-- Ações Rápidas de Contato com o Aluno -->
+                <div class="flex items-center justify-center space-x-2 mt-4 pt-4 border-t border-gray-100">
+                    <a id="sideBtnWhatsapp" href="https://wa.me/5511955500100" target="_blank" class="p-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 transition" title="Conversar no WhatsApp">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.082 19.165c-1.63 0-3.122-.411-4.437-1.109l-4.908 1.287 1.309-4.781c-.767-1.34-1.208-2.893-1.208-4.55 0-5.068 4.108-9.176 9.176-9.176s9.176 4.108 9.176 9.176c0 5.068-4.108 9.176-9.176 9.176z"/></svg>
+                    </a>
+                    <button onclick="quickAddPrivateNoteForStudent()" class="p-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 transition" title="Adicionar Nota de Desempenho">
+                        📝
+                    </button>
+                    <button onclick="approveStudentProject()" class="p-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-brandBlue transition" title="Aprovar Trabalho">
+                        ⭐
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTROLES DO TUTOR / GESTÃO DA CONVERSA -->
+            <div class="p-6 space-y-5 text-xs">
+                <div>
+                    <h4 class="font-extrabold uppercase text-gray-400 tracking-wider mb-2 text-[11px]">Controles da Mentoria</h4>
+                    
+                    <!-- Trava do Chat Desta Sala -->
+                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-gray-800 block">Status do Chat</span>
+                            <span class="text-[11px] text-gray-500" id="sideChatStatusText">Permitir alunos falarem</span>
+                        </div>
+                        <input type="checkbox" id="sideChatLockSwitch" onchange="toggleSideRoomChatLock(this.checked)" checked class="toggle-checkbox w-5 h-5 accent-brandBlue rounded cursor-pointer">
+                    </div>
+                </div>
+
+                <!-- Tutor / Monitor Atribuído -->
+                <div>
+                    <label class="block font-bold text-gray-700 uppercase mb-1 text-[11px]">Tutor Responsável</label>
+                    <div class="flex items-center space-x-2 p-2 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="w-6 h-6 rounded-full bg-brandOrange text-white font-bold flex items-center justify-center text-[10px]">AR</div>
+                        <span class="font-semibold text-gray-800">Adelmo Reis (Tutor Master)</span>
+                    </div>
+                </div>
+
+                <!-- Turma Atribuída -->
+                <div>
+                    <label class="block font-bold text-gray-700 uppercase mb-1 text-[11px]">Turma Vinculada</label>
+                    <select class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-medium text-gray-800 focus:outline-none">
+                        <option>🚀 Turma Alpha 2026</option>
+                        <option>⚡ Mentoria Individual VIP</option>
+                        <option>🛠️ Plantão de Implantação VPS</option>
+                    </select>
+                </div>
+
+                <!-- Prioridade Pedagógica -->
+                <div>
+                    <label class="block font-bold text-gray-700 uppercase mb-1 text-[11px]">Nível de Urgência da Dúvida</label>
+                    <select class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-medium text-gray-800 focus:outline-none">
+                        <option value="high">🔴 Alta (Dúvida Bloqueante)</option>
+                        <option value="medium" selected>🟡 Média (Revisão de Código)</option>
+                        <option value="low">🟢 Normal (Conceito Geral)</option>
+                    </select>
+                </div>
+
+                <!-- Etiquetas de Aprendizado -->
+                <div>
+                    <label class="block font-bold text-gray-700 uppercase mb-1.5 text-[11px]">Etiquetas Pedagógicas</label>
+                    <div class="flex flex-wrap gap-1.5 mb-2" id="sideTagsContainer">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700 border border-blue-200">Transbordo IA</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700 border border-amber-200">Trabalho Entregue</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Ativa no Chat</span>
+                    </div>
+                    <button onclick="promptAddTagToStudent()" class="w-full py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-bold text-[11px] transition">
+                        + Adicionar Etiqueta
+                    </button>
+                </div>
+
+                <!-- Trabalhos Submetidos Nesta Conversa -->
+                <div class="pt-4 border-t border-gray-100">
+                    <h5 class="font-extrabold uppercase text-gray-400 tracking-wider mb-2 text-[11px]">Último Anexo Submetido</h5>
+                    <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between">
+                        <div class="flex items-center space-x-2 truncate">
+                            <span class="text-xl">📄</span>
+                            <div class="truncate">
+                                <p class="font-bold text-gray-800 truncate" id="sideAttachedFileName">Fluxo_Transbordo_Helena.json</p>
+                                <p class="text-[10px] text-gray-400">42 KB • Hoje às 14:20</p>
+                            </div>
+                        </div>
+                        <button onclick="alert('Download do trabalho iniciado com sucesso!')" class="p-1.5 rounded-lg bg-blue-100 text-blue-700 font-bold hover:bg-blue-200 transition" title="Baixar Trabalho">
+                            📥
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- MODAL PARA CRIAR NOVO TÓPICO DE ESTUDO -->
+    <div id="newStudyTopicModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gray-100 animate-fadeIn">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                <div class="flex items-center space-x-2.5">
+                    <span class="text-2xl">🎓</span>
+                    <h3 class="text-lg font-extrabold text-gray-900">Novo Tópico ou Sala de Mentoria</h3>
+                </div>
+                <button onclick="closeNewStudyTopicModal()" class="text-gray-400 hover:text-gray-700">✕</button>
+            </div>
+
+            <form id="newStudyTopicForm" class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-bold text-gray-700 uppercase mb-1">Título do Tópico / Dúvida *</label>
+                    <input type="text" id="newTopicTitle" required placeholder="Ex: Dúvida sobre Webhooks e Transbordo de IA" class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold">
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-700 uppercase mb-1">Módulo Vinculado</label>
+                    <select id="newTopicModule" class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium">
+                        <option>Módulo 1: Visão Geral e Infraestrutura VPS</option>
+                        <option>Módulo 2: Gestão Multi-Tenant e White Label</option>
+                        <option>Módulo 3: CRM e Recursos de Produtividade</option>
+                        <option selected>Módulo 4: Automação, IA e Transbordo Humano</option>
+                        <option>Módulo 5: Métricas e Modelo de Negócios</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-700 uppercase mb-1">Descrição Inicial da Discussão *</label>
+                    <textarea id="newTopicDesc" rows="3" required placeholder="Descreva os objetivos deste estudo ou o desafio a ser resolvido pelo grupo..." class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end space-x-2">
+                    <button type="button" onclick="closeNewStudyTopicModal()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition">Cancelar</button>
+                    <button type="submit" class="px-5 py-2 bg-brandBlue hover:bg-brandBlueDark text-white font-extrabold rounded-xl transition shadow">Criar Tópico</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODAL DO CONSOLE DE SUPER ADMINISTRADOR -->
+    <!-- ======================================================== -->
+    <div id="superAdminModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-gray-200 overflow-hidden animate-fadeIn">
+            
+            <!-- Cabeçalho do Super Administrador -->
+            <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0 border-b border-slate-800">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brandBlue to-indigo-600 flex items-center justify-center text-white shadow-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h2 class="text-base sm:text-lg font-black tracking-tight text-white">Console do Super Administrador</h2>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">Root SaaS</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Gestão Educacional, Integrações de APIs, Turmas, Classes e Grade Curricular</p>
+                    </div>
+                </div>
+                <button onclick="closeSuperAdminModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition">✕</button>
+            </div>
+
+            <!-- Abas Principais do Super Admin -->
+            <div class="px-6 bg-slate-100 border-b border-gray-200 flex items-center space-x-2 shrink-0 overflow-x-auto py-2">
+                <button onclick="switchSuperAdminTab('alunos')" id="adminTabBtnAlunos" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2 bg-white text-brandBlue shadow-sm border border-gray-200">
+                    <span>👤</span>
+                    <span>Criar Novo Aluno</span>
+                    <span id="badgeCountAlunos" class="ml-1 px-1.5 py-0.2 rounded-full text-[10px] bg-blue-100 text-brandBlue font-extrabold">5</span>
+                </button>
+                <button onclick="switchSuperAdminTab('integracoes')" id="adminTabBtnIntegracoes" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2 text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent">
+                    <span>⚡</span>
+                    <span>Integrações & Webhooks</span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                </button>
+                <button onclick="switchSuperAdminTab('turmas')" id="adminTabBtnTurmas" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2 text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent">
+                    <span>🎓</span>
+                    <span>Novas Turmas & Classes</span>
+                    <span id="badgeCountTurmasClasses" class="ml-1 px-1.5 py-0.2 rounded-full text-[10px] bg-purple-100 text-purple-700 font-extrabold">2T • 3C</span>
+                </button>
+            </div>
+
+            <!-- Corpo dos Painéis com Rolagem Interna -->
+            <div class="p-6 overflow-y-auto flex-1 bg-slate-50/50">
+
+                <!-- ============================================== -->
+                <!-- ABA 1: CRIAR NOVO ALUNO & GESTÃO DE ESTUDANTES -->
+                <!-- ============================================== -->
+                <div id="adminPanelAlunos" class="space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <!-- Formulário de Cadastro do Aluno -->
+                        <div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                            <div class="flex items-center space-x-2 pb-3 border-b border-gray-100">
+                                <span class="text-xl">✍️</span>
+                                <div>
+                                    <h4 class="text-sm font-black text-gray-900">Cadastrar Novo Aluno</h4>
+                                    <p class="text-[11px] text-gray-500">Provisione acesso de aluno ao portal e vincule a turma</p>
+                                </div>
+                            </div>
+
+                            <form id="formCreateStudent" onsubmit="handleCreateStudent(event)" class="space-y-3 text-xs">
+                                <div>
+                                    <label class="block font-bold text-gray-700 mb-1">Nome Completo do Aluno *</label>
+                                    <input type="text" id="newStudentName" required placeholder="Ex: Lucas Gabriel Fontes" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:bg-white focus:border-brandBlue focus:ring-1 focus:ring-brandBlue outline-none">
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">E-mail de Acesso *</label>
+                                        <input type="email" id="newStudentEmail" required placeholder="aluno@email.com" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-medium focus:bg-white focus:border-brandBlue outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">WhatsApp (com DDI) *</label>
+                                        <input type="text" id="newStudentPhone" required placeholder="+55 11 99999-9999" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-medium focus:bg-white focus:border-brandBlue outline-none">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Vincular à Turma *</label>
+                                        <select id="newStudentTurmaSelect" onchange="updateNewStudentClasseOptions()" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:bg-white outline-none">
+                                            <!-- Preenchido dinamicamente via JS -->
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Classe / Sala de Estudo *</label>
+                                        <select id="newStudentClasseSelect" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:bg-white outline-none">
+                                            <!-- Preenchido dinamicamente via JS -->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block font-bold text-gray-700 mb-1">Status da Matrícula</label>
+                                    <select id="newStudentStatus" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:bg-white outline-none">
+                                        <option value="Ativo">🟢 Ativo (Acesso Liberado)</option>
+                                        <option value="Pendente">🟡 Pendente (Aguardando Pagamento/Documento)</option>
+                                        <option value="Concluido">🎓 Concluído / Certificado</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block font-bold text-gray-700 mb-1">Cargo / Empresa do Aluno (Opcional)</label>
+                                    <input type="text" id="newStudentRole" placeholder="Ex: Gestor de Tráfego • Agência Meta" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-medium focus:bg-white outline-none">
+                                </div>
+
+                                <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-brandBlue to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold rounded-xl transition shadow-md flex items-center justify-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                    <span>Salvar e Matricular Aluno</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Lista de Alunos Cadastrados -->
+                        <div class="lg:col-span-7 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col">
+                            <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-3">
+                                <div>
+                                    <h4 class="text-sm font-black text-gray-900">Alunos Matriculados no Portal</h4>
+                                    <p class="text-[11px] text-gray-500">Visualização em tempo real de estudantes cadastrados</p>
+                                </div>
+                                <div class="relative w-48">
+                                    <input type="text" id="searchStudentInput" onkeyup="filterStudentsTable()" placeholder="Buscar aluno..." class="w-full pl-7 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs outline-none focus:bg-white">
+                                    <svg class="w-3.5 h-3.5 text-gray-400 absolute left-2 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                            </div>
+
+                            <div class="overflow-x-auto flex-1">
+                                <table class="w-full text-left text-xs">
+                                    <thead class="bg-gray-50 text-gray-600 uppercase font-black text-[10px] border-b border-gray-100">
+                                        <tr>
+                                            <th class="py-2.5 px-3">Aluno</th>
+                                            <th class="py-2.5 px-3">Contato</th>
+                                            <th class="py-2.5 px-3">Turma & Classe</th>
+                                            <th class="py-2.5 px-3">Status</th>
+                                            <th class="py-2.5 px-3 text-right">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminStudentsTableBody" class="divide-y divide-gray-100 font-medium">
+                                        <!-- Preenchido dinamicamente via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- ABA 2: INTEGRAÇÕES & WEBHOOKS -->
+                <!-- ============================================== -->
+                <div id="adminPanelIntegracoes" class="hidden space-y-6">
+                    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 flex items-start space-x-3 text-xs text-blue-900">
+                        <span class="text-xl">ℹ️</span>
+                        <div>
+                            <p class="font-bold">Ecossistema Conectado: Mensageria, Chatwoot e Automações</p>
+                            <p class="text-blue-700 text-[11px] mt-0.5">Todas as APIs abaixo sincronizam a sala de estudos com sua infraestrutura de atendimento, enviando alertas de novas aulas, transbordo e matrículas instantâneas.</p>
+                        </div>
+                    </div>
+
+                    <form id="formIntegracoes" onsubmit="handleSaveIntegracoes(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            
+                            <!-- Card 1: WhatsApp API -->
+                            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                                <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold text-sm">WA</div>
+                                        <div>
+                                            <h4 class="text-xs font-black text-gray-900">WhatsApp API (Evolution / Z-API)</h4>
+                                            <p class="text-[10px] text-gray-500">Notificações e Avisos de Aulas ao Vivo</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">Conectado 🟢</span>
+                                </div>
+
+                                <div class="space-y-2 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">URL Base da API</label>
+                                        <input type="text" id="intWhatsappUrl" value="https://api-wa.3digitos.com.br" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-mono text-[11px]">
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">API Token / Global Key</label>
+                                        <input type="password" id="intWhatsappKey" value="3d_live_token_789456123" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-mono text-[11px]">
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Nome da Instância Conectada</label>
+                                        <input type="text" id="intWhatsappInstance" value="instancia-alunos-turma-alpha" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-mono text-[11px]">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Chatwoot Webhooks -->
+                            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                                <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-8 h-8 rounded-xl bg-brandBlue text-white flex items-center justify-center font-bold text-sm">CW</div>
+                                        <div>
+                                            <h4 class="text-xs font-black text-gray-900">Chatwoot Webhook Gateway</h4>
+                                            <p class="text-[10px] text-gray-500">Sincronização de Conversas e Tutoria</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-800">Ativo ⚡</span>
+                                </div>
+
+                                <div class="space-y-2 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Endpoint do Webhook</label>
+                                        <input type="text" id="intChatwootWebhook" value="https://hub.3digitos.com.br/webhook/chatwoot-academic" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-mono text-[11px]">
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Eventos Disparadores Selecionados</label>
+                                        <div class="flex flex-wrap gap-1.5 pt-1">
+                                            <span class="px-2 py-1 rounded bg-gray-100 font-mono text-[10px] text-gray-700">message_created</span>
+                                            <span class="px-2 py-1 rounded bg-gray-100 font-mono text-[10px] text-gray-700">conversation_created</span>
+                                            <span class="px-2 py-1 rounded bg-gray-100 font-mono text-[10px] text-gray-700">assignee_changed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Gateways de Pagamento (Kiwify / Hotmart) -->
+                            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                                <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-sm">💳</div>
+                                        <div>
+                                            <h4 class="text-xs font-black text-gray-900">Kiwify & Hotmart (Matrícula Automática)</h4>
+                                            <p class="text-[10px] text-gray-500">Provisionamento imediato após compra aprovada</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-100 text-purple-800">Sincronizado</span>
+                                </div>
+
+                                <div class="space-y-2 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Chave Secreta do Webhook (Signature Secret)</label>
+                                        <input type="password" id="intKiwifySecret" value="kiwify_wh_secret_998811" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-mono text-[11px]">
+                                    </div>
+                                    <p class="text-[11px] text-gray-500">Quando a transação for concluída, o aluno é criado e alocado na turma automaticamente.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 4: Motor de Automações & Google Meet -->
+                            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                                <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-sm">📹</div>
+                                        <div>
+                                            <h4 class="text-xs font-black text-gray-900">Salas de Aula Ao Vivo & Automações</h4>
+                                            <p class="text-[10px] text-gray-500">Google Meet / Zoom e Motor de Fluxos</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-800">Operando</span>
+                                </div>
+
+                                <div class="space-y-2 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Link Padrão da Mentoria / Aula Ao Vivo</label>
+                                        <input type="text" id="intMeetingUrl" value="https://meet.google.com/abc-mentoria-3d" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-mono text-[11px]">
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Webhook do Motor de Automações</label>
+                                        <input type="text" id="intAutomationsWebhook" value="https://automacoes.3digitos.com.br/webhook/academico" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-mono text-[11px]">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="flex justify-end space-x-3 pt-2">
+                            <button type="button" onclick="testIntegrationsConnection()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition text-xs">Testar Conexões</button>
+                            <button type="submit" class="px-6 py-2 bg-brandBlue hover:bg-brandBlueDark text-white font-extrabold rounded-xl transition shadow text-xs flex items-center space-x-2">
+                                <span>Salvar Configurações de Integração</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- ABA 3: NOVAS TURMAS, CLASSES, MATRÍCULAS & DISCIPLINAS -->
+                <!-- ============================================== -->
+                <div id="adminPanelTurmas" class="hidden space-y-6">
+                    
+                    <!-- Sub-menu de Navegação Interno para Turmas e Classes -->
+                    <div class="flex items-center space-x-2 bg-gray-200/70 p-1.5 rounded-2xl w-fit text-xs font-extrabold">
+                        <button onclick="switchTurmaSubTab('turmas')" id="subTabBtnTurmas" class="px-3.5 py-1.5 rounded-xl bg-white text-brandBlue shadow-sm transition">
+                            👥 1. Turmas
+                        </button>
+                        <button onclick="switchTurmaSubTab('classes')" id="subTabBtnClasses" class="px-3.5 py-1.5 rounded-xl text-gray-600 hover:text-gray-900 transition">
+                            🏫 2. Classes
+                        </button>
+                        <button onclick="switchTurmaSubTab('matriculas')" id="subTabBtnMatriculas" class="px-3.5 py-1.5 rounded-xl text-gray-600 hover:text-gray-900 transition">
+                            📝 3. Matricular Alunos
+                        </button>
+                        <button onclick="switchTurmaSubTab('disciplinas')" id="subTabBtnDisciplinas" class="px-3.5 py-1.5 rounded-xl text-gray-600 hover:text-gray-900 transition">
+                            📚 4. Matérias / Disciplinas
+                        </button>
+                    </div>
+
+                    <!-- SUB-ABA 1: GESTÃO DE TURMAS -->
+                    <div id="subPanelTurmas" class="space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            <!-- Formulário Criar Turma -->
+                            <div class="lg:col-span-4 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                                <div class="pb-2 border-b border-gray-100">
+                                    <h4 class="text-sm font-black text-gray-900">Criar Nova Turma</h4>
+                                    <p class="text-[11px] text-gray-500">Defina turmas macro (Ex: Turma 2026, Mentoria VIP)</p>
+                                </div>
+
+                                <form id="formCreateTurma" onsubmit="handleCreateTurma(event)" class="space-y-3 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Nome da Turma *</label>
+                                        <input type="text" id="newTurmaName" required placeholder="Ex: Turma Beta 2026" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-semibold outline-none focus:bg-white focus:border-brandBlue">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block font-bold text-gray-700 mb-1">Código / Semestre *</label>
+                                            <input type="text" id="newTurmaCode" required placeholder="Ex: 2026.2" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-medium outline-none focus:bg-white">
+                                        </div>
+                                        <div>
+                                            <label class="block font-bold text-gray-700 mb-1">Vagas Totais</label>
+                                            <input type="number" id="newTurmaCapacity" value="50" min="1" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-medium outline-none focus:bg-white">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Status da Turma</label>
+                                        <select id="newTurmaStatus" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-semibold outline-none focus:bg-white">
+                                            <option value="Em Andamento">🟢 Em Andamento</option>
+                                            <option value="Inscrições Abertas">🔵 Inscrições Abertas</option>
+                                            <option value="Encerrada">⚪ Encerrada</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Descrição / Foco da Formação</label>
+                                        <textarea id="newTurmaDesc" rows="2" placeholder="Objetivo pedagógico da turma..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-normal outline-none focus:bg-white"></textarea>
+                                    </div>
+
+                                    <button type="submit" class="w-full py-2.5 bg-brandBlue hover:bg-brandBlueDark text-white font-extrabold rounded-xl transition shadow flex items-center justify-center space-x-1.5">
+                                        <span>+ Criar Turma</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Listagem de Turmas -->
+                            <div class="lg:col-span-8 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col">
+                                <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-3">
+                                    <div>
+                                        <h4 class="text-sm font-black text-gray-900">Turmas Cadastradas</h4>
+                                        <p class="text-[11px] text-gray-500">Visão geral das turmas, capacidade e classes filhas</p>
+                                    </div>
+                                </div>
+
+                                <div class="overflow-x-auto flex-1">
+                                    <table class="w-full text-left text-xs">
+                                        <thead class="bg-gray-50 text-gray-600 uppercase font-black text-[10px] border-b border-gray-100">
+                                            <tr>
+                                                <th class="py-2.5 px-3">Turma & Código</th>
+                                                <th class="py-2.5 px-3">Classes</th>
+                                                <th class="py-2.5 px-3">Alunos</th>
+                                                <th class="py-2.5 px-3">Status</th>
+                                                <th class="py-2.5 px-3 text-right">Ação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="adminTurmasTableBody" class="divide-y divide-gray-100 font-medium">
+                                            <!-- Preenchido via JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-ABA 2: CRIAR CLASSES DENTRO DAS TURMAS -->
+                    <div id="subPanelClasses" class="hidden space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            <!-- Formulário Criar Classe -->
+                            <div class="lg:col-span-4 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                                <div class="pb-2 border-b border-gray-100">
+                                    <h4 class="text-sm font-black text-gray-900">Criar Classe na Turma</h4>
+                                    <p class="text-[11px] text-gray-500">Divida a turma em classes (ex: Manhã, Noite, Laboratório)</p>
+                                </div>
+
+                                <form id="formCreateClasse" onsubmit="handleCreateClasse(event)" class="space-y-3 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Selecione a Turma Pai *</label>
+                                        <select id="newClasseTurmaSelect" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none focus:bg-white">
+                                            <!-- Preenchido via JS -->
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Nome da Classe / Sala *</label>
+                                        <input type="text" id="newClasseName" required placeholder="Ex: Classe A - Noite ou Laboratório Prático" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-semibold outline-none focus:bg-white focus:border-brandBlue">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block font-bold text-gray-700 mb-1">Turno / Horário</label>
+                                            <select id="newClasseTurno" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-medium outline-none focus:bg-white">
+                                                <option value="Noturno (19h30 - 21h30)">Noturno (19h30 - 21h30)</option>
+                                                <option value="Matutino (09h00 - 11h00)">Matutino (09h00 - 11h00)</option>
+                                                <option value="Sábados Intensivo">Sábados Intensivo</option>
+                                                <option value="EAD Assíncrono">EAD Assíncrono</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block font-bold text-gray-700 mb-1">Limite Vagas</label>
+                                            <input type="number" id="newClasseVagas" value="30" min="1" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-medium outline-none focus:bg-white">
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="w-full py-2.5 bg-brandBlue hover:bg-brandBlueDark text-white font-extrabold rounded-xl transition shadow flex items-center justify-center space-x-1.5">
+                                        <span>+ Criar Classe</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Listagem de Classes -->
+                            <div class="lg:col-span-8 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col">
+                                <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-3">
+                                    <div>
+                                        <h4 class="text-sm font-black text-gray-900">Classes Ativas por Turma</h4>
+                                        <p class="text-[11px] text-gray-500">Classes vinculadas às turmas e suas disciplinas</p>
+                                    </div>
+                                </div>
+
+                                <div class="overflow-x-auto flex-1">
+                                    <table class="w-full text-left text-xs">
+                                        <thead class="bg-gray-50 text-gray-600 uppercase font-black text-[10px] border-b border-gray-100">
+                                            <tr>
+                                                <th class="py-2.5 px-3">Classe</th>
+                                                <th class="py-2.5 px-3">Turma Vinculada</th>
+                                                <th class="py-2.5 px-3">Turno / Horário</th>
+                                                <th class="py-2.5 px-3">Matérias</th>
+                                                <th class="py-2.5 px-3 text-right">Ação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="adminClassesTableBody" class="divide-y divide-gray-100 font-medium">
+                                            <!-- Preenchido via JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-ABA 3: MATRICULAR ALUNOS NAS CLASSES -->
+                    <div id="subPanelMatriculas" class="hidden space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            <!-- Formulário Matricular Aluno -->
+                            <div class="lg:col-span-4 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                                <div class="pb-2 border-b border-gray-100">
+                                    <h4 class="text-sm font-black text-gray-900">Matricular Aluno na Classe</h4>
+                                    <p class="text-[11px] text-gray-500">Alocar um aluno cadastrado em uma classe específica</p>
+                                </div>
+
+                                <form id="formMatricularAluno" onsubmit="handleMatricularAluno(event)" class="space-y-3 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Selecionar Aluno *</label>
+                                        <select id="matriculaAlunoSelect" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none focus:bg-white">
+                                            <!-- Preenchido via JS -->
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Turma *</label>
+                                        <select id="matriculaTurmaSelect" onchange="updateMatriculaClasseOptions()" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none focus:bg-white">
+                                            <!-- Preenchido via JS -->
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Classe de Destino *</label>
+                                        <select id="matriculaClasseSelect" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none focus:bg-white">
+                                            <!-- Preenchido via JS -->
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Código da Matrícula (Opcional)</label>
+                                        <input type="text" id="matriculaNumCode" placeholder="Ex: MAT-2026-088" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-mono text-[11px] outline-none focus:bg-white">
+                                    </div>
+
+                                    <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl transition shadow flex items-center justify-center space-x-1.5">
+                                        <span>✓ Efetivar Matrícula na Classe</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Listagem de Matrículas Ativas -->
+                            <div class="lg:col-span-8 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col">
+                                <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-3">
+                                    <div>
+                                        <h4 class="text-sm font-black text-gray-900">Alunos Matriculados por Classe</h4>
+                                        <p class="text-[11px] text-gray-500">Distribuição dos alunos em cada classe educacional</p>
+                                    </div>
+                                    <div class="w-48">
+                                        <select id="filterMatriculaClasseSelect" onchange="renderMatriculasList()" class="w-full px-2.5 py-1 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold">
+                                            <option value="all">Todas as Classes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="overflow-x-auto flex-1">
+                                    <table class="w-full text-left text-xs">
+                                        <thead class="bg-gray-50 text-gray-600 uppercase font-black text-[10px] border-b border-gray-100">
+                                            <tr>
+                                                <th class="py-2.5 px-3">Código</th>
+                                                <th class="py-2.5 px-3">Aluno</th>
+                                                <th class="py-2.5 px-3">Turma & Classe</th>
+                                                <th class="py-2.5 px-3">Data</th>
+                                                <th class="py-2.5 px-3 text-right">Ação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="adminMatriculasTableBody" class="divide-y divide-gray-100 font-medium">
+                                            <!-- Preenchido via JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-ABA 4: INCLUIR MATÉRIAS / DISCIPLINAS NAS CLASSES -->
+                    <div id="subPanelDisciplinas" class="hidden space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            <!-- Formulário Criar Disciplina -->
+                            <div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                                <div class="pb-2 border-b border-gray-100">
+                                    <h4 class="text-sm font-black text-gray-900">Incluir Matéria / Disciplina</h4>
+                                    <p class="text-[11px] text-gray-500">Adicione disciplinas curriculares à classe selecionada</p>
+                                </div>
+
+                                <form id="formCreateDisciplina" onsubmit="handleCreateDisciplina(event)" class="space-y-3 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Classe de Destino *</label>
+                                        <select id="newDisciplinaClasseSelect" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none focus:bg-white">
+                                            <!-- Preenchido via JS -->
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Nome da Matéria / Disciplina *</label>
+                                        <input type="text" id="newDisciplinaName" required placeholder="Ex: Infraestrutura VPS, Docker & SSL Automático" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-semibold outline-none focus:bg-white focus:border-brandBlue">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block font-bold text-gray-700 mb-1">Carga Horária *</label>
+                                            <input type="text" id="newDisciplinaWorkload" required placeholder="Ex: 40 Horas" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-medium outline-none focus:bg-white">
+                                        </div>
+                                        <div>
+                                            <label class="block font-bold text-gray-700 mb-1">Tutor / Professor *</label>
+                                            <input type="text" id="newDisciplinaTutor" required value="Adelmo Reis" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-medium outline-none focus:bg-white">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-gray-700 mb-1">Ementa Curricular & Objetivos</label>
+                                        <textarea id="newDisciplinaSyllabus" rows="3" placeholder="Resumo prático dos temas ensinados na matéria..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl font-normal outline-none focus:bg-white"></textarea>
+                                    </div>
+
+                                    <button type="submit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl transition shadow flex items-center justify-center space-x-1.5">
+                                        <span>+ Vincular Disciplina à Classe</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Listagem da Grade Curricular -->
+                            <div class="lg:col-span-7 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col">
+                                <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-3">
+                                    <div>
+                                        <h4 class="text-sm font-black text-gray-900">Grade Curricular de Disciplinas</h4>
+                                        <p class="text-[11px] text-gray-500">Matérias cadastradas por classe de estudo</p>
+                                    </div>
+                                    <div class="w-48">
+                                        <select id="filterDisciplinaClasseSelect" onchange="renderDisciplinasList()" class="w-full px-2.5 py-1 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold">
+                                            <option value="all">Todas as Classes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="overflow-x-auto flex-1">
+                                    <table class="w-full text-left text-xs">
+                                        <thead class="bg-gray-50 text-gray-600 uppercase font-black text-[10px] border-b border-gray-100">
+                                            <tr>
+                                                <th class="py-2.5 px-3">Matéria / Disciplina</th>
+                                                <th class="py-2.5 px-3">Classe</th>
+                                                <th class="py-2.5 px-3">Carga / Tutor</th>
+                                                <th class="py-2.5 px-3 text-right">Ação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="adminDisciplinasTableBody" class="divide-y divide-gray-100 font-medium">
+                                            <!-- Preenchido via JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Rodapé do Console -->
+            <div class="px-6 py-3 bg-gray-100 border-t border-gray-200 flex items-center justify-between shrink-0 text-xs text-gray-500">
+                <span class="flex items-center space-x-1 font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                    <span>Ambiente Multi-Tenant 3Dígitos Operacional</span>
+                </span>
+                <button onclick="closeSuperAdminModal()" class="px-4 py-1.5 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold transition">
+                    Fechar Console
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT DE INTELIGÊNCIA DA SALA DE ESTUDOS -->
+    <script>
+        // ESTADO GLOBAL DO AMBIENTE EDUCACIONAL
+        let currentRole = 'professor'; // 'professor' ou 'student'
+        let currentComposerMode = 'reply'; // 'reply' (público) ou 'private' (nota pedagógica)
+        let isGlobalChatLocked = false;
+        let activeRoomId = 'room-1';
+        let attachedFile = null;
+
+        // Dados Pré-Carregados de Salas e Discussões de Estudo (Baseado na Foto do Chatwoot)
+        const STUDY_ROOMS = [
+            {
+                id: 'room-1',
+                studentName: 'Helena Carvalho',
+                studentRole: 'Chefe de Operações na Aurora Comércio • Aluna 2026',
+                avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
+                email: 'helena@aurora.inc',
+                phone: '+55 11 95550-0100',
+                subject: 'Módulo 4: Estrutura de Transbordo Humano no Chatwoot',
+                channelBadge: 'Turma Alpha WhatsApp',
+                assignedTutor: 'Adelmo Reis',
+                lastMessage: 'Perfeito. Obrigada pela ajuda rápida!',
+                timeAgo: '2h • 34m',
+                unreadCount: 0,
+                tags: ['transbordo-ia', 'suporte-resolvido'],
+                videoUrl: 'https://www.youtube.com/embed/Y7-TU9vooLI',
+                videoTitle: 'Aula 04: Configurando Transbordo Humano e Pausa de IA sem Loop',
+                isChatLocked: false,
+                messages: [
+                    {
+                        id: 1,
+                        sender: 'Helena Carvalho',
+                        senderRole: 'student',
+                        text: 'Olá Professor Adelmo, fiz a configuração do webhook com o motor de automações, mas quando o atendente assume a conversa, a IA ainda tentou responder uma vez. Como garanto a trava imediata?',
+                        time: 'Hoje, 09:15 AM',
+                        isPrivate: false
+                    },
+                    {
+                        id: 2,
+                        sender: 'Adelmo Reis',
+                        senderRole: 'professor',
+                        text: 'Olá Helena! Excelente ponto. No primeiro nó do seu motor de automações, você precisa colocar uma condição IF checando se "assignee_id" é diferente de nulo OU se existe a etiqueta "humano". Se sim, encerre o fluxo antes de invocar o modelo de IA.',
+                        time: 'Hoje, 09:22 AM',
+                        isPrivate: false
+                    },
+                    {
+                        id: 3,
+                        sender: 'Adelmo Reis (Nota Pedagógica)',
+                        senderRole: 'professor',
+                        text: 'Nota para a monitoria: A Helena tem excelente base técnica e já construiu a VPS. Vale a pena convidá-la para o case de sucesso do próximo webinar.',
+                        time: 'Hoje, 09:25 AM',
+                        isPrivate: true
+                    },
+                    {
+                        id: 4,
+                        sender: 'Helena Carvalho',
+                        senderRole: 'student',
+                        text: 'Funcionou perfeitamente! Coloquei o filtro e a IA pausou no milissegundo em que cliquei em assumir. Anexei o arquivo do meu fluxo testado para sua avaliação.',
+                        time: 'Hoje, 10:04 AM',
+                        isPrivate: false,
+                        attachment: {
+                            name: 'Fluxo_Transbordo_Helena.json',
+                            size: '42 KB',
+                            type: 'application/json'
+                        }
+                    },
+                    {
+                        id: 5,
+                        sender: 'Adelmo Reis',
+                        senderRole: 'professor',
+                        text: 'Maravilha, Helena! Seu fluxo está impecável e segue à risca o padrão corporativo de alta disponibilidade. Trabalho aprovado com louvor!',
+                        time: 'Hoje, 10:15 AM',
+                        isPrivate: false
+                    }
+                ],
+                submissions: [
+                    {
+                        id: 'sub-1',
+                        fileName: 'Fluxo_Transbordo_Helena.json',
+                        student: 'Helena Carvalho',
+                        date: 'Hoje às 10:04',
+                        status: 'Aprovado com Louvor ⭐',
+                        grade: '10/10'
+                    }
+                ]
+            },
+            {
+                id: 'room-2',
+                studentName: 'Carolina Pinto',
+                studentRole: 'Analista de Sistemas • Aluna Turma Alpha',
+                avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+                email: 'carolina@techcorp.com',
+                phone: '+55 21 98888-2233',
+                subject: 'Módulo 1: Deploy com Docker e Easypanel na VPS',
+                channelBadge: 'Turma Alpha Web',
+                assignedTutor: 'Lucas Almeida (Monitor)',
+                lastMessage: 'Pode deixar — acompanho por aqui.',
+                timeAgo: '3h • 5m',
+                unreadCount: 1,
+                tags: ['vps-deploy', 'duvida-aberta'],
+                videoUrl: 'https://www.youtube.com/embed/Y7-TU9vooLI',
+                videoTitle: 'Aula 01: Instalação da VPS e Painel Easypanel com SSL Automático',
+                isChatLocked: false,
+                messages: [
+                    {
+                        id: 1,
+                        sender: 'Carolina Pinto',
+                        senderRole: 'student',
+                        text: 'Boa tarde professor! No Easypanel, a porta do PostgreSQL deve ficar exposta publicamente ou apenas interna na rede do Docker?',
+                        time: 'Hoje, 11:30 AM',
+                        isPrivate: false
+                    },
+                    {
+                        id: 2,
+                        sender: 'Adelmo Reis',
+                        senderRole: 'professor',
+                        text: 'Olá Carolina! Por boas práticas de segurança corporativa, JAMAIS exponha a porta 5432 do PostgreSQL para a internet. Mantenha-a interna na rede Docker (bridge). Apenas a porta 80 e 443 do Chatwoot devem ter acesso externo!',
+                        time: 'Hoje, 11:38 AM',
+                        isPrivate: false
+                    }
+                ],
+                submissions: []
+            },
+            {
+                id: 'room-3',
+                studentName: 'Marcelo Dias',
+                studentRole: 'Engenheiro de Automações • Aluno VIP',
+                avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+                email: 'marcelo.eng@solucoes.com',
+                phone: '+55 31 97777-4455',
+                subject: 'Módulo 2: Configurando White Label no Super Admin',
+                channelBadge: 'WhatsApp Mentoria',
+                assignedTutor: 'Adelmo Reis',
+                lastMessage: 'À disposição — que bom que deu tudo certo!',
+                timeAgo: '4h • 21m',
+                unreadCount: 0,
+                tags: ['white-label', 'saas-multi-tenant'],
+                videoUrl: 'https://www.youtube.com/embed/Y7-TU9vooLI',
+                videoTitle: 'Aula 02: O Console de Super Admin e a Cobrança de Recorrência',
+                isChatLocked: false,
+                messages: [
+                    {
+                        id: 1,
+                        sender: 'Marcelo Dias',
+                        senderRole: 'student',
+                        text: 'Professor Adelmo, já fechei meu primeiro cliente para hospedar o Chatwoot a R$ 380/mês! Segui sua dica de limitar 5 atendentes.',
+                        time: 'Hoje, 08:40 AM',
+                        isPrivate: false
+                    },
+                    {
+                        id: 2,
+                        sender: 'Adelmo Reis',
+                        senderRole: 'professor',
+                        text: 'Sensacional, Marcelo! Parabéns pelo resultado prático imediato! É exatamente essa recorrência que constrói um negócio previsível.',
+                        time: 'Hoje, 08:50 AM',
+                        isPrivate: false
+                    }
+                ],
+                submissions: []
+            },
+            {
+                id: 'room-4',
+                studentName: 'Aline Moreira',
+                studentRole: 'Gestora Comercial • Aluna Turma Alpha',
+                avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80',
+                email: 'aline@consultoria.com.br',
+                phone: '+55 41 96666-1122',
+                subject: 'Módulo 3: Atalhos de Barra (/) e Macros de Atendimento',
+                channelBadge: 'Instagram Estudos',
+                assignedTutor: 'Beatriz Castro (Monitora)',
+                lastMessage: 'Imagina — aproveite o novo plano.',
+                timeAgo: '5h • 12m',
+                unreadCount: 0,
+                tags: ['macros', 'produtividade'],
+                videoUrl: 'https://www.youtube.com/embed/Y7-TU9vooLI',
+                videoTitle: 'Aula 03: Multiplicando a Produtividade com Macros e Respostas Prontas',
+                isChatLocked: false,
+                messages: [
+                    {
+                        id: 1,
+                        sender: 'Aline Moreira',
+                        senderRole: 'student',
+                        text: 'Consegui cadastrar mais de 20 respostas prontas com a barra (/). A equipe adorou a rapidez!',
+                        time: 'Hoje, 07:15 AM',
+                        isPrivate: false
+                    }
+                ],
+                submissions: []
+            }
+        ];
+
+        // INICIALIZAÇÃO DA INTERFACE
+        function initStudyEnvironment() {
+            renderRoomsFeed(STUDY_ROOMS);
+            loadActiveRoom('room-1');
+            updateUserRoleUI();
+        }
+
+        // Renderizar Coluna 2 (Feed de Discussões/Salas de Alunos)
+        function renderRoomsFeed(rooms) {
+            const feed = document.getElementById('studyRoomsFeedList');
+            if (!feed) return;
+
+            let html = '';
+            rooms.forEach(r => {
+                const isActive = r.id === activeRoomId;
+                const tagColor = r.tags.includes('transbordo-ia') ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-brandOrange';
+
+                html += `
+                    <div onclick="loadActiveRoom('${r.id}')" class="p-4 transition-all duration-200 cursor-pointer flex items-start space-x-3 group ${
+                        isActive 
+                        ? 'bg-blue-50/80 border-l-4 border-brandBlue' 
+                        : 'hover:bg-gray-50/80 bg-white'
+                    }">
+                        <!-- Avatar com Indicador Online -->
+                        <div class="relative shrink-0 mt-0.5">
+                            <img src="${r.avatar}" alt="${r.studentName}" class="w-10 h-10 rounded-full object-cover shadow-sm border border-gray-200 group-hover:scale-105 transition">
+                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+                        </div>
+
+                        <!-- Conteúdo do Card Estilo Chatwoot -->
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-[11px] font-semibold text-gray-500 flex items-center space-x-1 truncate max-w-[140px]">
+                                    <span>🌐</span>
+                                    <span class="truncate">${r.channelBadge}</span>
+                                </span>
+                                <span class="text-[10px] text-gray-400 font-medium whitespace-nowrap ml-1">${r.timeAgo}</span>
+                            </div>
+
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="text-xs font-bold text-gray-900 truncate group-hover:text-brandBlue transition ${isActive ? 'text-brandBlue font-extrabold' : ''}">
+                                    ${r.studentName}
+                                </h4>
+                                ${r.unreadCount > 0 ? `<span class="w-4 h-4 rounded-full bg-brandBlue text-white text-[10px] font-extrabold flex items-center justify-center">${r.unreadCount}</span>` : ''}
+                            </div>
+
+                            <p class="text-xs text-gray-500 truncate mb-2 leading-tight">
+                                ${r.lastMessage}
+                            </p>
+
+                            <!-- Tags Coloridas da Conversa -->
+                            <div class="flex items-center space-x-1.5 flex-wrap gap-1">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${tagColor}">
+                                    ${r.tags[0] || 'geral'}
+                                </span>
+                                <span class="text-[10px] text-gray-400 truncate max-w-[100px]">
+                                    👤 ${r.assignedTutor.split(' ')[0]}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            feed.innerHTML = html;
+        }
+
+        // Carregar Sala Selecionada na Coluna 3 e Coluna 4
+        function loadActiveRoom(roomId) {
+            activeRoomId = roomId;
+            const room = STUDY_ROOMS.find(r => r.id === roomId);
+            if (!room) return;
+
+            // Atualizar Topbar da Coluna 3
+            document.getElementById('activeRoomAvatar').src = room.avatar;
+            document.getElementById('activeRoomStudentName').textContent = room.studentName;
+            document.getElementById('activeRoomTopicSubject').textContent = room.subject;
+            document.getElementById('activeLessonTitle').textContent = room.videoTitle;
+            document.getElementById('activeLessonVideoIframe').src = room.videoUrl;
+
+            // Atualizar Coluna 4 (Perfil Lateral)
+            document.getElementById('sideStudentAvatar').src = room.avatar;
+            document.getElementById('sideStudentName').textContent = room.studentName;
+            document.getElementById('sideStudentRole').textContent = room.studentRole;
+            document.getElementById('sideStudentEmail').textContent = room.email;
+            document.getElementById('sideStudentPhone').textContent = room.phone;
+            document.getElementById('sideBtnWhatsapp').href = `https://wa.me/${room.phone.replace(/\D/g, '')}`;
+
+            // Atualizar status de trava do chat
+            const lockSwitch = document.getElementById('sideChatLockSwitch');
+            if (lockSwitch) lockSwitch.checked = !room.isChatLocked;
+            updateRoomChatLockDisplay(room.isChatLocked);
+
+            // Renderizar Mensagens
+            renderRoomMessages(room.messages);
+            renderSubmissions(room.submissions);
+
+            // Re-renderizar o feed para atualizar borda azul
+            renderRoomsFeed(STUDY_ROOMS);
+        }
+
+        // Renderizar Mensagens do Chat com Visual do Chatwoot
+        function renderRoomMessages(messages) {
+            const container = document.getElementById('chatMessagesContainer');
+            if (!container) return;
+
+            let html = '';
+
+            messages.forEach(msg => {
+                const isProf = msg.senderRole === 'professor';
+                const isPrivate = msg.isPrivate;
+
+                // Se for aluno e a mensagem for privada, não mostra para o aluno!
+                if (currentRole === 'student' && isPrivate) {
+                    return;
+                }
+
+                if (isPrivate) {
+                    // Nota Pedagógica Privada (Fundo Amarelo Chatwoot)
+                    html += `
+                        <div class="max-w-2xl mx-auto my-3 p-4 rounded-2xl bg-amber-50 border border-amber-300 shadow-sm flex items-start space-x-3 animate-fadeIn">
+                            <span class="text-xl shrink-0">🔒</span>
+                            <div class="flex-1 text-xs">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="font-extrabold text-amber-900 uppercase tracking-wider text-[11px] flex items-center space-x-1">
+                                        <span>NOTA PEDAGÓGICA PRIVADA (Apenas Professores e Monitores)</span>
+                                    </span>
+                                    <span class="text-[10px] text-amber-700">${msg.time}</span>
+                                </div>
+                                <p class="text-amber-950 font-medium leading-relaxed">${msg.text}</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (isProf) {
+                    // Mensagem do Professor (Lado Direito ou Destaque Azul)
+                    html += `
+                        <div class="flex flex-col items-end my-3 animate-fadeIn">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-blue-100 text-brandBlue">Tutor Oficial</span>
+                                <span class="text-xs font-bold text-gray-800">${msg.sender}</span>
+                                <span class="text-[10px] text-gray-400">${msg.time}</span>
+                            </div>
+                            <div class="max-w-xl p-4 rounded-2xl rounded-tr-none bg-gradient-to-r from-brandBlue to-brandBlueDark text-white text-xs sm:text-sm shadow-md leading-relaxed">
+                                ${msg.text}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Mensagem do Aluno (Lado Esquerdo com Avatar)
+                    html += `
+                        <div class="flex items-start space-x-3 my-3 animate-fadeIn">
+                            <div class="w-8 h-8 rounded-full bg-gray-300 shrink-0 overflow-hidden mt-1 shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" class="w-full h-full object-cover">
+                            </div>
+                            <div class="max-w-xl">
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <span class="text-xs font-bold text-gray-900">${msg.sender}</span>
+                                    <span class="text-[10px] text-gray-400">${msg.time}</span>
+                                </div>
+                                <div class="p-4 rounded-2xl rounded-tl-none bg-white border border-gray-200 text-gray-800 text-xs sm:text-sm shadow-sm leading-relaxed">
+                                    ${msg.text}
+                                    ${msg.attachment ? `
+                                        <div class="mt-3 p-3 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between">
+                                            <div class="flex items-center space-x-2 truncate">
+                                                <span class="text-lg">📄</span>
+                                                <div class="truncate">
+                                                    <p class="font-bold text-gray-800 text-xs truncate">${msg.attachment.name}</p>
+                                                    <p class="text-[10px] text-gray-400">${msg.attachment.size}</p>
+                                                </div>
+                                            </div>
+                                            <button onclick="alert('Download do anexo iniciado!')" class="px-3 py-1 bg-brandBlue text-white rounded-lg text-xs font-bold hover:bg-blue-600 transition shadow-sm">
+                                                Baixar
+                                            </button>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            container.innerHTML = html;
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Renderizar Lista de Trabalhos Entregues
+        function renderSubmissions(submissions) {
+            const list = document.getElementById('roomSubmissionsList');
+            const badge = document.getElementById('submissionsCountBadge');
+            if (badge) badge.textContent = submissions.length;
+            if (!list) return;
+
+            if (submissions.length === 0) {
+                list.innerHTML = `<div class="p-6 text-center text-xs text-gray-400 bg-gray-50 rounded-2xl border border-gray-100">Nenhum trabalho submetido nesta sala até o momento.</div>`;
+                return;
+            }
+
+            let html = '';
+            submissions.forEach(sub => {
+                html += `
+                    <div class="p-4 rounded-2xl border border-gray-200 bg-gray-50 flex items-center justify-between flex-wrap gap-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-bold">
+                                📄
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-gray-900">${sub.fileName}</h4>
+                                <p class="text-[10px] text-gray-500">Enviado por: <strong>${sub.student}</strong> • ${sub.date}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            ${sub.grade ? `<span class="px-2.5 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 border border-amber-200">Nota ${escHtml(sub.grade)}</span>` : ''}
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                ${escHtml(sub.status)}
+                            </span>
+                            ${currentRole === 'professor' ? `<button onclick="promptGradeSubmission('${escHtml(sub.id)}')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl transition shadow">📝 Corrigir</button>` : ''}
+                            <button onclick="alert('Baixando trabalho do aluno...')" class="px-3 py-1.5 bg-brandBlue hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition shadow">
+                                📥 Baixar
+                            </button>
+                        </div>
+                        ${sub.feedback ? `<p class="w-full text-[11px] text-gray-600 bg-white border border-gray-200 rounded-lg px-3 py-2">💬 <strong>Feedback do professor:</strong> ${escHtml(sub.feedback)}</p>` : ''}
+                    </div>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        // ==========================================
+        // CONTROLES DE CHAT E PAPEL (PROFESSOR vs ALUNO)
+        // ==========================================
+        function setUserRole(role) {
+            currentRole = role;
+            updateUserRoleUI();
+
+            // Recarregar mensagens para ocultar/exibir notas privadas
+            const room = STUDY_ROOMS.find(r => r.id === activeRoomId);
+            if (room) {
+                renderRoomMessages(room.messages);
+                renderSubmissions(room.submissions || []);
+                updateRoomChatLockDisplay(room.isChatLocked);
+            }
+        }
+
+        function updateUserRoleUI() {
+            const btnProf = document.getElementById('btnRoleProfessor');
+            const btnStud = document.getElementById('btnRoleStudent');
+            const currentName = document.getElementById('currentUserName');
+            const currentRoleDesc = document.getElementById('currentUserRoleDesc');
+            const currentAvatar = document.getElementById('currentUserAvatar');
+            const privateNoteBtn = document.getElementById('composerModePrivate');
+            const videoEditControls = document.getElementById('professorVideoEditControls');
+
+            if (currentRole === 'professor') {
+                btnProf.className = 'px-3 py-1 rounded-lg font-bold transition bg-white text-brandBlue shadow-sm';
+                btnStud.className = 'px-3 py-1 rounded-lg font-semibold text-gray-600 hover:text-gray-900 transition';
+                currentName.textContent = 'Adelmo Reis';
+                currentRoleDesc.textContent = 'Tutor Master • 3Dígitos';
+                currentAvatar.textContent = 'AR';
+                currentAvatar.className = 'w-9 h-9 rounded-full bg-gradient-to-tr from-brandOrange to-orange-500 text-white font-extrabold flex items-center justify-center text-xs shadow-sm';
+                if (privateNoteBtn) privateNoteBtn.classList.remove('hidden');
+                if (videoEditControls) videoEditControls.classList.remove('hidden');
+            } else {
+                btnStud.className = 'px-3 py-1 rounded-lg font-bold transition bg-white text-emerald-700 shadow-sm';
+                btnProf.className = 'px-3 py-1 rounded-lg font-semibold text-gray-600 hover:text-gray-900 transition';
+                currentName.textContent = 'Helena Carvalho';
+                currentRoleDesc.textContent = 'Estudante da Turma Alpha';
+                currentAvatar.textContent = 'HC';
+                currentAvatar.className = 'w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 text-white font-extrabold flex items-center justify-center text-xs shadow-sm';
+                if (privateNoteBtn) privateNoteBtn.classList.add('hidden');
+                if (videoEditControls) videoEditControls.classList.add('hidden');
+                setComposerMode('reply');
+            }
+
+            const profTab = document.getElementById('mainTabProfessor');
+            if (profTab) profTab.classList.toggle('hidden', currentRole !== 'professor');
+            const profPanel = document.getElementById('professorContentPanel');
+            if (currentRole !== 'professor' && profPanel && !profPanel.classList.contains('hidden')) setActiveMainTab('messages');
+        }
+
+        // Alternar Trava Global do Chat
+        function toggleGlobalChatLock() {
+            if (currentRole !== 'professor') {
+                alert('Apenas o Professor Tutor tem permissão para travar ou destravar o chat da turma.');
+                return;
+            }
+
+            isGlobalChatLocked = !isGlobalChatLocked;
+            const room = STUDY_ROOMS.find(r => r.id === activeRoomId);
+            if (room) {
+                room.isChatLocked = isGlobalChatLocked;
+            }
+
+            updateRoomChatLockDisplay(isGlobalChatLocked);
+        }
+
+        function toggleSideRoomChatLock(isChecked) {
+            if (currentRole !== 'professor') return;
+            const room = STUDY_ROOMS.find(r => r.id === activeRoomId);
+            if (room) {
+                room.isChatLocked = !isChecked;
+                isGlobalChatLocked = room.isChatLocked;
+                updateRoomChatLockDisplay(room.isChatLocked);
+            }
+        }
+
+        function updateRoomChatLockDisplay(isLocked) {
+            const lockIcon = document.getElementById('chatLockIcon');
+            const lockLabel = document.getElementById('chatLockLabel');
+            const btn = document.getElementById('btnGlobalChatLock');
+            const lockedBanner = document.getElementById('chatLockedBanner');
+            const inputMessage = document.getElementById('chatInputMessage');
+            const btnSend = document.getElementById('btnSendMessage');
+            const sideSwitch = document.getElementById('sideChatLockSwitch');
+            const sideStatusText = document.getElementById('sideChatStatusText');
+
+            if (isLocked) {
+                lockIcon.textContent = '🔒';
+                lockLabel.textContent = 'Chat Silenciado';
+                btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow-sm bg-red-50 text-red-700 border border-red-200 hover:bg-red-100';
+                if (sideSwitch) sideSwitch.checked = false;
+                if (sideStatusText) sideStatusText.textContent = 'Silenciado pelo Professor';
+
+                if (currentRole === 'student') {
+                    lockedBanner.classList.remove('hidden');
+                    inputMessage.disabled = true;
+                    btnSend.disabled = true;
+                    btnSend.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    lockedBanner.classList.add('hidden');
+                    inputMessage.disabled = false;
+                    btnSend.disabled = false;
+                    btnSend.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            } else {
+                lockIcon.textContent = '🔓';
+                lockLabel.textContent = 'Chat Liberado';
+                btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow-sm bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100';
+                if (sideSwitch) sideSwitch.checked = true;
+                if (sideStatusText) sideStatusText.textContent = 'Permitir alunos falarem';
+
+                lockedBanner.classList.add('hidden');
+                inputMessage.disabled = false;
+                btnSend.disabled = false;
+                btnSend.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // ==========================================
+        // COMPOSITOR DE MENSAGENS (Chatwoot Style)
+        // ==========================================
+        function setComposerMode(mode) {
+            currentComposerMode = mode;
+            const btnReply = document.getElementById('composerModeReply');
+            const btnPrivate = document.getElementById('composerModePrivate');
+            const wrapper = document.getElementById('composerInputWrapper');
+            const input = document.getElementById('chatInputMessage');
+
+            if (mode === 'private') {
+                btnPrivate.className = 'px-3 py-1 rounded-lg bg-amber-100 text-amber-900 font-extrabold transition';
+                btnReply.className = 'px-3 py-1 rounded-lg text-gray-600 hover:bg-gray-100 font-bold transition';
+                wrapper.className = 'relative rounded-2xl border-2 border-amber-300 bg-amber-50/60 transition-all duration-200 p-2';
+                input.placeholder = 'Digite uma NOTA PEDAGÓGICA PRIVADA (visível apenas para o professor e equipe)...';
+            } else {
+                btnReply.className = 'px-3 py-1 rounded-lg bg-gray-100 text-gray-800 font-extrabold transition';
+                btnPrivate.className = 'px-3 py-1 rounded-lg text-amber-700 hover:bg-amber-50 font-bold transition';
+                wrapper.className = 'relative rounded-2xl border border-gray-200 bg-white transition-all duration-200 p-2';
+                input.placeholder = 'Shift + Enter para nova linha. Digite sua dúvida, contribuição ou feedback...';
+            }
+        }
+
+        // Envio de Mensagem no Chat
+        document.getElementById('chatMessageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('chatInputMessage');
+            const text = input.value.trim();
+
+            if (!text && !attachedFile) return;
+
+            const room = STUDY_ROOMS.find(r => r.id === activeRoomId);
+            if (!room) return;
+
+            const isProf = currentRole === 'professor';
+            const senderName = isProf ? 'Adelmo Reis' : 'Helena Carvalho';
+
+            const newMsg = {
+                id: Date.now(),
+                sender: senderName,
+                senderRole: currentRole,
+                text: text || (attachedFile ? `[Envio de Anexo: ${attachedFile.name}]` : ''),
+                time: 'Agora mesmo',
+                isPrivate: (isProf && currentComposerMode === 'private'),
+                attachment: attachedFile ? { name: attachedFile.name, size: (attachedFile.size / 1024).toFixed(1) + ' KB' } : null
+            };
+
+            room.messages.push(newMsg);
+            room.lastMessage = newMsg.text.slice(0, 45) + '...';
+            room.timeAgo = 'Agora';
+
+            // Se for anexo, adiciona à lista de trabalhos da sala
+            if (attachedFile) {
+                room.submissions.push({
+                    id: 'sub-' + Date.now(),
+                    fileName: attachedFile.name,
+                    student: senderName,
+                    date: 'Hoje às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                    status: '⏳ Aguardando Avaliação',
+                    grade: 'Pendente'
+                });
+                renderSubmissions(room.submissions);
+                clearAttachment();
+            }
+
+            input.value = '';
+            renderRoomMessages(room.messages);
+            renderRoomsFeed(STUDY_ROOMS);
+        });
+
+        // Manipulação de Anexos
+        function handleChatAttachment(e) {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+
+            attachedFile = files[0];
+            document.getElementById('attachedFileName').textContent = attachedFile.name;
+            document.getElementById('attachedFileIndicator').classList.remove('hidden');
+        }
+
+        function clearAttachment() {
+            attachedFile = null;
+            document.getElementById('attachedFileIndicator').classList.add('hidden');
+            document.getElementById('chatAttachmentInput').value = '';
+        }
+
+        function insertEmoji(emoji) {
+            const input = document.getElementById('chatInputMessage');
+            input.value += ' ' + emoji + ' ';
+            input.focus();
+        }
+
+        // ==========================================
+        // ABAS PRINCIPAIS (Mensagens / Vídeo / Entregas)
+        // ==========================================
+        function setActiveMainTab(tab) {
+            if (tab === 'professor' && currentRole !== 'professor') tab = 'messages';
+            const btns = {
+                messages: document.getElementById('mainTabMessages'),
+                material: document.getElementById('mainTabMaterial'),
+                submissions: document.getElementById('mainTabSubmissions'),
+                professor: document.getElementById('mainTabProfessor')
+            };
+            const panels = {
+                material: document.getElementById('materialContentPanel'),
+                submissions: document.getElementById('submissionsContentPanel'),
+                professor: document.getElementById('professorContentPanel')
+            };
+
+            const OFF = 'px-3.5 py-1.5 rounded-xl transition text-gray-600 hover:bg-gray-100 border border-transparent flex items-center space-x-1';
+            const ON = 'px-3.5 py-1.5 rounded-xl transition bg-blue-50 text-brandBlue font-extrabold border border-blue-200 flex items-center space-x-1';
+            Object.values(btns).forEach(b => { if (b) b.className = OFF; });
+            Object.values(panels).forEach(p => { if (p) p.classList.add('hidden'); });
+
+            if (btns[tab]) btns[tab].className = ON;
+            if (panels[tab]) panels[tab].classList.remove('hidden');
+            if (tab === 'professor') renderProfessorPanel();
+        }
+
+        // ==========================================
+        // PAINEL DO PROFESSOR (Chat por sala, Presença, Notas e Correção)
+        // ==========================================
+        function readStore(key, fallback) {
+            try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch (e) { return fallback; }
+        }
+        function writeStore(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+
+        function escHtml(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function getTurmaStudents(turmaId) {
+            if (!academicData) return [];
+            const ids = new Set((academicData.matriculas || []).filter(m => m.turmaId === turmaId).map(m => m.studentId));
+            return (academicData.students || []).filter(s => ids.has(s.id));
+        }
+
+        function renderProfessorPanel() {
+            if (!academicData) loadAcademicData();
+            renderProfChatControls();
+
+            const sel = document.getElementById('profTurmaSelect');
+            if (sel) {
+                const cur = sel.value;
+                sel.innerHTML = (academicData.turmas || []).map(t => `<option value="${escHtml(t.id)}">${escHtml(t.name)} (${escHtml(t.code)})</option>`).join('');
+                if (cur && (academicData.turmas || []).some(t => t.id === cur)) sel.value = cur;
+            }
+            const dateInput = document.getElementById('profAttendanceDate');
+            if (dateInput && !dateInput.value) dateInput.value = new Date().toISOString().slice(0, 10);
+            renderProfAttendance();
+        }
+
+        function renderProfChatControls() {
+            const box = document.getElementById('profChatControls');
+            if (!box) return;
+            box.innerHTML = STUDY_ROOMS.map(r => `
+                <div class="flex items-center justify-between p-2.5 bg-gray-50 border border-gray-200 rounded-xl">
+                    <div class="min-w-0">
+                        <p class="font-bold text-xs text-gray-900 truncate">${escHtml(r.studentName)} • ${escHtml(r.channelBadge)}</p>
+                        <p class="text-[10px] text-gray-500 truncate">${escHtml(r.subject)}</p>
+                    </div>
+                    <button onclick="profToggleRoomChat('${escHtml(r.id)}')" class="shrink-0 ml-2 px-3 py-1 rounded-lg text-[11px] font-bold border ${r.isChatLocked ? 'bg-red-50 text-red-700 border-red-200' : 'bg-emerald-50 text-emerald-800 border-emerald-200'}">
+                        ${r.isChatLocked ? '🔒 Silenciado' : '🔓 Liberado'}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function profToggleRoomChat(roomId) {
+            const room = STUDY_ROOMS.find(r => r.id === roomId);
+            if (!room) return;
+            room.isChatLocked = !room.isChatLocked;
+            if (roomId === activeRoomId) { isGlobalChatLocked = room.isChatLocked; updateRoomChatLockDisplay(room.isChatLocked); }
+            renderProfChatControls();
+        }
+
+        function profSetAllChats(locked) {
+            STUDY_ROOMS.forEach(r => { r.isChatLocked = locked; });
+            isGlobalChatLocked = locked;
+            updateRoomChatLockDisplay(locked);
+            renderProfChatControls();
+        }
+
+        function renderProfAttendance() {
+            const turmaId = (document.getElementById('profTurmaSelect') || {}).value;
+            const date = (document.getElementById('profAttendanceDate') || {}).value;
+            const list = document.getElementById('profAttendanceList');
+            if (!list) return;
+
+            const students = getTurmaStudents(turmaId);
+            if (students.length === 0) {
+                list.innerHTML = '<div class="p-4 text-center text-xs text-gray-400 bg-gray-50 rounded-xl border border-gray-100">Nenhum aluno matriculado nesta turma. Matricule alunos na Área de Membros.</div>';
+                return;
+            }
+
+            const attendance = readStore('portal_attendance', {});
+            const grades = readStore('portal_final_grades', {});
+            const dayRecord = (attendance[turmaId] || {})[date] || {};
+            const allDates = Object.keys(attendance[turmaId] || {});
+
+            list.innerHTML = `
+                <table class="w-full text-left text-xs">
+                    <thead><tr class="text-[10px] uppercase text-gray-500 border-b border-gray-200">
+                        <th class="py-2 px-2">Aluno</th><th class="py-2 px-2 text-center">Presente em ${escHtml(date)}</th><th class="py-2 px-2 text-center">Frequência</th><th class="py-2 px-2 text-center">Nota final (0-10)</th>
+                    </tr></thead>
+                    <tbody class="divide-y divide-gray-100">
+                    ${students.map(s => {
+                        const present = allDates.filter(d => attendance[turmaId][d][s.id] === true).length;
+                        const pct = allDates.length ? Math.round(present / allDates.length * 100) : null;
+                        const g = grades[turmaId + ':' + s.id];
+                        return `<tr>
+                            <td class="py-2 px-2 font-bold text-gray-900">${escHtml(s.name)}<div class="text-[10px] font-normal text-gray-500">${escHtml(s.email)}</div></td>
+                            <td class="py-2 px-2 text-center"><input type="checkbox" class="prof-att-check w-4 h-4" data-student="${escHtml(s.id)}" ${dayRecord[s.id] ? 'checked' : ''}></td>
+                            <td class="py-2 px-2 text-center">${pct === null ? '-' : `<span class="px-2 py-0.5 rounded-full font-bold ${pct >= 75 ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-700'}">${pct}%</span>`}</td>
+                            <td class="py-2 px-2 text-center"><input type="number" min="0" max="10" step="0.1" class="prof-grade-input w-16 px-2 py-1 border border-gray-200 rounded-lg text-center" data-student="${escHtml(s.id)}" value="${g !== undefined ? g : ''}"></td>
+                        </tr>`;
+                    }).join('')}
+                    </tbody>
+                </table>`;
+        }
+
+        function profSaveAttendanceAndGrades() {
+            if (currentRole !== 'professor') return;
+            const turmaId = document.getElementById('profTurmaSelect').value;
+            const date = document.getElementById('profAttendanceDate').value;
+            if (!turmaId || !date) { alert('Selecione a turma e a data da aula.'); return; }
+
+            const attendance = readStore('portal_attendance', {});
+            attendance[turmaId] = attendance[turmaId] || {};
+            attendance[turmaId][date] = {};
+            document.querySelectorAll('.prof-att-check').forEach(c => { attendance[turmaId][date][c.dataset.student] = c.checked; });
+            writeStore('portal_attendance', attendance);
+
+            const grades = readStore('portal_final_grades', {});
+            document.querySelectorAll('.prof-grade-input').forEach(i => {
+                const key = turmaId + ':' + i.dataset.student;
+                if (i.value === '') { delete grades[key]; return; }
+                const v = Math.min(10, Math.max(0, parseFloat(i.value)));
+                if (!isNaN(v)) grades[key] = v;
+            });
+            writeStore('portal_final_grades', grades);
+
+            renderProfAttendance();
+            alert('✅ Presença e notas salvas com sucesso!');
+        }
+
+        function profExportAttendanceCsv() {
+            const turmaId = document.getElementById('profTurmaSelect').value;
+            const students = getTurmaStudents(turmaId);
+            const attendance = (readStore('portal_attendance', {}))[turmaId] || {};
+            const grades = readStore('portal_final_grades', {});
+            const dates = Object.keys(attendance).sort();
+            let csv = 'Aluno,E-mail,' + dates.join(',') + ',Frequencia %,Nota final\n';
+            students.forEach(s => {
+                const marks = dates.map(d => attendance[d][s.id] ? 'P' : 'F');
+                const pct = dates.length ? Math.round(marks.filter(m => m === 'P').length / dates.length * 100) : '';
+                const q = v => '"' + String(v).replace(/"/g, '""') + '"';
+                csv += [q(s.name), q(s.email), ...marks, pct, grades[turmaId + ':' + s.id] ?? ''].join(',') + '\n';
+            });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' }));
+            a.download = 'frequencia_notas_' + turmaId + '.csv';
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        }
+
+        // Correção de trabalhos (nota + feedback) pelo professor
+        function promptGradeSubmission(subId) {
+            if (currentRole !== 'professor') { alert('Apenas o professor pode corrigir trabalhos.'); return; }
+            const room = STUDY_ROOMS.find(r => r.id === activeRoomId);
+            const sub = room && room.submissions.find(s => s.id === subId);
+            if (!sub) return;
+            const g = prompt('Nota do trabalho de ' + sub.student + ' (0 a 10):', (sub.grade || '').replace('/10', ''));
+            if (g === null) return;
+            const val = parseFloat(String(g).replace(',', '.'));
+            if (isNaN(val) || val < 0 || val > 10) { alert('Informe uma nota válida entre 0 e 10.'); return; }
+            const feedback = prompt('Feedback para o aluno (opcional):', sub.feedback || '') || '';
+            sub.grade = val + '/10';
+            sub.feedback = feedback;
+            sub.status = val >= 7 ? 'Aprovado ✅' : 'Refazer 🔁';
+            renderSubmissions(room.submissions);
+        }
+
+        // Trocar Vídeo da Aula
+        function promptChangeVideoUrl() {
+            const url = prompt('Cole aqui a URL do novo vídeo de aula (YouTube ou MP4):');
+            if (!url) return;
+
+            let embedUrl = url;
+            const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+            if (ytMatch && ytMatch[1]) {
+                embedUrl = `https://www.youtube.com/embed/${ytMatch[1]}`;
+            }
+
+            const room = STUDY_ROOMS.find(r => r.id === activeRoomId);
+            if (room) {
+                room.videoUrl = embedUrl;
+                document.getElementById('activeLessonVideoIframe').src = embedUrl;
+                alert('Vídeo da aula atualizado para todos os alunos da sala!');
+            }
+        }
+
+        // Submeter Trabalho
+        function promptSubmitHomework() {
+            const input = document.getElementById('chatAttachmentInput');
+            if (input) input.click();
+        }
+
+        function quickAddPrivateNoteForStudent() {
+            if (currentRole !== 'professor') {
+                alert('Apenas o professor pode criar notas pedagógicas privadas.');
+                return;
+            }
+            setComposerMode('private');
+            document.getElementById('chatInputMessage').focus();
+        }
+
+        function approveStudentProject() {
+            if (currentRole !== 'professor') return;
+            const room = STUDY_ROOMS.find(r => r.id === activeRoomId);
+            if (room && room.submissions.length > 0) {
+                room.submissions[0].status = 'Aprovado com Louvor ⭐';
+                room.submissions[0].grade = 'Nota 10/10';
+                renderSubmissions(room.submissions);
+                alert(`Trabalho de ${room.studentName} marcado como Aprovado com Louvor!`);
+            } else {
+                alert('Nenhum trabalho submetido para avaliação.');
+            }
+        }
+
+        function promptAddTagToStudent() {
+            const tag = prompt('Digite o nome da nova etiqueta pedagógica:');
+            if (!tag || !tag.trim()) return;
+
+            const container = document.getElementById('sideTagsContainer');
+            const span = document.createElement('span');
+            span.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700 border border-purple-200';
+            span.textContent = tag.trim();
+            container.appendChild(span);
+        }
+
+        // Modais de Criação de Tópico
+        function openNewStudyTopicModal() {
+            document.getElementById('newStudyTopicModal').classList.remove('hidden');
+            document.getElementById('newStudyTopicModal').classList.add('flex');
+        }
+
+        function closeNewStudyTopicModal() {
+            document.getElementById('newStudyTopicModal').classList.add('hidden');
+            document.getElementById('newStudyTopicModal').classList.remove('flex');
+        }
+
+        document.getElementById('newStudyTopicForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('newTopicTitle').value.trim();
+            const module = document.getElementById('newTopicModule').value;
+            const desc = document.getElementById('newTopicDesc').value.trim();
+
+            const newRoom = {
+                id: 'room-' + Date.now(),
+                studentName: 'Nova Discussão de Grupo',
+                studentRole: 'Tópico Criado pelo Tutor',
+                avatar: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=150&q=80',
+                email: 'mentoria@3digitos.com',
+                phone: '+55 99 99999-9999',
+                subject: `${module}: ${title}`,
+                channelBadge: 'Turma Alpha 2026',
+                assignedTutor: 'Adelmo Reis',
+                lastMessage: desc,
+                timeAgo: 'Agora',
+                unreadCount: 0,
+                tags: ['novo-estudo', 'mentoria'],
+                videoUrl: 'https://www.youtube.com/embed/Y7-TU9vooLI',
+                videoTitle: title,
+                isChatLocked: false,
+                messages: [
+                    {
+                        id: 1,
+                        sender: 'Adelmo Reis',
+                        senderRole: 'professor',
+                        text: `Bem-vindos a esta sala de estudos! Tema em pauta: "${title}". Assistam ao vídeo e enviem suas contribuições.`,
+                        time: 'Agora mesmo',
+                        isPrivate: false
+                    }
+                ],
+                submissions: []
+            };
+
+            STUDY_ROOMS.unshift(newRoom);
+            closeNewStudyTopicModal();
+            renderRoomsFeed(STUDY_ROOMS);
+            loadActiveRoom(newRoom.id);
+        });
+
+        function filterRoomsList(term) {
+            term = (term || '').toLowerCase();
+            const filtered = STUDY_ROOMS.filter(r => 
+                r.studentName.toLowerCase().includes(term) || 
+                r.subject.toLowerCase().includes(term) ||
+                r.lastMessage.toLowerCase().includes(term)
+            );
+            renderRoomsFeed(filtered);
+        }
+
+        function filterRoomsByCategory(cat) {
+            if (cat === 'all') {
+                renderRoomsFeed(STUDY_ROOMS);
+            } else if (cat === 'submissions') {
+                const filtered = STUDY_ROOMS.filter(r => r.submissions && r.submissions.length > 0);
+                renderRoomsFeed(filtered);
+            } else if (cat === 'unanswered') {
+                const filtered = STUDY_ROOMS.filter(r => r.unreadCount > 0);
+                renderRoomsFeed(filtered);
+            } else {
+                renderRoomsFeed(STUDY_ROOMS);
+            }
+        }
+
+        function filterRoomsByTag(tag) {
+            const filtered = STUDY_ROOMS.filter(r => r.tags.some(t => t.includes(tag)));
+            renderRoomsFeed(filtered.length ? filtered : STUDY_ROOMS);
+        }
+
+        // ========================================================
+        // CONTROLADOR DO SISTEMA ACADÊMICO & SUPER ADMINISTRADOR
+        // ========================================================
+        const DEFAULT_ACADEMIC_DATA = {
+            students: [
+                {
+                    id: 'stu-1',
+                    name: 'Helena Carvalho',
+                    email: 'helena@aurora.inc',
+                    phone: '+55 11 95550-0100',
+                    role: 'Chefe de Operações • Aurora Comércio',
+                    turmaId: 'turma-1',
+                    classeId: 'classe-1',
+                    status: 'Ativo',
+                    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80'
+                },
+                {
+                    id: 'stu-2',
+                    name: 'Carolina Pinto',
+                    email: 'carolina@techcorp.com',
+                    phone: '+55 21 98888-2233',
+                    role: 'Analista de Sistemas • TechCorp',
+                    turmaId: 'turma-1',
+                    classeId: 'classe-1',
+                    status: 'Ativo',
+                    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+                },
+                {
+                    id: 'stu-3',
+                    name: 'Marcelo Dias',
+                    email: 'marcelo.eng@solucoes.com',
+                    phone: '+55 31 97777-4455',
+                    role: 'Engenheiro de Automações • VIP',
+                    turmaId: 'turma-2',
+                    classeId: 'classe-3',
+                    status: 'Ativo',
+                    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
+                },
+                {
+                    id: 'stu-4',
+                    name: 'Aline Moreira',
+                    email: 'aline@consultoria.com.br',
+                    phone: '+55 41 96666-1122',
+                    role: 'Gestora Comercial • Agência',
+                    turmaId: 'turma-1',
+                    classeId: 'classe-2',
+                    status: 'Ativo',
+                    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80'
+                },
+                {
+                    id: 'stu-5',
+                    name: 'Rafael Souza',
+                    email: 'rafael@gestao.com',
+                    phone: '+55 51 93333-8899',
+                    role: 'Consultor de Processos',
+                    turmaId: 'turma-1',
+                    classeId: 'classe-1',
+                    status: 'Pendente',
+                    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80'
+                }
+            ],
+            turmas: [
+                {
+                    id: 'turma-1',
+                    name: 'Turma Alpha 2026',
+                    code: '2026.1',
+                    capacity: 60,
+                    status: 'Em Andamento',
+                    desc: 'Formação completa em Atendimento Inteligente, Infraestrutura VPS e Soluções Multi-Tenant.'
+                },
+                {
+                    id: 'turma-2',
+                    name: 'Mentoria VIP Black 2026',
+                    code: 'VIP-2026',
+                    capacity: 20,
+                    status: 'Em Andamento',
+                    desc: 'Acompanhamento direto para donos de agências e provedores de SaaS.'
+                }
+            ],
+            classes: [
+                {
+                    id: 'classe-1',
+                    turmaId: 'turma-1',
+                    name: 'Classe A - Formação FullStack',
+                    turno: 'Noturno (19h30 - 21h30)',
+                    vagas: 35
+                },
+                {
+                    id: 'classe-2',
+                    turmaId: 'turma-1',
+                    name: 'Classe B - EAD & Aulas Gravadas',
+                    turno: 'EAD Assíncrono',
+                    vagas: 25
+                },
+                {
+                    id: 'classe-3',
+                    turmaId: 'turma-2',
+                    name: 'Laboratório Prático VIP',
+                    turno: 'Sábados Intensivo',
+                    vagas: 20
+                }
+            ],
+            matriculas: [
+                { id: 'mat-1', studentId: 'stu-1', turmaId: 'turma-1', classeId: 'classe-1', matriculaNum: 'MAT-2026-001', date: '15/01/2026' },
+                { id: 'mat-2', studentId: 'stu-2', turmaId: 'turma-1', classeId: 'classe-1', matriculaNum: 'MAT-2026-002', date: '18/01/2026' },
+                { id: 'mat-3', studentId: 'stu-3', turmaId: 'turma-2', classeId: 'classe-3', matriculaNum: 'VIP-2026-015', date: '22/01/2026' },
+                { id: 'mat-4', studentId: 'stu-4', turmaId: 'turma-1', classeId: 'classe-2', matriculaNum: 'MAT-2026-004', date: '01/02/2026' },
+                { id: 'mat-5', studentId: 'stu-5', turmaId: 'turma-1', classeId: 'classe-1', matriculaNum: 'MAT-2026-005', date: '10/02/2026' }
+            ],
+            disciplinas: [
+                { id: 'disc-1', classeId: 'classe-1', name: 'Infraestrutura VPS, Docker & Painel Easypanel', workload: '40 Horas', tutor: 'Adelmo Reis', syllabus: 'Deploy de servidores virtuais, criação de containers, orquestração e SSL automático.' },
+                { id: 'disc-2', classeId: 'classe-1', name: 'Console Super Admin & White Label Multi-Tenant', workload: '30 Horas', tutor: 'Adelmo Reis', syllabus: 'Provisionamento de clientes, criação de empresas SaaS, limites de atendentes e precificação recorrente.' },
+                { id: 'disc-3', classeId: 'classe-1', name: 'CRM, Atributos Customizados e Produtividade', workload: '25 Horas', tutor: 'Beatriz Castro', syllabus: 'Campos personalizados, etiquetas de funil, macros de atendimento e notas internas.' },
+                { id: 'disc-4', classeId: 'classe-1', name: 'Motor de Automações, IA e Transbordo Humano', workload: '45 Horas', tutor: 'Adelmo Reis', syllabus: 'Conexão via webhooks, filtros de parada para atendente humano e integração com modelos de IA.' },
+                { id: 'disc-5', classeId: 'classe-3', name: 'Arquitetura de Escala e Contratos Corporativos', workload: '50 Horas', tutor: 'Adelmo Reis', syllabus: 'Estratégias de vendas de alto valor e gestão técnica de clientes corporativos.' }
+            ],
+            integracoes: {
+                whatsappUrl: 'https://api-wa.3digitos.com.br',
+                whatsappKey: '3d_live_token_789456123',
+                whatsappInstance: 'instancia-alunos-turma-alpha',
+                chatwootWebhook: 'https://hub.3digitos.com.br/webhook/chatwoot-academic',
+                kiwifySecret: 'kiwify_wh_secret_998811',
+                meetingUrl: 'https://meet.google.com/abc-mentoria-3d',
+                automationsWebhook: 'https://automacoes.3digitos.com.br/webhook/academico'
+            }
+        };
+
+        let academicData = null;
+
+        function loadAcademicData() {
+            try {
+                const stored = localStorage.getItem('portal_academic_system');
+                if (stored) {
+                    academicData = JSON.parse(stored);
+                } else {
+                    academicData = JSON.parse(JSON.stringify(DEFAULT_ACADEMIC_DATA));
+                    saveAcademicData();
+                }
+            } catch (err) {
+                academicData = JSON.parse(JSON.stringify(DEFAULT_ACADEMIC_DATA));
+            }
+            updateAdminBadges();
+        }
+
+        function saveAcademicData() {
+            localStorage.setItem('portal_academic_system', JSON.stringify(academicData));
+            updateAdminBadges();
+        }
+
+        function updateAdminBadges() {
+            if (!academicData) return;
+            const badgeAlunos = document.getElementById('badgeCountAlunos');
+            if (badgeAlunos) badgeAlunos.textContent = academicData.students.length;
+
+            const badgeTurmas = document.getElementById('badgeCountTurmasClasses');
+            if (badgeTurmas) {
+                badgeTurmas.textContent = `${academicData.turmas.length}T • ${academicData.classes.length}C`;
+            }
+        }
+
+        // Abertura e Fechamento do Modal Super Admin
+        function openSuperAdminModal() {
+            if (!academicData) loadAcademicData();
+            document.getElementById('superAdminModal').classList.remove('hidden');
+            document.getElementById('superAdminModal').classList.add('flex');
+            
+            // Popula os seletores e renderiza a visualização
+            populateSuperAdminSelects();
+            renderStudentsList();
+            renderTurmasList();
+            renderClassesList();
+            renderMatriculasList();
+            renderDisciplinasList();
+            loadIntegracoesForm();
+        }
+
+        function closeSuperAdminModal() {
+            document.getElementById('superAdminModal').classList.add('hidden');
+            document.getElementById('superAdminModal').classList.remove('flex');
+        }
+
+        // Alternância de Abas Principais
+        function switchSuperAdminTab(tab) {
+            const btnAlunos = document.getElementById('adminTabBtnAlunos');
+            const btnInt = document.getElementById('adminTabBtnIntegracoes');
+            const btnTurmas = document.getElementById('adminTabBtnTurmas');
+
+            const pAlunos = document.getElementById('adminPanelAlunos');
+            const pInt = document.getElementById('adminPanelIntegracoes');
+            const pTurmas = document.getElementById('adminPanelTurmas');
+
+            // Reset tab styles
+            [btnAlunos, btnInt, btnTurmas].forEach(b => {
+                b.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2 text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent';
+            });
+
+            // Hide panels
+            pAlunos.classList.add('hidden');
+            pInt.classList.add('hidden');
+            pTurmas.classList.add('hidden');
+
+            if (tab === 'alunos') {
+                btnAlunos.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2 bg-white text-brandBlue shadow-sm border border-gray-200';
+                pAlunos.classList.remove('hidden');
+                renderStudentsList();
+            } else if (tab === 'integracoes') {
+                btnInt.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2 bg-white text-brandBlue shadow-sm border border-gray-200';
+                pInt.classList.remove('hidden');
+                loadIntegracoesForm();
+            } else if (tab === 'turmas') {
+                btnTurmas.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2 bg-white text-brandBlue shadow-sm border border-gray-200';
+                pTurmas.classList.remove('hidden');
+                switchTurmaSubTab('turmas');
+            }
+        }
+
+        // Alternância de Sub-abas de Turmas
+        function switchTurmaSubTab(subTab) {
+            const btnT = document.getElementById('subTabBtnTurmas');
+            const btnC = document.getElementById('subTabBtnClasses');
+            const btnM = document.getElementById('subTabBtnMatriculas');
+            const btnD = document.getElementById('subTabBtnDisciplinas');
+
+            const pT = document.getElementById('subPanelTurmas');
+            const pC = document.getElementById('subPanelClasses');
+            const pM = document.getElementById('subPanelMatriculas');
+            const pD = document.getElementById('subPanelDisciplinas');
+
+            [btnT, btnC, btnM, btnD].forEach(b => {
+                b.className = 'px-3.5 py-1.5 rounded-xl text-gray-600 hover:text-gray-900 transition';
+            });
+
+            pT.classList.add('hidden');
+            pC.classList.add('hidden');
+            pM.classList.add('hidden');
+            pD.classList.add('hidden');
+
+            if (subTab === 'turmas') {
+                btnT.className = 'px-3.5 py-1.5 rounded-xl bg-white text-brandBlue shadow-sm transition';
+                pT.classList.remove('hidden');
+                renderTurmasList();
+            } else if (subTab === 'classes') {
+                btnC.className = 'px-3.5 py-1.5 rounded-xl bg-white text-brandBlue shadow-sm transition';
+                pC.classList.remove('hidden');
+                renderClassesList();
+            } else if (subTab === 'matriculas') {
+                btnM.className = 'px-3.5 py-1.5 rounded-xl bg-white text-brandBlue shadow-sm transition';
+                pM.classList.remove('hidden');
+                renderMatriculasList();
+            } else if (subTab === 'disciplinas') {
+                btnD.className = 'px-3.5 py-1.5 rounded-xl bg-white text-brandBlue shadow-sm transition';
+                pD.classList.remove('hidden');
+                renderDisciplinasList();
+            }
+        }
+
+        // Popula todos os Dropdowns de Turmas e Classes
+        function populateSuperAdminSelects() {
+            if (!academicData) return;
+
+            // Select de Turmas no Form de Criar Aluno
+            const stuTurmaSelect = document.getElementById('newStudentTurmaSelect');
+            if (stuTurmaSelect) {
+                stuTurmaSelect.innerHTML = academicData.turmas.map(t => `<option value="${t.id}">${t.name} (${t.code})</option>`).join('');
+                updateNewStudentClasseOptions();
+            }
+
+            // Select de Turmas no Form de Criar Classe
+            const classeTurmaSelect = document.getElementById('newClasseTurmaSelect');
+            if (classeTurmaSelect) {
+                classeTurmaSelect.innerHTML = academicData.turmas.map(t => `<option value="${t.id}">${t.name} (${t.code})</option>`).join('');
+            }
+
+            // Select de Turmas e Alunos na Matrícula
+            const matAlunoSelect = document.getElementById('matriculaAlunoSelect');
+            if (matAlunoSelect) {
+                matAlunoSelect.innerHTML = academicData.students.map(s => `<option value="${s.id}">${s.name} (${s.email})</option>`).join('');
+            }
+
+            const matTurmaSelect = document.getElementById('matriculaTurmaSelect');
+            if (matTurmaSelect) {
+                matTurmaSelect.innerHTML = academicData.turmas.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+                updateMatriculaClasseOptions();
+            }
+
+            // Select de Classes no Form de Criar Disciplina
+            const discClasseSelect = document.getElementById('newDisciplinaClasseSelect');
+            if (discClasseSelect) {
+                discClasseSelect.innerHTML = academicData.classes.map(c => {
+                    const turma = academicData.turmas.find(t => t.id === c.turmaId);
+                    const turmaName = turma ? turma.name : 'Geral';
+                    return `<option value="${c.id}">${c.name} [${turmaName}]</option>`;
+                }).join('');
+            }
+
+            // Filtros de Tabelas
+            const filterMat = document.getElementById('filterMatriculaClasseSelect');
+            if (filterMat) {
+                filterMat.innerHTML = `<option value="all">Todas as Classes</option>` + 
+                    academicData.classes.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+            }
+
+            const filterDisc = document.getElementById('filterDisciplinaClasseSelect');
+            if (filterDisc) {
+                filterDisc.innerHTML = `<option value="all">Todas as Classes</option>` + 
+                    academicData.classes.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+            }
+        }
+
+        function updateNewStudentClasseOptions() {
+            const turmaId = document.getElementById('newStudentTurmaSelect').value;
+            const classeSelect = document.getElementById('newStudentClasseSelect');
+            if (!classeSelect) return;
+
+            const filteredClasses = academicData.classes.filter(c => c.turmaId === turmaId);
+            if (filteredClasses.length === 0) {
+                classeSelect.innerHTML = `<option value="">Nenhuma classe nesta turma</option>`;
+            } else {
+                classeSelect.innerHTML = filteredClasses.map(c => `<option value="${c.id}">${c.name} (${c.turno})</option>`).join('');
+            }
+        }
+
+        function updateMatriculaClasseOptions() {
+            const turmaId = document.getElementById('matriculaTurmaSelect').value;
+            const classeSelect = document.getElementById('matriculaClasseSelect');
+            if (!classeSelect) return;
+
+            const filteredClasses = academicData.classes.filter(c => c.turmaId === turmaId);
+            if (filteredClasses.length === 0) {
+                classeSelect.innerHTML = `<option value="">Nenhuma classe disponível</option>`;
+            } else {
+                classeSelect.innerHTML = filteredClasses.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+            }
+        }
+
+        // Renderização da Tabela de Alunos
+        function renderStudentsList(term = '') {
+            const tbody = document.getElementById('adminStudentsTableBody');
+            if (!tbody || !academicData) return;
+
+            term = term.toLowerCase().trim();
+            const filtered = academicData.students.filter(s => 
+                s.name.toLowerCase().includes(term) || 
+                s.email.toLowerCase().includes(term) ||
+                s.phone.toLowerCase().includes(term)
+            );
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-gray-400 font-bold">Nenhum aluno encontrado</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(s => {
+                const turma = academicData.turmas.find(t => t.id === s.turmaId);
+                const classe = academicData.classes.find(c => c.id === s.classeId);
+                const turmaName = turma ? turma.name : 'Turma Não Definida';
+                const classeName = classe ? classe.name : 'Classe Geral';
+
+                const statusBadge = s.status === 'Ativo' 
+                    ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">Ativo</span>`
+                    : s.status === 'Pendente' 
+                    ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-800">Pendente</span>`
+                    : `<span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-brandBlue">Concluído</span>`;
+
+                return `
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="py-2.5 px-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="${s.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}" class="w-7 h-7 rounded-full object-cover">
+                                <div>
+                                    <p class="font-bold text-gray-900 leading-tight">${s.name}</p>
+                                    <p class="text-[10px] text-gray-400">${s.role || 'Estudante'}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <p class="font-medium text-gray-800">${s.email}</p>
+                            <p class="text-[10px] text-gray-400 font-mono">${s.phone}</p>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <span class="inline-block px-2 py-0.5 rounded bg-gray-100 text-[10px] font-bold text-gray-700">${turmaName}</span>
+                            <p class="text-[10px] text-brandBlue font-semibold mt-0.5">${classeName}</p>
+                        </td>
+                        <td class="py-2.5 px-3">${statusBadge}</td>
+                        <td class="py-2.5 px-3 text-right">
+                            <button onclick="deleteStudent('${s.id}')" class="text-rose-500 hover:text-rose-700 p-1 hover:bg-rose-50 rounded-lg transition" title="Remover Aluno">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function filterStudentsTable() {
+            const term = document.getElementById('searchStudentInput').value;
+            renderStudentsList(term);
+        }
+
+        // Renderização da Tabela de Turmas
+        function renderTurmasList() {
+            const tbody = document.getElementById('adminTurmasTableBody');
+            if (!tbody || !academicData) return;
+
+            tbody.innerHTML = academicData.turmas.map(t => {
+                const totalClasses = academicData.classes.filter(c => c.turmaId === t.id).length;
+                const totalMatriculas = academicData.matriculas.filter(m => m.turmaId === t.id).length;
+
+                return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-2.5 px-3">
+                            <p class="font-bold text-gray-900">${t.name}</p>
+                            <p class="text-[10px] text-indigo-600 font-mono font-semibold">Código: ${t.code}</p>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-50 text-brandBlue">${totalClasses} Classes</span>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-50 text-purple-700">${totalMatriculas} / ${t.capacity} Alunos</span>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">${t.status}</span>
+                        </td>
+                        <td class="py-2.5 px-3 text-right">
+                            <button onclick="deleteTurma('${t.id}')" class="text-rose-500 hover:text-rose-700 p-1 hover:bg-rose-50 rounded-lg transition" title="Excluir Turma">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Renderização da Tabela de Classes
+        function renderClassesList() {
+            const tbody = document.getElementById('adminClassesTableBody');
+            if (!tbody || !academicData) return;
+
+            tbody.innerHTML = academicData.classes.map(c => {
+                const turma = academicData.turmas.find(t => t.id === c.turmaId);
+                const turmaName = turma ? turma.name : 'Turma Geral';
+                const totalMat = academicData.matriculas.filter(m => m.classeId === c.id).length;
+                const totalDisc = academicData.disciplinas.filter(d => d.classeId === c.id).length;
+
+                return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-2.5 px-3">
+                            <p class="font-bold text-gray-900">${c.name}</p>
+                            <p class="text-[10px] text-gray-500">${totalMat} alunos inscritos</p>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700">${turmaName}</span>
+                        </td>
+                        <td class="py-2.5 px-3 text-gray-700">${c.turno}</td>
+                        <td class="py-2.5 px-3">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-brandBlue">${totalDisc} Matérias</span>
+                        </td>
+                        <td class="py-2.5 px-3 text-right">
+                            <button onclick="deleteClasse('${c.id}')" class="text-rose-500 hover:text-rose-700 p-1 hover:bg-rose-50 rounded-lg transition" title="Excluir Classe">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Renderização da Tabela de Matrículas
+        function renderMatriculasList() {
+            const tbody = document.getElementById('adminMatriculasTableBody');
+            const filterClasse = document.getElementById('filterMatriculaClasseSelect') ? document.getElementById('filterMatriculaClasseSelect').value : 'all';
+            if (!tbody || !academicData) return;
+
+            let list = academicData.matriculas;
+            if (filterClasse !== 'all') {
+                list = list.filter(m => m.classeId === filterClasse);
+            }
+
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-gray-400 font-bold">Nenhuma matrícula registrada</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = list.map(m => {
+                const student = academicData.students.find(s => s.id === m.studentId);
+                const turma = academicData.turmas.find(t => t.id === m.turmaId);
+                const classe = academicData.classes.find(c => c.id === m.classeId);
+
+                const stuName = student ? student.name : 'Aluno Removido';
+                const turmaName = turma ? turma.name : 'Geral';
+                const classeName = classe ? classe.name : 'Classe Geral';
+
+                return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-2.5 px-3 font-mono font-bold text-gray-700">${m.matriculaNum}</td>
+                        <td class="py-2.5 px-3">
+                            <p class="font-bold text-gray-900">${stuName}</p>
+                            <p class="text-[10px] text-gray-400">${student ? student.email : ''}</p>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-700">${turmaName}</span>
+                            <p class="text-[10px] text-brandBlue font-semibold mt-0.5">${classeName}</p>
+                        </td>
+                        <td class="py-2.5 px-3 text-gray-500 font-mono text-[11px]">${m.date}</td>
+                        <td class="py-2.5 px-3 text-right">
+                            <button onclick="deleteMatricula('${m.id}')" class="text-rose-500 hover:text-rose-700 p-1 hover:bg-rose-50 rounded-lg transition" title="Cancelar Matrícula">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Renderização da Tabela de Disciplinas / Matérias
+        function renderDisciplinasList() {
+            const tbody = document.getElementById('adminDisciplinasTableBody');
+            const filterClasse = document.getElementById('filterDisciplinaClasseSelect') ? document.getElementById('filterDisciplinaClasseSelect').value : 'all';
+            if (!tbody || !academicData) return;
+
+            let list = academicData.disciplinas;
+            if (filterClasse !== 'all') {
+                list = list.filter(d => d.classeId === filterClasse);
+            }
+
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-gray-400 font-bold">Nenhuma disciplina vinculada nesta classe</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = list.map(d => {
+                const classe = academicData.classes.find(c => c.id === d.classeId);
+                const classeName = classe ? classe.name : 'Classe Geral';
+
+                return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-2.5 px-3">
+                            <p class="font-bold text-gray-900">${d.name}</p>
+                            <p class="text-[10px] text-gray-500 line-clamp-1">${d.syllabus || 'Sem ementa detalhada'}</p>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700">${classeName}</span>
+                        </td>
+                        <td class="py-2.5 px-3">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-50 text-brandBlue">${d.workload}</span>
+                            <p class="text-[10px] text-gray-600 font-semibold mt-0.5">${d.tutor}</p>
+                        </td>
+                        <td class="py-2.5 px-3 text-right">
+                            <button onclick="deleteDisciplina('${d.id}')" class="text-rose-500 hover:text-rose-700 p-1 hover:bg-rose-50 rounded-lg transition" title="Excluir Disciplina">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Ações de Criação
+        function handleCreateStudent(e) {
+            e.preventDefault();
+            const name = document.getElementById('newStudentName').value.trim();
+            const email = document.getElementById('newStudentEmail').value.trim();
+            const phone = document.getElementById('newStudentPhone').value.trim();
+            const turmaId = document.getElementById('newStudentTurmaSelect').value;
+            const classeId = document.getElementById('newStudentClasseSelect').value;
+            const status = document.getElementById('newStudentStatus').value;
+            const role = document.getElementById('newStudentRole').value.trim() || 'Estudante da Formação';
+
+            if (!name || !email) return;
+
+            const newId = 'stu-' + Date.now();
+            const avatarList = [
+                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80',
+                'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80'
+            ];
+            const randomAvatar = avatarList[Math.floor(Math.random() * avatarList.length)];
+
+            const newStudent = {
+                id: newId,
+                name,
+                email,
+                phone,
+                role,
+                turmaId,
+                classeId,
+                status,
+                avatar: randomAvatar
+            };
+
+            academicData.students.unshift(newStudent);
+
+            // Cria automaticamente a matrícula do aluno
+            const today = new Date().toLocaleDateString('pt-BR');
+            const matCode = 'MAT-' + new Date().getFullYear() + '-' + Math.floor(100 + Math.random() * 900);
+            academicData.matriculas.unshift({
+                id: 'mat-' + Date.now(),
+                studentId: newId,
+                turmaId,
+                classeId,
+                matriculaNum: matCode,
+                date: today
+            });
+
+            saveAcademicData();
+            populateSuperAdminSelects();
+            renderStudentsList();
+            renderMatriculasList();
+            document.getElementById('formCreateStudent').reset();
+            alert(`Aluno ${name} matriculado com sucesso sob a matrícula ${matCode}!`);
+        }
+
+        function handleCreateTurma(e) {
+            e.preventDefault();
+            const name = document.getElementById('newTurmaName').value.trim();
+            const code = document.getElementById('newTurmaCode').value.trim();
+            const capacity = parseInt(document.getElementById('newTurmaCapacity').value) || 50;
+            const status = document.getElementById('newTurmaStatus').value;
+            const desc = document.getElementById('newTurmaDesc').value.trim();
+
+            if (!name || !code) return;
+
+            const newTurma = {
+                id: 'turma-' + Date.now(),
+                name,
+                code,
+                capacity,
+                status,
+                desc
+            };
+
+            academicData.turmas.push(newTurma);
+            saveAcademicData();
+            populateSuperAdminSelects();
+            renderTurmasList();
+            document.getElementById('formCreateTurma').reset();
+            alert(`Nova Turma "${name}" cadastrada com sucesso!`);
+        }
+
+        function handleCreateClasse(e) {
+            e.preventDefault();
+            const turmaId = document.getElementById('newClasseTurmaSelect').value;
+            const name = document.getElementById('newClasseName').value.trim();
+            const turno = document.getElementById('newClasseTurno').value;
+            const vagas = parseInt(document.getElementById('newClasseVagas').value) || 30;
+
+            if (!name || !turmaId) return;
+
+            const newClasse = {
+                id: 'classe-' + Date.now(),
+                turmaId,
+                name,
+                turno,
+                vagas
+            };
+
+            academicData.classes.push(newClasse);
+            saveAcademicData();
+            populateSuperAdminSelects();
+            renderClassesList();
+            document.getElementById('formCreateClasse').reset();
+            alert(`Classe "${name}" criada e vinculada à turma!`);
+        }
+
+        function handleMatricularAluno(e) {
+            e.preventDefault();
+            const studentId = document.getElementById('matriculaAlunoSelect').value;
+            const turmaId = document.getElementById('matriculaTurmaSelect').value;
+            const classeId = document.getElementById('matriculaClasseSelect').value;
+            let matCode = document.getElementById('matriculaNumCode').value.trim();
+
+            if (!matCode) {
+                matCode = 'MAT-' + new Date().getFullYear() + '-' + Math.floor(100 + Math.random() * 900);
+            }
+
+            const today = new Date().toLocaleDateString('pt-BR');
+            academicData.matriculas.unshift({
+                id: 'mat-' + Date.now(),
+                studentId,
+                turmaId,
+                classeId,
+                matriculaNum: matCode,
+                date: today
+            });
+
+            // Atualiza turma/classe no objeto do aluno
+            const student = academicData.students.find(s => s.id === studentId);
+            if (student) {
+                student.turmaId = turmaId;
+                student.classeId = classeId;
+            }
+
+            saveAcademicData();
+            renderMatriculasList();
+            renderStudentsList();
+            document.getElementById('formMatricularAluno').reset();
+            populateSuperAdminSelects();
+            alert(`Matrícula ${matCode} efetivada com sucesso!`);
+        }
+
+        function handleCreateDisciplina(e) {
+            e.preventDefault();
+            const classeId = document.getElementById('newDisciplinaClasseSelect').value;
+            const name = document.getElementById('newDisciplinaName').value.trim();
+            const workload = document.getElementById('newDisciplinaWorkload').value.trim();
+            const tutor = document.getElementById('newDisciplinaTutor').value.trim();
+            const syllabus = document.getElementById('newDisciplinaSyllabus').value.trim();
+
+            if (!name || !classeId) return;
+
+            const newDisciplina = {
+                id: 'disc-' + Date.now(),
+                classeId,
+                name,
+                workload,
+                tutor,
+                syllabus
+            };
+
+            academicData.disciplinas.push(newDisciplina);
+            saveAcademicData();
+            renderDisciplinasList();
+            document.getElementById('formCreateDisciplina').reset();
+            alert(`Disciplina "${name}" vinculada à classe com sucesso!`);
+        }
+
+        function loadIntegracoesForm() {
+            if (!academicData || !academicData.integracoes) return;
+            const int = academicData.integracoes;
+            if (document.getElementById('intWhatsappUrl')) document.getElementById('intWhatsappUrl').value = int.whatsappUrl || '';
+            if (document.getElementById('intWhatsappKey')) document.getElementById('intWhatsappKey').value = int.whatsappKey || '';
+            if (document.getElementById('intWhatsappInstance')) document.getElementById('intWhatsappInstance').value = int.whatsappInstance || '';
+            if (document.getElementById('intChatwootWebhook')) document.getElementById('intChatwootWebhook').value = int.chatwootWebhook || '';
+            if (document.getElementById('intKiwifySecret')) document.getElementById('intKiwifySecret').value = int.kiwifySecret || '';
+            if (document.getElementById('intMeetingUrl')) document.getElementById('intMeetingUrl').value = int.meetingUrl || '';
+            if (document.getElementById('intAutomationsWebhook')) document.getElementById('intAutomationsWebhook').value = int.automationsWebhook || '';
+        }
+
+        function handleSaveIntegracoes(e) {
+            e.preventDefault();
+            if (!academicData) return;
+            academicData.integracoes = {
+                whatsappUrl: document.getElementById('intWhatsappUrl').value.trim(),
+                whatsappKey: document.getElementById('intWhatsappKey').value.trim(),
+                whatsappInstance: document.getElementById('intWhatsappInstance').value.trim(),
+                chatwootWebhook: document.getElementById('intChatwootWebhook').value.trim(),
+                kiwifySecret: document.getElementById('intKiwifySecret').value.trim(),
+                meetingUrl: document.getElementById('intMeetingUrl').value.trim(),
+                automationsWebhook: document.getElementById('intAutomationsWebhook').value.trim()
+            };
+            saveAcademicData();
+            alert('Configurações de Integrações e Webhooks salvas com sucesso!');
+        }
+
+        function testIntegrationsConnection() {
+            alert('🟢 Conexão validada com sucesso!\n• Servidor WhatsApp API: Online (Instância Ativa)\n• Webhook Chatwoot: Resposta 200 OK\n• Gateway de Pagamento: Autenticado\n• Motor de Automações: Sincronizado');
+        }
+
+        // Funções de Exclusão
+        function deleteStudent(id) {
+            if (!confirm('Deseja realmente remover este aluno?')) return;
+            academicData.students = academicData.students.filter(s => s.id !== id);
+            academicData.matriculas = academicData.matriculas.filter(m => m.studentId !== id);
+            saveAcademicData();
+            populateSuperAdminSelects();
+            renderStudentsList();
+            renderMatriculasList();
+        }
+
+        function deleteTurma(id) {
+            if (!confirm('Deseja excluir esta turma e desvincular suas classes?')) return;
+            academicData.turmas = academicData.turmas.filter(t => t.id !== id);
+            saveAcademicData();
+            populateSuperAdminSelects();
+            renderTurmasList();
+        }
+
+        function deleteClasse(id) {
+            if (!confirm('Deseja excluir esta classe?')) return;
+            academicData.classes = academicData.classes.filter(c => c.id !== id);
+            saveAcademicData();
+            populateSuperAdminSelects();
+            renderClassesList();
+        }
+
+        function deleteMatricula(id) {
+            if (!confirm('Deseja cancelar esta matrícula?')) return;
+            academicData.matriculas = academicData.matriculas.filter(m => m.id !== id);
+            saveAcademicData();
+            renderMatriculasList();
+        }
+
+        function deleteDisciplina(id) {
+            if (!confirm('Deseja remover esta disciplina da grade?')) return;
+            academicData.disciplinas = academicData.disciplinas.filter(d => d.id !== id);
+            saveAcademicData();
+            renderDisciplinasList();
+        }
+
+        // Executar inicialização
+        loadAcademicData();
+        initStudyEnvironment();
+    </script>
+</body>
+</html>

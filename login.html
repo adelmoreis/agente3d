@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Restrita & Segurança - 3Dígitos Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { brandGreen: '#10b981', brandGreenDark: '#047857', brandOrange: '#f97316' } } } }
+    </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-2xl w-full max-w-md border border-gray-100 relative overflow-hidden">
+        <!-- Barra decorativa superior -->
+        <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brandGreen via-emerald-400 to-brandOrange"></div>
+
+        <div class="text-center mb-8">
+            <img src="logo.png" alt="Logo 3Dígitos" class="h-20 mx-auto mb-4 object-contain">
+            <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">Área do Administrador</h2>
+            <p class="text-gray-500 text-sm mt-1">Acesso exclusivo para administradores e colaboradores autorizados.</p>
+        </div>
+
+        <form id="loginForm" class="space-y-5">
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">E-mail Corporativo</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path></svg>
+                    </div>
+                    <input type="email" id="email" placeholder="3digitos2023@gmail.com" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800" required>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Senha de Acesso</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <input type="password" id="password" placeholder="••••••••" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brandGreen focus:border-brandGreen focus:bg-white transition text-gray-800" required>
+                </div>
+            </div>
+
+            <div id="errorMsg" class="hidden text-red-600 text-sm font-semibold text-center bg-red-50 border border-red-200 py-2.5 px-4 rounded-xl">
+                ⚠️ E-mail ou senha incorretos ou usuário inativo.
+            </div>
+
+            <button type="submit" class="w-full bg-gradient-to-r from-brandGreen to-brandGreenDark hover:from-emerald-600 hover:to-emerald-800 text-white font-extrabold py-3.5 px-4 rounded-xl transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                Entrar no Painel Seguro
+            </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-gray-100 flex flex-col items-center space-y-3 text-center">
+            <span class="inline-flex items-center text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                🔒 Conexão Segura & Criptografada
+            </span>
+            <a href="index.html" class="text-sm text-gray-500 hover:text-brandOrange font-medium transition flex items-center">
+                &larr; Voltar ao site principal
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            // 1. Verificação do Administrador Master (Adelmo Reis)
+            if (email === '3digitos2023@gmail.com' && password === '2683233d') {
+                const masterUser = {
+                    name: 'Adelmo Reis',
+                    email: '3digitos2023@gmail.com',
+                    role: 'Super Administrador',
+                    department: 'Diretoria Executiva',
+                    access: 'admin' // Acesso total irrestrito
+                };
+                sessionStorage.setItem('currentUser', JSON.stringify(masterUser));
+                sessionStorage.setItem('isAdminLoggedIn', 'true');
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            // 2. Verificação de Colaboradores cadastrados no sistema
+            const rawCollabs = localStorage.getItem('portal_collaborators');
+            const collaborators = rawCollabs ? JSON.parse(rawCollabs) : [];
+            const foundUser = collaborators.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password && u.status === 'Ativo');
+
+            if (foundUser) {
+                sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
+                sessionStorage.setItem('isAdminLoggedIn', 'true');
+                window.location.href = 'admin.html';
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

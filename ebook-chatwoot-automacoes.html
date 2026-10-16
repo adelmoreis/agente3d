@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-book Vivo e Interativo: Domine o Chatwoot & Automações com IA - 3Dígitos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandGreen: '#10b981',
+                        brandOrange: '#f97316',
+                        brandBlue: '#2781F6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        code, kbd { font-family: 'JetBrains Mono', monospace; }
+        @media print {
+            .no-print { display: none !important; }
+            .page-break { page-break-before: always; break-before: page; }
+            body { background: white !important; color: #0f172a !important; }
+            .print-card { border: 1px solid #e2e8f0 !important; background: white !important; color: #0f172a !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- BARRA SUPERIOR DE CONTROLE E PROGRESSO DE LEITURA (Não aparece na impressão) -->
+    <header class="no-print sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 px-4 sm:px-6 py-3.5 flex flex-col md:flex-row items-center justify-between gap-3 shadow-xl">
+        <div class="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
+            <a href="index.html" class="flex items-center space-x-2 text-slate-400 hover:text-white text-xs sm:text-sm font-semibold transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <span>Voltar ao Portal</span>
+            </a>
+            <span class="text-slate-700 hidden sm:inline">|</span>
+            <button onclick="toggleChapterIndex()" class="flex items-center space-x-1.5 text-xs font-bold text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1.5 rounded-xl border border-blue-500/20 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+                <span>Sumário Interativo</span>
+            </button>
+        </div>
+
+        <!-- Indicador de Progresso de Leitura -->
+        <div class="flex items-center space-x-3 w-full md:w-auto justify-center">
+            <div class="w-36 sm:w-48 bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div id="readingProgressBar" class="bg-gradient-to-r from-blue-500 to-emerald-400 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <span id="readingProgressText" class="text-xs font-bold text-slate-300 whitespace-nowrap">0 de 20 lidos (0%)</span>
+        </div>
+
+        <!-- Ações do E-book (Modo Editor + Ver Logins + Salvar PDF) -->
+        <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
+            <!-- Botão Ver Logins do E-book (CRM) -->
+            <a href="admin.html#leads" target="_blank" class="px-3 py-2 bg-emerald-950/80 hover:bg-emerald-900/80 text-emerald-300 text-xs font-bold rounded-xl border border-emerald-500/40 transition flex items-center space-x-1.5" title="Ver leads que informaram Nome e WhatsApp">
+                <span>👥</span>
+                <span>Ver Logins</span>
+            </a>
+
+            <!-- Botão Ativar Modo de Edição -->
+            <button onclick="toggleEditMode()" id="btnToggleEditMode" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold rounded-xl border border-amber-500/30 transition flex items-center space-x-1.5" title="Personalizar textos, imagens e vídeos">
+                <span>✏️</span>
+                <span id="editModeBtnLabel">Modo Editor</span>
+            </button>
+
+            <!-- Botão Baixar / Imprimir PDF -->
+            <button onclick="window.print()" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-blue-500/25 transition flex items-center space-x-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>Salvar em PDF</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- BARRA DO MODO EDITOR (Visível quando o Modo Editor está ativado) -->
+    <div id="editorToolbar" class="no-print hidden bg-amber-950/80 border-b border-amber-600/40 px-6 py-3 text-xs flex flex-wrap items-center justify-between gap-3 backdrop-blur-md">
+        <div class="flex items-center space-x-2 text-amber-200">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <span class="font-bold">MODO DE EDIÇÃO ATIVO:</span>
+            <span class="text-amber-300/80">Clique em "✏️ Editar" em qualquer tópico para alterar textos, trocar imagens, anexar vídeos ou modificar dicas.</span>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button onclick="openEditModalForNew()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg transition shadow">
+                ➕ Adicionar Tópico
+            </button>
+            <button onclick="exportBookJson()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg border border-slate-600 transition">
+                💾 Baixar JSON
+            </button>
+            <button onclick="importBookJsonPrompt()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg border border-slate-600 transition">
+                📂 Carregar JSON
+            </button>
+            <button onclick="resetBookToDefault()" class="px-3 py-1.5 bg-red-900/60 hover:bg-red-800 text-red-200 font-bold rounded-lg border border-red-700/50 transition">
+                🔄 Restaurar Padrão
+            </button>
+        </div>
+    </div>
+
+    <!-- GAVETA LATERAL DO SUMÁRIO INTERATIVO -->
+    <div id="chapterDrawer" class="no-print fixed inset-y-0 right-0 w-80 bg-slate-900 border-l border-slate-800 z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+            <div>
+                <h4 class="font-bold text-white text-sm">Sumário Dinâmico</h4>
+                <p class="text-[11px] text-slate-400">Clique para navegar diretamente</p>
+            </div>
+            <button onclick="toggleChapterIndex()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">✕</button>
+        </div>
+        <div id="drawerChapterList" class="flex-1 overflow-y-auto p-4 space-y-2 text-xs">
+            <!-- Gerado dinamicamente -->
+        </div>
+        <div class="p-4 border-t border-slate-800 bg-slate-950/60">
+            <button onclick="markAllCompleted()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition text-xs">
+                ✓ Marcar Todos como Lidos
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTAINER PRINCIPAL DO LIVRO -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-12 flex-1 w-full" id="livingBookContainer">
+        <!-- Tópicos renderizados dinamicamente via JS -->
+    </main>
+
+    <!-- MODAL DE EDIÇÃO DE TÓPICO -->
+    <div id="topicEditModal" class="no-print fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+                        ✏️
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white" id="editModalHeader">Editar Tópico do Livro</h3>
+                        <p class="text-xs text-slate-400">Altere textos, mídias e dicas para manter o livro vivo e atualizado.</p>
+                    </div>
+                </div>
+                <button onclick="closeEditModal()" class="text-slate-400 hover:text-white p-2">✕</button>
+            </div>
+
+            <form id="editTopicForm" class="space-y-4 overflow-y-auto py-4 pr-1 flex-1 text-xs">
+                <input type="hidden" id="editTopicId">
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block font-bold text-slate-300 uppercase mb-1">Nº da Página</label>
+                        <input type="number" id="editPageNumber" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-300 uppercase mb-1">Badge / Tag</label>
+                        <input type="text" id="editBadge" placeholder="Ex: Infraestrutura" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-300 uppercase mb-1">Módulo</label>
+                        <input type="text" id="editModule" placeholder="Ex: Módulo 1" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-slate-300 uppercase mb-1">Título do Tópico *</label>
+                    <input type="text" id="editTitle" required class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-bold text-sm">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-slate-300 uppercase mb-1">Subtítulo / Resumo Atraente</label>
+                    <input type="text" id="editSubtitle" class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-slate-300 uppercase mb-1">Texto do Tópico (HTML ou Parágrafos) *</label>
+                    <textarea id="editContent" rows="6" required class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-200 font-mono text-xs"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-slate-300 uppercase mb-1">URL da Imagem / Screenshot</label>
+                        <input type="url" id="editImageUrl" placeholder="https://..." class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-300 uppercase mb-1">URL do Vídeo Explicativo (YouTube/Loom)</label>
+                        <input type="url" id="editVideoUrl" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    </div>
+                </div>
+
+                <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800 space-y-2">
+                    <label class="block font-bold text-amber-400 uppercase">💡 Dica do Especialista / Ponto Crítico</label>
+                    <input type="text" id="editTipTitle" placeholder="Título da Dica (Ex: 💡 Dica Pro do Adelmo)" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-semibold">
+                    <textarea id="editTipText" rows="2" placeholder="Explicação da dica..." class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-slate-300"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end space-x-3">
+                    <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold rounded-xl shadow-lg transition">
+                        💾 Salvar Alterações
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE CAPTURA DE LEAD (GATE DE ACESSO OBRIGATÓRIO) -->
+    <div id="ebookGateModal" class="no-print fixed inset-0 bg-slate-950/95 backdrop-blur-md z-[110] hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-8 shadow-2xl relative overflow-hidden">
+            <div class="text-center relative z-10 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-tr from-blue-600 to-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto shadow-lg mb-3">
+                    📖
+                </div>
+                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                    Acesso Exclusivo & Gratuito
+                </span>
+                <h3 class="text-2xl font-extrabold text-white mt-2">Desbloqueie o Livro Vivo</h3>
+                <p class="text-xs text-slate-400 mt-1">
+                    Informe seu nome e WhatsApp para liberar a leitura interativa com vídeos, dicas e download em PDF.
+                </p>
+            </div>
+
+            <form id="gateForm" class="space-y-4 relative z-10 text-xs">
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-slate-300 mb-1.5">Seu Nome Completo *</label>
+                    <input type="text" id="gateNameInput" required placeholder="Ex: Rodrigo Mendonça" class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-slate-500 text-sm transition">
+                </div>
+
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-slate-300 mb-1.5">WhatsApp com DDD *</label>
+                    <div class="relative">
+                        <input type="tel" id="gatePhoneInput" required placeholder="(11) 98765-4321" class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-slate-500 text-sm transition">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold rounded-xl shadow-lg shadow-blue-500/30 transition flex items-center justify-center space-x-2 text-sm">
+                        <span>🚀 Liberar Acesso Imediato</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- BANNER DE BOAS-VINDAS FLUTUANTE -->
+    <div id="welcomeLeadBanner" class="no-print hidden fixed bottom-6 left-6 z-40 max-w-sm bg-slate-950/95 border border-emerald-500/40 p-4 rounded-2xl shadow-2xl backdrop-blur-md">
+        <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-base">
+                ✓
+            </div>
+            <div class="flex-1 text-xs">
+                <p class="font-bold text-white" id="welcomeLeadName">Acesso Liberado!</p>
+                <p class="text-slate-400 mt-0.5">Explore os vídeos e dicas abaixo ou clique em <strong>Salvar em PDF</strong>.</p>
+            </div>
+            <button onclick="document.getElementById('welcomeLeadBanner').remove()" class="text-slate-500 hover:text-white">✕</button>
+        </div>
+    </div>
+
+    <!-- FOOTER DA PÁGINA -->
+    <footer class="no-print border-t border-slate-900 bg-slate-950 py-8 px-6 text-center text-xs text-slate-500">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="text-blue-500 font-bold">3Dígitos</span>
+                <span>• E-book Vivo e Interativo com Inteligência Artificial</span>
+            </div>
+            <div>
+                © 2026 3Dígitos Tecnologia • Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE DADOS BASE DO E-BOOK -->
+    <script src="ebook-data.js"></script>
+
+    <!-- SCRIPT PRINCIPAL DO LIVRO VIVO E INTERATIVO -->
+    <script>
+        // Estado do Livro Vivo
+        let currentEbookData = [];
+        let completedTopics = JSON.parse(localStorage.getItem('portal_living_ebook_completed') || '[]');
+        let isEditModeActive = false;
+
+        // Inicialização
+        function initLivingBook() {
+            // Carregar do localStorage ou usar o padrão oficial de ebook-data.js
+            const savedCustom = localStorage.getItem('portal_living_ebook_custom');
+            if (savedCustom) {
+                try {
+                    currentEbookData = JSON.parse(savedCustom);
+                } catch(e) {
+                    currentEbookData = (typeof INITIAL_LIVING_EBOOK !== 'undefined') ? INITIAL_LIVING_EBOOK : [];
+                }
+            } else if (typeof INITIAL_LIVING_EBOOK !== 'undefined') {
+                currentEbookData = JSON.parse(JSON.stringify(INITIAL_LIVING_EBOOK));
+            } else {
+                currentEbookData = [];
+            }
+
+            renderLivingBook();
+            renderChapterDrawer();
+            updateReadingProgress();
+        }
+
+        // Converter URL comum de YouTube para embed URL
+        function formatVideoEmbedUrl(url) {
+            if (!url) return null;
+            if (url.includes('youtube.com/embed/')) return url;
+            const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+            if (ytMatch && ytMatch[1]) {
+                return `https://www.youtube.com/embed/${ytMatch[1]}`;
+            }
+            return url;
+        }
+
+        // Renderizador Principal dos Tópicos
+        function renderLivingBook() {
+            const container = document.getElementById('livingBookContainer');
+            if (!container) return;
+
+            let html = '';
+
+            currentEbookData.forEach((topic, index) => {
+                const isCompleted = completedTopics.includes(topic.id);
+                const embedVideoUrl = formatVideoEmbedUrl(topic.videoUrl);
+
+                html += `
+                    <article id="${topic.id}" class="page-break bg-slate-900 print-card rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl relative overflow-hidden transition-all duration-300 ${isCompleted ? 'border-emerald-500/40' : ''}">
+                        
+                        <!-- Topo do Card / Metadados -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-slate-800/80">
+                            <div class="flex items-center space-x-2">
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                                    Página ${topic.pageNumber || index + 1}
+                                </span>
+                                <span class="text-xs font-semibold text-slate-400">
+                                    ${topic.module || 'Módulo Oficial'}
+                                </span>
+                            </div>
+
+                            <div class="flex items-center space-x-2">
+                                ${isCompleted 
+                                    ? `<span class="no-print px-3 py-1 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1">
+                                        <span>✓ Lido</span>
+                                       </span>`
+                                    : ''
+                                }
+
+                                <!-- Botões Visíveis no Modo de Edição -->
+                                ${isEditModeActive 
+                                    ? `<div class="no-print flex items-center space-x-1.5">
+                                        <button onclick="openEditModal('${topic.id}')" class="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-lg transition shadow">
+                                            ✏️ Editar
+                                        </button>
+                                        <button onclick="deleteTopic('${topic.id}')" class="px-2 py-1 bg-red-900/60 hover:bg-red-800 text-red-200 text-xs font-bold rounded-lg transition" title="Excluir tópico">
+                                            🗑️
+                                        </button>
+                                       </div>`
+                                    : ''
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Título e Subtítulo -->
+                        <div class="mt-6 mb-6">
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                                ${topic.title}
+                            </h2>
+                            ${topic.subtitle ? `<p class="text-sm sm:text-base text-slate-400 mt-2 font-normal">${topic.subtitle}</p>` : ''}
+                        </div>
+
+                        <!-- Vídeo Explicativo Integrado (se configurado) -->
+                        ${embedVideoUrl ? `
+                            <div class="no-print my-6 bg-slate-950 p-4 sm:p-6 rounded-2xl border border-blue-500/30 shadow-lg">
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <div class="w-7 h-7 rounded-lg bg-red-600 text-white flex items-center justify-center text-xs font-bold">
+                                        ▶
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold uppercase tracking-wider text-blue-400">Vídeo-Aula Explicativa</h4>
+                                        <p class="text-xs text-white font-semibold">${topic.videoTitle || 'Assista à explicação prática deste conceito'}</p>
+                                    </div>
+                                </div>
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-inner bg-black">
+                                    <iframe class="w-full h-full" src="${embedVideoUrl}" title="${topic.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- Imagem / Screenshot (se houver) -->
+                        ${topic.imageUrl ? `
+                            <div class="my-6 rounded-2xl overflow-hidden border border-slate-800 shadow-md">
+                                <img src="${topic.imageUrl}" alt="${topic.title}" class="w-full h-64 sm:h-80 object-cover hover:scale-105 transition-transform duration-500">
+                            </div>
+                        ` : ''}
+
+                        <!-- Conteúdo de Texto Formatado -->
+                        <div class="prose prose-invert max-w-none text-sm sm:text-base text-slate-300 leading-relaxed space-y-4">
+                            ${topic.content}
+                        </div>
+
+                        <!-- Dica Interativa do Especialista (se houver) -->
+                        ${topic.tip ? `
+                            <div class="my-6 p-4 sm:p-5 rounded-2xl bg-blue-950/40 border border-blue-500/30 flex items-start space-x-3.5">
+                                <span class="text-2xl shrink-0">💡</span>
+                                <div class="text-xs sm:text-sm">
+                                    <h5 class="font-bold text-blue-300">${topic.tip.title || 'Dica do Especialista'}</h5>
+                                    <p class="text-slate-300 mt-1 leading-relaxed">${topic.tip.text}</p>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- Widget Interativo Especial: Calculadora de SaaS na Página 20 -->
+                        ${topic.widget === 'roi-calculator' ? `
+                            <div class="no-print my-8 p-6 bg-slate-950 rounded-2xl border border-emerald-500/40 shadow-xl">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">
+                                        💰
+                                    </div>
+                                    <div>
+                                        <h4 class="font-extrabold text-white text-base">Simulador Interativo de Lucro Recorrente (SaaS)</h4>
+                                        <p class="text-xs text-slate-400">Calcule seu faturamento mensal e anual com clientes hospedados na sua VPS.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                                    <div>
+                                        <label class="block font-bold text-slate-300 mb-1">Número de Empresas Clientes:</label>
+                                        <input type="number" id="calcClients" value="15" min="1" max="500" oninput="calculateSaaSRoi()" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-bold">
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-slate-300 mb-1">Mensalidade Média por Cliente (R$):</label>
+                                        <input type="number" id="calcPrice" value="350" min="50" max="5000" step="50" oninput="calculateSaaSRoi()" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-bold">
+                                    </div>
+                                </div>
+
+                                <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                                        <span class="text-[10px] uppercase font-bold text-slate-400">Faturamento Mensal (MRR)</span>
+                                        <h5 class="text-emerald-400 font-extrabold text-lg mt-0.5" id="calcResultMrr">R$ 5.250,00</h5>
+                                    </div>
+                                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                                        <span class="text-[10px] uppercase font-bold text-slate-400">Faturamento Anual (ARR)</span>
+                                        <h5 class="text-blue-400 font-extrabold text-lg mt-0.5" id="calcResultArr">R$ 63.000,00</h5>
+                                    </div>
+                                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                                        <span class="text-[10px] uppercase font-bold text-slate-400">Margem Líquida Estimada</span>
+                                        <h5 class="text-purple-400 font-extrabold text-lg mt-0.5">> 95% Líquido</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- Barra de Conclusão do Tópico -->
+                        <div class="no-print mt-8 pt-4 border-t border-slate-800 flex items-center justify-between flex-wrap gap-3">
+                            <span class="text-xs text-slate-500 font-semibold">Tópico ${index + 1} de ${currentEbookData.length}</span>
+                            <button onclick="toggleTopicCompleted('${topic.id}')" class="px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-2 ${
+                                isCompleted 
+                                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30'
+                                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+                            }">
+                                <span>${isCompleted ? '✓ Tópico Concluído' : 'Marcar como Lido'}</span>
+                            </button>
+                        </div>
+                    </article>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Simulação da Calculadora de SaaS
+        function calculateSaaSRoi() {
+            const clients = parseFloat(document.getElementById('calcClients')?.value || 15);
+            const price = parseFloat(document.getElementById('calcPrice')?.value || 350);
+            const mrr = clients * price;
+            const arr = mrr * 12;
+
+            const mrrEl = document.getElementById('calcResultMrr');
+            const arrEl = document.getElementById('calcResultArr');
+
+            if (mrrEl) mrrEl.textContent = mrr.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            if (arrEl) arrEl.textContent = arr.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // Marcar / Desmarcar Tópico como Lido
+        function toggleTopicCompleted(topicId) {
+            const index = completedTopics.indexOf(topicId);
+            if (index > -1) {
+                completedTopics.splice(index, 1);
+            } else {
+                completedTopics.push(topicId);
+            }
+            localStorage.setItem('portal_living_ebook_completed', JSON.stringify(completedTopics));
+            renderLivingBook();
+            renderChapterDrawer();
+            updateReadingProgress();
+        }
+
+        function markAllCompleted() {
+            completedTopics = currentEbookData.map(t => t.id);
+            localStorage.setItem('portal_living_ebook_completed', JSON.stringify(completedTopics));
+            renderLivingBook();
+            renderChapterDrawer();
+            updateReadingProgress();
+        }
+
+        // Atualizar Barra de Progresso
+        function updateReadingProgress() {
+            const total = currentEbookData.length || 1;
+            const completed = completedTopics.length;
+            const percent = Math.min(100, Math.round((completed / total) * 100));
+
+            const bar = document.getElementById('readingProgressBar');
+            const text = document.getElementById('readingProgressText');
+
+            if (bar) bar.style.width = `${percent}%`;
+            if (text) text.textContent = `${completed} de ${total} lidos (${percent}%)`;
+        }
+
+        // Gaveta do Sumário
+        function toggleChapterIndex() {
+            const drawer = document.getElementById('chapterDrawer');
+            if (drawer) {
+                drawer.classList.toggle('translate-x-full');
+            }
+        }
+
+        function renderChapterDrawer() {
+            const list = document.getElementById('drawerChapterList');
+            if (!list) return;
+
+            let html = '';
+            currentEbookData.forEach((topic, idx) => {
+                const isCompleted = completedTopics.includes(topic.id);
+                html += `
+                    <a href="#${topic.id}" onclick="toggleChapterIndex()" class="block p-2.5 rounded-xl border transition ${
+                        isCompleted 
+                        ? 'bg-emerald-950/30 border-emerald-500/30 text-emerald-300' 
+                        : 'bg-slate-950 border-slate-800 text-slate-300 hover:bg-slate-800'
+                    }">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] uppercase font-bold text-slate-500">Pág ${topic.pageNumber || idx + 1}</span>
+                            ${isCompleted ? '<span class="text-emerald-400 font-bold">✓</span>' : ''}
+                        </div>
+                        <p class="font-bold truncate mt-0.5">${topic.title}</p>
+                    </a>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        // ==========================================
+        // MODO EDITOR & PERSONALIZAÇÃO
+        // ==========================================
+        function toggleEditMode() {
+            isEditModeActive = !isEditModeActive;
+            const toolbar = document.getElementById('editorToolbar');
+            const btnLabel = document.getElementById('editModeBtnLabel');
+            const btn = document.getElementById('btnToggleEditMode');
+
+            if (isEditModeActive) {
+                toolbar.classList.remove('hidden');
+                btnLabel.textContent = 'Fechar Editor';
+                btn.classList.add('bg-amber-500', 'text-slate-950');
+                btn.classList.remove('bg-slate-800', 'text-amber-400');
+            } else {
+                toolbar.classList.add('hidden');
+                btnLabel.textContent = 'Modo Editor';
+                btn.classList.remove('bg-amber-500', 'text-slate-950');
+                btn.classList.add('bg-slate-800', 'text-amber-400');
+            }
+
+            renderLivingBook();
+        }
+
+        function openEditModal(topicId) {
+            const topic = currentEbookData.find(t => t.id === topicId);
+            if (!topic) return;
+
+            document.getElementById('editModalHeader').textContent = `Editar Página ${topic.pageNumber}: ${topic.title}`;
+            document.getElementById('editTopicId').value = topic.id;
+            document.getElementById('editPageNumber').value = topic.pageNumber || '';
+            document.getElementById('editBadge').value = topic.badge || '';
+            document.getElementById('editModule').value = topic.module || '';
+            document.getElementById('editTitle').value = topic.title || '';
+            document.getElementById('editSubtitle').value = topic.subtitle || '';
+            document.getElementById('editContent').value = topic.content || '';
+            document.getElementById('editImageUrl').value = topic.imageUrl || '';
+            document.getElementById('editVideoUrl').value = topic.videoUrl || '';
+            document.getElementById('editTipTitle').value = (topic.tip && topic.tip.title) || '';
+            document.getElementById('editTipText').value = (topic.tip && topic.tip.text) || '';
+
+            const modal = document.getElementById('topicEditModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function openEditModalForNew() {
+            const newPageNum = currentEbookData.length + 1;
+            document.getElementById('editModalHeader').textContent = `Adicionar Novo Tópico (Página ${newPageNum})`;
+            document.getElementById('editTopicId').value = 'pag-' + Date.now();
+            document.getElementById('editPageNumber').value = newPageNum;
+            document.getElementById('editBadge').value = 'Novo Tópico';
+            document.getElementById('editModule').value = 'Módulo Adicional';
+            document.getElementById('editTitle').value = '';
+            document.getElementById('editSubtitle').value = '';
+            document.getElementById('editContent').value = '<p>Digite aqui o conteúdo explicativo deste tópico...</p>';
+            document.getElementById('editImageUrl').value = '';
+            document.getElementById('editVideoUrl').value = '';
+            document.getElementById('editTipTitle').value = '💡 Dica Pro';
+            document.getElementById('editTipText').value = '';
+
+            const modal = document.getElementById('topicEditModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeEditModal() {
+            const modal = document.getElementById('topicEditModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Submissão do Formulário de Edição
+        document.getElementById('editTopicForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('editTopicId').value;
+            const pageNum = parseInt(document.getElementById('editPageNumber').value) || (currentEbookData.length + 1);
+            const badge = document.getElementById('editBadge').value.trim();
+            const module = document.getElementById('editModule').value.trim();
+            const title = document.getElementById('editTitle').value.trim();
+            const subtitle = document.getElementById('editSubtitle').value.trim();
+            const content = document.getElementById('editContent').value;
+            const imageUrl = document.getElementById('editImageUrl').value.trim();
+            const videoUrl = document.getElementById('editVideoUrl').value.trim();
+            const tipTitle = document.getElementById('editTipTitle').value.trim();
+            const tipText = document.getElementById('editTipText').value.trim();
+
+            const existingIndex = currentEbookData.findIndex(t => t.id === id);
+
+            const updatedObj = {
+                id: id,
+                pageNumber: pageNum,
+                module: module,
+                badge: badge,
+                title: title,
+                subtitle: subtitle,
+                content: content,
+                imageUrl: imageUrl,
+                videoUrl: videoUrl,
+                tip: (tipTitle || tipText) ? { title: tipTitle, text: tipText } : null
+            };
+
+            if (existingIndex > -1) {
+                currentEbookData[existingIndex] = { ...currentEbookData[existingIndex], ...updatedObj };
+            } else {
+                currentEbookData.push(updatedObj);
+            }
+
+            // Salvar no localStorage
+            localStorage.setItem('portal_living_ebook_custom', JSON.stringify(currentEbookData));
+
+            closeEditModal();
+            renderLivingBook();
+            renderChapterDrawer();
+            updateReadingProgress();
+
+            alert('Tópico salvo com sucesso!');
+        });
+
+        function deleteTopic(topicId) {
+            if (!confirm('Deseja realmente remover este tópico do livro?')) return;
+            currentEbookData = currentEbookData.filter(t => t.id !== topicId);
+            localStorage.setItem('portal_living_ebook_custom', JSON.stringify(currentEbookData));
+            renderLivingBook();
+            renderChapterDrawer();
+            updateReadingProgress();
+        }
+
+        function resetBookToDefault() {
+            if (!confirm('Deseja restaurar o conteúdo padrão original do livro de 20 páginas?')) return;
+            localStorage.removeItem('portal_living_ebook_custom');
+            currentEbookData = JSON.parse(JSON.stringify(INITIAL_LIVING_EBOOK));
+            renderLivingBook();
+            renderChapterDrawer();
+            updateReadingProgress();
+            alert('Conteúdo padrão restaurado!');
+        }
+
+        function exportBookJson() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentEbookData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "ebook_chatwoot_automacoes_personalizado.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function importBookJsonPrompt() {
+            const jsonText = prompt('Cole aqui o conteúdo JSON do livro para importar:');
+            if (!jsonText) return;
+            try {
+                const parsed = JSON.parse(jsonText);
+                if (Array.isArray(parsed)) {
+                    currentEbookData = parsed;
+                    localStorage.setItem('portal_living_ebook_custom', JSON.stringify(currentEbookData));
+                    renderLivingBook();
+                    renderChapterDrawer();
+                    updateReadingProgress();
+                    alert('E-book importado com sucesso!');
+                } else {
+                    alert('Formato inválido. O JSON deve ser uma lista de tópicos.');
+                }
+            } catch(e) {
+                alert('Erro ao interpretar JSON: ' + e.message);
+            }
+        }
+
+        // ==========================================
+        // CONTROLE DE ACESSO / CAPTAÇÃO DE LEADS
+        // ==========================================
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const isUnlockedByUrl = urlParams.get('unlocked') === 'true';
+            const savedLead = sessionStorage.getItem('portal_user_lead');
+            const gateModal = document.getElementById('ebookGateModal');
+            const banner = document.getElementById('welcomeLeadBanner');
+            const welcomeLeadName = document.getElementById('welcomeLeadName');
+
+            function unlockUser(name) {
+                if (gateModal) {
+                    gateModal.classList.add('hidden');
+                    gateModal.classList.remove('flex');
+                }
+                if (banner) {
+                    banner.classList.remove('hidden');
+                    if (name) {
+                        welcomeLeadName.textContent = `Acesso liberado para ${name}!`;
+                    }
+                }
+            }
+
+            if (savedLead) {
+                try {
+                    const parsed = JSON.parse(savedLead);
+                    unlockUser(parsed.name);
+                } catch(e) {
+                    unlockUser();
+                }
+            } else if (isUnlockedByUrl) {
+                unlockUser();
+            } else {
+                if (gateModal) {
+                    gateModal.classList.remove('hidden');
+                    gateModal.classList.add('flex');
+                }
+            }
+
+            const gateForm = document.getElementById('gateForm');
+            if (gateForm) {
+                gateForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('gateNameInput').value.trim();
+                    const whatsapp = document.getElementById('gatePhoneInput').value.trim();
+
+                    if (!name || !whatsapp) {
+                        alert('Por favor, informe seu nome e WhatsApp.');
+                        return;
+                    }
+
+                    const leadData = {
+                        id: Date.now().toString(),
+                        name: name,
+                        whatsapp: whatsapp,
+                        ebookId: 'ebook-chatwoot-ia',
+                        ebookTitle: 'Domine o Chatwoot & Automações com IA (Livro Vivo)',
+                        date: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                        timestamp: Date.now()
+                    };
+
+                    const rawLeads = localStorage.getItem('portal_leads');
+                    const leads = rawLeads ? JSON.parse(rawLeads) : [];
+                    leads.unshift(leadData);
+                    localStorage.setItem('portal_leads', JSON.stringify(leads));
+
+                    sessionStorage.setItem('portal_user_lead', JSON.stringify({ name, whatsapp }));
+                    unlockUser(name);
+                });
+            }
+
+            // Máscara WhatsApp
+            const phoneInput = document.getElementById('gatePhoneInput');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+                    e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+                });
+            }
+        })();
+
+        // Executar renderização inicial
+        initLivingBook();
+    </script>
+</body>
+</html>
