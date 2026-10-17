@@ -192,10 +192,10 @@
                 </div>
                 
                 <!-- Card Projeto 1: RHINOVA -->
-                <a href="http://localhost:8081" data-project="rhinova" target="_blank" rel="noopener noreferrer" title="Abrir projeto RHINOVA ao vivo" class="group flex items-center justify-between bg-white/95 backdrop-blur-xl border border-white/80 rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.25)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)] hover:scale-105 hover:-translate-x-3 transition-all duration-300 w-[320px] sm:w-[360px] lg:w-[390px] relative cursor-pointer">
+                <a href="rhinova.html" data-project="rhinova" title="Conhecer o projeto RHINOVA e sua estrutura completa" class="group flex items-center justify-between bg-white/95 backdrop-blur-xl border border-white/80 rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.25)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)] hover:scale-105 hover:-translate-x-3 transition-all duration-300 w-[320px] sm:w-[360px] lg:w-[390px] relative cursor-pointer">
                     <div class="flex items-center space-x-4">
-                        <div class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden shadow-md shrink-0 ring-2 ring-orange-200">
-                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=200&q=80" alt="RHINOVA" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden shadow-md shrink-0 ring-2 ring-orange-200 bg-white flex items-center justify-center p-1.5">
+                            <img src="rhinova-assets/logo.png" alt="RHINOVA" class="w-full h-full object-contain group-hover:scale-110 transition duration-500">
                             <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
                         </div>
                         <div>
@@ -368,21 +368,18 @@
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group">
                     <div class="h-52 bg-gray-200 relative overflow-hidden">
                         <div class="absolute inset-0 bg-brandGreen opacity-10 group-hover:opacity-0 transition duration-300"></div>
-                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="RHINOVA - Recursos Humanos & Gestão de Pessoas" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img src="rhinova-assets/rh_consulting_team_1774645746761.png" alt="RHINOVA - Recursos Humanos & Gestão de Pessoas" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-8">
                         <div class="uppercase tracking-wide text-sm text-brandOrange font-bold mb-1">Recursos Humanos & Gestão</div>
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">RHINOVA</h3>
                         <p class="text-gray-600 mb-6 leading-relaxed">
-                            Uma solução moderna e inovadora para Recursos Humanos (RH). Desenvolvida para transformar a gestão de pessoas, otimizar processos de recrutamento e seleção, admissão digital e potencializar o capital humano da sua empresa.
+                            Uma solução moderna e inovadora para Recursos Humanos (RH). Desenvolvida pela 3Dígitos para transformar a gestão de pessoas, otimizar processos de recrutamento e seleção, ponto eletrônico e potencializar o capital humano da sua empresa.
                         </p>
                         <div class="flex items-center space-x-4">
-                            <a href="http://localhost:8081" target="_blank" rel="noopener noreferrer" class="text-brandGreen font-bold hover:text-brandGreenDark flex items-center transition">
-                                Acessar Projeto ao Vivo
-                                <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
-                            <a href="rhinova.html" class="text-xs text-gray-400 hover:text-brandOrange font-semibold transition">
-                                Ver apresentação
+                            <a href="rhinova.html" class="text-brandGreen font-bold hover:text-brandGreenDark flex items-center transition">
+                                Conhecer Case RHINOVA
+                                <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </a>
                         </div>
                     </div>
@@ -622,8 +619,12 @@
                 <a href="#contato" class="text-gray-400 hover:text-brandOrange transition">Contato</a>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-            &copy; 2026 3Dígitos Tecnologia e Automações IA. Todos os direitos reservados.
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-500 text-xs">
+            <div class="flex items-center space-x-2.5">
+                <img src="logo-transparent.png" alt="3Dígitos" class="h-6 w-auto object-contain">
+                <span>&copy; 2026 3Dígitos Tecnologia e Automações IA. Todos os direitos reservados.</span>
+            </div>
+            <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="hover:text-brandOrange transition">Voltar ao topo &uarr;</a>
         </div>
     </footer>
 

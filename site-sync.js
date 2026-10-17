@@ -31,7 +31,7 @@ const DEFAULT_SITE_SETTINGS = {
     announcementLink: 'sala-estudos.html',
 
     // 5. Links de Projetos em Destaque
-    rhinovaUrl: 'http://localhost:8081',
+    rhinovaUrl: 'rhinova.html',
     rhinovaTag: 'RH & Inovação',
     rhinovaDesc: 'Gestão Inteligente de Pessoas, Ponto Eletrônico & Recrutamento',
     
@@ -47,7 +47,13 @@ const SiteSync = {
         try {
             const raw = localStorage.getItem(this.LOCAL_KEY);
             if (raw) {
-                return { ...DEFAULT_SITE_SETTINGS, ...JSON.parse(raw) };
+                const parsed = JSON.parse(raw);
+                // Se ainda estiver com o localhost:8081 antigo, migra para a vitrine rhinova.html
+                if (parsed.rhinovaUrl === 'http://localhost:8081' || !parsed.rhinovaUrl) {
+                    parsed.rhinovaUrl = 'rhinova.html';
+                    localStorage.setItem(this.LOCAL_KEY, JSON.stringify(parsed));
+                }
+                return { ...DEFAULT_SITE_SETTINGS, ...parsed };
             }
         } catch (e) {
             console.warn('[SiteSync] Erro ao ler localStorage:', e);
@@ -174,12 +180,19 @@ const SiteSync = {
         }
 
         // 5. Links de Projetos (RHINOVA)
-        if (settings.rhinovaUrl) {
-            document.querySelectorAll('a[data-project="rhinova"]').forEach(a => {
-                a.href = settings.rhinovaUrl;
+        const rawRhinova = settings.rhinovaUrl || 'rhinova.html';
+        const targetRhinovaUrl = (rawRhinova === 'http://localhost:8081') ? 'rhinova.html' : rawRhinova;
+
+        document.querySelectorAll('a[data-project="rhinova"]').forEach(a => {
+            a.href = targetRhinovaUrl;
+            if (targetRhinovaUrl.startsWith('http')) {
                 a.target = '_blank';
-            });
-        }
+                a.rel = 'noopener noreferrer';
+            } else {
+                a.removeAttribute('target');
+                a.removeAttribute('rel');
+            }
+        });
 
         // 6. Redes Sociais
         document.querySelectorAll('a[data-social="instagram"]').forEach(a => a.href = settings.instagramUrl || '#');
