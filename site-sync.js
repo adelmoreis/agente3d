@@ -5,8 +5,12 @@
 
 const DEFAULT_SITE_SETTINGS = {
     // 1. Contatos & Atendimento
-    whatsapp: '5599999999999',
+    whatsapp: '5574991223727',
     whatsappMessage: 'Olá, gostaria de saber mais sobre as soluções e orçamentos da 3Dígitos!',
+
+    // Chatwoot (atendimento omnichannel) - preencher com os dados do seu Chatwoot
+    chatwootBaseUrl: 'https://chatwoot.agente3d.net',   // ex: https://chat.seudominio.com
+    chatwootToken: 'W8HzHPJbmxXzVHn5Y4T9xhiB',     // Website Token da caixa de entrada "Website"
     phone: '(11) 99999-9999',
     email: '3digitos2023@gmail.com',
     address: 'Atendimento Nacional & Internacional (Remoto)',
@@ -118,6 +122,37 @@ const SiteSync = {
         return { success: true, serverSaved, data: merged };
     },
 
+    // Integração Chatwoot: o ícone flutuante abre o chat; sem configuração, usa o WhatsApp
+    _chatwootLoaded: false,
+    setupChatwoot(settings, waLink) {
+        const launcher = document.getElementById('chatwootLauncher');
+        const base = (settings.chatwootBaseUrl || '').trim().replace(/\/+$/, '');
+        const token = (settings.chatwootToken || '').trim();
+
+        if (!launcher) return;
+        if (!base || !token) {
+            launcher.href = waLink;   // fallback
+            return;
+        }
+
+        launcher.removeAttribute('target');
+        launcher.href = '#';
+        launcher.onclick = (e) => {
+            e.preventDefault();
+            if (window.$chatwoot) window.$chatwoot.toggle('open');
+            else window.open(waLink, '_blank');
+        };
+
+        if (this._chatwootLoaded) return;
+        this._chatwootLoaded = true;
+        window.chatwootSettings = { hideMessageBubble: true, position: 'right', locale: 'pt_BR', type: 'standard' };
+        const s = document.createElement('script');
+        s.src = base + '/packs/js/sdk.js';
+        s.async = true;
+        s.onload = () => window.chatwootSDK && window.chatwootSDK.run({ websiteToken: token, baseUrl: base });
+        document.body.appendChild(s);
+    },
+
     // Aplicar configurações dinamicamente na página atual (ex: index.html)
     applyToPage(settings) {
         if (!settings) settings = this.getSettingsLocal();
@@ -127,9 +162,12 @@ const SiteSync = {
         const waText = encodeURIComponent(settings.whatsappMessage || 'Olá!');
         const waLink = `https://wa.me/${cleanWhatsapp}?text=${waText}`;
 
-        document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+        document.querySelectorAll('a[href*="wa.me"]:not([data-chatwoot])').forEach(link => {
             link.href = waLink;
         });
+
+        // Ícone flutuante = Chatwoot (canal omnichannel). Demais botões continuam no WhatsApp.
+        this.setupChatwoot(settings, waLink);
 
         // 2. Telefones, E-mails e Endereço
         document.querySelectorAll('[data-sync="phone"]').forEach(el => el.textContent = settings.phone || '');
