@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Lojista - Luke Stilo Kids | Gestão 3Dígitos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lukePink: '#ec4899',
+                        lukeAmber: '#f59e0b',
+                        lukeOrange: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Topbar Demo -->
+    <div class="bg-slate-900 text-white text-xs py-2 px-4 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="font-medium text-gray-300">Demonstração do Painel Gerencial • <strong>Luke Stilo Kids</strong></span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-amber-300 hover:underline text-[11px] font-bold">Ver Loja Pública</a>
+                <span class="text-gray-600">|</span>
+                <a href="../luke.html" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3 py-1 rounded-lg text-[11px] transition">
+                    &larr; Voltar ao Case 3Dígitos
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegação do Painel -->
+    <header class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 flex items-center justify-center text-white font-black text-sm shadow">
+                    🧸
+                </div>
+                <div>
+                    <h2 class="font-black text-base text-gray-900 leading-tight">Luke Stilo Kids</h2>
+                    <span class="text-[10px] text-emerald-600 font-bold uppercase">Painel da Lojista Conectado</span>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <span class="text-xs text-gray-500 font-medium hidden sm:inline">Bem-vinda, <strong>Lojista</strong></span>
+                <div class="w-8 h-8 rounded-full bg-pink-100 text-pink-600 font-bold flex items-center justify-center text-xs">
+                    LK
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full space-y-6">
+        
+        <!-- Métricas Rápidas do Mês -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <div class="text-xs text-gray-400 font-bold uppercase">Total de Peças Ativas</div>
+                <div class="text-2xl font-black text-gray-900 mt-1">24 looks</div>
+                <div class="text-[11px] text-emerald-600 font-semibold mt-1">100% no ar no catálogo</div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <div class="text-xs text-gray-400 font-bold uppercase">Pedidos pelo WhatsApp</div>
+                <div class="text-2xl font-black text-pink-600 mt-1">48 pedidos</div>
+                <div class="text-[11px] text-emerald-600 font-semibold mt-1">+35% este mês</div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <div class="text-xs text-gray-400 font-bold uppercase">Visualizações da Loja</div>
+                <div class="text-2xl font-black text-orange-500 mt-1">1.820 acessos</div>
+                <div class="text-[11px] text-gray-500 font-semibold mt-1">Visitantes no celular</div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <div class="text-xs text-gray-400 font-bold uppercase">Taxa de Conversão</div>
+                <div class="text-2xl font-black text-emerald-600 mt-1">9.4%</div>
+                <div class="text-[11px] text-gray-500 font-semibold mt-1">Direto no WhatsApp</div>
+            </div>
+        </div>
+
+        <!-- Seção de Ações: Cadastrar Roupinha & Gerenciar Catálogo -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Cadastro Rápido de Novo Produto -->
+            <div class="lg:col-span-5 bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+                <div class="flex items-center space-x-2 border-b border-gray-100 pb-3">
+                    <span class="text-lg">📸</span>
+                    <h3 class="font-extrabold text-gray-900 text-sm">Adicionar Nova Peça ao Catálogo</h3>
+                </div>
+
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="font-bold text-gray-600 block mb-1">Nome da Roupinha / Conjunto:</label>
+                        <input type="text" value="Vestido Infantil Princesa Encantada" class="w-full p-2.5 rounded-xl border border-gray-300 bg-gray-50 font-medium">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="font-bold text-gray-600 block mb-1">Preço (R$):</label>
+                            <input type="text" value="R$ 95,00" class="w-full p-2.5 rounded-xl border border-gray-300 bg-gray-50 font-medium">
+                        </div>
+                        <div>
+                            <label class="font-bold text-gray-600 block mb-1">Categoria:</label>
+                            <select class="w-full p-2.5 rounded-xl border border-gray-300 bg-gray-50 font-medium">
+                                <option>👧 Meninas</option>
+                                <option>👦 Meninos</option>
+                                <option>👶 Bebês</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-bold text-gray-600 block mb-1">Tamanhos Disponíveis:</label>
+                        <div class="flex gap-1.5 flex-wrap">
+                            <span class="px-2.5 py-1 bg-pink-100 text-pink-700 font-bold rounded-lg text-[11px]">Tam 2</span>
+                            <span class="px-2.5 py-1 bg-pink-100 text-pink-700 font-bold rounded-lg text-[11px]">Tam 4</span>
+                            <span class="px-2.5 py-1 bg-pink-100 text-pink-700 font-bold rounded-lg text-[11px]">Tam 6</span>
+                            <span class="px-2.5 py-1 bg-pink-100 text-pink-700 font-bold rounded-lg text-[11px]">Tam 8</span>
+                        </div>
+                    </div>
+                    <div class="border-2 border-dashed border-gray-200 rounded-2xl p-4 text-center cursor-pointer hover:border-pink-300 transition">
+                        <span class="text-2xl block mb-1">📷</span>
+                        <span class="font-bold text-gray-700">Tirar foto pelo Celular ou Selecionar</span>
+                        <p class="text-[10px] text-gray-400 mt-0.5">Suporta JPG, PNG e WebP</p>
+                    </div>
+                    <button class="w-full py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white font-black rounded-xl shadow-md hover:opacity-95 transition">
+                        ✓ Salvar e Publicar na Loja
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabela de Produtos Cadastrados -->
+            <div class="lg:col-span-7 bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+                <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                    <h3 class="font-extrabold text-gray-900 text-sm">Peças Publicadas no Catálogo</h3>
+                    <span class="text-xs text-pink-600 font-bold">Total: 7 itens demonstrativos</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-gray-600">
+                        <thead class="bg-gray-50 text-gray-700 font-black uppercase text-[10px] border-b border-gray-100">
+                            <tr>
+                                <th class="p-3">Foto / Produto</th>
+                                <th class="p-3">Categoria</th>
+                                <th class="p-3">Preço</th>
+                                <th class="p-3">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="p-3 flex items-center space-x-3">
+                                    <img src="uploads/1777043301343-Conjuntomenino2.jpg" class="w-10 h-10 rounded-lg object-cover">
+                                    <span class="font-bold text-gray-900">Conjunto Esportivo Menino</span>
+                                </td>
+                                <td class="p-3">Bebês & Meninos</td>
+                                <td class="p-3 font-bold text-gray-900">R$ 45,00</td>
+                                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[10px]">Ativo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 flex items-center space-x-3">
+                                    <img src="uploads/1777026534286-sadalia.jpg" class="w-10 h-10 rounded-lg object-cover">
+                                    <span class="font-bold text-gray-900">Sandália Molekinho</span>
+                                </td>
+                                <td class="p-3">Bebês & Calçados</td>
+                                <td class="p-3 font-bold text-gray-900">R$ 75,00</td>
+                                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[10px]">Ativo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 flex items-center space-x-3">
+                                    <img src="uploads/1777026685700-VestidoMenina2.jpg" class="w-10 h-10 rounded-lg object-cover">
+                                    <span class="font-bold text-gray-900">Vestido Jeans Delicado</span>
+                                </td>
+                                <td class="p-3">Meninas</td>
+                                <td class="p-3 font-bold text-gray-900">R$ 90,00</td>
+                                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[10px]">Ativo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 flex items-center space-x-3">
+                                    <img src="uploads/1776987926237-vestidomenina.jpg" class="w-10 h-10 rounded-lg object-cover">
+                                    <span class="font-bold text-gray-900">Vestido Floral Encantador</span>
+                                </td>
+                                <td class="p-3">Meninas</td>
+                                <td class="p-3 font-bold text-gray-900">R$ 130,00</td>
+                                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[10px]">Ativo</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

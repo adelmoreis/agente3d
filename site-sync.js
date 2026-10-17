@@ -179,13 +179,37 @@ const SiteSync = {
             }
         }
 
-        // 5. Links de Projetos (RHINOVA)
+        // 5. Links de Projetos (RHINOVA & Clínica)
         const rawRhinova = settings.rhinovaUrl || 'rhinova.html';
         const targetRhinovaUrl = (rawRhinova === 'http://localhost:8081') ? 'rhinova.html' : rawRhinova;
 
         document.querySelectorAll('a[data-project="rhinova"]').forEach(a => {
             a.href = targetRhinovaUrl;
             if (targetRhinovaUrl.startsWith('http')) {
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+            } else {
+                a.removeAttribute('target');
+                a.removeAttribute('rel');
+            }
+        });
+
+        const targetClinicaUrl = settings.clinicaUrl || 'clinica.html';
+        document.querySelectorAll('a[data-project="clinica"]').forEach(a => {
+            a.href = targetClinicaUrl;
+            if (targetClinicaUrl.startsWith('http')) {
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+            } else {
+                a.removeAttribute('target');
+                a.removeAttribute('rel');
+            }
+        });
+
+        const targetLukeUrl = settings.lukeUrl || 'luke.html';
+        document.querySelectorAll('a[data-project="luke"]').forEach(a => {
+            a.href = targetLukeUrl;
+            if (targetLukeUrl.startsWith('http')) {
                 a.target = '_blank';
                 a.rel = 'noopener noreferrer';
             } else {

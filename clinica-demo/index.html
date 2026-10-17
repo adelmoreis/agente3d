@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediClinic 3Dígitos - Centro Médico & Especialidades</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <!-- HEADER INSTITUCIONAL -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-6">
+      
+      <!-- LOGO DA CLÍNICA -->
+      <a href="/" class="flex items-center space-x-2.5 shrink-0">
+        <div class="bg-emerald-600 text-white p-2 rounded-xl shadow-sm">
+          <i class="fa-solid fa-hospital text-lg"></i>
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight text-slate-900 leading-none block">MediClinic <span class="text-emerald-600">3Dígitos</span></span>
+          <span class="text-[11px] text-slate-500 font-medium">Centro Médico & Especialidades</span>
+        </div>
+      </a>
+
+      <!-- MENU DE NAVEGAÇÃO COMPACTO -->
+      <nav class="hidden md:flex items-center space-x-6 font-medium text-sm text-slate-600 whitespace-nowrap">
+        <a href="#inicio" class="hover:text-emerald-600 transition py-1">Início</a>
+        <a href="#especialidades" class="hover:text-emerald-600 transition py-1">Especialidades</a>
+        <a href="#convenios" class="hover:text-emerald-600 transition py-1">Convênios</a>
+        <a href="#medicos" class="hover:text-emerald-600 transition py-1">Corpo Médico</a>
+      </nav>
+
+      <!-- BOTÕES DE AÇÃO -->
+      <div class="flex items-center space-x-2 shrink-0 whitespace-nowrap">
+        <a href="/resultados-exames.html" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-2 px-4 rounded-full shadow-md hover:shadow-lg transition duration-200 flex items-center gap-2">
+          <i class="fa-solid fa-file-circle-plus text-sm"></i>
+          <span>Resultado de Exames</span>
+        </a>
+
+        <button onclick="abrirModalAgendamentoPublico()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
+          <i class="fa-solid fa-calendar-check text-sm text-amber-300"></i>
+          <span>Agendar Consulta</span>
+        </button>
+
+        <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+          <a href="https://wa.me/5574991223727?text=Olá" target="_blank" title="WhatsApp Oficial" class="w-7 h-7 text-emerald-600 hover:bg-emerald-100 rounded-lg flex items-center justify-center transition">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+          </a>
+          <a href="https://instagram.com/agente3d.oficial" target="_blank" title="Instagram" class="w-7 h-7 text-rose-600 hover:bg-rose-100 rounded-lg flex items-center justify-center transition">
+            <i class="fa-brands fa-instagram text-sm"></i>
+          </a>
+          <a href="https://t.me/agente3d.oficial" target="_blank" title="Telegram" class="w-7 h-7 text-sky-600 hover:bg-sky-100 rounded-lg flex items-center justify-center transition">
+            <i class="fa-brands fa-telegram text-sm"></i>
+          </a>
+        </div>
+
+        <a href="/login.html" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs py-2 px-3 rounded-xl border border-slate-300 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-lock text-slate-500 text-xs"></i>
+          <span>Área Restrita</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="inicio" class="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-950 text-white py-20 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.15),transparent_50%)]"></div>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+      
+      <div class="space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-700/60 border border-emerald-500/40 text-emerald-200 text-xs font-semibold">
+          <i class="fa-solid fa-circle-check text-emerald-400"></i> Atendimento Rápido e Transparência nos Convênios
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          Sua Saúde em Primeiras Mãos com Atendimento de Excelência.
+        </h1>
+
+        <p class="text-emerald-100/90 text-base sm:text-lg leading-relaxed">
+          Na MediClinic 3Dígitos você conta com equipe médica multidisciplinar altamente qualificada. Agende sua consulta de forma 100% automatizada pelo nosso WhatsApp oficial.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+          <button onclick="abrirModalAgendamentoPublico()" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-calendar-check text-lg"></i> Agendar Consulta Online
+          </button>
+
+          <!-- CANAIS DE ATENDIMENTO E REDES SOCIAIS ELEGANTE -->
+          <div class="flex items-center gap-2 bg-emerald-950/50 p-1.5 rounded-xl border border-white/10 backdrop-blur-md shrink-0 justify-center">
+            <span class="text-[11px] text-emerald-200/90 font-medium px-2 hidden md:inline">Canais Rápidos:</span>
+            
+            <a href="https://wa.me/5574991223727?text=Quero%20agendar%20uma%20consulta" target="_blank" title="Atendimento WhatsApp" class="w-10 h-10 bg-emerald-800/80 hover:bg-emerald-600 text-emerald-300 hover:text-white rounded-lg flex items-center justify-center transition border border-emerald-600/40">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+            </a>
+
+            <a href="https://instagram.com/agente3d.oficial" target="_blank" title="Instagram da Clínica" class="w-10 h-10 bg-rose-950/40 hover:bg-rose-600 text-pink-300 hover:text-white rounded-lg flex items-center justify-center transition border border-rose-500/30">
+              <i class="fa-brands fa-instagram text-lg"></i>
+            </a>
+
+            <a href="https://t.me/agente3d.oficial" target="_blank" title="Canal Oficial Telegram" class="w-10 h-10 bg-sky-950/40 hover:bg-sky-600 text-sky-300 hover:text-white rounded-lg flex items-center justify-center transition border border-sky-500/30">
+              <i class="fa-brands fa-telegram text-lg"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-emerald-700/60 text-center sm:text-left">
+          <div>
+            <span class="block text-2xl font-black text-emerald-300">+15.000</span>
+            <span class="text-xs text-emerald-200">Pacientes Atendidos</span>
+          </div>
+          <div>
+            <span class="block text-2xl font-black text-emerald-300">+25</span>
+            <span class="text-xs text-emerald-200">Especialistas Médicos</span>
+          </div>
+          <div onclick="abrirModalAvaliacao()" class="cursor-pointer group hover:bg-white/10 p-1.5 rounded-xl transition border border-transparent hover:border-emerald-400/40" title="Clique para ver ou deixar sua opinião sobre a clínica">
+            <span id="hero-stat-rating" class="block text-2xl font-black text-emerald-300 group-hover:scale-105 transition">4.9 ★</span>
+            <span class="text-xs text-emerald-200 group-hover:text-white flex items-center justify-center sm:justify-start gap-1">
+              <span>Avaliação Média</span>
+              <i class="fa-solid fa-chevron-right text-[10px] text-emerald-400 group-hover:translate-x-0.5 transition"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARROSSEL DE BANNERS FLUTUANTES DE DESTAQUE DA CLÍNICA -->
+      <div id="container-banner-flutuante" onmouseenter="pausarBannerHero()" onmouseleave="retomarBannerHero()" class="bg-white/10 backdrop-blur-md border border-white/20 p-5 sm:p-7 rounded-3xl shadow-2xl text-slate-900 space-y-4 relative overflow-hidden group transition-all duration-300">
+        
+        <!-- INSÍGNIA SUPERIOR DE STATUS / NAVEGAÇÃO RÁPIDA -->
+        <div class="flex items-center justify-between text-xs text-emerald-200/90 font-medium px-1">
+          <div class="flex items-center gap-2">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+            </span>
+            <span class="font-bold tracking-wide uppercase text-[11px] text-emerald-300">Destaques da Clínica</span>
+          </div>
+          <span id="badge-indicador-banner" class="bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[10px] text-emerald-200 font-semibold">
+            1 de 4
+          </span>
+        </div>
+
+        <!-- ÁREA DOS SLIDES -->
+        <div class="relative min-h-[310px] flex items-center justify-center">
+          
+          <!-- SLIDE 1: WHATSAPP IA (ORIGINAL MANTIDO INTEGRALMENTE) -->
+          <div id="hero-slide-0" class="hero-slide-item bg-white p-6 rounded-2xl shadow-xl space-y-4 w-full transition-all duration-500 transform opacity-100 scale-100">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+              <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold text-lg shadow-inner">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm">Atendimento Automatizado 24/7</h3>
+                <p class="text-xs text-slate-500">Agendamento via WhatsApp integrado ao Automa��es</p>
+              </div>
+            </div>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-emerald-900 shadow-sm">
+                <span class="font-semibold block mb-0.5"><i class="fa-brands fa-whatsapp text-emerald-600 mr-1"></i> Paciente:</span>
+                "Olá, vocês aceitam Unimed ou Bradesco Saúde?"
+              </div>
+
+              <div class="bg-slate-100 border border-slate-200 p-3 rounded-xl text-slate-800 shadow-sm">
+                <span class="font-semibold block mb-0.5 text-emerald-700"><i class="fa-solid fa-user-doctor mr-1"></i> Assistente Virtual da Clínica:</span>
+                "Sim! Aceitamos Unimed, Bradesco Saúde, SulAmérica, Amil e muito mais. Deseja agendar sua consulta?"
+              </div>
+            </div>
+
+            <a href="https://wa.me/5574991223727?text=Olá,%20gostaria%20de%20agendar%20uma%20consulta" target="_blank" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-xs flex items-center justify-center gap-2">
+              <i class="fa-brands fa-whatsapp text-base"></i> Iniciar Conversa no WhatsApp
+            </a>
+          </div>
+
+          <!-- SLIDE 2: AGENDAMENTO ONLINE INSTANTÂNEO -->
+          <div id="hero-slide-1" class="hero-slide-item bg-white p-6 rounded-2xl shadow-xl space-y-4 w-full transition-all duration-500 transform opacity-0 scale-95 hidden">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+              <div class="w-10 h-10 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center font-bold text-lg shadow-inner">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm">Agendamento Online 100% Digital</h3>
+                <p class="text-xs text-slate-500">Escolha dia, horário e médico sem sair de casa</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="bg-teal-50 border border-teal-100 p-3 rounded-xl text-teal-900 flex flex-col justify-between">
+                <span class="font-bold text-slate-800 text-[11px] block"><i class="fa-solid fa-clock text-teal-600 mr-1"></i> Sem Filas</span>
+                <span class="text-[10px] text-teal-700">Horários livres hoje com confirmação imediata</span>
+              </div>
+              <div class="bg-sky-50 border border-sky-100 p-3 rounded-xl text-sky-900 flex flex-col justify-between">
+                <span class="font-bold text-slate-800 text-[11px] block"><i class="fa-solid fa-user-nurse text-sky-600 mr-1"></i> Especialidades</span>
+                <span class="text-[10px] text-sky-700">Mais de 25 médicos credenciados</span>
+              </div>
+            </div>
+
+            <button onclick="abrirModalAgendamentoPublico()" class="w-full text-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-xs flex items-center justify-center gap-2">
+              <i class="fa-solid fa-calendar-plus text-sm"></i> Agendar Sua Consulta Agora
+            </button>
+          </div>
+
+          <!-- SLIDE 3: PORTAL DO PACIENTE & EXAMES -->
+          <div id="hero-slide-2" class="hero-slide-item bg-white p-6 rounded-2xl shadow-xl space-y-4 w-full transition-all duration-500 transform opacity-0 scale-95 hidden">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+              <div class="w-10 h-10 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center font-bold text-lg shadow-inner">
+                <i class="fa-solid fa-file-medical-query"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm">Portal de Resultados de Exames</h3>
+                <p class="text-xs text-slate-500">Laudos e exames prontos com assinatura digital</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl space-y-2 text-xs">
+              <div class="flex items-center justify-between text-slate-700">
+                <span class="font-semibold flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-emerald-600"></i> Segurança SSL & LGPD</span>
+                <span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2 py-0.5 rounded-md">Online</span>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Consulte seus exames laboratoriais e laudos de imagem a qualquer momento através do seu CPF e chave de acesso.
+              </p>
+            </div>
+
+            <a href="/resultados-exames.html" class="block w-full text-center bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-xs flex items-center justify-center gap-2">
+              <i class="fa-solid fa-file-arrow-down text-sm"></i> Acessar Meus Exames
+            </a>
+          </div>
+
+          <!-- SLIDE 4: CONVÊNIOS E ATENDIMENTO HUMANIZADO -->
+          <div id="hero-slide-3" class="hero-slide-item bg-white p-6 rounded-2xl shadow-xl space-y-4 w-full transition-all duration-500 transform opacity-0 scale-95 hidden">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+              <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center font-bold text-lg shadow-inner">
+                <i class="fa-solid fa-hand-holding-medical"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm">Mais de 15 Convênios Aceitos</h3>
+                <p class="text-xs text-slate-500">Unimed, Bradesco, SulAmérica, Amil e mais</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 justify-center py-1">
+              <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1 rounded-lg border border-slate-200">Unimed</span>
+              <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1 rounded-lg border border-slate-200">Bradesco Saúde</span>
+              <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1 rounded-lg border border-slate-200">SulAmérica</span>
+              <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1 rounded-lg border border-slate-200">Amil</span>
+              <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1 rounded-lg border border-slate-200">Porto Seguro</span>
+              <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1 rounded-lg border border-slate-200">Particular</span>
+            </div>
+
+            <a href="#convenios" class="block w-full text-center bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-xs flex items-center justify-center gap-2">
+              <i class="fa-solid fa-list-check text-sm"></i> Ver Lista Completa de Convênios
+            </a>
+          </div>
+
+        </div>
+
+        <!-- CONTROLES FLUTUANTES (NAVEGAÇÃO E INDICADORES) -->
+        <div class="flex items-center justify-between pt-2 border-t border-white/10">
+          <!-- BOTÃO ANTERIOR -->
+          <button onclick="mudarSlideHero(-1)" title="Banner Anterior" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition border border-white/30 hover:scale-105 active:scale-95 shadow">
+            <i class="fa-solid fa-chevron-left text-xs"></i>
+          </button>
+
+          <!-- DOTS INDICADORES DE BANNERS -->
+          <div class="flex items-center gap-2">
+            <button onclick="irParaSlideHero(0)" id="dot-hero-0" class="w-7 h-2 rounded-full bg-emerald-400 transition-all duration-300 shadow-sm" title="Banner 1"></button>
+            <button onclick="irParaSlideHero(1)" id="dot-hero-1" class="w-2.5 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300" title="Banner 2"></button>
+            <button onclick="irParaSlideHero(2)" id="dot-hero-2" class="w-2.5 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300" title="Banner 3"></button>
+            <button onclick="irParaSlideHero(3)" id="dot-hero-3" class="w-2.5 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300" title="Banner 4"></button>
+          </div>
+
+          <!-- BOTÃO PRÓXIMO -->
+          <button onclick="mudarSlideHero(1)" title="Próximo Banner" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition border border-white/30 hover:scale-105 active:scale-95 shadow">
+            <i class="fa-solid fa-chevron-right text-xs"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section id="especialidades" class="py-16 px-4 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12 space-y-2">
+      <h2 class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Nossos Serviços</h2>
+      <h3 class="text-3xl font-bold text-slate-900">Especialidades Médicas</h3>
+      <p class="text-slate-600 text-sm">Oferecemos atendimento médico completo com tecnologia de ponta para você e sua família.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition space-y-3">
+        <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-xl">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+        <h4 class="font-bold text-lg text-slate-800">Cardiologia</h4>
+        <p class="text-xs text-slate-600">Prevenção, diagnóstico e tratamento avançado de doenças cardiovasculares e eletrocardiogramas.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition space-y-3">
+        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl">
+          <i class="fa-solid fa-baby"></i>
+        </div>
+        <h4 class="font-bold text-lg text-slate-800">Pediatria</h4>
+        <p class="text-xs text-slate-600">Acompanhamento do desenvolvimento infantil, vacinação e suporte pediátrico contínuo.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition space-y-3">
+        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl">
+          <i class="fa-solid fa-bone"></i>
+        </div>
+        <h4 class="font-bold text-lg text-slate-800">Ortopedia</h4>
+        <p class="text-xs text-slate-600">Tratamento de fraturas, dores articulares, lesões esportivas e cirurgias ortopédicas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVÊNIOS ATENDIDOS (COM BADGES DE STATUS ATIVO vs SUSPENSO) -->
+  <section id="convenios" class="bg-slate-100 py-16 px-4 border-t border-b border-slate-200">
+    <div class="max-w-7xl mx-auto space-y-10">
+      
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <h2 class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Planos de Saúde</h2>
+        <h3 class="text-3xl font-bold text-slate-900">Convênios Credenciados & Status</h3>
+        <p class="text-slate-600 text-sm">Transparência completa sobre os planos atendidos e a situação atual de cada operadora.</p>
+      </div>
+
+      <!-- LEGENDA DE STATUS -->
+      <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-600 bg-white p-3 rounded-xl max-w-md mx-auto border border-slate-200 shadow-sm">
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> ATIVO (Atendimento Normal)</span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> SUSPENSO (Temporário)</span>
+      </div>
+
+      <!-- GRID DE MARCAS E LOGOS DE CONVÊNIOS COM STATUS VISÍVEL -->
+      <div id="grid-convenios-logos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CORPO MÉDICO -->
+  <section id="medicos" class="bg-white py-16 px-4 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto space-y-10">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <h2 class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Nossa Equipe</h2>
+        <h3 class="text-3xl font-bold text-slate-900">Corpo Médico Residente</h3>
+        <p class="text-slate-600 text-sm">Profissionais renomados com vasta experiência nas principais instituições de saúde.</p>
+      </div>
+
+      <div id="container-corpo-medico-publico" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Renderizado via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- AVALIAÇÕES E DEPOIMENTOS DOS PACIENTES -->
+  <section id="avaliacoes" class="bg-slate-100 py-16 px-4 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto space-y-10">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-2 max-w-2xl">
+          <h2 class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Voz dos Nossos Pacientes</h2>
+          <h3 class="text-3xl font-bold text-slate-900">Avaliações & Opiniões sobre a Clínica</h3>
+          <p class="text-slate-600 text-sm">Transparência total sobre a satisfação dos nossos pacientes em cada consulta e procedimento.</p>
+        </div>
+
+        <button onclick="abrirModalAvaliacao()" class="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow transition flex items-center gap-2">
+          <i class="fa-solid fa-star text-amber-300"></i>
+          <span>Deixar Minha Avaliação</span>
+        </button>
+      </div>
+
+      <!-- PAINEL DE NOTA GERAL & DEPOIMENTOS -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        
+        <!-- CARD DE RESUMO E NOTA MÉDIA -->
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+          <div class="text-center space-y-2 border-b border-slate-100 pb-6">
+            <span id="overview-avg-rating" class="text-5xl font-black text-slate-900 block">4.9</span>
+            <div id="overview-stars" class="text-amber-400 text-xl space-x-1">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p id="overview-reviews-count" class="text-xs font-semibold text-slate-500">Baseado em opiniões verificadas</p>
+          </div>
+
+          <!-- BARRAS DE DISTRIBUIÇÃO DAS NOTAS -->
+          <div id="rating-breakdown-container" class="space-y-2 text-xs">
+            <!-- Renderizado via JS -->
+          </div>
+
+          <button onclick="abrirModalAvaliacao()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-xl transition text-center flex items-center justify-center gap-2">
+            <i class="fa-solid fa-pen-to-square"></i> Escrever Depoimento
+          </button>
+        </div>
+
+        <!-- GRID DE CARDS DE DEPOIMENTOS -->
+        <div id="container-depoimentos-pacientes" class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Renderizado via JS -->
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODAL DE DEIXAR AVALIAÇÃO / OPINIÃO -->
+  <div id="modal-avaliacao" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 my-auto max-h-[90vh] flex flex-col overflow-hidden">
+      
+      <div class="bg-slate-900 text-white p-5 sm:p-6 flex items-center justify-between shrink-0 border-b border-slate-800">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-amber-300 text-lg shadow-sm">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-base">Avaliar Atendimento</h3>
+            <p class="text-xs text-slate-400">Sua opinião ajuda a melhorar nossa clínica</p>
+          </div>
+        </div>
+        <button onclick="fecharModalAvaliacao()" class="text-slate-400 hover:text-white p-2 text-lg transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="form-submeter-avaliacao" onsubmit="enviarAvaliacao(event)" class="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
+        
+        <!-- SELETOR INTERATIVO DE ESTRELAS -->
+        <div class="text-center space-y-2 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Qual é a sua nota para a clínica?</label>
+          <div id="star-picker-container" class="flex justify-center space-x-2 text-3xl text-slate-300 cursor-pointer">
+            <i data-value="1" onclick="setRating(1)" onmouseenter="highlightStars(1)" onmouseleave="resetStarHighlight()" class="fa-solid fa-star transition hover:scale-125"></i>
+            <i data-value="2" onclick="setRating(2)" onmouseenter="highlightStars(2)" onmouseleave="resetStarHighlight()" class="fa-solid fa-star transition hover:scale-125"></i>
+            <i data-value="3" onclick="setRating(3)" onmouseenter="highlightStars(3)" onmouseleave="resetStarHighlight()" class="fa-solid fa-star transition hover:scale-125"></i>
+            <i data-value="4" onclick="setRating(4)" onmouseenter="highlightStars(4)" onmouseleave="resetStarHighlight()" class="fa-solid fa-star transition hover:scale-125"></i>
+            <i data-value="5" onclick="setRating(5)" onmouseenter="highlightStars(5)" onmouseleave="resetStarHighlight()" class="fa-solid fa-star transition hover:scale-125"></i>
+          </div>
+          <span id="star-picker-label" class="block text-xs font-bold text-emerald-600">5 de 5 Estrelas (Excelente)</span>
+          <input type="hidden" id="input-rating-val" value="5" required />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Seu Nome Completo *</label>
+          <input type="text" id="input-review-name" required placeholder="Ex: Mariana Costa" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">E-mail ou WhatsApp (Opcional)</label>
+            <input type="text" id="input-review-email" placeholder="mariana@email.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Médico / Especialidade (Opcional)</label>
+            <select id="select-review-doctor" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+              <option value="">Clínica Geral</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- PERGUNTAS RÁPIDAS SOBRE O MÉDICO & ATENDIMENTO -->
+        <div class="space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+              <i class="fa-solid fa-list-check text-emerald-600 mr-1"></i> O que você mais destacaria no atendimento do médico?
+            </label>
+            <span class="text-[10px] text-slate-400 font-semibold">(Toque para selecionar)</span>
+          </div>
+
+          <div class="flex flex-wrap gap-2" id="quick-tags-container">
+            <button type="button" onclick="toggleQuickTag(this, '⏱️ Pontualidade no Horário')" class="quick-tag bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-regular fa-clock text-emerald-600"></i> ⏱️ Pontualidade
+            </button>
+            <button type="button" onclick="toggleQuickTag(this, '🩺 Atenção e Empatia do Médico')" class="quick-tag bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-stethoscope text-emerald-600"></i> 🩺 Atenção & Empatia
+            </button>
+            <button type="button" onclick="toggleQuickTag(this, '💬 Explicação Clara do Diagnóstico')" class="quick-tag bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-regular fa-comments text-emerald-600"></i> 💬 Explicação Clara
+            </button>
+            <button type="button" onclick="toggleQuickTag(this, '🏥 Limpeza e Conforto')" class="quick-tag bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-hospital text-emerald-600"></i> 🏥 Limpeza & Conforto
+            </button>
+            <button type="button" onclick="toggleQuickTag(this, '⚡ Agilidade na Recepção')" class="quick-tag bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-bolt text-emerald-600"></i> ⚡ Agilidade na Recepção
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-200/80">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Como foi a Pontualidade?</label>
+              <select id="select-review-punctuality" class="w-full bg-white px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                <option value="🟢 Pontual (No horário exato)">🟢 Pontual (No horário exato)</option>
+                <option value="🟡 Tolerável (Pequeno atraso de 10-15 min)">🟡 Tolerável (Pequeno atraso)</option>
+                <option value="🔴 Demorado">🔴 Demorado</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Recomendaria este Médico?</label>
+              <select id="select-review-recommend" class="w-full bg-white px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                <option value="🌟 Sim! Com certeza recomendo">🌟 Sim! Com certeza recomendo</option>
+                <option value="👍 Sim, recomendo">👍 Sim, recomendo</option>
+                <option value="🤝 Neutro">🤝 Neutro</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Sua Opinião / Comentário *</label>
+          <textarea id="input-review-comment" required rows="3" placeholder="Conte como foi sua experiência com nossos profissionais e instalações..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none resize-none"></textarea>
+        </div>
+
+        <div class="flex justify-end space-x-3 pt-3 border-t border-slate-100 shrink-0 sticky bottom-0 bg-white pb-1">
+          <button type="button" onclick="fecharModalAvaliacao()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-semibold text-xs hover:bg-slate-100 transition">
+            Cancelar
+          </button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow transition flex items-center gap-1.5">
+            <i class="fa-solid fa-paper-plane"></i> Publicar Opinião
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE CADASTRO E AGENDAMENTO DE CONSULTA (PACIENTE) -->
+  <div id="modal-agendamento-publico" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden border border-slate-200 my-auto max-h-[90vh] flex flex-col">
+      
+      <div class="bg-gradient-to-r from-emerald-800 to-teal-900 text-white p-5 sm:p-6 flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-3">
+          <div class="w-11 h-11 bg-emerald-500/20 text-emerald-300 rounded-2xl border border-emerald-400/30 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-calendar-plus"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg leading-tight">Agendar Consulta Médica</h3>
+            <p class="text-xs text-emerald-100/80">Escolha o especialista, data, convênio e o melhor horário</p>
+          </div>
+        </div>
+        <button onclick="fecharModalAgendamentoPublico()" class="text-slate-300 hover:text-white p-2 text-xl transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="form-agendar-consulta-publica" onsubmit="confirmarAgendamentoPublico(event)" class="p-4 sm:p-6 space-y-6 overflow-y-auto flex-1">
+        
+        <!-- ETAPA 1: MÉDICO & DATA -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-widest flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px]">1</span>
+            <span>Especialista & Data da Consulta</span>
+          </h4>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Médico / Especialidade *</label>
+              <select id="public-select-medico" onchange="buscarSlotsDisponiveisPublico()" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                <option value="">Selecione o médico...</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Data Desejada *</label>
+              <input type="date" id="public-input-data" onchange="buscarSlotsDisponiveisPublico()" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 2: SELEÇÃO DE HORÁRIOS LIVRES -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-widest flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px]">2</span>
+            <span>Horários Disponíveis</span>
+          </h4>
+
+          <div id="public-container-slots" class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+            <p class="text-xs text-slate-500">Selecione o médico e a data para visualizar a grade de horários livres.</p>
+          </div>
+          <input type="hidden" id="public-input-horario-selecionado" required />
+        </div>
+
+        <!-- ETAPA 3: CONVÊNIO & TIPO DE ATENDIMENTO -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-widest flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px]">3</span>
+            <span>Plano de Saúde & Modalidade</span>
+          </h4>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Convênio / Plano de Saúde *</label>
+              <select id="public-select-convenio" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                <option value="Particular">Particular (Sem convênio)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Modalidade do Atendimento *</label>
+              <select id="public-select-modalidade" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                <option value="PRESENCIAL">🏥 Consulta Presencial na Clínica</option>
+                <option value="TELEMEDICINA">💻 Telemedicina (Online por Vídeo)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 4: DADOS DO PACIENTE -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-widest flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px]">4</span>
+            <span>Seus Dados de Identificação</span>
+          </h4>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Nome Completo do Paciente *</label>
+              <input type="text" id="public-paciente-nome" required placeholder="Ex: Maria Oliveira" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">CPF (Conformidade LGPD) *</label>
+              <input type="text" id="public-paciente-cpf" required placeholder="123.456.789-00" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Telefone / WhatsApp (Para Notificação) *</label>
+              <input type="text" id="public-paciente-telefone" required placeholder="+5511999999999" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">E-mail para Confirmação *</label>
+              <input type="email" id="public-paciente-email" required placeholder="paciente@email.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Observações ou Sintomas (Opcional)</label>
+            <input type="text" id="public-paciente-notes" placeholder="Ex: Dor no peito, consulta de rotina, check-up anual..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="flex justify-end space-x-3 pt-4 border-t border-slate-100">
+          <button type="button" onclick="fecharModalAgendamentoPublico()" class="px-5 py-3 rounded-xl border border-slate-300 text-slate-600 font-semibold text-xs hover:bg-slate-100 transition">
+            Cancelar
+          </button>
+          <button type="submit" id="btn-submit-public-agendamento" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-amber-300"></i> Finalizar & Confirmar Agendamento
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CUSTOMIZADO DE SUCESSO / CONFIRMAÇÃO DE AGENDAMENTO -->
+  <div id="modal-sucesso-custom" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-5 border border-slate-100 text-center animate-in fade-in zoom-in duration-200">
+      
+      <!-- ÍCONE COM ANIMAÇÃO PULSANTE DE SUCESSO -->
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl font-extrabold shadow-inner relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-25"></span>
+        <i class="fa-solid fa-circle-check relative"></i>
+      </div>
+
+      <!-- TÍTULO & SUBTÍTULO -->
+      <div>
+        <h3 id="modal-sucesso-titulo" class="text-xl font-extrabold text-slate-900 leading-tight">Solicitação Registrada com Sucesso!</h3>
+        <p id="modal-sucesso-subtitulo" class="text-xs text-slate-500 mt-1">Sua solicitação foi encaminhada para a recepção da clínica.</p>
+      </div>
+
+      <!-- BLOCO DE DETALHES DA CONSULTA -->
+      <div id="modal-sucesso-detalhes" class="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 text-left text-xs space-y-2 text-slate-800">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <!-- BLOCO DE NOTIFICAÇÕES DISPARADAS -->
+      <div id="modal-sucesso-notificacoes" class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-left text-xs space-y-1.5 font-medium text-slate-700">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <!-- BOTÃO CONTINUAR -->
+      <button onclick="fecharModalSucessoCustom()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3 px-4 rounded-xl shadow-md transition text-sm flex items-center justify-center gap-2">
+        <i class="fa-solid fa-check"></i> Perfeito, Entendi!
+      </button>
+
+    </div>
+  </div>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer id="contato" class="bg-slate-900 text-slate-400 py-12 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-slate-800 pb-8">
+      
+      <div class="space-y-3">
+        <div class="flex items-center space-x-2 text-white font-bold text-lg">
+          <i class="fa-solid fa-hospital text-emerald-400"></i>
+          <span>MediClinic 3Dígitos</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Excelência em cuidados médicos com tecnologia de agendamento automático e integridade de dados.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Links Rápidos</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#inicio" class="hover:text-white">Início</a></li>
+          <li><a href="#especialidades" class="hover:text-white">Especialidades</a></li>
+          <li><a href="#convenios" class="hover:text-white">Convênios</a></li>
+          <li><a href="#medicos" class="hover:text-white">Corpo Médico</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Contato & Redes Sociais</h4>
+        <ul class="space-y-2 text-xs">
+          <li><i class="fa-solid fa-location-dot text-emerald-400 mr-1.5"></i> Rua da Estrela, 29 - Bahia - Brasil</li>
+          <li><i class="fa-solid fa-phone text-emerald-400 mr-1.5"></i> 74 99122-3727</li>
+          <li><a href="https://wa.me/5574991223727" target="_blank" class="hover:text-white flex items-center gap-1.5"><i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp: 74 99122-3727</a></li>
+          <li><a href="https://instagram.com/agente3d.oficial" target="_blank" class="hover:text-white flex items-center gap-1.5"><i class="fa-brands fa-instagram text-pink-400"></i> Instagram: @agente3d.oficial</a></li>
+          <li><a href="https://t.me/agente3d.oficial" target="_blank" class="hover:text-white flex items-center gap-1.5"><i class="fa-brands fa-telegram text-sky-400"></i> Telegram: t.me/agente3d.oficial</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Acesso do Funcionário</h4>
+        <p class="text-xs text-slate-400 mb-3">Área restrita de agendamentos e recepção.</p>
+        <a href="/login.html" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+          <i class="fa-solid fa-lock"></i> Entrar na Área Restrita
+        </a>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+      <p>&copy; 2026 MediClinic 3Dígitos - Todos os direitos reservados.</p>
+      <div class="flex space-x-4 mt-2 sm:mt-0">
+        <a href="/login.html" class="hover:text-slate-300">Login da Recepção</a>
+        <a href="/api/docs" target="_blank" class="hover:text-slate-300">API Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      carregarCorpoMedico();
+      carregarConvenios();
+      carregarEstatisticaEAvaliacoes();
+      
+      const hoje = new Date().toISOString().split('T')[0];
+      const dateInput = document.getElementById('public-input-data');
+      if (dateInput) dateInput.value = hoje;
+    });
+
+    async function carregarEstatisticaEAvaliacoes() {
+      await Promise.all([
+        carregarStatsAvaliacao(),
+        carregarListaDepoimentos(),
+        carregarMedicosParaSelect(),
+        carregarConveniosSelectPublico()
+      ]);
+    }
+
+    async function carregarConveniosSelectPublico() {
+      try {
+        const res = await fetch('/api/v1/health-insurances');
+        const convenios = await res.json();
+        const select = document.getElementById('public-select-convenio');
+        if (select && convenios) {
+          const ativos = convenios.filter(c => c.status === 'ATIVO');
+          select.innerHTML = `<option value="Particular">Particular (Sem convênio)</option>` + ativos.map(c => `
+            <option value="${c.name}">${c.name}</option>
+          `).join('');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Modal de Agendamento Público de Consultas
+    function abrirModalAgendamentoPublico() {
+      document.getElementById('modal-agendamento-publico').classList.remove('hidden');
+      carregarMedicosParaSelect();
+      carregarConveniosSelectPublico();
+    }
+
+    function fecharModalAgendamentoPublico() {
+      document.getElementById('modal-agendamento-publico').classList.add('hidden');
+    }
+
+    async function buscarSlotsDisponiveisPublico() {
+      const doctorId = document.getElementById('public-select-medico').value;
+      const date = document.getElementById('public-input-data').value;
+      const container = document.getElementById('public-container-slots');
+
+      if (!doctorId || !date) {
+        container.innerHTML = `<p class="text-xs text-slate-500">Selecione o médico e a data para visualizar os horários disponíveis.</p>`;
+        return;
+      }
+
+      container.innerHTML = `<p class="text-xs text-emerald-600 font-semibold animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Consultando agenda médica...</p>`;
+
+      try {
+        const res = await fetch(`/api/v1/integrations/doctors/${doctorId}/available-slots?date=${date}`, {
+          headers: { 'x-api-key': 'm2m_sec_9f83a21b8c74e5d61f23456789abcdef' }
+        });
+        const data = await res.json();
+        const allSlots = (data && Array.isArray(data.allSlots)) ? data.allSlots : [];
+        const availableOnly = (data && Array.isArray(data.availableSlots)) ? data.availableSlots : [];
+
+        if (allSlots.length === 0 && availableOnly.length === 0) {
+          container.innerHTML = `<p class="text-xs text-amber-700 font-semibold bg-amber-50 p-3 rounded-xl border border-amber-200">Não há horários previstos para esta data. Tente outro dia.</p>`;
+          return;
+        }
+
+        const itemsToRender = allSlots.length > 0
+          ? allSlots
+          : availableOnly.map(t => ({ time: t, available: true, status: 'AVAILABLE' }));
+
+        container.innerHTML = `
+          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 pt-1">
+            ${itemsToRender.map(slot => {
+              const timeStr = typeof slot === 'string' ? slot : slot.time;
+              const isAvailable = typeof slot === 'string' ? true : slot.available;
+              const status = typeof slot === 'string' ? 'AVAILABLE' : slot.status;
+              const startTimeISO = `${date}T${timeStr}:00.000Z`;
+
+              if (status === 'CONFIRMED' || (!isAvailable && status !== 'BREAK')) {
+                return `
+                  <div title="Horário já agendado e confirmado pela recepção" class="relative overflow-hidden py-2 px-1 bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-xs border border-emerald-700 flex flex-col items-center justify-center cursor-not-allowed select-none opacity-95">
+                    <span class="text-xs font-black tracking-wide">${timeStr}</span>
+                    <span class="text-[9px] font-extrabold text-emerald-100 bg-emerald-800/40 px-1.5 py-0.5 rounded-full mt-0.5 flex items-center gap-0.5 uppercase tracking-wider">
+                      <i class="fa-solid fa-lock text-[8px]"></i> Indisponível
+                    </span>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-15 text-[8px] font-black uppercase tracking-widest text-white rotate-[-15deg]">INDISPONÍVEL</div>
+                  </div>
+                `;
+              } else if (status === 'BREAK') {
+                return `
+                  <div title="Intervalo do especialista" class="py-2 px-1 bg-slate-100 text-slate-400 font-semibold text-xs rounded-xl border border-slate-200 flex flex-col items-center justify-center cursor-not-allowed select-none opacity-70">
+                    <span class="text-xs font-medium text-slate-500 line-through">${timeStr}</span>
+                    <span class="text-[9px] text-slate-400 font-semibold">Pausa</span>
+                  </div>
+                `;
+              } else {
+                return `
+                  <button type="button" onclick="selecionarSlotPublico('${startTimeISO}', this)" class="btn-slot-publico py-2.5 px-2 bg-white border border-emerald-400 hover:bg-emerald-600 hover:text-white font-bold text-xs rounded-xl transition text-slate-800 shadow-xs flex flex-col items-center justify-center gap-0.5">
+                    <span class="text-xs">${timeStr}</span>
+                  </button>
+                `;
+              }
+            }).join('')}
+          </div>
+        `;
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = `<p class="text-xs text-red-600">Erro ao carregar horários livres.</p>`;
+      }
+    }
+
+    function selecionarSlotPublico(startTimeISO, btnEl) {
+      document.querySelectorAll('.btn-slot-publico').forEach(b => {
+        b.classList.remove('bg-emerald-800', 'text-white', 'ring-4', 'ring-emerald-300', 'scale-[1.03]');
+        b.classList.add('bg-white', 'text-slate-800');
+      });
+
+      btnEl.classList.remove('bg-white', 'text-slate-800');
+      btnEl.classList.add('bg-emerald-800', 'text-white', 'ring-4', 'ring-emerald-300', 'scale-[1.03]');
+
+      document.getElementById('public-input-horario-selecionado').value = startTimeISO;
+    }
+
+    async function confirmarAgendamentoPublico(event) {
+      event.preventDefault();
+
+      const doctorId = document.getElementById('public-select-medico').value;
+      const startTime = document.getElementById('public-input-horario-selecionado').value;
+      const healthInsuranceName = document.getElementById('public-select-convenio').value;
+      const consultationType = document.getElementById('public-select-modalidade').value;
+      const patientName = document.getElementById('public-paciente-nome').value;
+      const patientCpf = document.getElementById('public-paciente-cpf').value;
+      const patientPhone = document.getElementById('public-paciente-telefone').value;
+      const patientEmail = document.getElementById('public-paciente-email').value;
+      const notes = document.getElementById('public-paciente-notes').value;
+
+      if (!startTime) {
+        alert('Por favor, clique em um dos horários verdes disponíveis para selecionar a hora da consulta!');
+        return;
+      }
+
+      const btnSubmit = document.getElementById('btn-submit-public-agendamento');
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Confirmando Agendamento...`;
+
+      try {
+        const response = await fetch('/api/v1/appointments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            doctorId,
+            patientName,
+            patientCpf,
+            patientPhone,
+            patientEmail,
+            startTime,
+            healthInsuranceName,
+            consultationType,
+            notes,
+            origin: 'WEB'
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Erro ao realizar agendamento');
+        }
+
+        const dataHoraObj = new Date(startTime);
+        const dataFormatada = dataHoraObj.toLocaleDateString('pt-BR');
+        const horaFormatada = dataHoraObj.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+        abrirModalSucessoCustom({
+          titulo: 'Solicitação Registrada com Sucesso!',
+          subtitulo: 'Sua solicitação foi encaminhada para a Recepção da Clínica.',
+          detalhes: [
+            { label: 'Paciente', value: patientName },
+            { label: 'Data/Hora', value: `${dataFormatada} às ${horaFormatada}` },
+            { label: 'Convênio', value: healthInsuranceName },
+            { label: 'Modalidade', value: consultationType === 'TELEMEDICINA' ? '💻 Telemedicina' : '🏥 Presencial' }
+          ],
+          notificacoes: [
+            `Aguardando Aprovação da Recepção`,
+            `Confirmação oficial será enviada para WhatsApp: ${patientPhone}`
+          ]
+        });
+
+        fecharModalAgendamentoPublico();
+        document.getElementById('form-agendar-consulta-publica').reset();
+        document.getElementById('public-input-horario-selecionado').value = '';
+        document.getElementById('public-container-slots').innerHTML = `<p class="text-xs text-slate-500">Selecione o médico e a data para visualizar a grade de horários livres.</p>`;
+      } catch (err) {
+        alert(`Erro ao agendar consulta: ${err.message}`);
+        console.error(err);
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = `<i class="fa-solid fa-circle-check text-amber-300"></i> Finalizar & Confirmar Agendamento`;
+      }
+    }
+
+    function abrirModalSucessoCustom({ titulo, subtitulo, detalhes, notificacoes }) {
+      document.getElementById('modal-sucesso-titulo').innerText = titulo || 'Sucesso!';
+      document.getElementById('modal-sucesso-subtitulo').innerText = subtitulo || 'Operação realizada com sucesso.';
+
+      const containerDetalhes = document.getElementById('modal-sucesso-detalhes');
+      if (detalhes && detalhes.length > 0) {
+        containerDetalhes.classList.remove('hidden');
+        containerDetalhes.innerHTML = detalhes.map(d => `
+          <div class="flex justify-between items-center border-b border-emerald-200/50 pb-1.5 last:border-0 last:pb-0">
+            <span class="text-slate-500 font-medium">${d.label}:</span>
+            <span class="font-bold text-emerald-950">${d.value}</span>
+          </div>
+        `).join('');
+      } else {
+        containerDetalhes.classList.add('hidden');
+      }
+
+      const containerNotificacoes = document.getElementById('modal-sucesso-notificacoes');
+      if (notificacoes && notificacoes.length > 0) {
+        containerNotificacoes.classList.remove('hidden');
+        containerNotificacoes.innerHTML = `
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">📩 Status & Notificação:</span>
+          ${notificacoes.map(n => `
+            <div class="flex items-center gap-2 text-emerald-700 font-semibold">
+              <i class="fa-solid fa-circle-check text-emerald-500"></i>
+              <span>${n}</span>
+            </div>
+          `).join('')}
+        `;
+      } else {
+        containerNotificacoes.classList.add('hidden');
+      }
+
+      document.getElementById('modal-sucesso-custom').classList.remove('hidden');
+    }
+
+    function fecharModalSucessoCustom() {
+      document.getElementById('modal-sucesso-custom').classList.add('hidden');
+    }
+
+    async function carregarStatsAvaliacao() {
+      try {
+        const res = await fetch('/api/v1/reviews/stats');
+        const stats = await res.json();
+        
+        const heroRating = document.getElementById('hero-stat-rating');
+        if (heroRating) {
+          heroRating.textContent = `${stats.formattedAverage || '4.9'} ★`;
+        }
+
+        const overviewAvg = document.getElementById('overview-avg-rating');
+        if (overviewAvg) {
+          overviewAvg.textContent = stats.formattedAverage || '4.9';
+        }
+
+        const overviewCount = document.getElementById('overview-reviews-count');
+        if (overviewCount) {
+          overviewCount.textContent = `Baseado em ${stats.totalReviews || 0} opiniões verificadas`;
+        }
+
+        // Renderiza estrelas no overview
+        const overviewStars = document.getElementById('overview-stars');
+        if (overviewStars) {
+          const ratingVal = Math.round(stats.averageRating || 5);
+          let starsHtml = '';
+          for (let i = 1; i <= 5; i++) {
+            if (i <= ratingVal) {
+              starsHtml += `<i class="fa-solid fa-star text-amber-400"></i>`;
+            } else {
+              starsHtml += `<i class="fa-regular fa-star text-slate-300"></i>`;
+            }
+          }
+          overviewStars.innerHTML = starsHtml;
+        }
+
+        // Renderiza breakdown
+        const breakdownContainer = document.getElementById('rating-breakdown-container');
+        if (breakdownContainer && stats.breakdown) {
+          const total = stats.totalReviews || 1;
+          let breakdownHtml = '';
+          for (let star = 5; star >= 1; star--) {
+            const count = stats.breakdown[star] || 0;
+            const pct = Math.round((count / total) * 100);
+            breakdownHtml += `
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-semibold text-slate-600">${star} estrelas</span>
+                <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: ${pct}%"></div>
+                </div>
+                <span class="w-8 text-right font-medium text-slate-400">${count}</span>
+              </div>
+            `;
+          }
+          breakdownContainer.innerHTML = breakdownHtml;
+        }
+      } catch (err) {
+        console.error('Erro ao carregar estatísticas de avaliação:', err);
+      }
+    }
+
+    async function carregarListaDepoimentos() {
+      try {
+        const res = await fetch('/api/v1/reviews');
+        const reviews = await res.json();
+        const container = document.getElementById('container-depoimentos-pacientes');
+
+        if (!reviews || reviews.length === 0) {
+          container.innerHTML = `<p class="col-span-full text-center text-slate-400 py-8">Nenhum depoimento cadastrado. Seja o primeiro a opinar!</p>`;
+          return;
+        }
+
+        container.innerHTML = reviews.map(r => {
+          let stars = '';
+          for (let i = 1; i <= 5; i++) {
+            if (i <= r.rating) {
+              stars += `<i class="fa-solid fa-star text-amber-400"></i>`;
+            } else {
+              stars += `<i class="fa-regular fa-star text-slate-300"></i>`;
+            }
+          }
+
+          const initials = r.patientName ? r.patientName.split(' ').map(n => n.charAt(0)).slice(0,2).join('').toUpperCase() : 'P';
+          const dataFormatada = new Date(r.createdAt).toLocaleDateString('pt-BR');
+
+          return `
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-3">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-1 text-sm">
+                    ${stars}
+                  </div>
+                  <span class="text-[11px] text-slate-400 font-medium">${dataFormatada}</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed italic">
+                  "${r.comment}"
+                </p>
+              </div>
+
+              <div class="pt-3 border-t border-slate-100 flex items-center space-x-3">
+                <div class="w-9 h-9 bg-emerald-100 text-emerald-800 font-extrabold rounded-full flex items-center justify-center text-xs shadow-sm">
+                  ${initials}
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-xs">${r.patientName}</h4>
+                  <span class="text-[11px] text-emerald-700 font-medium">${r.doctorName || 'Clínica Geral'}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error('Erro ao carregar depoimentos:', err);
+      }
+    }
+
+    async function carregarMedicosParaSelect() {
+      try {
+        const res = await fetch('/api/v1/doctors');
+        const medicos = await res.json();
+        
+        // Populate select para avaliação
+        const selectReview = document.getElementById('select-review-doctor');
+        if (selectReview && medicos) {
+          selectReview.innerHTML = `<option value="">Clínica Geral</option>` + medicos.map(m => `
+            <option value="${m.id}">${m.name} (${m.specialty})</option>
+          `).join('');
+        }
+
+        // Populate select para agendamento público de consulta
+        const selectAgendamento = document.getElementById('public-select-medico');
+        if (selectAgendamento && medicos) {
+          selectAgendamento.innerHTML = `<option value="">Selecione o médico...</option>` + medicos.map(m => `
+            <option value="${m.id}">${m.name} - ${m.specialty} ${m.crm ? '(' + m.crm + ')' : ''}</option>
+          `).join('');
+        }
+      } catch (err) {
+        console.error('Erro ao carregar médicos:', err);
+      }
+    }
+
+    // Modal de Avaliação & Star Picker
+    let currentRatingSelected = 5;
+    let selectedQuickTags = new Set();
+
+    function toggleQuickTag(btn, tagText) {
+      if (selectedQuickTags.has(tagText)) {
+        selectedQuickTags.delete(tagText);
+        btn.classList.remove('bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'font-bold', 'ring-2', 'ring-emerald-400');
+        btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+      } else {
+        selectedQuickTags.add(tagText);
+        btn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'font-bold', 'ring-2', 'ring-emerald-400');
+        btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      }
+    }
+
+    function abrirModalAvaliacao() {
+      document.getElementById('modal-avaliacao').classList.remove('hidden');
+      setRating(5);
+    }
+
+    function fecharModalAvaliacao() {
+      document.getElementById('modal-avaliacao').classList.add('hidden');
+      resetQuickTags();
+    }
+
+    function resetQuickTags() {
+      selectedQuickTags.clear();
+      document.querySelectorAll('.quick-tag').forEach(btn => {
+        btn.classList.remove('bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'font-bold', 'ring-2', 'ring-emerald-400');
+        btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+      });
+    }
+
+    function setRating(val) {
+      currentRatingSelected = val;
+      document.getElementById('input-rating-val').value = val;
+      
+      const labels = {
+        1: '1 de 5 Estrelas (Muito Insatisfeito)',
+        2: '2 de 5 Estrelas (Regular)',
+        3: '3 de 5 Estrelas (Bom)',
+        4: '4 de 5 Estrelas (Muito Bom)',
+        5: '5 de 5 Estrelas (Excelente)'
+      };
+      
+      const lbl = document.getElementById('star-picker-label');
+      if (lbl) lbl.textContent = labels[val] || `${val} Estrelas`;
+      
+      highlightStars(val);
+    }
+
+    function highlightStars(val) {
+      const container = document.getElementById('star-picker-container');
+      if (!container) return;
+      const icons = container.querySelectorAll('i');
+      icons.forEach((icon, idx) => {
+        if (idx < val) {
+          icon.classList.remove('text-slate-300');
+          icon.classList.add('text-amber-400');
+        } else {
+          icon.classList.remove('text-amber-400');
+          icon.classList.add('text-slate-300');
+        }
+      });
+    }
+
+    function resetStarHighlight() {
+      highlightStars(currentRatingSelected);
+    }
+
+    async function enviarAvaliacao(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('input-review-name').value;
+      const email = document.getElementById('input-review-email').value;
+      const rating = parseInt(document.getElementById('input-rating-val').value, 10);
+      const doctorId = document.getElementById('select-review-doctor').value;
+      let comment = document.getElementById('input-review-comment').value;
+
+      const punctuality = document.getElementById('select-review-punctuality') ? document.getElementById('select-review-punctuality').value : '';
+      const recommend = document.getElementById('select-review-recommend') ? document.getElementById('select-review-recommend').value : '';
+
+      let metaDetails = [];
+      if (selectedQuickTags.size > 0) {
+        metaDetails.push(`Destaques: ${Array.from(selectedQuickTags).join(' • ')}`);
+      }
+      if (punctuality) {
+        metaDetails.push(`Pontualidade: ${punctuality}`);
+      }
+      if (recommend) {
+        metaDetails.push(`Recomendação: ${recommend}`);
+      }
+
+      if (metaDetails.length > 0) {
+        comment += `\n\n📌 (${metaDetails.join(' | ')})`;
+      }
+
+      try {
+        const response = await fetch('/api/v1/reviews', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            patientName: name,
+            patientEmail: email || undefined,
+            rating,
+            comment,
+            doctorId: doctorId || undefined,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Falha ao enviar avaliação');
+        }
+
+        alert('Obrigado! Sua opinião foi enviada com sucesso e já está visível para nossos pacientes.');
+        fecharModalAvaliacao();
+        document.getElementById('form-submeter-avaliacao').reset();
+        resetQuickTags();
+        
+        // Atualiza tela
+        carregarEstatisticaEAvaliacoes();
+      } catch (err) {
+        alert('Erro ao enviar avaliação. Verifique os dados e tente novamente.');
+        console.error(err);
+      }
+    }
+
+    async function carregarCorpoMedico() {
+      try {
+        const res = await fetch('/api/v1/doctors');
+        const medicos = await res.json();
+        const container = document.getElementById('container-corpo-medico-publico');
+        
+        if (!medicos || medicos.length === 0) {
+          container.innerHTML = `<p class="col-span-full text-center text-slate-400">Nenhum médico cadastrado no momento.</p>`;
+          return;
+        }
+
+        container.innerHTML = medicos.map(m => `
+          <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl flex items-center space-x-4">
+            <div class="w-14 h-14 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-md overflow-hidden">
+              ${m.avatarUrl ? `<img src="${m.avatarUrl}" class="w-full h-full object-cover" alt="${m.name}">` : m.name.charAt(0)}
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900 text-base">${m.name}</h4>
+              <span class="inline-block text-xs font-semibold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full mt-0.5">${m.specialty}</span>
+              ${m.crm ? `<p class="text-[11px] text-slate-500 mt-1 font-semibold">${m.crm}</p>` : ''}
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Carrega TODOS os convênios cadastrados (exibindo ATIVOS e SUSPENSOS com avisos claros)
+    async function carregarConvenios() {
+      try {
+        const res = await fetch('/api/v1/health-insurances');
+        const convenios = await res.json();
+        const grid = document.getElementById('grid-convenios-logos');
+
+        if (!convenios || convenios.length === 0) {
+          grid.innerHTML = `<p class="col-span-full text-center text-slate-400">Nenhum convênio cadastrado no momento.</p>`;
+          return;
+        }
+
+        grid.innerHTML = convenios.map(c => {
+          const isSuspenso = c.status === 'SUSPENSO';
+
+          if (isSuspenso) {
+            return `
+              <div class="bg-amber-50/70 border border-amber-300 p-5 rounded-2xl shadow-sm flex flex-col items-center justify-center text-center space-y-2 relative overflow-hidden">
+                <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-2xl font-bold">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <span class="font-bold text-slate-900 text-sm block">${c.name}</span>
+                <span class="text-[10px] text-amber-900 font-bold bg-amber-200/80 px-2.5 py-0.5 rounded-full border border-amber-300">
+                  <i class="fa-solid fa-circle-pause text-amber-700 mr-1"></i> ATENDIMENTO SUSPENSO
+                </span>
+                <p class="text-[11px] text-amber-800 leading-tight pt-1">
+                  Atendimento suspenso temporariamente devido a repactuação contratual.
+                </p>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center text-center space-y-2 group">
+              <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-2xl font-bold group-hover:scale-110 transition">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <span class="font-bold text-slate-800 text-sm block">${c.name}</span>
+              <span class="text-[10px] text-emerald-700 uppercase font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                <i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> ATENDENDO NORMALMENTE
+              </span>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // ==========================================
+    // CONTROLADOR DE BANNERS FLUTUANTES DA HOME
+    // ==========================================
+    let currentHeroSlideIndex = 0;
+    const totalHeroSlides = 4;
+    let heroSlideTimer = null;
+
+    function atualizarHeroSlide() {
+      for (let i = 0; i < totalHeroSlides; i++) {
+        const slide = document.getElementById(`hero-slide-${i}`);
+        const dot = document.getElementById(`dot-hero-${i}`);
+        
+        if (slide && dot) {
+          if (i === currentHeroSlideIndex) {
+            slide.classList.remove('hidden');
+            requestAnimationFrame(() => {
+              slide.classList.remove('opacity-0', 'scale-95');
+              slide.classList.add('opacity-100', 'scale-100');
+            });
+
+            dot.className = 'w-7 h-2 rounded-full bg-emerald-400 transition-all duration-300 shadow-sm';
+          } else {
+            slide.classList.remove('opacity-100', 'scale-100');
+            slide.classList.add('opacity-0', 'scale-95');
+            slide.classList.add('hidden');
+
+            dot.className = 'w-2.5 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300';
+          }
+        }
+      }
+
+      const badge = document.getElementById('badge-indicador-banner');
+      if (badge) {
+        badge.innerText = `${currentHeroSlideIndex + 1} de ${totalHeroSlides}`;
+      }
+    }
+
+    function mudarSlideHero(direction) {
+      currentHeroSlideIndex = (currentHeroSlideIndex + direction + totalHeroSlides) % totalHeroSlides;
+      atualizarHeroSlide();
+      reiniciarTimerBannerHero();
+    }
+
+    function irParaSlideHero(index) {
+      currentHeroSlideIndex = index;
+      atualizarHeroSlide();
+      reiniciarTimerBannerHero();
+    }
+
+    function iniciarTimerBannerHero() {
+      if (!heroSlideTimer) {
+        heroSlideTimer = setInterval(() => {
+          currentHeroSlideIndex = (currentHeroSlideIndex + 1) % totalHeroSlides;
+          atualizarHeroSlide();
+        }, 5000);
+      }
+    }
+
+    function pausarBannerHero() {
+      if (heroSlideTimer) {
+        clearInterval(heroSlideTimer);
+        heroSlideTimer = null;
+      }
+    }
+
+    function retomarBannerHero() {
+      iniciarTimerBannerHero();
+    }
+
+    function reiniciarTimerBannerHero() {
+      pausarBannerHero();
+      iniciarTimerBannerHero();
+    }
+
+    // Inicializa carrossel flutuante
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        atualizarHeroSlide();
+        iniciarTimerBannerHero();
+      });
+    } else {
+      atualizarHeroSlide();
+      iniciarTimerBannerHero();
+    }
+  </script>
+
+  <!-- INTEGRAÇÃO CHATWOOT LIVE CHAT WIDGET -->
+  <script>
+    (function(d,t) {
+      var BASE_URL="https://chatwoot.agente3d.net";
+      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=BASE_URL+"/packs/js/sdk.js";
+      g.async = true;
+      s.parentNode.insertBefore(g,s);
+      g.onload=function(){
+        window.chatwootSDK.run({
+          websiteToken: 'j82N7RT4V3cEHM5o3bd25Cd9',
+          baseUrl: BASE_URL
+        });
+      }
+    })(document,"script");
+
+    function abrirChatwoot() {
+      if (window.$chatwoot) {
+        window.$chatwoot.toggle();
+      } else {
+        window.open('https://wa.me/5574991223727?text=Olá,%20gostaria%20de%20atendimento', '_blank');
+      }
+    }
+  </script>
+</body>
+</html>
+

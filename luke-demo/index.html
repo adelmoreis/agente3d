@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luke Stilo Kids - Loja Virtual & Vitrine Infantil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lukePink: '#ec4899',
+                        lukePinkDark: '#db2777',
+                        lukeAmber: '#f59e0b',
+                        lukeOrange: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#FFFDF9] text-gray-800 antialiased min-h-screen flex flex-col selection:bg-pink-200">
+
+    <!-- Faixa Topo de Demonstração 3Dígitos -->
+    <div class="bg-slate-900 text-white text-xs py-2 px-4 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="font-medium text-gray-300">Demonstração Interativa do Case • <strong>Luke Stilo Kids</strong></span>
+            </div>
+            <a href="../luke.html" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3 py-1 rounded-lg text-[11px] transition flex items-center space-x-1">
+                <span>&larr; Voltar ao Case 3Dígitos</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Header da Loja Luke Stilo Kids -->
+    <header class="bg-white border-b border-amber-100/60 sticky top-8 z-40 shadow-sm backdrop-blur-md bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logomarca da Loja -->
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-400 via-orange-400 to-pink-500 p-0.5 shadow-md flex items-center justify-center">
+                    <div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center text-2xl font-black">
+                        🧸
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 leading-none">
+                        Luke Stilo <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500">Kids</span>
+                    </h1>
+                    <p class="text-[10px] sm:text-[11px] text-gray-400 font-bold tracking-wider uppercase mt-0.5">Moda, Conforto & Alegria</p>
+                </div>
+            </div>
+
+            <!-- Botões Direitos: Atendimento WhatsApp & Carrinho -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <a href="https://wa.me/5599999999999?text=Olá,%20estou%20vendo%20a%20loja%20Luke%20Stilo%20Kids!" target="_blank" class="hidden sm:flex items-center space-x-2 bg-emerald-50 text-emerald-700 px-3.5 py-2 rounded-xl text-xs font-bold border border-emerald-200 hover:bg-emerald-100 transition">
+                    <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.082 19.165c-1.63 0-3.122-.411-4.437-1.109l-4.908 1.287 1.309-4.781c-.767-1.34-1.208-2.893-1.208-4.55 0-5.068 4.108-9.176 9.176-9.176s9.176 4.108 9.176 9.176c0 5.068-4.108 9.176-9.176 9.176z"/></svg>
+                    <span>Falar no Zap</span>
+                </a>
+
+                <!-- Botão Carrinho com Badge -->
+                <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-extrabold px-4 py-2.5 rounded-xl shadow-md flex items-center space-x-2 transition transform active:scale-95">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span class="hidden sm:inline text-xs">Sacola</span>
+                    <span id="cartCountBadge" class="bg-white text-pink-600 text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-sm">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Promocional de Destaque -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <div class="relative bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 rounded-3xl overflow-hidden shadow-lg text-white p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-3 text-center md:text-left z-10 max-w-xl">
+                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider text-amber-100 border border-white/20">
+                    ✨ Coleção Exclusiva Infantil
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black leading-tight">
+                    Lookinhos Incríveis para Brincar com Estilo e Conforto! 💛
+                </h2>
+                <p class="text-amber-50 text-xs sm:text-sm font-medium">
+                    Escolha as peças, selecione o tamanho e finalize o pedido no WhatsApp com atendimento humanizado.
+                </p>
+            </div>
+            <div class="relative z-10 shrink-0">
+                <div class="bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white text-gray-800 text-center space-y-1">
+                    <span class="text-2xl">🚚</span>
+                    <div class="text-xs font-black uppercase tracking-wider text-pink-600">Frete & Retirada</div>
+                    <div class="text-[11px] text-gray-500 font-medium">Enviamos para todo o Brasil</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barra de Filtros & Categorias -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-4">
+            
+            <!-- Botões de Categorias -->
+            <div class="flex items-center space-x-2 overflow-x-auto pb-1 max-w-full">
+                <button onclick="filterCategory('todos')" id="btn-cat-todos" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-gray-900 text-white shadow-sm transition">
+                    ✨ Todos os Looks
+                </button>
+                <button onclick="filterCategory('meninas')" id="btn-cat-meninas" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-600 hover:bg-pink-50 hover:text-pink-600 border border-gray-200 transition">
+                    👧 Meninas
+                </button>
+                <button onclick="filterCategory('meninos')" id="btn-cat-meninos" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 border border-gray-200 transition">
+                    👦 Meninos
+                </button>
+                <button onclick="filterCategory('bebes')" id="btn-cat-bebes" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-600 hover:bg-amber-50 hover:text-amber-600 border border-gray-200 transition">
+                    👶 Bebês
+                </button>
+            </div>
+
+            <!-- Contador de Itens Encontrados -->
+            <div class="text-xs font-bold text-gray-400">
+                Mostrando <span id="itemsCount" class="text-gray-800">7</span> peças disponíveis
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid de Produtos da Loja -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+        <div id="productsGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <!-- Renderizado dinamicamente via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal Detalhes do Produto -->
+    <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh]">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-9 h-9 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-gray-500 hover:text-gray-900 shadow-md">
+                ✕
+            </button>
+            
+            <div class="overflow-y-auto p-6 space-y-4">
+                <div class="aspect-square w-full rounded-2xl overflow-hidden bg-gray-100 shadow-inner relative">
+                    <img id="modalImg" src="" alt="Produto" class="w-full h-full object-cover">
+                    <span id="modalBadge" class="absolute top-3 left-3 bg-pink-500 text-white font-black text-[10px] uppercase px-2.5 py-1 rounded-full shadow-sm"></span>
+                </div>
+
+                <div class="flex items-start justify-between gap-4">
+                    <div>
+                        <h3 id="modalTitle" class="text-xl font-black text-gray-900 leading-tight"></h3>
+                        <div class="text-xs text-gray-400 font-bold uppercase mt-0.5" id="modalCategory"></div>
+                    </div>
+                    <div id="modalPrice" class="text-2xl font-black text-pink-600 shrink-0"></div>
+                </div>
+
+                <p id="modalDesc" class="text-xs text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-100 whitespace-pre-line"></p>
+
+                <!-- Seleção de Tamanho -->
+                <div>
+                    <label class="text-xs font-bold text-gray-700 block mb-1.5">Escolha o Tamanho:</label>
+                    <div id="modalSizes" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <!-- Seleção de Cores -->
+                <div id="colorContainer">
+                    <label class="text-xs font-bold text-gray-700 block mb-1.5">Cor / Modelo:</label>
+                    <div id="modalColors" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <!-- Prova Social: Curtidas & Comentários -->
+                <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                    <button onclick="handleLike()" id="modalLikeBtn" class="flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-rose-50 text-rose-600 hover:bg-rose-100 transition">
+                        <span>❤️</span>
+                        <span id="modalLikesCount">0</span>
+                        <span>Curtidas</span>
+                    </button>
+                    <span class="text-[11px] text-gray-400 font-medium">✨ Garantia de Satisfação</span>
+                </div>
+
+                <!-- Área de Comentários Reais -->
+                <div class="bg-amber-50/50 p-3 rounded-2xl border border-amber-100 space-y-2">
+                    <div class="text-[11px] font-bold text-amber-900 uppercase">💬 Opinião de Quem Comprou:</div>
+                    <div id="modalCommentsList" class="space-y-1.5 max-h-24 overflow-y-auto text-xs text-gray-600"></div>
+                </div>
+            </div>
+
+            <!-- Rodapé do Modal com Botão Adicionar à Sacola -->
+            <div class="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-3">
+                <button onclick="addToCartFromModal()" class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-black text-sm rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span>Colocar na Sacola</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gaveta Lateral do Carrinho (Cart Drawer) -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden transition-opacity">
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
+            
+            <div class="p-5 border-b border-gray-100 flex items-center justify-between bg-amber-50/50">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xl">🛍️</span>
+                    <h3 class="text-base font-black text-gray-900">Sua Sacola de Compras</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="w-8 h-8 rounded-full bg-white text-gray-500 hover:text-gray-900 flex items-center justify-center shadow-sm">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Lista de Itens no Carrinho -->
+            <div id="cartItemsList" class="flex-grow overflow-y-auto p-5 space-y-4">
+                <!-- Preenchido via JavaScript -->
+            </div>
+
+            <!-- Formulário de Finalização -->
+            <div class="p-5 bg-gray-50 border-t border-gray-100 space-y-4">
+                <div class="space-y-2">
+                    <div>
+                        <label class="text-[11px] font-bold text-gray-600 uppercase">Seu Nome Completo:</label>
+                        <input id="customerName" type="text" placeholder="Ex: Ana Maria" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[11px] font-bold text-gray-600 uppercase">Método:</label>
+                            <select id="deliveryOption" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+                                <option value="Entrega no Endereço">📦 Entrega</option>
+                                <option value="Retirada na Loja">🏪 Retirada</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-bold text-gray-600 uppercase">Bairro / Cidade:</label>
+                            <input id="customerAddress" type="text" placeholder="Ex: Centro" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2 border-t border-gray-200">
+                    <span class="text-sm font-bold text-gray-700">Subtotal da Compra:</span>
+                    <span id="cartTotal" class="text-2xl font-black text-pink-600">R$ 0,00</span>
+                </div>
+
+                <button onclick="checkoutToWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.082 19.165c-1.63 0-3.122-.411-4.437-1.109l-4.908 1.287 1.309-4.781c-.767-1.34-1.208-2.893-1.208-4.55 0-5.068 4.108-9.176 9.176-9.176s9.176 4.108 9.176 9.176c0 5.068-4.108 9.176-9.176 9.176z"/></svg>
+                    <span>Finalizar Pedido pelo WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé da Loja -->
+    <footer class="bg-white border-t border-amber-100 py-8 text-xs text-gray-400 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="font-bold text-gray-700">Luke Stilo Kids</span>
+                <span>• Loja de Moda Infantil</span>
+            </div>
+            <div>
+                Plataforma e-commerce desenvolvida por <a href="../luke.html" class="font-bold text-pink-600 hover:underline">3Dígitos Tecnologia</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dados e Lógica de Produtos -->
+    <script>
+        const PRODUCTS = [
+            {
+                id: "2",
+                name: "Conjunto Esportivo Menino",
+                price: 45,
+                shortDescription: "Conforto + Estilo para o dia a dia! Conjuntinho super leve com tecido respirável 💛",
+                imageUrl: "uploads/1777043301343-Conjuntomenino2.jpg",
+                category: "bebes",
+                categoryLabel: "Bebês & Meninos",
+                ageGroup: "1-3 anos",
+                availableSizes: ["1", "2", "4", "6", "P", "M", "G"],
+                colors: ["Verde", "Azul Marinho", "Cinza"],
+                likes: 4,
+                comments: [
+                    { user: "Mamãe Mariana", text: "Comprei para o meu filho de 2 anos e ficou perfeito!" },
+                    { user: "Carla S.", text: "Tecido excelente, super recomendo ❤️" }
+                ],
+                isNew: false
+            },
+            {
+                id: "3",
+                name: "Sandália Molekinho",
+                price: 75,
+                shortDescription: "Sandália Molekinho. Conforto e qualidade incomparável! Perfeita para os primeiros passinhos.",
+                imageUrl: "uploads/1777026534286-sadalia.jpg",
+                category: "bebes",
+                categoryLabel: "Bebês & Calçados",
+                ageGroup: "1-3 anos",
+                availableSizes: ["P", "M", "G", "20", "21"],
+                colors: ["Bege", "Amarelo Pastel", "Branco"],
+                likes: 8,
+                comments: [
+                    { user: "Bruna Lima", text: "Muito macia, não machuca o pezinho dele!" }
+                ],
+                isNew: true
+            },
+            {
+                id: "4",
+                name: "Vestido Jeans Delicado",
+                price: 90,
+                shortDescription: "Encanto em cada detalhe 🌸✨ Vestidinho moderno com toque macio e caimento soltinho.",
+                imageUrl: "uploads/1777026685700-VestidoMenina2.jpg",
+                category: "meninas",
+                categoryLabel: "Meninas",
+                ageGroup: "4-6 anos",
+                availableSizes: ["6", "8", "10", "12"],
+                colors: ["Jeans Azul", "Jeans Claro"],
+                likes: 12,
+                comments: [
+                    { user: "Patrícia", text: "Minha filha não quer mais tirar do corpo de tão lindo!" }
+                ],
+                isNew: false
+            },
+            {
+                id: "6",
+                name: "Vestido Floral Encantador",
+                price: 130,
+                shortDescription: "Um look apaixonante para deixar sua pequena ainda mais encantadora 🧡🐰\nDetalhes delicados e tecido 100% confortável!",
+                imageUrl: "uploads/1776987926237-vestidomenina.jpg",
+                category: "meninas",
+                categoryLabel: "Meninas",
+                ageGroup: "1-3 anos",
+                availableSizes: ["1", "2", "4", "6"],
+                colors: ["Bege", "Rosê", "Off-White"],
+                likes: 15,
+                comments: [
+                    { user: "Fernanda", text: "Vestido digno de princesa! Amamos muito 💕" }
+                ],
+                isNew: true
+            },
+            {
+                id: "7",
+                name: "Conjunto Passeio Menino",
+                price: 90,
+                shortDescription: "Camiseta e bermudinha confortável para passeios e momentos de diversão.",
+                imageUrl: "uploads/1776988873041-camiseteamenino.jpg",
+                category: "meninos",
+                categoryLabel: "Meninos",
+                ageGroup: "4-6 anos",
+                availableSizes: ["P", "M", "4", "6"],
+                colors: ["Azul", "Amarelo"],
+                likes: 6,
+                comments: [
+                    { user: "Lucas M.", text: "Ótima qualidade das costuras!" }
+                ],
+                isNew: true
+            },
+            {
+                id: "8",
+                name: "Vestido Kyly Raposinha",
+                price: 65,
+                shortDescription: "Vestido Kyly bordado de altíssima qualidade com desenho fofo de raposinha.",
+                imageUrl: "uploads/1777137571717-vestidomenina.jpg",
+                category: "meninas",
+                categoryLabel: "Meninas",
+                ageGroup: "4-6 anos",
+                availableSizes: ["4", "6", "8"],
+                colors: ["Marrom", "Caramelo"],
+                likes: 9,
+                comments: [
+                    { user: "Juliana", text: "Perfeito para dias fresquinhos ❤️" }
+                ],
+                isNew: false
+            },
+            {
+                id: "9",
+                name: "Conjunto Short Saia Racket",
+                price: 85,
+                shortDescription: "Conjunto Short e Saia. Blusa Rosa com gola polo e Saia amarela com bordado exclusivo!",
+                imageUrl: "uploads/1778014336283-WhatsApp_Image_2026-05-05_at_17.40.41.jpeg",
+                category: "meninas",
+                categoryLabel: "Meninas",
+                ageGroup: "1-3 anos",
+                availableSizes: ["2", "4", "6", "12"],
+                colors: ["Rosa com Amarelo"],
+                likes: 11,
+                comments: [
+                    { user: "Camila", text: "Chegou super rápido aqui em casa!" }
+                ],
+                isNew: true
+            }
+        ];
+
+        let currentCategory = 'todos';
+        let cart = [];
+        let currentModalProduct = null;
+        let selectedSize = '';
+        let selectedColor = '';
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const items = currentCategory === 'todos' 
+                ? PRODUCTS 
+                : PRODUCTS.filter(p => p.category === currentCategory);
+
+            document.getElementById('itemsCount').textContent = items.length;
+
+            grid.innerHTML = items.map(p => `
+                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between group cursor-pointer" onclick="openProductModal('${p.id}')">
+                    <div class="relative aspect-square overflow-hidden bg-gray-100">
+                        <img src="${p.imageUrl}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        ${p.isNew ? '<span class="absolute top-2.5 left-2.5 bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase shadow">Novo</span>' : ''}
+                        <button onclick="event.stopPropagation(); quickLike('${p.id}')" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-xs shadow-sm hover:scale-110 transition">
+                            ❤️ <span class="ml-0.5 text-[10px] font-bold text-gray-700">${p.likes}</span>
+                        </button>
+                    </div>
+
+                    <div class="p-4 flex flex-col flex-grow justify-between">
+                        <div>
+                            <div class="text-[10px] font-extrabold uppercase tracking-wide text-pink-600 mb-1">${p.categoryLabel}</div>
+                            <h4 class="font-black text-gray-900 text-sm line-clamp-1 group-hover:text-pink-600 transition">${p.name}</h4>
+                            <p class="text-[11px] text-gray-400 mt-0.5 font-medium">Tam: ${p.availableSizes.slice(0, 3).join(', ')}${p.availableSizes.length > 3 ? '...' : ''}</p>
+                        </div>
+
+                        <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-between">
+                            <span class="text-base font-black text-gray-900">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
+                            <span class="w-8 h-8 rounded-xl bg-pink-50 text-pink-600 group-hover:bg-pink-600 group-hover:text-white flex items-center justify-center transition shadow-sm font-bold text-sm">
+                                +
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = 'cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 transition';
+            });
+            const activeBtn = document.getElementById(`btn-cat-${cat}`);
+            if (activeBtn) {
+                activeBtn.className = 'cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-gray-900 text-white shadow-sm transition';
+            }
+            renderProducts();
+        }
+
+        function openProductModal(id) {
+            const p = PRODUCTS.find(x => x.id === id);
+            if (!p) return;
+            currentModalProduct = p;
+            selectedSize = p.availableSizes[0] || '';
+            selectedColor = p.colors[0] || '';
+
+            document.getElementById('modalImg').src = p.imageUrl;
+            document.getElementById('modalTitle').textContent = p.name;
+            document.getElementById('modalCategory').textContent = p.categoryLabel + ' • ' + p.ageGroup;
+            document.getElementById('modalPrice').textContent = `R$ ${p.price.toFixed(2).replace('.', ',')}`;
+            document.getElementById('modalDesc').textContent = p.shortDescription;
+            document.getElementById('modalBadge').textContent = p.isNew ? 'Lançamento' : 'Destaque';
+            document.getElementById('modalLikesCount').textContent = p.likes;
+
+            // Render sizes
+            const sizesContainer = document.getElementById('modalSizes');
+            sizesContainer.innerHTML = p.availableSizes.map((s, idx) => `
+                <button type="button" onclick="selectSize('${s}', this)" class="size-btn px-3 py-1.5 rounded-xl text-xs font-bold ${idx === 0 ? 'bg-pink-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition">
+                    ${s}
+                </button>
+            `).join('');
+
+            // Render colors
+            const colorsContainer = document.getElementById('modalColors');
+            colorsContainer.innerHTML = p.colors.map((c, idx) => `
+                <button type="button" onclick="selectColor('${c}', this)" class="color-btn px-3 py-1.5 rounded-xl text-xs font-bold ${idx === 0 ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition">
+                    ${c}
+                </button>
+            `).join('');
+
+            // Render comments
+            const commentsContainer = document.getElementById('modalCommentsList');
+            commentsContainer.innerHTML = p.comments.map(c => `
+                <div class="bg-white p-2 rounded-lg border border-amber-100">
+                    <span class="font-bold text-gray-800">${c.user}:</span> ${c.text}
+                </div>
+            `).join('');
+
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        function selectSize(size, el) {
+            selectedSize = size;
+            document.querySelectorAll('.size-btn').forEach(b => b.className = 'size-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 transition');
+            el.className = 'size-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-pink-600 text-white transition';
+        }
+
+        function selectColor(color, el) {
+            selectedColor = color;
+            document.querySelectorAll('.color-btn').forEach(b => b.className = 'color-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 transition');
+            el.className = 'color-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-gray-900 text-white transition';
+        }
+
+        function handleLike() {
+            if (!currentModalProduct) return;
+            currentModalProduct.likes++;
+            document.getElementById('modalLikesCount').textContent = currentModalProduct.likes;
+            renderProducts();
+        }
+
+        function quickLike(id) {
+            const p = PRODUCTS.find(x => x.id === id);
+            if (p) {
+                p.likes++;
+                renderProducts();
+            }
+        }
+
+        function addToCartFromModal() {
+            if (!currentModalProduct) return;
+            cart.push({
+                product: currentModalProduct,
+                size: selectedSize,
+                color: selectedColor
+            });
+            closeProductModal();
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCountBadge').textContent = cart.length;
+            const list = document.getElementById('cartItemsList');
+            if (cart.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-16 space-y-3">
+                        <span class="text-4xl">🛍️</span>
+                        <div class="text-sm font-bold text-gray-600">Sua sacola está vazia</div>
+                        <p class="text-xs text-gray-400">Escolha lindos lookinhos para adicionar aqui!</p>
+                    </div>
+                `;
+                document.getElementById('cartTotal').textContent = 'R$ 0,00';
+                return;
+            }
+
+            let total = 0;
+            list.innerHTML = cart.map((item, idx) => {
+                total += item.product.price;
+                return `
+                    <div class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100">
+                        <img src="${item.product.imageUrl}" class="w-16 h-16 rounded-xl object-cover shrink-0">
+                        <div class="flex-grow">
+                            <h5 class="text-xs font-bold text-gray-900 line-clamp-1">${item.product.name}</h5>
+                            <div class="text-[11px] text-gray-500 mt-0.5">Tam: <strong>${item.size}</strong> | Cor: <strong>${item.color}</strong></div>
+                            <div class="text-xs font-black text-pink-600 mt-1">R$ ${item.product.price.toFixed(2).replace('.', ',')}</div>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" class="w-7 h-7 rounded-full text-gray-400 hover:text-rose-600 flex items-center justify-center">
+                            ✕
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('cartTotal').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        function removeFromCart(idx) {
+            cart.splice(idx, 1);
+            updateCartUI();
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function checkoutToWhatsApp() {
+            if (cart.length === 0) {
+                alert('Sua sacola está vazia! Adicione uma roupinha antes de finalizar.');
+                return;
+            }
+
+            const name = document.getElementById('customerName').value.trim() || 'Cliente';
+            const method = document.getElementById('deliveryOption').value;
+            const address = document.getElementById('customerAddress').value.trim() || 'A combinar';
+
+            let msg = `Olá Luke Stilo Kids! Gostaria de fazer o pedido pelo catálogo virtual:\n\n`;
+            msg += `👤 *Nome:* ${name}\n`;
+            msg += `🚚 *Método:* ${method} (${address})\n\n`;
+            msg += `🛍️ *Itens da Sacola:*\n`;
+
+            let total = 0;
+            cart.forEach((item, i) => {
+                total += item.product.price;
+                msg += `${i + 1}. ${item.product.name} - Tam: ${item.size} - Cor: ${item.color} (R$ ${item.product.price.toFixed(2).replace('.', ',')})\n`;
+            });
+
+            msg += `\n💰 *Total:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
+            msg += `Como podemos combinar o pagamento e entrega?`;
+
+            const cleanPhone = '5599999999999';
+            const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        // Inicializar com parâmetros da URL (ex: ?cat=meninas)
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const catParam = urlParams.get('cat');
+            if (catParam && ['meninas', 'meninos', 'bebes'].includes(catParam)) {
+                filterCategory(catParam);
+            } else {
+                renderProducts();
+            }
+        });
+    </script>
+</body>
+</html>
