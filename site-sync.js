@@ -52,9 +52,26 @@ const SiteSync = {
             const raw = localStorage.getItem(this.LOCAL_KEY);
             if (raw) {
                 const parsed = JSON.parse(raw);
+                let updated = false;
                 // Se ainda estiver com o localhost:8081 antigo, migra para a vitrine rhinova.html
                 if (parsed.rhinovaUrl === 'http://localhost:8081' || !parsed.rhinovaUrl) {
                     parsed.rhinovaUrl = 'rhinova.html';
+                    updated = true;
+                }
+                // Migra número placeholder antigo e tokens antigos do Chatwoot
+                if (!parsed.whatsapp || parsed.whatsapp === '5599999999999') {
+                    parsed.whatsapp = DEFAULT_SITE_SETTINGS.whatsapp;
+                    updated = true;
+                }
+                if (!parsed.chatwootBaseUrl) {
+                    parsed.chatwootBaseUrl = DEFAULT_SITE_SETTINGS.chatwootBaseUrl;
+                    updated = true;
+                }
+                if (!parsed.chatwootToken || parsed.chatwootToken === 'cnsoWqY9xnWS9NZbKF2avLWX') {
+                    parsed.chatwootToken = DEFAULT_SITE_SETTINGS.chatwootToken;
+                    updated = true;
+                }
+                if (updated) {
                     localStorage.setItem(this.LOCAL_KEY, JSON.stringify(parsed));
                 }
                 return { ...DEFAULT_SITE_SETTINGS, ...parsed };
@@ -89,7 +106,7 @@ const SiteSync = {
         } catch (e) {
             console.warn('[SiteSync] Usando cache local:', e);
         }
-        return settings;
+        return this.getSettingsLocal();
     },
 
     // Salvar configurações (local e no servidor se disponível)
@@ -122,34 +139,120 @@ const SiteSync = {
         return { success: true, serverSaved, data: merged };
     },
 
-    // Integração Chatwoot: o ícone flutuante abre o chat; sem configuração, usa o WhatsApp
+    // Integração Chatwoot Centralizada: todos os botões de atendimento/orçamento abrem o widget do Chatwoot
     _chatwootLoaded: false,
+    _chatwootFailed: false,
+    _pendingOpen: false,
+    _delegatedBound: false,
+    _fallbackWaLink: 'https://wa.me/5574991223727',
+
+    openChat(fallbackUrl) {
+        const wa = fallbackUrl || this._fallbackWaLink;
+        if (window.$chatwoot && typeof window.$chatwoot.toggle === 'function') {
+            window.$chatwoot.toggle('open');
+            return;
+        }
+        if (this._chatwootLoaded && !this._chatwootFailed) {
+            this._pendingOpen = true;
+            return;
+        }
+        window.open(wa, '_blank');
+    },
+
     setupChatwoot(settings, waLink) {
-        const launcher = document.getElementById('chatwootLauncher');
+        this._fallbackWaLink = waLink;
         const base = (settings.chatwootBaseUrl || '').trim().replace(/\/+$/, '');
         const token = (settings.chatwootToken || '').trim();
 
-        if (!launcher) return;
+        // Garante que o widget do Chatwoot fique sempre visível acima de modais e barras fixas
+        if (!document.getElementById('chatwootZIndexFix')) {
+            const style = document.createElement('style');
+            style.id = 'chatwootZIndexFix';
+            style.textContent = '.woot-widget-holder, .woot-widget-bubble, .woot--bubble-holder { z-index: 999999 !important; }';
+            document.head.appendChild(style);
+        }
+
+        // Injeta o botão flutuante do mascote 3D nas páginas públicas caso ainda não exista
+        const path = (window.location.pathname || '').toLowerCase();
+        const isRestrictedPage = path.includes('admin') || path.includes('login') || path.includes('drive');
+        if (!document.getElementById('chatwootLauncher') && !isRestrictedPage && document.body) {
+            const launcherEl = document.createElement('a');
+            launcherEl.id = 'chatwootLauncher';
+            launcherEl.setAttribute('data-chatwoot', 'launcher');
+            launcherEl.href = '#chat';
+            launcherEl.title = 'Fale conosco';
+            launcherEl.className = 'fixed bottom-6 right-6 z-50 flex items-center justify-center group transition-all duration-300 hover:scale-110';
+            launcherEl.innerHTML = `
+                <img src="whatsapp-icon.png" alt="Atendimento 3Dígitos" class="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-2xl animate-bounce group-hover:animate-none">
+                <span class="absolute right-full mr-3 bg-white text-gray-800 px-4 py-2 rounded-xl shadow-2xl text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none border border-gray-100 after:content-[''] after:absolute after:top-1/2 after:right-[-6px] after:-translate-y-1/2 after:border-t-8 after:border-t-transparent after:border-l-8 after:border-l-white after:border-b-8 after:border-b-transparent">
+                    Fale conosco!
+                </span>
+            `;
+            document.body.appendChild(launcherEl);
+        }
+
         if (!base || !token) {
-            launcher.href = waLink;   // fallback
+            document.querySelectorAll('a[href*="wa.me"], [data-chatwoot]').forEach(link => {
+                link.href = waLink;
+                link.target = '_blank';
+            });
             return;
         }
 
-        launcher.removeAttribute('target');
-        launcher.href = '#';
-        launcher.onclick = (e) => {
-            e.preventDefault();
-            if (window.$chatwoot) window.$chatwoot.toggle('open');
-            else window.open(waLink, '_blank');
+        // Vincula todos os botões de WhatsApp / Orçamento / Atendimento da página ao Chatwoot
+        const bindTrigger = (el) => {
+            if (!el) return;
+            el.setAttribute('data-chatwoot-trigger', 'true');
+            el.removeAttribute('target');
+            el.removeAttribute('rel');
+            el.href = '#atendimento';
+            el.onclick = (e) => {
+                e.preventDefault();
+                this.openChat(waLink);
+            };
         };
 
+        document.querySelectorAll('a[href*="wa.me"], [data-chatwoot], [data-chatwoot-trigger]').forEach(bindTrigger);
+
+        // Delegação global de cliques para capturar também botões criados dinamicamente (ex: modais de e-books)
+        if (!this._delegatedBound) {
+            this._delegatedBound = true;
+            document.addEventListener('click', (e) => {
+                const trigger = e.target.closest('a[href*="wa.me/55"], [data-chatwoot], [data-chatwoot-trigger]');
+                if (trigger) {
+                    e.preventDefault();
+                    this.openChat(this._fallbackWaLink);
+                }
+            });
+        }
+
+        // Carrega o SDK do Chatwoot uma única vez
         if (this._chatwootLoaded) return;
         this._chatwootLoaded = true;
         window.chatwootSettings = { hideMessageBubble: true, position: 'right', locale: 'pt_BR', type: 'standard' };
+
+        window.addEventListener('chatwoot:ready', () => {
+            if (this._pendingOpen && window.$chatwoot) {
+                this._pendingOpen = false;
+                window.$chatwoot.toggle('open');
+            }
+        });
+
         const s = document.createElement('script');
         s.src = base + '/packs/js/sdk.js';
         s.async = true;
-        s.onload = () => window.chatwootSDK && window.chatwootSDK.run({ websiteToken: token, baseUrl: base });
+        s.onload = () => {
+            if (window.chatwootSDK) {
+                window.chatwootSDK.run({ websiteToken: token, baseUrl: base });
+            }
+        };
+        s.onerror = () => {
+            this._chatwootFailed = true;
+            if (this._pendingOpen) {
+                this._pendingOpen = false;
+                window.open(this._fallbackWaLink, '_blank');
+            }
+        };
         document.body.appendChild(s);
     },
 
@@ -157,17 +260,10 @@ const SiteSync = {
     applyToPage(settings) {
         if (!settings) settings = this.getSettingsLocal();
 
-        // 1. WhatsApp em toda a página
+        // 1. Atendimento Omnichannel (Chatwoot centralizado em todos os botões de Orçamento / WhatsApp)
         const cleanWhatsapp = (settings.whatsapp || '').replace(/\D/g, '');
         const waText = encodeURIComponent(settings.whatsappMessage || 'Olá!');
         const waLink = `https://wa.me/${cleanWhatsapp}?text=${waText}`;
-
-        document.querySelectorAll('a[href*="wa.me"]:not([data-chatwoot])').forEach(link => {
-            link.href = waLink;
-        });
-
-        // Ícone flutuante = Chatwoot (canal omnichannel). Demais botões continuam no WhatsApp.
-        this.setupChatwoot(settings, waLink);
 
         // 2. Telefones, E-mails e Endereço
         document.querySelectorAll('[data-sync="phone"]').forEach(el => el.textContent = settings.phone || '');
@@ -195,13 +291,18 @@ const SiteSync = {
                 else heroCtaBtn.textContent = settings.heroCtaText;
             }
             if (settings.heroCtaType === 'whatsapp') {
-                heroCtaBtn.href = waLink;
-                heroCtaBtn.target = '_blank';
+                heroCtaBtn.setAttribute('data-chatwoot', 'cta');
             } else {
+                heroCtaBtn.removeAttribute('data-chatwoot');
+                heroCtaBtn.removeAttribute('data-chatwoot-trigger');
+                heroCtaBtn.onclick = null;
                 heroCtaBtn.href = '#contato';
                 heroCtaBtn.removeAttribute('target');
             }
         }
+
+        // Inicializa o Chatwoot e vincula todos os botões (incluindo heroCtaBtn, vitrines e flutuante)
+        this.setupChatwoot(settings, waLink);
 
         // 4. Barra de Alerta Superior
         const bannerContainer = document.getElementById('topAnnouncementBanner');
