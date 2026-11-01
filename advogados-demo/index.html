@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Associados | Advocacia Especializada</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #070e17;
+      --bg-surface: #0d1726;
+      --bg-card: #111e31;
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-dark: #997b1a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(212, 175, 55, 0.22);
+      --font-serif: 'Cinzel', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 14, 23, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .brand-logo-img {
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+      transition: transform 0.3s ease;
+    }
+    .brand:hover .brand-logo-img {
+      transform: scale(1.05);
+    }
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--gold-primary);
+      background: rgba(212, 175, 55, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-size: 1.3rem;
+      border-radius: 6px;
+    }
+    .brand-text h1 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+    .brand-text span {
+      font-size: 0.72rem;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+    }
+    nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    nav a:hover, nav a.nav-active {
+      color: #fff;
+    }
+    .nav-portal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
+      color: var(--gold-light) !important;
+      font-weight: 600;
+    }
+    .nav-portal-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--gold-primary);
+      border-radius: 50%;
+    }
+
+    .btn-header {
+      background: var(--gold-primary);
+      border: none;
+      color: #070e17;
+      padding: 10px 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    .btn-header:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 5rem 2rem 3rem;
+      max-width: 1220px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-color);
+      padding: 6px 18px;
+      border-radius: 50px;
+      color: var(--gold-light);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .hero h2 {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      line-height: 1.25;
+      color: #fff;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero h2 span {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #070e17;
+      padding: 13px 28px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(212, 175, 55, 0.45);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      padding: 13px 26px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* FLOW / HOW IT WORKS */
+    .flow-section {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 3rem;
+      text-align: center;
+    }
+    .badge-modern {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--gold-light);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .flow-title {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: #ffffff;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.5px;
+    }
+    .flow-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 780px;
+      margin: 0 auto 3.5rem;
+      font-weight: 300;
+    }
+
+    .grid-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: left;
+    }
+    @media (max-width: 1024px) { .grid-steps { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid-steps { grid-template-columns: 1fr; } }
+
+    .step-box {
+      background: rgba(13, 23, 38, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 2.2rem 1.6rem;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .step-box:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+    }
+    .circle-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      color: #070e17;
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .step-box h3 {
+      font-size: 1.15rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .step-box p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* SEÇÃO O ESCRITÓRIO */
+    .about-section {
+      background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-primary) 100%);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 5rem 2rem;
+    }
+    .about-container {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 900px) { .about-container { grid-template-columns: 1fr; } }
+    .about-text h3 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 1.8rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-card h4 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    .stat-card span {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* SEÇÃO ÁREAS DE ATUAÇÃO */
+    .practices-section {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 5.5rem 2rem 4rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-header span {
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+    .section-header h3 {
+      font-family: var(--font-serif);
+      font-size: 2.3rem;
+      color: #fff;
+      margin-top: 0.4rem;
+    }
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+    .practice-box {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 2.2rem;
+      transition: all 0.3s;
+    }
+    .practice-box:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+    }
+    .practice-box h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+    }
+    .practice-box p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+    .practice-box ul {
+      list-style: none;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+    .practice-box ul li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .practice-box ul li::before {
+      content: "✦";
+      color: var(--gold-primary);
+      font-size: 0.75rem;
+    }
+
+    /* CONTATO */
+    .contact-section {
+      background: #050a12;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 5rem 2rem;
+    }
+    .contact-container {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    @media (max-width: 840px) { .contact-container { grid-template-columns: 1fr; } }
+    .contact-info h3 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .contact-info p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 2rem;
+    }
+    .contact-detail-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 1.4rem;
+    }
+    .contact-detail-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-detail-item h5 {
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    .contact-detail-item span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .contact-form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 2.2rem;
+    }
+    .contact-form-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      margin-bottom: 1.2rem;
+    }
+
+    /* BANNER CTA */
+    .cta-banner {
+      background: rgba(13, 23, 38, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      margin-top: 3.5rem;
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .cta-banner h4 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--gold-light);
+      margin-bottom: 0.4rem;
+    }
+    .cta-banner p { color: var(--text-muted); font-size: 0.9rem; }
+    .btn-cta-chat {
+      background: var(--gold-primary);
+      color: #070e17;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 12px 24px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s;
+    }
+    .btn-cta-chat:hover { background: var(--gold-light); }
+
+    /* FOOTER */
+    footer {
+      background: #03060a;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2.5rem 2rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .footer-content {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .footer-bottom {
+      max-width: 1220px;
+      margin: 1.2rem auto 0;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+
+    /* MODAL: PORTAL / ÁREA DO CLIENTE */
+    .portal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(3, 7, 13, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      animation: fadeIn 0.25s ease-out;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .portal-modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 1040px;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+    .portal-header {
+      padding: 1.4rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7, 14, 23, 0.7);
+    }
+    .portal-header h2 { font-family: var(--font-serif); font-size: 1.3rem; color: #fff; }
+    .portal-close-btn { background: transparent; border: none; color: var(--text-muted); font-size: 1.8rem; cursor: pointer; }
+
+    /* VIEW 1: LOGIN */
+    .portal-login-view { padding: 3.5rem 2rem; text-align: center; max-width: 480px; margin: 0 auto; }
+    .portal-login-view h3 { font-size: 1.4rem; color: var(--gold-light); margin-bottom: 0.6rem; }
+    .portal-login-view p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 2rem; }
+    .form-group { text-align: left; margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; }
+    .form-group input {
+      width: 100%; background: #08111d; border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px; padding: 12px 14px; color: #fff; font-size: 0.9rem; outline: none;
+    }
+    .form-group input:focus { border-color: var(--gold-primary); }
+    .btn-login-submit {
+      width: 100%; background: var(--gold-primary); color: #070e17; font-weight: 700;
+      padding: 12px; border-radius: 6px; border: none; cursor: pointer; margin-top: 0.5rem;
+    }
+    .btn-login-submit:hover { background: var(--gold-light); }
+    .portal-demo-hint {
+      margin-top: 1.5rem; font-size: 0.78rem; color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04); padding: 8px; border-radius: 4px;
+    }
+
+    /* VIEW 2: DASHBOARD AUTENTICADO DO CLIENTE */
+    .portal-dashboard-view { display: none; padding: 2rem; }
+    .dash-topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .dash-user-info h3 { font-size: 1.2rem; color: #fff; }
+    .dash-user-info p { font-size: 0.8rem; color: var(--gold-light); }
+    .btn-dash-logout {
+      background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted); font-size: 0.78rem; padding: 6px 14px; border-radius: 4px; cursor: pointer;
+    }
+
+    /* ==============================================================
+       PAINEL DE SIMULAÇÃO TRIBUNAL DENTRO DA ÁREA DO CLIENTE
+       ============================================================== */
+    .dash-sync-panel {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 78, 59, 0.15));
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 8px;
+      padding: 1.2rem 1.6rem;
+      margin-bottom: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .dash-sync-panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .dash-sync-panel-info h4 {
+      color: #34d399;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+    }
+    .dash-sync-panel-info p {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+    .btn-sync-action {
+      background: #10b981;
+      color: #070e17;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-sync-action:hover {
+      background: #34d399;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+    }
+    .dash-sync-log {
+      display: none;
+      background: #060b13;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      width: 100%;
+      line-height: 1.5;
+    }
+
+    /* SELETOR E BUSCADOR DE PROCESSO */
+    .process-selector-bar {
+      background: #091322;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+    .selector-left { flex: 1; min-width: 280px; }
+    .selector-left label {
+      display: block; font-size: 0.76rem; color: var(--gold-light);
+      font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .process-dropdown {
+      width: 100%; background: #0f1c2d; border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px; color: #fff; padding: 9px 12px; font-size: 0.85rem; outline: none; cursor: pointer;
+    }
+    .selector-right { display: flex; align-items: flex-end; gap: 8px; min-width: 300px; }
+    .search-input-box { flex: 1; }
+    .search-input-box label { display: block; font-size: 0.76rem; color: var(--text-muted); margin-bottom: 6px; }
+    .search-input-box input {
+      width: 100%; background: #0f1c2d; border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px; color: #fff; padding: 9px 12px; font-size: 0.82rem; outline: none;
+    }
+    .btn-search-proc {
+      background: var(--gold-primary); color: #070e17; font-weight: 700;
+      font-size: 0.82rem; padding: 9px 14px; border-radius: 6px; border: none; cursor: pointer; white-space: nowrap;
+    }
+
+    .active-process-banner {
+      background: rgba(212, 175, 55, 0.08); border-left: 4px solid var(--gold-primary);
+      border-radius: 4px; padding: 12px 16px; margin-bottom: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .active-process-banner h4 { font-size: 0.95rem; color: #fff; }
+    .active-process-banner span {
+      background: rgba(16, 185, 129, 0.15); color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 10px; border-radius: 12px;
+      font-size: 0.75rem; font-weight: 600;
+    }
+
+    .dash-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+    @media (max-width: 768px) { .dash-grid { grid-template-columns: 1fr; } }
+    .dash-card {
+      background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 8px; padding: 1.5rem;
+    }
+    .dash-card h4 { font-size: 1rem; color: var(--gold-light); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+
+    .process-timeline { display: flex; flex-direction: column; gap: 1.2rem; }
+    .timeline-item { position: relative; padding-left: 24px; border-left: 2px solid rgba(212, 175, 55, 0.3); }
+    .timeline-item.active { border-left-color: var(--gold-primary); }
+    .timeline-item::before {
+      content: ""; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--gold-primary);
+    }
+    .timeline-date { font-size: 0.75rem; color: var(--gold-light); font-weight: 600; }
+    .timeline-title { font-size: 0.88rem; color: #fff; font-weight: 600; margin: 2px 0; }
+    .timeline-desc { font-size: 0.8rem; color: var(--text-muted); }
+
+    .doc-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px; background: rgba(7, 14, 23, 0.5); border-radius: 6px;
+      margin-bottom: 8px; font-size: 0.82rem;
+    }
+    .doc-status-ok { color: #34d399; font-size: 0.75rem; font-weight: 600; }
+
+    .dash-cta-chat {
+      background: rgba(212, 175, 55, 0.08); border: 1px dashed var(--gold-primary);
+      border-radius: 8px; padding: 1.2rem; text-align: center; margin-top: 1.5rem;
+    }
+    .dash-cta-chat p { font-size: 0.82rem; color: #e2e8f0; margin-bottom: 10px; }
+
+    /* CHATWOOT WIDGET */
+    .chat-trigger-btn {
+      position: fixed; bottom: 25px; right: 25px;
+      background: linear-gradient(135deg, #1f4270, #0d1e38);
+      border: 1px solid var(--gold-primary); color: #fff;
+      padding: 12px 20px; border-radius: 50px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      display: flex; align-items: center; gap: 12px; cursor: pointer; z-index: 999;
+      transition: transform 0.3s;
+    }
+    .chat-trigger-btn:hover { transform: scale(1.04); }
+    .status-dot { width: 9px; height: 9px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
+
+    .notif-badge {
+      position: absolute; top: -6px; right: -6px;
+      background: #ef4444; color: #fff; font-size: 0.7rem; font-weight: 700;
+      width: 18px; height: 18px; border-radius: 50%; display: none;
+      align-items: center; justify-content: center;
+    }
+
+    .chat-modal {
+      position: fixed; bottom: 90px; right: 25px; width: 380px; max-width: calc(100vw - 40px);
+      height: 520px; background: #0f1c2e; border: 1px solid var(--gold-primary);
+      border-radius: 12px; box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+      display: none; flex-direction: column; z-index: 1000; overflow: hidden;
+    }
+    .chat-modal-header {
+      background: #0a1320; padding: 14px 18px; display: flex; justify-content: space-between;
+      align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .chat-modal-header h5 { color: #fff; font-size: 0.95rem; }
+    .chat-modal-header p { font-size: 0.72rem; color: var(--gold-light); }
+    .close-btn { background: transparent; border: none; color: var(--text-muted); font-size: 1.3rem; cursor: pointer; }
+    .chat-body { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .bubble { max-width: 82%; padding: 10px 14px; border-radius: 8px; font-size: 0.85rem; line-height: 1.45; }
+    .bubble-bot { background: #18283e; color: #e2e8f0; border: 1px solid rgba(255,255,255,0.05); }
+    .quick-chips { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+    .chip-btn {
+      background: rgba(212, 175, 55, 0.1); border: 1px solid var(--border-color);
+      color: var(--gold-light); padding: 7px 12px; border-radius: 6px; font-size: 0.78rem; text-align: left; cursor: pointer;
+    }
+    .chip-btn:hover { background: rgba(212, 175, 55, 0.2); }
+    .chat-footer-input {
+      padding: 10px 14px; background: #0a1320; border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex; gap: 8px;
+    }
+    .chat-footer-input input {
+      flex: 1; background: #132238; border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px; padding: 8px 12px; color: #fff; font-size: 0.82rem; outline: none;
+    }
+    .chat-footer-input button {
+      background: var(--gold-primary); border: none; color: #070e17; font-weight: 700;
+      padding: 0 14px; border-radius: 4px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Faixa Topo de Demonstração 3Dígitos -->
+  <div style="background:#04080e; color:#e2e8f0; font-size:0.76rem; padding:7px 24px; border-bottom:1px solid rgba(212,175,55,0.25); display:flex; justify-content:space-between; align-items:center; z-index:1100; position:relative;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="width:8px; height:8px; border-radius:50%; background:#10b981; display:inline-block;"></span>
+      <span>Demonstração Interativa do Case • <strong style="color:#f3e5ab;">Associados Advocacia Especializada</strong></span>
+    </div>
+    <a href="../advogados.html" style="background:rgba(212,175,55,0.16); border:1px solid rgba(212,175,55,0.4); color:#f3e5ab; font-weight:700; padding:4px 12px; border-radius:6px; font-size:0.72rem;">
+      &larr; Voltar ao Case 3Dígitos
+    </a>
+  </div>
+
+  <!-- HEADER COM NAVEGAÇÃO COMPLETA -->
+  <header>
+    <div class="brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      <img src="logo-agente3d.png" alt="Logo Agente 3D" class="brand-logo-img">
+      <div class="brand-text">
+        <h1>ASSOCIADOS</h1>
+        <span>Advocacia Especializada</span>
+      </div>
+    </div>
+    <nav>
+      <a href="#inicio" class="nav-active">Início</a>
+      <a href="#escritorio">O Escritório</a>
+      <a href="#atuacao">Áreas de Atuação</a>
+      <a class="nav-portal-badge" onclick="openPortal()">Portal do Cliente</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <button class="btn-header" onclick="toggleChat()">
+      <span>💬</span> Falar com Advogado
+    </button>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="inicio">
+    <div class="hero-badge">✦ ATENDIMENTO ESTRATÉGICO & INOVAÇÃO JURÍDICA</div>
+    <h2>Segurança Jurídica com <span>Eficiência e Resolução Ágil</span></h2>
+    <p>Defendemos seus direitos com sólida atuação judicial e extrajudicial. Inicie sua triagem documental e agende sua consulta diretamente pelo portal ou pelo WhatsApp integrado.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="toggleChat()">
+        <span>Iniciar Atendimento Online</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <a href="#como-funciona" class="btn-secondary">Como Funciona a Triagem</a>
+    </div>
+  </section>
+
+  <!-- SEÇÃO COMO FUNCIONA O ATENDIMENTO INTEGRADO (4 BLOCOS) -->
+  <section class="flow-section" id="como-funciona">
+    <div class="badge-modern">⚙ EXPERIÊNCIA MODERNA DO CLIENTE</div>
+    <h2 class="flow-title">COMO FUNCIONA NOSSO ATENDIMENTO INTEGRADO</h2>
+    <p class="flow-desc">
+      Adeus à burocracia e aos telefonemas sem resposta. Nosso ecossistema conecta o portal ao WhatsApp e ao painel dos advogados em segundos.
+    </p>
+
+    <div class="grid-steps">
+      <div class="step-box">
+        <div class="circle-num">1</div>
+        <h3>Triagem Instantânea</h3>
+        <p>O cliente inicia a conversa pelo site ou WhatsApp. O fluxo identifica o nicho jurídico e prioriza a urgência.</p>
+      </div>
+
+      <div class="step-box">
+        <div class="circle-num">2</div>
+        <h3>Upload de Documentos</h3>
+        <p>Envio simplificado de comprovantes em PDF ou foto direto pelo chat. Os anexos sobem direto para a pasta segura da causa.</p>
+      </div>
+
+      <div class="step-box">
+        <div class="circle-num">3</div>
+        <h3>Agendamento & Calendário</h3>
+        <p>Integração com a agenda dos sócios. Horários livres são oferecidos em tempo real sem conflito de compromissos.</p>
+      </div>
+
+      <div class="step-box">
+        <div class="circle-num">4</div>
+        <h3>Lembretes 24h e 1h</h3>
+        <p>Notificações automáticas pré-consulta com link da videochamada ou endereço, reduzindo faltas e esquecimentos.</p>
+      </div>
+    </div>
+
+    <!-- BANNER DE CTA -->
+    <div class="cta-banner">
+      <div>
+        <h4>QUER VER O FLUXO FUNCIONANDO AGORA NA PRÁTICA?</h4>
+        <p>Abra o widget no canto inferior direito ou acesse o Portal do Cliente para testar o atendimento em tempo real.</p>
+      </div>
+      <button class="btn-cta-chat" onclick="toggleChat()">
+        <span>💬</span> Abrir Chat Modelo
+      </button>
+    </div>
+  </section>
+
+  <!-- SEÇÃO O ESCRITÓRIO -->
+  <section class="about-section" id="escritorio">
+    <div class="about-container">
+      <div class="about-text">
+        <span style="color: var(--gold-primary); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 2px; font-weight: 600;">Tradição & Modernidade</span>
+        <h3 style="margin-top: 6px;">Excelência Jurídica Guiada por Tecnologia e Transparência</h3>
+        <p>Fundado com o compromisso de entregar defesa personalizada de alto nível, o escritório <strong>Associados</strong> alia vasta experiência forense aos mais modernos ecossistemas de automação judicial.</p>
+        <p>Nosso diferencial é garantir que o cliente nunca fique desinformado sobre sua causa: cada andamento publicado nos tribunais é capturado em tempo real e disponibilizado de imediato no portal.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <h4>+15 Anos</h4>
+          <span>De Atuação no Mercado</span>
+        </div>
+        <div class="stat-card">
+          <h4>+2.400</h4>
+          <span>Processos Concluídos</span>
+        </div>
+        <div class="stat-card">
+          <h4>98.4%</h4>
+          <span>Índice de Satisfação</span>
+        </div>
+        <div class="stat-card">
+          <h4>24/7</h4>
+          <span>Monitoramento Digital</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO ÁREAS DE ATUAÇÃO -->
+  <section class="practices-section" id="atuacao">
+    <div class="section-header">
+      <span>Nossas Especialidades</span>
+      <h3>Áreas de Atuação Jurídica</h3>
+    </div>
+    <div class="practice-grid">
+      <div class="practice-box">
+        <h4>Direito Empresarial & Contratos</h4>
+        <p>Consultoria preventiva, gestão de contratos complexos, reestruturação societária e defesas em execuções e disputas comerciais.</p>
+        <ul>
+          <li>Planejamento Contratual e Due Diligence</li>
+          <li>Acordos de Sócios e Governança</li>
+          <li>Cobrança Estratégica e Recuperação de Ativos</li>
+        </ul>
+      </div>
+
+      <div class="practice-box">
+        <h4>Direito Trabalhista Patronal</h4>
+        <p>Defesa qualificada de empresas, compliance com a CLT, elaboração de pareceres e mitigação contínua de passivos trabalhistas.</p>
+        <ul>
+          <li>Auditoria Preventiva de Riscos Trabalhistas</li>
+          <li>Defesas e Recursos em Reclamações</li>
+          <li>Mediação e Acordos Coletivos</li>
+        </ul>
+      </div>
+
+      <div class="practice-box">
+        <h4>Direito Civil, Família & Sucessões</h4>
+        <p>Proteção do patrimônio familiar, inventários judiciais e extrajudiciais ágeis, divórcios e planejamento sucessório estruturado.</p>
+        <ul>
+          <li>Inventários Rápidos em Cartório</li>
+          <li>Planejamento Sucessório Familiar</li>
+          <li>Contratos Imobiliários e Regularização</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO CONTATO -->
+  <section class="contact-section" id="contato">
+    <div class="contact-container">
+      <div class="contact-info">
+        <span style="color: var(--gold-primary); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 2px; font-weight: 600;">Canais de Atendimento</span>
+        <h3 style="margin-top: 6px;">Entre em Contato Conosco</h3>
+        <p>Agende uma reunião presencial em nossas sedes ou inicie um atendimento consultivo online agora mesmo.</p>
+
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon">📍</div>
+          <div>
+            <h5>Sede Principal - Jacobina / BA</h5>
+            <span>Rua da Estrela, 29, Bairro do Leader, Jacobina - Bahia</span>
+          </div>
+        </div>
+
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon">📞</div>
+          <div>
+            <h5>Central Telefônica & WhatsApp</h5>
+            <span>(74) 99122-2737</span>
+          </div>
+        </div>
+
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon">✉️</div>
+          <div>
+            <h5>E-mail Corporativo</h5>
+            <span>contato@associados.adv.br</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <h4>Envie uma Mensagem Direta</h4>
+        <div class="form-group">
+          <label>Seu Nome Completo</label>
+          <input type="text" id="contactName" placeholder="Ex: Carlos Ferreira">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp / Telefone com DDD</label>
+          <input type="text" id="contactPhone" placeholder="(74) 99122-2737">
+        </div>
+        <div class="form-group">
+          <label>Breve Resumo da Causa</label>
+          <input type="text" id="contactMsg" placeholder="Descreva brevemente sua necessidade...">
+        </div>
+        <button class="btn-login-submit" onclick="submitContactForm()">Enviar para Triagem Jurídica</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <img src="logo-agente3d.png" alt="Logo Agente 3D" class="brand-logo-img" style="height: 38px;">
+        <div class="brand-text">
+          <h1 style="font-family: var(--font-serif); font-size: 1.1rem; color: #fff;">ASSOCIADOS</h1>
+          <span style="font-size: 0.72rem; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1.5px;">Sociedade de Advogados • OAB/BA 00.000</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Horário de Atendimento: Segunda a Sexta, das 08h30 às 18h30</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Associados. Todos os direitos reservados. Conformidade integral com a LGPD e o Código de Ética e Disciplina da OAB.
+    </div>
+  </footer>
+
+  <!-- ==============================================================
+       MODAL: PORTAL DO CLIENTE (COM SIMULADOR DO TRIBUNAL INTEGRADO)
+       ============================================================== -->
+  <div class="portal-overlay" id="portalOverlay">
+    <div class="portal-modal-card">
+      <div class="portal-header">
+        <h2>Área Restrita do Cliente • Gestão Multi-Processos</h2>
+        <button class="portal-close-btn" onclick="closePortal()">&times;</button>
+      </div>
+
+      <!-- TELA 1: LOGIN -->
+      <div class="portal-login-view" id="portalLoginView">
+        <h3>Painel do Cliente</h3>
+        <p>Acesse todos os processos vinculados ao seu CPF ou CNPJ em um único lugar.</p>
+        <div class="form-group">
+          <label>CPF ou CNPJ do Titular</label>
+          <input type="text" id="loginCpf" value="123.456.789-00">
+        </div>
+        <div class="form-group">
+          <label>Código de Acesso / Senha</label>
+          <input type="password" id="loginPass" value="••••••••">
+        </div>
+        <button class="btn-login-submit" onclick="performClientLogin()">Acessar Meus Processos</button>
+        <div class="portal-demo-hint">
+          ⚖️ Demonstração Protegida: clique em <strong>Acessar Meus Processos</strong> para abrir seu painel com a simulação do tribunal.
+        </div>
+      </div>
+
+      <!-- TELA 2: DASHBOARD AUTENTICADO DO CLIENTE -->
+      <div class="portal-dashboard-view" id="portalDashView">
+        <div class="dash-topbar">
+          <div class="dash-user-info">
+            <h3>Carlos Eduardo Ferreira (Pessoa Física & Jurídica)</h3>
+            <p>CPF: 123.456.789-00 • 3 Processos Ativos no Escritório</p>
+          </div>
+          <button class="btn-dash-logout" onclick="performLogout()">Sair da Conta</button>
+        </div>
+
+        <!-- PAINEL DE SIMULAÇÃO DO TRIBUNAL (CORRIGIDO E EM DESTAQUE) -->
+        <div class="dash-sync-panel">
+          <div class="dash-sync-panel-top">
+            <div class="dash-sync-panel-info">
+              <h4><span>⚡</span> Sincronização em Tempo Real com Tribunais (DataJud/CNJ)</h4>
+              <p>Monitoramento 24/7 conectado ao Diário Oficial e ao Tribunal de Justiça via Motor de Automações.</p>
+            </div>
+            <button class="btn-sync-action" id="btnSyncDash" onclick="runInternalTribunalSimulation()">
+              <span>🔄 Simular Novo Andamento do Tribunal</span>
+            </button>
+          </div>
+          <div class="dash-sync-log" id="dashSyncLog">
+            <div>[Log Automações] Conexão ativa com a API Pública do DataJud (CNJ). Aguardando novas publicações...</div>
+          </div>
+        </div>
+
+        <!-- BARRA SELETORA E BUSCADOR DE PROCESSO -->
+        <div class="process-selector-bar">
+          <div class="selector-left">
+            <label>✦ Selecionar Processo em Andamento</label>
+            <select class="process-dropdown" id="processSelect" onchange="onProcessChange()">
+              <option value="proc1">Ação Cível de Cobrança • Nº 1002341-89.2026.8.26.0100 (2ª Vara Cível SP)</option>
+              <option value="proc2">Reclamação Trabalhista Patronal • Nº 0010892-45.2025.5.02.0015 (TRT 2ª Região)</option>
+              <option value="proc3">Planejamento Sucessório & Inventário • Nº 2004512-11.2026.8.26.0001 (Família e Sucessões)</option>
+            </select>
+          </div>
+
+          <div class="selector-right">
+            <div class="search-input-box">
+              <label>Ou pesquise pelo nº do CNJ:</label>
+              <input type="text" id="searchProcessInput" placeholder="Ex: 1002341-89...">
+            </div>
+            <button class="btn-search-proc" onclick="filterByNumber()">Localizar</button>
+          </div>
+        </div>
+
+        <!-- BANNER DO PROCESSO SELECIONADO -->
+        <div class="active-process-banner">
+          <div>
+            <h4 id="activeProcTitle">Ação Cível de Cobrança • Autos nº 1002341-89.2026.8.26.0100</h4>
+            <small style="color: var(--text-muted);" id="activeProcCourt">Vara de Origem: 2ª Vara Cível Central da Comarca de São Paulo</small>
+          </div>
+          <span id="activeProcBadge">Em Andamento (Fase Inicial)</span>
+        </div>
+
+        <div class="dash-grid">
+          <!-- Coluna 1: Linha do Tempo Dinâmica -->
+          <div class="dash-card">
+            <h4>⚖️ Linha do Tempo do Processo Selecionado</h4>
+            <div class="process-timeline" id="timelineContainer"></div>
+          </div>
+
+          <!-- Coluna 2: Documentos e Suporte -->
+          <div>
+            <div class="dash-card">
+              <h4>📁 Documentos Deste Caso</h4>
+              <div id="docsContainer"></div>
+            </div>
+
+            <div class="dash-cta-chat">
+              <p>Dúvidas específicas sobre <strong id="ctaProcLabel">este processo</strong>?</p>
+              <button class="btn-cta-chat" style="width: 100%; justify-content: center;" onclick="openChatWithContext()">
+                Falar no Chatwoot sobre este Processo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTÃO FLUTUANTE DE CHAT -->
+  <div class="chat-trigger-btn" onclick="toggleChat()">
+    <span class="status-dot"></span>
+    <span style="font-size: 0.88rem; font-weight: 600;">Atendimento Online</span>
+    <span class="notif-badge" id="chatBadge">1</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </div>
+
+  <!-- MODAL CHATWOOT -->
+  <div class="chat-modal" id="chatModal">
+    <div class="chat-modal-header">
+      <div>
+        <h5>Atendimento Jurídico Digital</h5>
+        <p>● Escritório Online • Chatwoot + Automações IA</p>
+      </div>
+      <button class="close-btn" onclick="toggleChat()">&times;</button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="bubble bubble-bot">
+        Olá! Bem-vindo ao escritório <strong>Associados</strong>.<br><br>
+        Como podemos ajudar na sua causa jurídica hoje?
+        <div class="quick-chips">
+          <button class="chip-btn" onclick="selectOption('Agendar Consulta com Advogado')">📅 1. Agendar Consulta Jurídica</button>
+          <button class="chip-btn" onclick="selectOption('Envio de Documentos para Processo')">📎 2. Enviar Documentos do Caso</button>
+          <button class="chip-btn" onclick="selectOption('Acompanhamento de Processo')">⚖️ 3. Acompanhar Meus Processos</button>
+        </div>
+      </div>
+    </div>
+    <div class="chat-footer-input">
+      <input type="text" id="userInput" placeholder="Digite sua mensagem..." onkeypress="if(event.key==='Enter') sendMessage()">
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    const clientProcesses = {
+      proc1: {
+        title: "Ação Cível de Cobrança • Autos nº 1002341-89.2026.8.26.0100",
+        court: "Vara de Origem: 2ª Vara Cível Central da Comarca de São Paulo",
+        status: "Em Andamento (Fase Inicial)",
+        timeline: [
+          { date: "Hoje, 10:45", title: "Petição Inicial Protocolada", desc: "Ação distribuída no sistema eletrônico do tribunal." },
+          { date: "Ontem, 16:20", title: "Documentação Validada via Motor de Automações", desc: "Contrato e comprovantes conferidos e prontos para o juiz." },
+          { date: "28/10/2026", title: "Consulta Preliminar Realizada", desc: "Alinhamento de estratégia com a equipe jurídica." }
+        ],
+        docs: [
+          { name: "Contrato Assinado (PDF)", ok: true },
+          { name: "Comprovante de Inadimplência", ok: true },
+          { name: "Notificação Extrajudicial", ok: true }
+        ]
+      },
+      proc2: {
+        title: "Reclamação Trabalhista Patronal • Autos nº 0010892-45.2025.5.02.0015",
+        court: "Vara de Origem: 15ª Vara do Trabalho de São Paulo (TRT 2)",
+        status: "Audiência de Instrução Marcada",
+        timeline: [
+          { date: "Há 2 dias", title: "Designação de Audiência Virtual", desc: "Audiência marcada para 20/11/2026 às 14:00 via Zoom do tribunal." },
+          { date: "15/10/2026", title: "Contestação e Defesa Protocoladas", desc: "Peça defensiva com documentos de ponto anexada pelo escritório." },
+          { date: "02/10/2026", title: "Notificação Recebida", desc: "Equipe jurídica assumiu a procuração do caso." }
+        ],
+        docs: [
+          { name: "Cartão de Ponto 2025 (PDF)", ok: true },
+          { name: "Comprovantes de Pagamento Bancário", ok: true },
+          { name: "Rol de Testemunhas da Empresa", ok: true }
+        ]
+      },
+      proc3: {
+        title: "Planejamento Sucessório & Inventário • Autos nº 2004512-11.2026.8.26.0001",
+        court: "Vara de Origem: 1ª Vara da Família e Sucessões",
+        status: "Levantamento de Bens",
+        timeline: [
+          { date: "25/10/2026", title: "Esboço de Partilha Amigável Elaborado", desc: "Minuta em concordância entre todos os herdeiros." },
+          { date: "10/10/2026", title: "Certidões Negativas Emitidas", desc: "Receita Federal e Fazenda Estadual validadas sem pendências." }
+        ],
+        docs: [
+          { name: "Matrícula dos Imóveis Atualizadas", ok: true },
+          { name: "Certidão de Óbito e Casamento", ok: true }
+        ]
+      }
+    };
+
+    function renderCurrentProcess(key) {
+      const p = clientProcesses[key];
+      if (!p) return;
+
+      document.getElementById('activeProcTitle').innerText = p.title;
+      document.getElementById('activeProcCourt').innerText = p.court;
+      document.getElementById('activeProcBadge').innerText = p.status;
+      document.getElementById('ctaProcLabel').innerText = p.title.split('•')[0].trim();
+
+      const tContainer = document.getElementById('timelineContainer');
+      tContainer.innerHTML = p.timeline.map((item, idx) => `
+        <div class="timeline-item ${idx === 0 ? 'active' : ''}">
+          <div class="timeline-date">${item.date}</div>
+          <div class="timeline-title">${item.title}</div>
+          <div class="timeline-desc">${item.desc}</div>
+        </div>
+      `).join('');
+
+      const dContainer = document.getElementById('docsContainer');
+      dContainer.innerHTML = p.docs.map(doc => `
+        <div class="doc-item">
+          <span>${doc.name}</span>
+          <span class="doc-status-ok">✔ Validado</span>
+        </div>
+      `).join('');
+    }
+
+    function onProcessChange() {
+      const val = document.getElementById('processSelect').value;
+      renderCurrentProcess(val);
+    }
+
+    function filterByNumber() {
+      const q = document.getElementById('searchProcessInput').value.trim();
+      if (!q) return;
+      if (q.includes('0010892') || q.includes('TRT') || q.includes('Trabalhista')) {
+        document.getElementById('processSelect').value = 'proc2';
+        renderCurrentProcess('proc2');
+      } else if (q.includes('2004512') || q.includes('Inventário')) {
+        document.getElementById('processSelect').value = 'proc3';
+        renderCurrentProcess('proc3');
+      } else {
+        document.getElementById('processSelect').value = 'proc1';
+        renderCurrentProcess('proc1');
+      }
+    }
+
+    function openChatWithContext() {
+      const curSelect = document.getElementById('processSelect');
+      const selectedText = curSelect.options[curSelect.selectedIndex].text;
+      closePortal();
+      toggleChat();
+      appendBotMsg(`Olá Carlos! Vejo que você estava consultando o processo: **${selectedText}**.<br><br>Qual é a sua dúvida sobre esse andamento específico?`);
+    }
+
+    function openPortal() { document.getElementById('portalOverlay').style.display = 'flex'; }
+    function closePortal() { document.getElementById('portalOverlay').style.display = 'none'; }
+    function performClientLogin() {
+      document.getElementById('portalLoginView').style.display = 'none';
+      document.getElementById('portalDashView').style.display = 'block';
+      renderCurrentProcess('proc1');
+    }
+    function performLogout() {
+      document.getElementById('portalDashView').style.display = 'none';
+      document.getElementById('portalLoginView').style.display = 'block';
+    }
+
+    // ==============================================================
+    // SIMULAÇÃO DO TRIBUNAL DENTRO DO DASHBOARD DO CLIENTE
+    // ==============================================================
+    function runInternalTribunalSimulation() {
+      const btn = document.getElementById('btnSyncDash');
+      const log = document.getElementById('dashSyncLog');
+      log.style.display = 'block';
+      btn.disabled = true;
+      btn.innerText = 'Consultando DataJud...';
+
+      const time = new Date().toLocaleTimeString();
+
+      setTimeout(() => {
+        log.innerHTML = `<div>[${time}] <span style="color:#38bdf8;">Webhook DataJud/CNJ:</span> Nova publicação detectada no Tribunal de Justiça (TJSP).</div>`;
+      }, 700);
+
+      setTimeout(() => {
+        log.innerHTML += `<div>[${time}] <span style="color:#fbbf24;">Andamento Capturado:</span> "Despacho proferido: Intimação da parte contrária para manifestação em 15 dias."</div>`;
+      }, 1500);
+
+      setTimeout(() => {
+        log.innerHTML += `<div>[${time}] <span style="color:#34d399;">✔ Motor de Automações Concluída:</span> Linha do tempo atualizada e mensagem proativa enviada ao Chatwoot.</div>`;
+
+        // 1. Atualiza imediatamente a Linha do Tempo no topo
+        const timeline = document.getElementById('timelineContainer');
+        const newItem = document.createElement('div');
+        newItem.className = 'timeline-item active';
+        newItem.innerHTML = `
+          <div class="timeline-date">Agora mesmo (${time})</div>
+          <div class="timeline-title">Despacho Proferido pelo Juiz</div>
+          <div class="timeline-desc">Intimação da parte contrária para manifestação em 15 dias. Sincronizado automaticamente via API DataJud.</div>
+        `;
+        timeline.insertBefore(newItem, timeline.firstChild);
+
+        // 2. Dispara a Notificação no Chatwoot com Badge Vermelha
+        appendBotMsg(`🚨 **Aviso Automático do Tribunal (TJSP):**<br>Acaba de sair uma nova movimentação no seu processo: *Despacho proferido com intimação da parte contrária*. Já atualizamos sua Linha do Tempo aqui no Portal do Cliente!`);
+        document.getElementById('chatBadge').style.display = 'flex';
+
+        btn.disabled = false;
+        btn.innerHTML = '<span>🔄 Simular Novo Andamento do Tribunal</span>';
+      }, 2400);
+    }
+
+    function toggleChat() {
+      const modal = document.getElementById('chatModal');
+      modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+      document.getElementById('chatBadge').style.display = 'none';
+    }
+
+    function selectOption(text) {
+      appendUserMsg(text);
+      setTimeout(() => {
+        if(text.includes('Agendar')) {
+          appendBotMsg('Para agendarmos, informe por favor seu **Nome Completo** e telefone de contato:');
+        } else if (text.includes('Documentos')) {
+          appendBotMsg('Pode enviar os comprovantes em PDF diretamente por este chat.');
+        } else {
+          appendBotMsg('Se você tem mais de um processo conosco, acesse a **Área do Cliente** no topo do site com seu CPF ou digite o número do processo aqui!');
+        }
+      }, 500);
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const val = input.value.trim();
+      if (!val) return;
+      appendUserMsg(val);
+      input.value = '';
+      setTimeout(() => {
+        appendBotMsg('Mensagem registrada! Nossa Motor de Automações vinculou este contato ao seu cadastro no Chatwoot.');
+      }, 600);
+    }
+
+    function submitContactForm() {
+      const name = document.getElementById('contactName').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const msg = document.getElementById('contactMsg').value.trim();
+      if (!name || !phone) {
+        alert('Por favor, preencha pelo menos seu nome e telefone/WhatsApp.');
+        return;
+      }
+      toggleChat();
+      appendUserMsg(`Contato via formulário do site: ${name} (${phone}) - "${msg}"`);
+      setTimeout(() => {
+        appendBotMsg(`Olá ${name}! Recebemos sua mensagem pelo formulário. Nossa triagem já está direcionando você para um de nossos advogados.`);
+      }, 600);
+    }
+
+    function appendUserMsg(msg) {
+      const chatBody = document.getElementById('chatBody');
+      const div = document.createElement('div');
+      div.className = 'bubble';
+      div.style.background = '#d4af37';
+      div.style.color = '#070e17';
+      div.style.alignSelf = 'flex-end';
+      div.style.fontWeight = '500';
+      div.innerText = msg;
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function appendBotMsg(msg) {
+      const chatBody = document.getElementById('chatBody');
+      const div = document.createElement('div');
+      div.className = 'bubble bubble-bot';
+      div.innerHTML = msg.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('portal') === '1') {
+        openPortal();
+      } else if (params.get('chat') === '1') {
+        toggleChat();
+      }
+    });
+  </script>
+</body>
+</html>

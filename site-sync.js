@@ -40,7 +40,8 @@ const DEFAULT_SITE_SETTINGS = {
     rhinovaDesc: 'Gestão Inteligente de Pessoas, Ponto Eletrônico & Recrutamento',
     
     clinicaUrl: 'clinica.html',
-    lukeUrl: 'luke.html'
+    lukeUrl: 'luke.html',
+    advogadosUrl: 'advogados.html'
 };
 
 const SiteSync = {
@@ -349,6 +350,18 @@ const SiteSync = {
         document.querySelectorAll('a[data-project="luke"]').forEach(a => {
             a.href = targetLukeUrl;
             if (targetLukeUrl.startsWith('http')) {
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+            } else {
+                a.removeAttribute('target');
+                a.removeAttribute('rel');
+            }
+        });
+
+        const targetAdvogadosUrl = settings.advogadosUrl || 'advogados.html';
+        document.querySelectorAll('a[data-project="advogados"]').forEach(a => {
+            a.href = targetAdvogadosUrl;
+            if (targetAdvogadosUrl.startsWith('http')) {
                 a.target = '_blank';
                 a.rel = 'noopener noreferrer';
             } else {

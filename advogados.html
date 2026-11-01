@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associados Advocacia - Portal Jurídico, DataJud & Triagem | Vitrine 3Dígitos</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandGreen: '#10b981',
+                        brandGreenDark: '#047857',
+                        brandOrange: '#f97316',
+                        brandOrangeDark: '#c2410c',
+                        lawGold: '#d4af37',
+                        lawGoldLight: '#f3e5ab',
+                        lawNavy: '#070e17'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif-law { font-family: 'Cinzel', serif; }
+    </style>
+    <script src="site-sync.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-amber-600 selection:text-white">
+
+    <!-- Topbar / Navbar de Navegação da Vitrine -->
+    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <a href="index.html" class="flex items-center group">
+                    <img src="logo-transparent.png" alt="3Dígitos" class="h-10 sm:h-12 object-contain transition group-hover:scale-105">
+                </a>
+                <span class="text-gray-300 hidden sm:inline">|</span>
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider hidden sm:inline">Vitrine Oficial de Projetos</span>
+            </div>
+
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <a href="index.html#projetos" class="text-xs sm:text-sm font-bold text-gray-600 hover:text-brandOrange transition flex items-center px-3 sm:px-4 py-2 rounded-xl hover:bg-gray-50">
+                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Voltar à Vitrine
+                </a>
+                <a href="https://wa.me/5574991223727?text=Olá,%20vi%20o%20case%20do%20Portal%20de%20Advocacia%20no%20portal%203Dígitos%20e%20gostaria%20de%20um%20projeto%20semelhante!" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-extrabold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-xl transition shadow-md hover:shadow-lg flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.082 19.165c-1.63 0-3.122-.411-4.437-1.109l-4.908 1.287 1.309-4.781c-.767-1.34-1.208-2.893-1.208-4.55 0-5.068 4.108-9.176 9.176-9.176s9.176 4.108 9.176 9.176c0 5.068-4.108 9.176-9.176 9.176z"/></svg>
+                    <span>Quero um Portal Assim</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Showcase do Projeto -->
+    <section class="relative bg-gradient-to-br from-[#070e17] via-[#0d1726] to-[#17253b] text-white py-16 sm:py-20 lg:py-28 overflow-hidden">
+        <!-- Efeitos visuais de iluminação no fundo -->
+        <div class="absolute -top-32 -right-32 w-96 h-96 bg-amber-500/15 blur-3xl rounded-full pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-emerald-500/15 blur-3xl rounded-full pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:20px_20px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Informações e Apresentação do Case -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-amber-500/10 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-extrabold text-amber-300 border border-amber-500/30 shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+                        <span class="uppercase tracking-widest">Case de Sucesso • Jurídico, Escritórios & Tribunais</span>
+                    </div>
+
+                    <div class="flex justify-center lg:justify-start">
+                        <div class="bg-[#0d1726]/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl border border-amber-500/40 inline-flex items-center space-x-3">
+                            <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-400/50 text-amber-300 flex items-center justify-center font-bold text-xl shadow-sm">
+                                ⚖️
+                            </div>
+                            <div class="text-left">
+                                <h3 class="text-white font-serif-law font-bold text-base tracking-wider leading-none">ASSOCIADOS</h3>
+                                <p class="text-[11px] text-amber-400 font-semibold uppercase tracking-widest mt-1">Advocacia Especializada</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                        Portal do Cliente & <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-emerald-400">
+                            Automação Jurídica 24/7
+                        </span>
+                    </h1>
+
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Um ecossistema digital de alto padrão para escritórios de advocacia. Conecta triagem documental inteligente via chat, agendamento com sócios e uma Área Restrita do Cliente sincronizada em tempo real com os tribunais (DataJud/CNJ).
+                    </p>
+
+                    <!-- Selos Tecnológicos Utilizados -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 pt-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-amber-200 border border-amber-500/30">⚖️ Integração DataJud / CNJ</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white border border-white/15">🔐 Portal Multi-Processos</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white border border-white/15">💬 Triagem Chatwoot</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white border border-white/15">📎 Upload de Documentos</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white border border-white/15">🔔 Alertas no WhatsApp</span>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="pt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="advogados-demo/index.html" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-slate-950 font-black text-base rounded-2xl shadow-xl hover:shadow-amber-500/30 transform hover:-translate-y-0.5 transition duration-300 flex items-center justify-center space-x-2">
+                            <span>🏛️ Abrir Portal do Escritório ao Vivo</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                        <a href="#recursos" class="w-full sm:w-auto px-6 py-4 bg-white/10 hover:bg-white/20 text-white font-bold text-base rounded-2xl border border-white/20 transition text-center">
+                            Ver Módulos Jurídicos &darr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card Visual / Mockup do Portal Jurídico -->
+                <div class="lg:col-span-5">
+                    <div class="relative bg-white/10 p-3 rounded-3xl backdrop-blur-xl border border-amber-500/30 shadow-2xl">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl relative aspect-[4/3] bg-slate-900 group">
+                            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=900&q=80" alt="Portal Jurídico Associados" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#070e17] via-[#070e17]/40 to-transparent flex flex-col justify-end p-6">
+                                <span class="text-[11px] font-extrabold uppercase tracking-widest text-amber-400">Simulador DataJud Integrado</span>
+                                <h3 class="text-xl font-extrabold text-white mt-0.5">Associados • Advocacia Digital</h3>
+                                <p class="text-xs text-gray-300 mt-1">Transparência processual, triagem rápida e atendimento omnichannel.</p>
+                            </div>
+                        </div>
+
+                        <!-- Mini Cards de Estatísticas Flutuantes -->
+                        <div class="grid grid-cols-2 gap-3 mt-3">
+                            <div class="bg-[#070e17]/90 border border-amber-500/20 p-3.5 rounded-xl">
+                                <div class="text-xs text-gray-400 font-medium">Andamentos CNJ</div>
+                                <div class="text-lg font-black text-amber-400 mt-0.5">Tempo Real</div>
+                                <div class="text-[10px] text-gray-400">Sincronizado ao DataJud</div>
+                            </div>
+                            <div class="bg-[#070e17]/90 border border-amber-500/20 p-3.5 rounded-xl">
+                                <div class="text-xs text-gray-400 font-medium">Triagem & Docs</div>
+                                <div class="text-lg font-black text-emerald-400 mt-0.5">100% Digital</div>
+                                <div class="text-[10px] text-gray-400">Conformidade LGPD & OAB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Barra de Métricas & Benefícios -->
+    <section class="bg-white border-b border-gray-200 py-8 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                <div class="pt-4 md:pt-0">
+                    <div class="text-2xl sm:text-3xl font-black text-amber-600">-80%</div>
+                    <div class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Ligações perguntando "como está meu processo"</div>
+                </div>
+                <div class="pt-4 md:pt-0">
+                    <div class="text-2xl sm:text-3xl font-black text-slate-900">24/7</div>
+                    <div class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Monitoramento Automático de Tribunais</div>
+                </div>
+                <div class="pt-4 md:pt-0">
+                    <div class="text-2xl sm:text-3xl font-black text-emerald-600">Multi-Processos</div>
+                    <div class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Consulta por CPF/CNPJ ou Número CNJ</div>
+                </div>
+                <div class="pt-4 md:pt-0">
+                    <div class="text-2xl sm:text-3xl font-black text-brandOrange">Chatwoot IA</div>
+                    <div class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Triagem e Recebimento de Provas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Módulos & Recursos Desenvolvidos -->
+    <section id="recursos" class="py-16 sm:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center space-x-2 bg-amber-100 text-amber-900 px-3.5 py-1 rounded-full text-xs font-bold mb-3">
+                    ⚖️ ARQUITETURA DO PORTAL JURÍDICO
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+                    Tecnologia de Ponta para Escritórios de Advocacia Modernos
+                </h2>
+                <p class="text-gray-600 mt-4 text-base sm:text-lg">
+                    Conheça os módulos criados pela 3Dígitos para automatizar o atendimento, a coleta documental e o acompanhamento processual dos clientes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Módulo 1: Portal do Cliente Multi-Processos -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-gray-100 transition duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        🔐
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Portal do Cliente Multi-Processos</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Área restrita onde o cliente acessa com CPF ou CNPJ e visualiza todos os seus processos ativos (Cível, Trabalhista, Sucessões) com linha do tempo clara e humanizada.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-1.5 font-medium border-t border-gray-100 pt-4">
+                        <li class="flex items-center text-emerald-600">✓ Busca rápida por número do CNJ</li>
+                        <li class="flex items-center text-emerald-600">✓ Histórico de movimentações traduzido</li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 2: Sincronização DataJud / CNJ -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-gray-100 transition duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        ⚡
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Sincronização com Tribunais (DataJud)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Integração direta com a API Pública do DataJud (CNJ) e Diários Oficiais. Quando um juiz profere um despacho, a linha do tempo do cliente é atualizada e um alerta é disparado.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-1.5 font-medium border-t border-gray-100 pt-4">
+                        <li class="flex items-center text-emerald-600">✓ Simulador ao vivo de despacho judicial</li>
+                        <li class="flex items-center text-emerald-600">✓ Notificação proativa imediata no chat</li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 3: Triagem Jurídica Inteligente -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-gray-100 transition duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        💬
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Triagem & Chat Jurídico Integrado</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Widget de atendimento que qualifica a demanda inicial do cliente, identifica a especialidade jurídica (Empresarial, Trabalhista, Família) e encaminha ao advogado responsável.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-1.5 font-medium border-t border-gray-100 pt-4">
+                        <li class="flex items-center text-emerald-600">✓ Atalhos rápidos de autoatendimento</li>
+                        <li class="flex items-center text-emerald-600">✓ Contexto automático do processo aberto</li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 4: Coleta & Validação Documental -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-gray-100 transition duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        📁
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Pasta Digital & Upload de Provas</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Envio descomplicado de contratos, certidões, cartões de ponto e comprovantes em PDF ou foto, exibindo o status de validação de cada documento no painel do cliente.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-1.5 font-medium border-t border-gray-100 pt-4">
+                        <li class="flex items-center text-emerald-600">✓ Checklist de documentos validados</li>
+                        <li class="flex items-center text-emerald-600">✓ Organização automática por processo</li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 5: Agendamento & Lembretes -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-gray-100 transition duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 text-brandOrange flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        📅
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Agenda de Sócios & Lembretes 24h/1h</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Marcação de reuniões presenciais ou videochamadas integrada à agenda dos advogados, com disparo automático de lembretes 24 horas e 1 hora antes da consulta ou audiência.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-1.5 font-medium border-t border-gray-100 pt-4">
+                        <li class="flex items-center text-emerald-600">✓ Redução drástica de ausências em reuniões</li>
+                        <li class="flex items-center text-emerald-600">✓ Envio automático do link da sala virtual</li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 6: Vitrine Institucional OAB & LGPD -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-gray-100 transition duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-200 text-slate-800 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        🏛️
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Design Sobrio, Ética OAB & LGPD</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Identidade visual executiva em tons marinho e dourado que transmite autoridade jurídica, apresentando áreas de atuação, indicadores do escritório e total conformidade com a OAB.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-1.5 font-medium border-t border-gray-100 pt-4">
+                        <li class="flex items-center text-emerald-600">✓ Apresentação das áreas de especialidade</li>
+                        <li class="flex items-center text-emerald-600">✓ Formulário de triagem rápida integrado</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Acesso & Demonstração do Sistema ao Vivo -->
+    <section class="py-16 bg-gradient-to-br from-slate-100 to-amber-50/60 border-y border-amber-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-black uppercase tracking-widest text-amber-700">EXPERIMENTE AO VIVO</span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">Navegue pelas Telas do Portal Jurídico</h3>
+                <p class="text-gray-600 text-sm sm:text-base mt-2">
+                    Clique em uma das opções abaixo para testar o site institucional, o simulador de tribunais na Área do Cliente e o chat jurídico interativo.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                
+                <!-- Link 1: Portal Institucional Completo -->
+                <a href="advogados-demo/index.html" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl border border-gray-200 hover:border-amber-400 transition duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                            🏛️
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 group-hover:text-amber-700 transition">Site Institucional do Escritório</h4>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Apresentação completa do escritório Associados, áreas de atuação, fluxo de triagem e contato.</p>
+                    </div>
+                    <div class="mt-6 flex items-center text-xs font-bold text-amber-700">
+                        <span>Abrir Portal Jurídico</span> &rarr;
+                    </div>
+                </a>
+
+                <!-- Link 2: Área do Cliente & Simulador DataJud -->
+                <a href="advogados-demo/index.html?portal=1" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl border border-gray-200 hover:border-emerald-400 transition duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                            ⚖️
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 group-hover:text-emerald-700 transition">Portal do Cliente & Simulador CNJ</h4>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Teste o login do cliente, alterne entre processos e clique em "Simular Novo Andamento do Tribunal".</p>
+                    </div>
+                    <div class="mt-6 flex items-center text-xs font-bold text-emerald-700">
+                        <span>Testar Área do Cliente</span> &rarr;
+                    </div>
+                </a>
+
+                <!-- Link 3: Chat de Triagem Jurídica -->
+                <a href="advogados-demo/index.html?chat=1" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl border border-gray-200 hover:border-blue-400 transition duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                            💬
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 group-hover:text-blue-700 transition">Triagem & Atendimento Online</h4>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Experimente o widget de recepção jurídica com opções rápidas de agendamento e envio documental.</p>
+                    </div>
+                    <div class="mt-6 flex items-center text-xs font-bold text-blue-700">
+                        <span>Testar Chat Jurídico</span> &rarr;
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Chamada para Ação Final (CTA de Vendas) -->
+    <section class="py-20 bg-gradient-to-r from-[#070e17] via-[#0f1c2e] to-[#17253b] text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
+            <div class="inline-flex items-center space-x-2 bg-amber-500/10 px-4 py-1.5 rounded-full text-xs font-bold text-amber-300 border border-amber-500/30">
+                ⚖️ SOLUÇÕES PARA ESCRITÓRIOS DE ADVOCACIA & DEPARTAMENTOS JURÍDICOS
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+                Gostou deste portal jurídico? <br>
+                <span class="text-amber-400">Podemos personalizar e implantar no seu escritório!</span>
+            </h2>
+            <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                Desenvolvemos portais jurídicos exclusivos com Área do Cliente, integração com tribunais, triagem documental e atendimento centralizado no Chatwoot e WhatsApp.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a href="https://wa.me/5574991223727?text=Olá,%20vi%20o%20case%20do%20Portal%20de%20Advocacia%20no%20portal%203Dígitos%20e%20gostaria%20de%20solicitar%20um%20orçamento!" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-slate-950 font-black text-lg rounded-2xl shadow-2xl hover:scale-105 transition transform duration-300 flex items-center justify-center space-x-3">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.082 19.165c-1.63 0-3.122-.411-4.437-1.109l-4.908 1.287 1.309-4.781c-.767-1.34-1.208-2.893-1.208-4.55 0-5.068 4.108-9.176 9.176-9.176s9.176 4.108 9.176 9.176c0 5.068-4.108 9.176-9.176 9.176z"/></svg>
+                    <span>Falar com Especialista Agora</span>
+                </a>
+                <a href="index.html#projetos" class="w-full sm:w-auto px-8 py-5 bg-white/10 hover:bg-white/20 text-white font-bold text-base rounded-2xl border border-white/20 transition">
+                    &larr; Ver Outros Projetos na Vitrine
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-950 text-gray-500 py-10 border-t border-gray-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <img src="logo-transparent.png" alt="3Dígitos" class="h-9 w-auto object-contain">
+                <span>© 2026 3Dígitos Tecnologia e Automações IA. Todos os direitos reservados.</span>
+            </div>
+            <a href="index.html" class="text-gray-400 hover:text-brandOrange font-semibold transition">
+                Voltar para a página inicial &rarr;
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>
