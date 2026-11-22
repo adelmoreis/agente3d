@@ -762,6 +762,22 @@ body{margin:0}
 .node.hk .sq{border-radius:40px 9px 9px 40px}.node.hk .sq svg{width:36px;height:36px;color:inherit}.node.hk .hout{position:absolute;right:-8px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;border:1.5px solid #8a8a94;background:#fff;box-sizing:border-box}.node.hk .mth{position:absolute;left:calc(100% + 14px);top:50%;transform:translateY(-135%);font-size:11px;font-weight:700;color:#6b6b9a;letter-spacing:.03em;z-index:3;pointer-events:none}
 .node.hk .sq::after{content:"";position:absolute;left:calc(100% + 6px);top:50%;width:62px;border-top:2px solid #9a9aa5}.node.hk.l .sq::after{display:none}#m21Plus{left:calc(50% + 98px)}
 .win .card.intro{max-height:88vh;overflow:auto;max-width:640px}.win .card.intro h3{margin:14px 0 4px;font-size:15px}.win .card.intro p{margin:4px 0;font-size:14px;line-height:1.5}.ivs{display:grid;gap:6px;margin:6px 0}.ivw{background:#f6f3ff;border:1px solid #e1dafc;border-radius:10px;padding:8px 10px;text-align:left}.ivw b{display:block;font-size:13.5px}.ivw span{font-size:12.5px;color:#555}.ifn{display:inline-block;font-size:12px;color:#5b3fd1}
+
+/* Botão Flutuante e Suporte WhatsApp no Login */
+.zap-float{position:fixed;bottom:max(20px,env(safe-area-inset-bottom,0px));right:max(20px,env(safe-area-inset-right,0px));z-index:9999;display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--sans);filter:drop-shadow(0 6px 18px rgba(37,211,102,.35));transition:transform .2s ease,filter .2s ease}
+.zap-float:hover{transform:translateY(-2px) scale(1.03);filter:drop-shadow(0 8px 24px rgba(37,211,102,.45))}
+.zap-float-badge{background:#ffffff;color:#1f1f23;font-size:13px;font-weight:600;padding:8px 14px;border-radius:20px;border:1px solid #e4e4e7;box-shadow:0 4px 12px rgba(0,0,0,.08);display:flex;align-items:center;gap:7px;white-space:nowrap}
+.zap-float-badge span.dot{width:8px;height:8px;border-radius:50%;background:#12b76a;box-shadow:0 0 0 3px rgba(18,183,106,.2);display:inline-block}
+.zap-float-btn{width:52px;height:52px;border-radius:50%;background:#25d366;color:#ffffff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);flex-shrink:0;transition:background .2s}
+.zap-float:hover .zap-float-btn{background:#20ba59}
+.zap-float-btn svg{width:28px;height:28px;fill:currentColor}
+.login-support-box{margin-top:16px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;padding:12px 14px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left}
+.login-support-box b{display:block;font-size:12.5px;color:#14532d;margin-bottom:2px}
+.login-support-box span{font-size:11.5px;color:#16a34a}
+.login-support-btn{display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#ffffff!important;text-decoration:none;padding:7px 12px;border-radius:8px;font-weight:700;font-size:12px;white-space:nowrap;box-shadow:0 2px 8px rgba(37,211,102,.3);transition:transform .15s ease,background .15s ease;flex-shrink:0}
+.login-support-btn:hover{background:#20ba59;transform:scale(1.02)}
+@media(max-width:480px){.zap-float-badge{display:none}.login-support-box{flex-direction:column;align-items:flex-start}.login-support-btn{width:100%;justify-content:center}}
+
 </style>
 
 <div id="root"></div>
@@ -1412,8 +1428,8 @@ function route(){route0();navAfter();}
 function route0(){
   if(GLOGIN){if(CL.admChecked||CL.failed)gLoginView();else splashView();return;}
   tbtnSync();
-  if(S.logged){var gp=document.getElementById('gpill');if(gp)gp.remove();}
-  if(!S.logged){if(!V.capa){capaView();return;}if(cloudWait()){splashView();return;}loginView();return;}
+  if(S.logged){var gp=document.getElementById('gpill');if(gp)gp.remove();ensureZapFloat(false);}
+  if(!S.logged){ensureZapFloat(true);if(!V.capa){capaView();return;}if(cloudWait()){splashView();return;}loginView();return;}
   if(S.av<0||!S.name){onboardView();return;}
   if(V.view==='home'){homeView();return;}
   if(V.view==='m21'){m21Route();return;}
@@ -5774,8 +5790,25 @@ function backToAdmin(){
 }
 function cloudWait(){return !!(window.claude&&window.claude.use&&!CL.ready&&!CL.failed);}
 function splashView(){root.innerHTML='<div class="center"><div class="card"><p class="sub" style="margin:0">Conectando ao seu ambiente...</p></div></div>';mentorEl.classList.add('hidden');}
+
+function ensureZapFloat(show){
+  var el=document.getElementById('zapFloat');
+  if(!show){if(el)el.remove();return;}
+  if(el)return;
+  el=document.createElement('a');
+  el.id='zapFloat';
+  el.className='zap-float';
+  el.href='https://wa.me/5574998161911?text='+encodeURIComponent('Olá! Preciso de ajuda com o meu acesso ao Curso N8N.');
+  el.target='_blank';
+  el.rel='noopener';
+  el.setAttribute('aria-label','Falar com o suporte no WhatsApp');
+  el.innerHTML='<div class="zap-float-badge"><span class="dot"></span><b>Suporte WhatsApp</b></div><div class="zap-float-btn"><svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></div>';
+  document.body.appendChild(el);
+}
+
 function realLoginView(){
-  root.innerHTML='<div class="center"><div class="card">'+LOGO()+'<h1>Entrar</h1><p class="sub">Use o usuário e a senha que o seu gestor criou para você. Cada aluno tem o seu próprio ambiente e o seu progresso.</p><form id="f"><div class="field"><label for="lu">Usuário</label><input id="lu" type="text" autocomplete="username" autocapitalize="none" spellcheck="false"></div><div class="field"><label for="lp">Senha</label><div style="position:relative;display:flex;align-items:center"><input id="lp" type="password" autocomplete="current-password" style="padding-right:40px;width:100%"><button type="button" id="togglePw" style="position:absolute;right:8px;background:none;border:none;cursor:pointer;font-size:17px;color:#6b7280;padding:4px" aria-label="Mostrar senha" title="Mostrar/ocultar senha">👁️</button></div></div><p class="lerr" id="le" role="alert" hidden></p><button class="btn full" type="submit" id="go">Entrar</button></form><p class="note">Esqueceu a senha ou ainda não tem acesso? Fale com o seu gestor.</p></div></div>';
+  ensureZapFloat(true);
+  root.innerHTML='<div class="center"><div class="card">'+LOGO()+'<h1>Entrar</h1><p class="sub">Use o usuário e a senha que o seu gestor criou para você. Cada aluno tem o seu próprio ambiente e o seu progresso.</p><form id="f"><div class="field"><label for="lu">Usuário</label><input id="lu" type="text" autocomplete="username" autocapitalize="none" spellcheck="false"></div><div class="field"><label for="lp">Senha</label><div style="position:relative;display:flex;align-items:center"><input id="lp" type="password" autocomplete="current-password" style="padding-right:40px;width:100%"><button type="button" id="togglePw" style="position:absolute;right:8px;background:none;border:none;cursor:pointer;font-size:17px;color:#6b7280;padding:4px" aria-label="Mostrar senha" title="Mostrar/ocultar senha">👁️</button></div></div><p class="lerr" id="le" role="alert" hidden></p><button class="btn full" type="submit" id="go">Entrar</button></form><div class="login-support-box"><div><b>Esqueceu a senha ou precisa de ajuda?</b><span>Fale direto com o suporte no WhatsApp.</span></div><a class="login-support-btn" href="https://wa.me/5574998161911?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20o%20meu%20acesso%20ao%20Curso%20N8N." target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>WhatsApp</a></div></div></div>';
   var er=$('#le'),go=$('#go'),lp=$('#lp'),tp=$('#togglePw');
   if(tp&&lp){
     tp.addEventListener('click',function(){
