@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#062e24"/>
+      <stop offset="50%" stop-color="#0b4537"/>
+      <stop offset="100%" stop-color="#021c16"/>
+    </linearGradient>
+    <radialGradient id="glowEmerald" cx="75%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="480" fill="url(#bg4)"/>
+  <rect width="800" height="480" fill="url(#glowEmerald)"/>
+
+  <!-- Ícone estilizado Apostila Digital -->
+  <g transform="translate(530, 110)">
+    <rect width="210" height="250" rx="20" fill="#032019" stroke="#10b981" stroke-width="2"/>
+    <rect x="25" y="40" width="160" height="14" rx="7" fill="#10b981" opacity="0.8"/>
+    <rect x="25" y="70" width="120" height="10" rx="5" fill="#34d399" opacity="0.4"/>
+    <rect x="25" y="95" width="160" height="10" rx="5" fill="#34d399" opacity="0.4"/>
+    <rect x="25" y="120" width="140" height="10" rx="5" fill="#34d399" opacity="0.4"/>
+    <rect x="25" y="160" width="160" height="60" rx="10" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-dasharray="3"/>
+    <text x="45" y="196" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#a7f3d0">BUSCA DINÂMICA</text>
+  </g>
+
+  <g transform="translate(60, 60)">
+    <rect width="220" height="34" rx="17" fill="#10b981" fill-opacity="0.2" stroke="#34d399" stroke-width="1.5"/>
+    <circle cx="20" cy="17" r="5" fill="#34d399"/>
+    <text x="34" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#6ee7b7" letter-spacing="1.5">APOSTILA AGENTE3D</text>
+  </g>
+
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="34" font-weight="900" fill="#ffffff" letter-spacing="-0.5">
+    Apostila Inteligente:
+  </text>
+  <text x="60" y="195" font-family="system-ui, sans-serif" font-size="38" font-weight="900" fill="#34d399" letter-spacing="-0.5">
+    Manual com Busca Real
+  </text>
+
+  <text x="60" y="245" font-family="system-ui, sans-serif" font-size="16" fill="#94a3b8" font-weight="500">
+    Chega de PDFs estáticos pesados. Nosso manual digital
+  </text>
+  <text x="60" y="272" font-family="system-ui, sans-serif" font-size="16" fill="#94a3b8" font-weight="500">
+    possui índice dinâmico, código copiável e Módulo 1 grátis.
+  </text>
+
+  <g transform="translate(60, 360)">
+    <rect width="190" height="56" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="20" y="26" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#64748b" letter-spacing="1">MÓDULO 1</text>
+    <text x="20" y="47" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#10b981">100% Gratuito</text>
+
+    <rect x="210" width="200" height="56" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="230" y="26" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#64748b" letter-spacing="1">BUSCA INSTANTÂNEA</text>
+    <text x="230" y="47" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#f97316">Localize em 1 Clique</text>
+  </g>
+</svg>
