@@ -58,7 +58,8 @@
                 
                 <!-- Links Desktop / Telas Médias e Grandes (100% inalterado) -->
                 <div class="hidden md:flex items-center space-x-3 lg:space-x-5">
-                    <a href="#solucoes" class="text-gray-700 hover:text-brandOrange font-bold transition">Consultoria & Cursos</a>
+                    <a href="#consultoria" class="text-gray-700 hover:text-brandOrange font-bold transition">Consultoria</a>
+                    <a href="#cursos" class="text-gray-700 hover:text-brandOrange font-bold transition">Cursos & n8n</a>
                     <a href="#projetos" class="text-gray-700 hover:text-brandOrange font-bold transition">Vitrine</a>
                     <a href="#blog" class="text-gray-700 hover:text-brandOrange font-bold transition">Blog</a>
                     <a href="login.html" class="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-brandOrange text-brandOrange hover:bg-brandOrange hover:text-white rounded-lg transition font-semibold">Área Restrita</a>
@@ -292,88 +293,361 @@
     </section>
 
     <!-- Nova Seção: Soluções e Treinamentos -->
-    <section id="solucoes" class="pt-6 pb-20 bg-white relative">
+    <!-- SEÇÃO 1: CONSULTORIA & TRANSFORMAÇÃO DIGITAL (PARA EMPRESAS) -->
+    <section id="consultoria" class="pt-8 pb-20 bg-white relative">
+        <div id="solucoes" class="absolute -top-24"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-                <span class="text-brandOrange font-bold tracking-wider uppercase text-sm drop-shadow-sm">O que nós fazemos</span>
-                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-2 mb-4">Transformação Digital & Capacitação</h2>
-                <div class="h-1 w-24 bg-brandGreen mx-auto rounded mb-6"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Ajudamos empresas a otimizarem seu tempo com tecnologias de ponta e ensinamos profissionais a dominarem o futuro do mercado.
+            <div class="text-center mb-14">
+                <span class="text-brandOrange font-bold tracking-wider uppercase text-sm drop-shadow-sm inline-flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-brandOrange animate-pulse"></span> O que nós fazemos · Para Empresas & Negócios
+                </span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-2 mb-4">Consultoria & Transformação Digital</h2>
+                <div class="h-1.5 w-24 bg-brandGreen mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Ajudamos sua empresa a organizar processos, centralizar o atendimento omnichannel e implantar automações inteligentes que eliminam o trabalho manual repetitivo e aceleram suas vendas.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Grid de Soluções Corporativas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Bloco: Para Empresas -->
-                <div class="bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brandGreen opacity-10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-125 duration-500"></div>
-                    <div class="flex items-center mb-8">
-                        <div class="w-16 h-16 bg-brandGreen text-white rounded-2xl flex items-center justify-center shadow-lg mr-5">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                <!-- Card 1: Chatwoot Atendimento Inteligente -->
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-lg hover:shadow-2xl transition duration-300 relative overflow-hidden group flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-brandGreen opacity-10 rounded-bl-full transition-transform group-hover:scale-125 duration-500"></div>
+                    <div>
+                        <div class="w-14 h-14 bg-brandGreen text-white rounded-2xl flex items-center justify-center shadow-md mb-6">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                         </div>
-                        <h3 class="text-3xl font-bold text-gray-900">Para Empresas</h3>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brandGreen bg-emerald-50 px-3 py-1 rounded-full">Omnichannel</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mt-3 mb-3">Atendimento Inteligente (Chatwoot)</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                            Centralize WhatsApp Oficial, Instagram Direct, Facebook Messenger e E-mail em um painel corporativo único. Sua equipe inteira atendendo no mesmo número, com histórico, tags e métricas de desempenho.
+                        </p>
+                        <ul class="text-xs text-gray-600 space-y-2 mb-6">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandGreen mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Instalação e configuração completa em servidor dedicado</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandGreen mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Treinamento prático dos atendentes e supervisores</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandGreen mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Filas por setor e distribuição automática de conversas</li>
+                        </ul>
                     </div>
-                    <p class="text-gray-600 mb-8 font-medium text-lg">Consultoria corporativa e implementação de sistemas para organizar processos e eliminar o trabalho manual da sua equipe.</p>
+                    <a href="#atendimento" onclick="if(window.SiteSync){ window.SiteSync.abrirMenuFlutuante('1'); } else { document.getElementById('chatwootLauncher')?.click(); } return false;" data-chatwoot="launcher" class="w-full py-3 px-4 bg-white border border-gray-200 text-gray-800 hover:text-brandGreen hover:border-brandGreen font-bold rounded-xl transition flex items-center justify-center text-sm shadow-sm group-hover:bg-brandGreen group-hover:text-white">
+                        Solicitar Consultoria Chatwoot <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Card 2: Engenharia de Automações -->
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-lg hover:shadow-2xl transition duration-300 relative overflow-hidden group flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-brandOrange opacity-10 rounded-bl-full transition-transform group-hover:scale-125 duration-500"></div>
+                    <div>
+                        <div class="w-14 h-14 bg-brandOrange text-white rounded-2xl flex items-center justify-center shadow-md mb-6">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brandOrange bg-orange-50 px-3 py-1 rounded-full">Workflows & APIs</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mt-3 mb-3">Engenharia de Automações (n8n)</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                            Integramos sistemas, ERPs, bancos de dados, planilhas e gateways de pagamento (Pix/Cartão). Construímos esteiras digitais seguras que rodam 24/7 sem falhas humanas.
+                        </p>
+                        <ul class="text-xs text-gray-600 space-y-2 mb-6">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandOrange mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Cobranças automáticas, disparo de notas e confirmações</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandOrange mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Sincronização em tempo real entre vendas e estoque</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandOrange mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Redução drástica de custos e ganho imediato de tempo</li>
+                        </ul>
+                    </div>
+                    <a href="#atendimento" onclick="if(window.SiteSync){ window.SiteSync.abrirMenuFlutuante('1'); } else { document.getElementById('chatwootLauncher')?.click(); } return false;" data-chatwoot="launcher" class="w-full py-3 px-4 bg-white border border-gray-200 text-gray-800 hover:text-brandOrange hover:border-brandOrange font-bold rounded-xl transition flex items-center justify-center text-sm shadow-sm group-hover:bg-brandOrange group-hover:text-white">
+                        Automatizar Meu Negócio <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Card 3: Agentes de IA & Atendimento Inteligente -->
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-lg hover:shadow-2xl transition duration-300 relative overflow-hidden group flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-emerald-600 opacity-10 rounded-bl-full transition-transform group-hover:scale-125 duration-500"></div>
+                    <div>
+                        <div class="w-14 h-14 bg-gray-900 text-brandGreen rounded-2xl flex items-center justify-center shadow-md mb-6">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full">Inteligência Artificial</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mt-3 mb-3">Agentes de IA & Agendamentos</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                            Desenvolvemos agentes de inteligência artificial personalizados para a sua empresa. Atendimento 24h no WhatsApp, triagem qualificada de leads e agendamento ao vivo sincronizado com o Google Agenda.
+                        </p>
+                        <ul class="text-xs text-gray-600 space-y-2 mb-6">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandGreen mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Conversas humanizadas, naturais e sem respostas engessadas</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandGreen mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Agendamento inteligente com verificação de conflitos</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-brandGreen mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Transbordo suave e notificação para atendente humano</li>
+                        </ul>
+                    </div>
+                    <a href="#atendimento" onclick="if(window.SiteSync){ window.SiteSync.abrirMenuFlutuante('4'); } else { document.getElementById('chatwootLauncher')?.click(); } return false;" data-chatwoot="launcher" class="w-full py-3 px-4 bg-gray-900 text-white hover:bg-gray-800 font-bold rounded-xl transition flex items-center justify-center text-sm shadow-sm cursor-pointer">
+                        Agendar Diagnóstico Gratuito <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Banner CTA Corporativo -->
+            <div class="mt-12 bg-gradient-to-r from-emerald-900 via-gray-900 to-gray-900 rounded-3xl p-8 md:p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-emerald-800/40">
+                <div class="space-y-2 text-center md:text-left">
+                    <span class="text-brandGreen text-xs font-bold uppercase tracking-widest">Atendimento Consultivo</span>
+                    <h4 class="text-2xl md:text-3xl font-extrabold text-white">Deseja um projeto estruturado sob medida para a sua operação?</h4>
+                    <p class="text-gray-300 text-sm max-w-2xl">
+                        Analisamos os gargalos de tempo da sua equipe e apresentamos uma proposta técnica clara, com escopo e prazos garantidos.
+                    </p>
+                </div>
+                <a href="#atendimento" onclick="if(window.SiteSync){ window.SiteSync.abrirMenuFlutuante('4'); } else { document.getElementById('chatwootLauncher')?.click(); } return false;" data-chatwoot="launcher" class="px-8 py-4 bg-brandGreen hover:bg-brandGreenDark text-white font-extrabold rounded-2xl shadow-lg transition duration-300 whitespace-nowrap flex items-center gap-2 transform hover:scale-105 cursor-pointer">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.155.57 4.178 1.565 5.928l-1.636 5.975 6.136-1.611c1.705.933 3.662 1.464 5.748 1.464 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
+                    Falar com Especialista
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: CURSOS & ACADEMIA N8N (FORMAÇÃO PROFISSIONAL) -->
+    <section id="cursos" class="py-24 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white relative overflow-hidden">
+        <!-- Elementos Visuais de Fundo -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brandOrange/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brandGreen/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#374151_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <!-- Cabeçalho da Seção de Cursos -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brandOrange/15 border border-brandOrange/30 text-brandOrange text-xs font-bold uppercase tracking-wider mb-4">
+                    <span class="w-2 h-2 rounded-full bg-brandOrange animate-ping"></span> Formação Prática Profissionalizante
+                </div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
+                    Academia <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandOrange via-orange-400 to-amber-300">n8n</span> Agente3d
+                </h2>
+                <div class="h-1.5 w-32 bg-gradient-to-r from-brandOrange to-brandGreen mx-auto rounded-full my-6"></div>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-normal leading-relaxed">
+                    Aprenda n8n fazendo, no <span class="text-white font-bold underline decoration-brandOrange decoration-2">único simulador interativo</span> do mercado, e saia automatizando o seu negócio ou prestando serviços de alto valor.
+                </p>
+            </div>
+
+            <!-- Grande Showcase do Curso N8N -->
+            <div class="bg-gray-900/95 rounded-3xl border border-gray-800 shadow-2xl overflow-hidden backdrop-blur-sm p-6 sm:p-10 lg:p-12 mb-16 relative">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                     
-                    <div class="space-y-6 z-10 relative">
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start hover:border-brandGreen transition duration-300">
-                            <div class="text-brandOrange mt-1 mr-4">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    <!-- Lado Esquerdo: Imagem / Banner do Curso com Badges -->
+                    <div class="lg:col-span-5 flex flex-col items-center">
+                        <div class="relative w-full max-w-md rounded-2xl overflow-hidden border-2 border-brandOrange/40 shadow-2xl group">
+                            <img src="cursos/n8n/icone_grupo_vip_agente3d_n8n.jpg" alt="Curso N8N Academia Agente3d" class="w-full h-auto object-cover transform group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/40 to-transparent"></div>
+                            
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-brandOrange text-white text-xs font-extrabold uppercase px-3 py-1.5 rounded-lg shadow-lg tracking-wide flex items-center gap-1.5">
+                                    🔥 Lançamento Oficial
+                                </span>
                             </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-900 mb-2">Atendimento Inteligente (Chatwoot)</h4>
-                                <p class="text-gray-600 text-sm leading-relaxed">Centralizamos seu WhatsApp, Instagram e E-mail em uma única tela. Implementamos a plataforma e treinamos sua equipe para não perder mais nenhuma venda por demora no atendimento.</p>
+
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <p class="text-white font-bold text-lg leading-snug drop-shadow-md">N8N Academia Agente3d</p>
+                                <p class="text-orange-300 text-xs font-medium">Turma Exclusiva dos 100 Primeiros Alunos</p>
                             </div>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start hover:border-brandGreen transition duration-300">
-                            <div class="text-brandOrange mt-1 mr-4">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+
+                        <!-- Mini Recursos Rápido Abaixo da Imagem -->
+                        <div class="w-full max-w-md mt-6 grid grid-cols-3 gap-2.5 text-center">
+                            <div class="bg-gray-800/80 border border-gray-700/60 p-3 rounded-xl shadow-sm">
+                                <span class="block text-brandOrange font-black text-xl">4</span>
+                                <span class="text-[11px] text-gray-300 leading-tight block font-medium">Mundos Práticos</span>
                             </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-900 mb-2">Engenharia de Automações</h4>
-                                <p class="text-gray-600 text-sm leading-relaxed">Criamos fluxos inteligentes que conectam seus sistemas. Nossas Automações trabalham em segundo plano gerenciando dados para que sua equipe foque na estratégia.</p>
+                            <div class="bg-gray-800/80 border border-gray-700/60 p-3 rounded-xl shadow-sm">
+                                <span class="block text-brandGreen font-black text-xl">100%</span>
+                                <span class="text-[11px] text-gray-300 leading-tight block font-medium">Interativo</span>
+                            </div>
+                            <div class="bg-gray-800/80 border border-gray-700/60 p-3 rounded-xl shadow-sm">
+                                <span class="block text-amber-400 font-black text-xl">VIP</span>
+                                <span class="text-[11px] text-gray-300 leading-tight block font-medium">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lado Direito: Conteúdo, Metodologia e Destaques -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-brandGreen">Método Revolucionário Prático</span>
+                            <h3 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+                                O fim dos tutoriais soltos do YouTube.
+                            </h3>
+                            <p class="text-gray-300 text-base leading-relaxed mt-3">
+                                Esqueça vídeos teóricos onde você só assiste passivamente sem aprender de verdade. Na <strong>N8N Academia Agente3d</strong>, você estuda em um <strong>simulador interativo real</strong>: o mentor virtual ensina o conceito, mostra onde clicar e você conecta os nós na prática. Se errar, recebe dicas instantâneas.
+                            </p>
+                        </div>
+
+                        <!-- Os 4 Mundos do Curso -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div class="bg-gray-800/60 border border-gray-700/70 p-4 rounded-2xl hover:border-brandOrange/60 transition duration-300">
+                                <div class="flex items-center gap-2.5 text-brandOrange font-bold text-sm mb-1.5">
+                                    <span class="w-6 h-6 rounded-lg bg-brandOrange/20 flex items-center justify-center text-xs font-black">1</span>
+                                    Mundo 1 · Primeiros Passos
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed">
+                                    Gatilhos, nós de dados, Edit Fields, lógica de JSON, expressões <code class="text-orange-300 bg-gray-900 px-1 py-0.5 rounded">{{ $json.campo }}</code> e manipulação sem medo.
+                                </p>
+                            </div>
+
+                            <div class="bg-gray-800/60 border border-gray-700/70 p-4 rounded-2xl hover:border-brandOrange/60 transition duration-300">
+                                <div class="flex items-center gap-2.5 text-brandOrange font-bold text-sm mb-1.5">
+                                    <span class="w-6 h-6 rounded-lg bg-brandOrange/20 flex items-center justify-center text-xs font-black">2</span>
+                                    Mundo 2 · Decisões & Dados
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed">
+                                    Webhooks ao vivo, nós condicionais If e Switch, requisições HTTP REST, filtros e roteamento inteligente de informações.
+                                </p>
+                            </div>
+
+                            <div class="bg-gray-800/60 border border-gray-700/70 p-4 rounded-2xl hover:border-brandGreen/60 transition duration-300">
+                                <div class="flex items-center gap-2.5 text-brandGreen font-bold text-sm mb-1.5">
+                                    <span class="w-6 h-6 rounded-lg bg-brandGreen/20 flex items-center justify-center text-xs font-black">3</span>
+                                    Mundo 3 · Automação de Negócios
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed">
+                                    Tratamento de erros avançado, bancos de dados, integrações com planilhas, gateways de pagamento e rotinas empresariais.
+                                </p>
+                            </div>
+
+                            <div class="bg-gray-800/60 border border-gray-700/70 p-4 rounded-2xl hover:border-brandGreen/60 transition duration-300">
+                                <div class="flex items-center gap-2.5 text-brandGreen font-bold text-sm mb-1.5">
+                                    <span class="w-6 h-6 rounded-lg bg-brandGreen/20 flex items-center justify-center text-xs font-black">4</span>
+                                    Mundo 4 · Agentes de IA & Escala
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed">
+                                    n8n com OpenAI/Claude, integração com Chatwoot e WhatsApp, criando agentes autônomos que atendem e vendem no automático.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- O que está incluso -->
+                        <div class="border-t border-gray-800 pt-4">
+                            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Tudo o que está incluso no seu acesso:</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-gray-300">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-brandGreen flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>3 meses de acesso total à plataforma do simulador</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-brandGreen flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Apostila Inteligente Completa (código e exercícios)</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-brandGreen flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Comunidade VIP no WhatsApp para tirar dúvidas</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-brandGreen flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>5 mentores virtuais, tutor e certificado de conclusão</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bloco: Cursos -->
-                <div class="bg-gray-900 rounded-3xl p-8 md:p-12 border border-gray-800 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brandOrange opacity-10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-125 duration-500"></div>
-                    <div class="flex items-center mb-8">
-                        <div class="w-16 h-16 bg-brandOrange text-white rounded-2xl flex items-center justify-center shadow-lg mr-5">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
+                <!-- CARD DE OFERTA E CHECKOUT DE VENDAS -->
+                <div class="mt-10 bg-gradient-to-r from-gray-900 via-gray-850 to-gray-900 border-2 border-brandOrange/40 rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brandOrange/15 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        
+                        <!-- Preço & Escassez -->
+                        <div class="text-center lg:text-left space-y-1.5">
+                            <div class="inline-flex items-center gap-1.5 bg-orange-500/20 text-brandOrange border border-orange-500/30 text-xs font-extrabold uppercase px-3 py-1 rounded-full mb-1">
+                                <span>⚡</span> Promoção de Lançamento · Turma dos 100 Primeiros
+                            </div>
+                            <div class="flex items-baseline justify-center lg:justify-start gap-2">
+                                <span class="text-sm text-gray-400 font-medium">De <span class="line-through">R$ 98,00</span> por</span>
+                                <span class="text-4xl sm:text-5xl font-black text-white">6x <span class="text-brandOrange">R$ 16,33</span></span>
+                            </div>
+                            <p class="text-sm text-gray-300 font-medium">
+                                ou à vista por apenas <strong class="text-brandGreen text-base font-black">R$ 88,20 no Pix</strong> (10% de desconto imediato).
+                            </p>
+                            <p class="text-xs text-orange-400/90 font-semibold">
+                                *Preço exclusivo para os 100 primeiros alunos inscritos.
+                            </p>
                         </div>
-                        <h3 class="text-3xl font-bold text-white">Para Você (Cursos)</h3>
+
+                        <!-- Botões de Ação Direta -->
+                        <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 w-full lg:w-auto">
+                            <!-- Botão Pix -->
+                            <a href="https://pag.ae/82kKqTCnM" target="_blank" class="w-full sm:w-auto px-6 py-4 bg-brandGreen hover:bg-brandGreenDark text-white font-black rounded-xl shadow-xl transition duration-200 text-center flex items-center justify-center gap-2 transform hover:scale-105">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                Pagar no Pix · R$ 88,20
+                            </a>
+
+                            <!-- Botão Cartão -->
+                            <a href="https://pag.ae/82kKi4Z2J" target="_blank" class="w-full sm:w-auto px-6 py-4 bg-brandOrange hover:bg-brandOrangeDark text-white font-black rounded-xl shadow-xl transition duration-200 text-center flex items-center justify-center gap-2 transform hover:scale-105">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                Cartão (6x de R$ 16,33)
+                            </a>
+
+                            <!-- Botão Página de Vendas Completa -->
+                            <a href="cursos/n8n/pagina-de-vendas.html" class="w-full sm:w-auto px-5 py-4 bg-gray-800 hover:bg-gray-700 text-gray-200 hover:text-white font-bold rounded-xl border border-gray-700 transition duration-200 text-center flex items-center justify-center gap-2 text-sm shadow-md">
+                                Ver Página de Vendas Completa <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
                     </div>
-                    <p class="text-gray-400 mb-8 font-medium text-lg">Aprenda com nossos especialistas e domine as ferramentas que estão moldando o futuro das empresas.</p>
-                    
-                    <div class="space-y-6 z-10 relative">
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-700 flex items-start hover:border-brandOrange transition duration-300">
-                            <div class="text-brandGreen mt-1 mr-4">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-white mb-2">Domine o Chatwoot</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">Do zero ao avançado. Aprenda a configurar, gerenciar e criar caixas de entrada omnichannel imbatíveis para o seu ou qualquer outro negócio.</p>
-                                <a href="javascript:alert('Página do curso em breve!');" class="inline-block mt-4 text-sm text-brandOrange font-bold hover:text-white transition flex items-center">Saiba mais e inscreva-se <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
-                            </div>
+
+                    <!-- Links Rápidos de Degustação, Simulador e Grupo VIP -->
+                    <div class="mt-6 pt-5 border-t border-gray-800 flex flex-wrap items-center justify-between text-xs text-gray-400 gap-4">
+                        <div class="flex items-center gap-5 flex-wrap">
+                            <a href="cursos/n8n/apostila.html" class="text-orange-400 hover:text-orange-300 font-bold underline flex items-center gap-1.5 transition">
+                                📖 Ler Módulo 1 da Apostila Grátis (Degustação)
+                            </a>
+                            <a href="cursos/n8n/index.html" class="text-emerald-400 hover:text-emerald-300 font-bold underline flex items-center gap-1.5 transition">
+                                🕹️ Acessar Simulador Interativo do Aluno
+                            </a>
                         </div>
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-700 flex items-start hover:border-brandOrange transition duration-300">
-                            <div class="text-brandGreen mt-1 mr-4">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-white mb-2">Mestre em Automações</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">Aprenda a criar fluxos visuais que conectam centenas de aplicativos. Construa sistemas no piloto automático sem precisar saber programar código pesado.</p>
-                                <a href="javascript:alert('Página do curso em breve!');" class="inline-block mt-4 text-sm text-brandOrange font-bold hover:text-white transition flex items-center">Saiba mais e inscreva-se <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
-                            </div>
-                        </div>
+                        <a href="https://chat.whatsapp.com/CLUu662jFtvL9r2ahPaOJa" target="_blank" class="text-gray-300 hover:text-white transition flex items-center gap-1.5 font-bold">
+                            <svg class="w-4 h-4 text-brandGreen" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.155.57 4.178 1.565 5.928l-1.636 5.975 6.136-1.611c1.705.933 3.662 1.464 5.748 1.464 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
+                            Entrar no Grupo VIP do WhatsApp
+                        </a>
                     </div>
                 </div>
 
             </div>
+
+            <!-- Outros Cursos / Trilha de Especialização -->
+            <div class="mt-8">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-white">Outros Treinamentos da Trilha Agente3d</h3>
+                    <p class="text-sm text-gray-400 mt-1">Domine o ecossistema completo de atendimento e inteligência artificial.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Curso Chatwoot -->
+                    <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 hover:border-brandGreen/60 transition duration-300 flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider text-brandGreen bg-emerald-950/80 border border-brandGreen/30 px-3 py-1 rounded-full">Atendimento & Suporte</span>
+                                <span class="text-xs text-gray-400 font-medium">Turma Aberta</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-white mb-2">Domine o Chatwoot</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                Do zero ao avançado. Aprenda a instalar, configurar departamentos, caixas de entrada omnichannel (WhatsApp, Instagram, Telegram) e transformar o atendimento da sua empresa em uma máquina de vendas.
+                            </p>
+                        </div>
+                        <a href="https://wa.me/5574998161911?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20curso%20Domine%20o%20Chatwoot." target="_blank" class="inline-flex items-center text-sm font-bold text-brandGreen hover:text-emerald-300 transition pt-4 border-t border-gray-800">
+                            Saiba mais sobre o Curso de Chatwoot <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+
+                    <!-- Curso Agentes de IA -->
+                    <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 hover:border-brandOrange/60 transition duration-300 flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider text-brandOrange bg-orange-950/80 border border-brandOrange/30 px-3 py-1 rounded-full">Inteligência Artificial</span>
+                                <span class="text-xs text-gray-400 font-medium">Em Breve</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-white mb-2">Formação Agentes Autônomos de IA</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                Aprenda a integrar LLMs (GPT-4o, Claude 3.5, Gemini) diretamente aos seus fluxos de n8n e Chatwoot, com memória conversacional, ferramentas customizadas e automação de decisões complexas.
+                            </p>
+                        </div>
+                        <a href="https://wa.me/5574998161911?text=Ol%C3%A1!%20Quero%20entrar%20na%20lista%20de%20espera%20da%20Forma%C3%A7%C3%A3o%20em%20Agentes%20de%20IA." target="_blank" class="inline-flex items-center text-sm font-bold text-brandOrange hover:text-orange-300 transition pt-4 border-t border-gray-800">
+                            Entrar na Lista de Espera VIP <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -670,7 +944,8 @@
                 <p class="text-gray-400 mt-2 text-sm">Construindo soluções digitais de impacto.</p>
             </div>
             <div class="flex space-x-6 text-sm">
-                <a href="#solucoes" class="text-gray-400 hover:text-brandOrange transition">Serviços</a>
+                <a href="#consultoria" class="text-gray-400 hover:text-brandOrange transition">Consultoria</a>
+                <a href="#cursos" class="text-gray-400 hover:text-brandOrange transition">Cursos & n8n</a>
                 <a href="#projetos" class="text-gray-400 hover:text-brandOrange transition">Vitrine</a>
                 <a href="#blog" class="text-gray-400 hover:text-brandOrange transition">Blog</a>
                 <a href="#contato" class="text-gray-400 hover:text-brandOrange transition">Contato</a>
