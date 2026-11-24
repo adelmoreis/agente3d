@@ -1,0 +1,32 @@
+services:
+  curso-n8n:
+    build:
+      context: ./n8n
+      dockerfile: Dockerfile
+    container_name: curso-n8n
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - n8n_dados:/app/dados
+    environment:
+      - PORT=8080
+
+  curso-chatwoot:
+    build:
+      context: ./chatwoot
+      dockerfile: Dockerfile
+    container_name: curso-chatwoot
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    volumes:
+      - chatwoot_dados:/app/dados
+      - chatwoot_audio:/app/audio
+    environment:
+      - PORT=8080
+
+volumes:
+  n8n_dados:
+  chatwoot_dados:
+  chatwoot_audio:

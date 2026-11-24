@@ -430,6 +430,32 @@ pre.js{margin:0;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;background:#
 .gph{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;max-width:1100px;margin:0 auto 14px}
 .gph h1{margin:0;font-size:26px}.gph p{margin:4px 0 0;color:#666}
 
+.cg-hub{background:linear-gradient(135deg,#121124 0%,#1e183a 100%);color:#fff;border-radius:18px;padding:18px 22px;margin:0 auto 16px;max-width:1100px;display:flex;flex-direction:column;gap:14px;box-shadow:0 12px 36px rgba(10,8,28,.28);border:1px solid rgba(255,255,255,.09)}
+.cg-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.cg-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,#8b5cf6,#ec4899);color:#fff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:99px}
+.cg-top h2{margin:3px 0 0;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.cg-top p{margin:2px 0 0;color:#a5a3c2;font-size:13px}
+.cg-selector{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.cg-pill{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;color:#fff;cursor:pointer;transition:all .2s ease;text-align:left;position:relative}
+.cg-pill:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
+.cg-pill.active{background:linear-gradient(135deg,rgba(91,78,232,.45),rgba(124,58,237,.25));border-color:#8b5cf6;box-shadow:0 0 20px rgba(139,92,246,.45)}
+.cg-pill-text{display:flex;flex-direction:column}
+.cg-pill-text b{font-size:14.5px;line-height:1.2}
+.cg-pill-text small{font-size:11.5px;color:#b4b2d6;margin-top:2px}
+.cg-pill.active .cg-pill-text small{color:#ddd6fe;font-weight:600}
+.cg-icon{font-size:24px;line-height:1}
+.cg-status-dot{width:10px;height:10px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;display:inline-block;animation:cgPulse 2s infinite}
+@keyframes cgPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+.cg-quick{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px}
+.cg-quick-links{display:flex;gap:8px;flex-wrap:wrap}
+.cg-ext{color:#c4b5fd;text-decoration:none;font-weight:600;padding:5px 12px;border-radius:8px;background:rgba(167,139,250,.12);transition:all .2s;border:1px solid rgba(167,139,250,.2)}
+.cg-ext:hover{background:rgba(167,139,250,.3);color:#fff}
+.cg-indicator{max-width:1100px;margin:0 auto 12px;background:#f0eefd;border:1px solid #dcd5fb;border-radius:10px;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:600;color:#4338ca}
+.cbadge{display:inline-block;font-size:10.5px;font-weight:800;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-right:6px}
+.cbadge.n8n{background:#eeecff;color:#4a3fd0;border:1px solid #d4cffb}
+.cbadge.cw{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd}
+.cbadge.combo{background:#fdf2f8;color:#be185d;border:1px solid #fbcfe8}
+
 .home{min-height:100vh;max-width:1080px;margin:0 auto;padding:22px max(16px,env(safe-area-inset-left,0px)) 120px;background:var(--bg)}
 .hh{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
 .hh .logo{margin:0}
@@ -762,15 +788,6 @@ body{margin:0}
 .node.hk .sq{border-radius:40px 9px 9px 40px}.node.hk .sq svg{width:36px;height:36px;color:inherit}.node.hk .hout{position:absolute;right:-8px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;border:1.5px solid #8a8a94;background:#fff;box-sizing:border-box}.node.hk .mth{position:absolute;left:calc(100% + 14px);top:50%;transform:translateY(-135%);font-size:11px;font-weight:700;color:#6b6b9a;letter-spacing:.03em;z-index:3;pointer-events:none}
 .node.hk .sq::after{content:"";position:absolute;left:calc(100% + 6px);top:50%;width:62px;border-top:2px solid #9a9aa5}.node.hk.l .sq::after{display:none}#m21Plus{left:calc(50% + 98px)}
 .win .card.intro{max-height:88vh;overflow:auto;max-width:640px}.win .card.intro h3{margin:14px 0 4px;font-size:15px}.win .card.intro p{margin:4px 0;font-size:14px;line-height:1.5}.ivs{display:grid;gap:6px;margin:6px 0}.ivw{background:#f6f3ff;border:1px solid #e1dafc;border-radius:10px;padding:8px 10px;text-align:left}.ivw b{display:block;font-size:13.5px}.ivw span{font-size:12.5px;color:#555}.ifn{display:inline-block;font-size:12px;color:#5b3fd1}
-
-/* Suporte Chatwoot no Login */
-.login-support-box{margin-top:16px;background:var(--info-soft,#eeedfd);border:1px solid #dcd7fa;color:#1f1f23;padding:12px 14px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left}
-.login-support-box b{display:block;font-size:12.5px;color:#3b2fc9;margin-bottom:2px}
-.login-support-box span{font-size:11.5px;color:#5b4ee8}
-.login-support-btn{display:inline-flex;align-items:center;gap:6px;background:#5b4ee8;color:#ffffff!important;text-decoration:none;padding:7px 13px;border-radius:8px;font-weight:700;font-size:12px;border:none;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(91,78,232,.35);transition:transform .15s ease,background .15s ease;flex-shrink:0}
-.login-support-btn:hover{background:#4b3ecb;transform:scale(1.02)}
-@media(max-width:480px){.login-support-box{flex-direction:column;align-items:flex-start}.login-support-btn{width:100%;justify-content:center}}
-
 </style>
 
 <div id="root"></div>
@@ -803,33 +820,18 @@ body{margin:0}
    return r.json().catch(function(){return {};}).then(function(j){if(!r.ok){var e=new Error(j.err||('http'+r.status));e.code=j.err||r.status;e.status=r.status;throw e;}return j;});});
  }
  var pollers=[];
- var _syncChan=null;
- try{
-   if(typeof BroadcastChannel!=='undefined'){
-     _syncChan=new BroadcastChannel('a3d_sync_bus');
-     _syncChan.onmessage=function(){bump();};
-   }
-   window.addEventListener('storage',function(ev){if(ev.key==='a3d_bus_ping')bump();});
- }catch(e){}
  function bump(){pollers.slice().forEach(function(f){try{f();}catch(e){}});}
- function bumpAll(){
-   bump();
-   try{
-     if(_syncChan)_syncChan.postMessage({t:Date.now()});
-     localStorage.setItem('a3d_bus_ping',Date.now());
-   }catch(e){}
- }
  function rsnap(id,ex,d){return {id:id,exists:!!ex,data:function(){return ex?JSON.parse(JSON.stringify(d)):undefined},metadata:{}};}
  function wr(p){return p;}
  var rdb={doc:function(p){var id=p.split('/').pop(),u='doc?path='+encodeURIComponent(p);return {id:id,path:p,
    get:function(){return api('GET',u).then(function(j){return rsnap(id,j.exists,j.data);});},
-   set:function(d){return api('PUT',u,d).then(function(r){setTimeout(bumpAll,50);return r;});},
-   update:function(d){return api('PATCH',u,d).then(function(r){setTimeout(bumpAll,50);return r;});},
-   delete:function(){return api('DELETE',u).then(function(r){setTimeout(bumpAll,50);return r;});},
+   set:function(d){return api('PUT',u,d).then(function(r){setTimeout(bump,50);return r;});},
+   update:function(d){return api('PATCH',u,d).then(function(r){setTimeout(bump,50);return r;});},
+   delete:function(){return api('DELETE',u).then(function(r){setTimeout(bump,50);return r;});},
    onSnapshot:function(n,er){var last=null,dead=false,f=function(){if(dead)return;api('GET',u).then(function(j){var k=JSON.stringify(j);if(k!==last){last=k;n(rsnap(id,j.exists,j.data));}}).catch(function(e){if(last===null){last='x';if(er)er(e);}});};
-    pollers.push(f);setTimeout(f,0);var t=setInterval(f,1500);return function(){dead=true;clearInterval(t);pollers=pollers.filter(function(x){return x!==f});};}};},
+    pollers.push(f);setTimeout(f,0);var t=setInterval(f,3000);return function(){dead=true;clearInterval(t);pollers=pollers.filter(function(x){return x!==f});};}};},
   collection:function(c){return {onSnapshot:function(n,er){var last=null,dead=false,f=function(){if(dead)return;api('GET','col?name='+encodeURIComponent(c)).then(function(j){var k=JSON.stringify(j);if(k!==last){last=k;var ds=j.docs.map(function(x){return rsnap(x.id,true,x.data);});n({docs:ds,size:ds.length,empty:!ds.length});}}).catch(function(e){if(last===null){last='x';if(er)er(e);}});};
-    pollers.push(f);setTimeout(f,0);var t=setInterval(f,1500);return function(){dead=true;clearInterval(t);pollers=pollers.filter(function(x){return x!==f});};}};}};
+    pollers.push(f);setTimeout(f,0);var t=setInterval(f,3000);return function(){dead=true;clearInterval(t);pollers=pollers.filter(function(x){return x!==f});};}};}};
  var ruser={isOwner:function(){return Promise.resolve(false)},canEdit:function(){return Promise.resolve(false)},id:function(){return Promise.resolve(UID)},profiles:user.profiles,search:user.search};
  A.api=api;A.uid=UID;
  A.salt=function(u){return api('GET','salt?user='+encodeURIComponent(u));};
@@ -837,7 +839,7 @@ body{margin:0}
  A.adminSalt=function(){return api('GET','adminsalt');};
  A.admin=function(e,h){return api('POST','admin',{email:e,h:h}).then(function(j){TOK=j.token;return j;});};
  A.download=function(path,name){return fetch('/api/'+path,{headers:{'X-Token':TOK,'X-Uid':UID},cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('http');return r.blob();}).then(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(a.href);},500);});};
-  var ready=(location.protocol==='http:'||location.protocol==='https:')?Promise.race([fetch('/api/ping',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){return !!(j&&j.ok);}),new Promise(function(r){setTimeout(function(){r(false);},10000);})]).catch(function(){return false;}):Promise.resolve(false);
+ var ready=(location.protocol==='http:'||location.protocol==='https:')?Promise.race([fetch('/api/ping',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){return !!(j&&j.ok);}),new Promise(function(r){setTimeout(function(){r(false);},2500);})]).catch(function(){return false;}):Promise.resolve(false);
  window.claude={a3d:A,use:function(n){return ready.then(function(rem){A.remote=!!rem;return n==='db'?(rem?rdb:db):n==='user'?(rem?ruser:user):null;});}};
 })();
 </script>
@@ -1269,7 +1271,10 @@ function capaView(){
   mentorEl.classList.add('hidden');gestorPill();
 }
 function loginView(){
-  realLoginView();
+  if(CL.ready&&CL.db&&!CL.admin){realLoginView();return;}
+  root.innerHTML='<div class="center"><div class="card">'+LOGO()+'<h1>Sign in</h1><p class="sub">Entre no ambiente de treino. Aqui você pratica como no n8n de verdade, sem risco de estragar nada.</p><form id="f" novalidate><div class="field"><label for="em">Email</label><input id="em" type="text" inputmode="email" value="aluno@academia.com" autocomplete="off"></div><div class="field"><label for="pw">Password</label><input id="pw" type="password" value="treino1234" autocomplete="off"></div><button class="btn full" type="submit" id="go">Sign in</button></form><p class="note">Esta é a tela de treino do n8n (não é o seu login do curso). Pode clicar em Sign in com o que já está preenchido: qualquer e-mail e senha funcionam aqui.</p></div></div>';
+  $('#f').addEventListener('submit',function(e){e.preventDefault();S.logged=true;save();route();});
+  mentorEl.classList.add('hidden');gestorPill();
 }
 function onboardView(){
   var sel=S.av;
@@ -1602,13 +1607,13 @@ function homeClassic(){
   var cards=SUMARIO.map(function(w){
     var its=w.it.map(function(i){
       var ok=wOpen(w)&&S[i[0]];
-      return '<li class="'+(ok?'ok':'')+'"'+(wOpen(w)?' data-mis="'+i[0]+'" style="cursor:pointer" title="Abrir missão"':'')+'><span class="hk">'+(ok?'&#10003;':(wOpen(w)?'&bull;':'&#128274;'))+'</span><span class="hn">'+esc(i[1])+'</span><span class="ht">'+esc(i[2])+'</span>'+(wOpen(w)?apLink(i[0]):'')+'</li>';
+      return '<li class="'+(ok?'ok':'')+'"><span class="hk">'+(ok?'&#10003;':(wOpen(w)?'&bull;':'&#128274;'))+'</span><span class="hn">'+esc(i[1])+'</span><span class="ht">'+esc(i[2])+'</span>'+(wOpen(w)?apLink(i[0]):'')+'</li>';
     }).join('');
     return '<section class="hw'+(wOpen(w)?'':' soon')+'"><h3><i>'+w.n+'</i>Mundo '+w.n+' &middot; '+esc(w.t)+(wOpen(w)?'':'<small>'+wLabel(w)+'</small>')+'</h3><ul>'+its+'</ul></section>';
   }).join('');
   root.innerHTML='<div class="home"><header class="hh">'+LOGO()+'<div class="hhr"><span class="hxp">'+(S.xp||0)+' XP</span>'+(CL&&CL.admin?'<button type="button" class="hbt pri" id="gbtn">Painel do gestor</button>':'')+'<button type="button" class="hbt" id="hap" title="Abrir a apostila, o material de apoio do curso">Apostila</button><button type="button" class="hbt" id="hvis" title="Trocar o visual da tela principal">Visual: Trilha</button><button type="button" class="hbt" id="hexit">Sair do curso</button></div></header>'+
    '<div class="hhero"><div class="hcopy"><p class="hey">Bem-vindo(a), '+esc(S.name)+'</p><h1>Você vai aprender n8n <em>fazendo</em>.</h1><p class="hp">Em cada missão você monta um workflow de verdade, passo a passo, com o mentor te mostrando onde clicar. Sem risco de estragar nada.</p>'+
-   goalBox()+'<div class="hbtns"><button class="btn big" type="button" id="hgo">'+(done?(m2perm()&&m2Next()?m2Label():((S.q2||m3perm())&&m3Which()?m3Label():((S.q3||m4perm())&&m4Which()?m4Label():(S.q4?'Ver meu certificado':'Rever o curso')))):(any?'Continuar de onde parei':'Começar o curso'))+'</button><button class="btn ghost" type="button" id="hsay">&#9654; Ouvir a apresentação</button>'+(S.cert?'<button class="btn ghost" type="button" id="hcert">Ver meu certificado</button>':'')+'</div></div>'+homeShot()+'</div>'+
+   goalBox()+'<div class="hbtns"><button class="btn big" type="button" id="hgo">'+(done?(m2perm()&&m2Next()?m2Label():(S.q2&&m3Which()?m3Label():(S.q3&&m4Which()?m4Label():(S.q4?'Ver meu certificado':'Rever o curso')))):(any?'Continuar de onde parei':'Começar o curso'))+'</button><button class="btn ghost" type="button" id="hsay">&#9654; Ouvir a apresentação</button>'+(S.cert?'<button class="btn ghost" type="button" id="hcert">Ver meu certificado</button>':'')+'</div></div>'+homeShot()+'</div>'+
    '<h2 class="hsum">O que você vai aprender</h2><div class="hgrid">'+cards+'</div></div>';
   homeWire();
 }
@@ -1619,7 +1624,7 @@ try{var _hv=localStorage.getItem('a3d_hv');if(_hv==='classic'||_hv==='painel')HV
 function setHV(v){HV=v;try{localStorage.setItem('a3d_hv',v);}catch(e){}route();}
 function goCourse(){
   try{speechSynthesis.cancel();}catch(e){}
-  if(S.q1&&m2perm()){var _n=m2Next();if(_n==='21'){m21Init();route();return;}if(_n==='22'||_n==='23'||_n==='24'){m2Init(_n);route();return;}if(_n==='q2'){startWorldQuiz(2);return;}if(!_n&&(S.q2||m3perm())){var _n3=m3Which();if(_n3==='31'||_n3==='32'||_n3==='33'){m3Init(_n3);route();return;}if(_n3==='q3'){startWorldQuiz(3);return;}if(!_n3&&(S.q3||m4perm())){var _n4=m4Which();if(_n4==='41'||_n4==='42'||_n4==='43'){m4Init(_n4);route();return;}if(_n4==='q4'){startWorldQuiz(4);return;}if(!_n4&&S.cert){certWin();return;}}}}
+  if(S.q1&&m2perm()){var _n=m2Next();if(_n==='21'){m21Init();route();return;}if(_n==='22'||_n==='23'||_n==='24'){m2Init(_n);route();return;}if(_n==='q2'){startWorldQuiz(2);return;}if(!_n&&S.q2){var _n3=m3Which();if(_n3==='31'||_n3==='32'||_n3==='33'){m3Init(_n3);route();return;}if(_n3==='q3'){startWorldQuiz(3);return;}if(!_n3){var _n4=m4Which();if(_n4==='41'||_n4==='42'||_n4==='43'){m4Init(_n4);route();return;}if(_n4==='q4'){startWorldQuiz(4);return;}if(!_n4&&S.cert){certWin();return;}}}}
   if(V.trig||V.ed){V.view='editor';route();return;}
   if(S.mine&&S.m11){openMine();return;}
   V.view='list';route();
@@ -1686,18 +1691,6 @@ function homeWire(){
   if(q('gbtn'))q('gbtn').addEventListener('click',openGestor);
   if(q('hvis'))q('hvis').addEventListener('click',function(){setHV(HV==='painel'?'classic':'painel');});
   document.querySelectorAll('[data-q]').forEach(function(b){b.addEventListener('click',function(){startWorldQuiz(+b.dataset.q);});});
-  document.querySelectorAll('[data-mis]').forEach(function(li){
-    li.addEventListener('click',function(e){
-      if(e.target.closest('.hapl'))return;
-      var k=li.dataset.mis;
-      if(k==='m21'){m21Init();route();}
-      else if(k==='m22'||k==='m23'||k==='m24'){m2Init(k==='m24'?'24':k==='m23'?'23':'22');route();}
-      else if(k==='m31'||k==='m32'||k==='m33'){m3Init(k.slice(1));route();}
-      else if(k==='m41'||k==='m42'||k==='m43'){m4Init(k.slice(1));route();}
-      else if(/^q\d/.test(k)){startWorldQuiz(+k.slice(1));}
-      else if(k==='m11'||k==='m12'||k==='m13'){V.view='list';route();}
-    });
-  });
   var qz=q('hquiz1');if(qz)qz.addEventListener('click',startQuiz);
   homeSay(false);
   if(S.logged&&S.av>=0&&(!S.intro||!S.ap))setTimeout(function(){if(GLOGIN||document.querySelector('.win'))return;if(!S.intro)introWin(false);else if(!S.ap)apWin(false);},500);
@@ -1709,11 +1702,8 @@ function levelInfo(xp){
   return {n:i+1,name:cur[1],next:nx?nx[1]:'',pct:nx?Math.round((xp-cur[0])/(nx[0]-cur[0])*100):100,left:nx?nx[0]-xp:0};
 }
 function skperm(){var p=CL&&CL.st&&CL.st.perms;return !!(p&&p.sk);}
-function m1perm(){var p=CL&&CL.st&&CL.st.perms;return p?p.m1!==false:true;}
 function m2perm(){var p=CL&&CL.st&&CL.st.perms;return p?!!p.m2:!!S.m2t;}
-function m3perm(){var p=CL&&CL.st&&CL.st.perms;return p?!!p.m3:false;}
-function m4perm(){var p=CL&&CL.st&&CL.st.perms;return p?!!p.m4:false;}
-function wOpen(w){return (w.n===1&&m1perm())||(w.n===2&&m2perm())||(w.n===3&&(m3perm()||!!S.q2))||(w.n===4&&(m4perm()||!!S.q3));}
+function wOpen(w){return !!w.open||(w.n===2&&m2perm())||(w.n===3&&!!S.q2)||(w.n===4&&!!S.q3);}
 function m4Which(){return !S.m41?'41':!S.m42?'42':!S.m43?'43':!S.q4?'q4':'';}
 function m4Label(){var k=m4Which();return k==='41'?'Começar a Missão 4.1':k==='42'?'Começar a Missão 4.2':k==='43'?'Começar o projeto final':k==='q4'?'Fazer o quiz final':'Rever o curso';}
 function m3Which(){return !S.m31?'31':!S.m32?'32':!S.m33?'33':!S.q3?'q3':'';}
@@ -1731,14 +1721,14 @@ function nextMission(){
   if(m2perm()&&!S.m23)return {k:'2.3',t:'If e Switch',d:'Decida o caminho do pedido: If para sim ou não e Switch para vários caminhos.',go:'course'};
   if(m2perm()&&!S.m24)return {k:'2.4',t:'Projeto do Mundo 2',d:S.goal==='biz'?'Monte o fluxo de um pedido da sua loja: Webhook, CEP e decisão. No fim, você escreve o plano da sua automação.':'Monte o fluxo completo: Webhook, HTTP Request e If, tudo junto.',go:'course'};
   if(m2perm()&&!S.q2)return {k:'Quiz',t:'Quiz do Mundo 2',d:'5 perguntas. Com 4 acertos você conclui o Mundo 2.',go:'quiz2'};
-  if((m3perm()||S.q2)&&!S.m31)return {k:'3.1',t:'Erros e alertas',d:'Um pedido chega com o CEP errado. Faça o fluxo avisar a equipe em vez de quebrar.',go:'course'};
-  if((m3perm()||S.q2)&&!S.m32)return {k:'3.2',t:'Loop Over Items',d:'A loja manda vários pedidos de uma vez. Trate um por vez, no ritmo certo.',go:'course'};
-  if((m3perm()||S.q2)&&!S.m33)return {k:'3.3',t:'Sub-workflows',d:'Guarde a busca de CEP em um workflow separado e chame quando precisar.',go:'course'};
-  if((m3perm()||S.q2)&&!S.q3)return {k:'Quiz',t:'Quiz do Mundo 3',d:'5 perguntas. Com 4 acertos você conclui o Mundo 3.',go:'quiz3'};
-  if((m4perm()||S.q3)&&!S.m41)return {k:'4.1',t:'Seu primeiro Agente de IA',d:'Monte um agente com chat, cérebro e uma ferramenta: o Buscar CEP que você criou.',go:'course'};
-  if((m4perm()||S.q3)&&!S.m42)return {k:'4.2',t:'Memória e saída estruturada',d:'Faça o agente lembrar da conversa e responder em campos fixos.',go:'course'};
-  if((m4perm()||S.q3)&&!S.m43)return {k:'4.3',t:'Projeto final',d:'Junte tudo: Webhook, If, AI Agent e Telegram em uma automação completa.',go:'course'};
-  if((m4perm()||S.q3)&&!S.q4)return {k:'Quiz',t:'Quiz final',d:'15 perguntas com tudo o que você viu. Com 12 acertos você recebe o certificado.',go:'quiz4'};
+  if(S.q2&&!S.m31)return {k:'3.1',t:'Erros e alertas',d:'Um pedido chega com o CEP errado. Faça o fluxo avisar a equipe em vez de quebrar.',go:'course'};
+  if(S.q2&&!S.m32)return {k:'3.2',t:'Loop Over Items',d:'A loja manda vários pedidos de uma vez. Trate um por vez, no ritmo certo.',go:'course'};
+  if(S.q2&&!S.m33)return {k:'3.3',t:'Sub-workflows',d:'Guarde a busca de CEP em um workflow separado e chame quando precisar.',go:'course'};
+  if(S.q2&&!S.q3)return {k:'Quiz',t:'Quiz do Mundo 3',d:'5 perguntas. Com 4 acertos você conclui o Mundo 3.',go:'quiz3'};
+  if(S.q3&&!S.m41)return {k:'4.1',t:'Seu primeiro Agente de IA',d:'Monte um agente com chat, cérebro e uma ferramenta: o Buscar CEP que você criou.',go:'course'};
+  if(S.q3&&!S.m42)return {k:'4.2',t:'Memória e saída estruturada',d:'Faça o agente lembrar da conversa e responder em campos fixos.',go:'course'};
+  if(S.q3&&!S.m43)return {k:'4.3',t:'Projeto final',d:'Junte tudo: Webhook, If, AI Agent e Telegram em uma automação completa.',go:'course'};
+  if(S.q3&&!S.q4)return {k:'Quiz',t:'Quiz final',d:'15 perguntas com tudo o que você viu. Com 12 acertos você recebe o certificado.',go:'quiz4'};
   if(S.q4)return {k:'Fim',t:'Curso concluído',d:'Parabéns! Seu certificado de participação está pronto.',go:'review'};
   return {k:'Aguardando',t:'Mundo 2 aguardando liberação',d:'Você concluiu o Mundo 1! Agora é com o seu mentor: ele vai liberar o Mundo 2 para você. Enquanto isso, refaça o quiz ou reveja as missões.',go:'review'};
 }
@@ -1747,13 +1737,13 @@ function homePainel(){
   var m1=[S.m11,S.m12,S.m13,S.q1].filter(Boolean).length,any=S.m11||S.m12||S.m13||S.q1,done=S.q1,av=AVS[S.av]||AVS[0];
   var stops=SUMARIO.map(function(w,k){
     var st=wOpen(w)?((w.n===1?S.q1:w.n===2?S.q2:w.n===3?S.q3:S.q4)?'done':'cur'):(w.n===2&&S.q1?'wait':'lock');
-    var its=w.it.map(function(i){var ok=wOpen(w)&&S[i[0]];return '<li class="'+(ok?'ok':(wOpen(w)?'todo':'lk'))+'"'+(wOpen(w)?' data-mis="'+i[0]+'" style="cursor:pointer" title="Abrir missão"':'')+'><span class="zk">'+(ok?'&#10003;':(wOpen(w)?'&bull;':'&#128274;'))+'</span><span class="zn">'+esc(i[1])+'</span><span class="zt">'+esc(i[2])+'</span>'+(wOpen(w)?apLink(i[0]):'')+'</li>';}).join('');
+    var its=w.it.map(function(i){var ok=wOpen(w)&&S[i[0]];return '<li class="'+(ok?'ok':(wOpen(w)?'todo':'lk'))+'"><span class="zk">'+(ok?'&#10003;':(wOpen(w)?'&bull;':'&#128274;'))+'</span><span class="zn">'+esc(i[1])+'</span><span class="zt">'+esc(i[2])+'</span>'+(wOpen(w)?apLink(i[0]):'')+'</li>';}).join('');
     var tag=st==='cur'?'<span class="ztag cur">Você está aqui</span>':st==='done'?'<span class="ztag ok">Concluído</span>':st==='wait'?'<span class="ztag cur">Aguardando liberação</span>':'<span class="ztag">em breve</span>';
     return '<div class="zz '+(k%2?'r':'l')+' '+st+'"><div class="zc"><div class="zh"><h3>Mundo '+w.n+' &middot; '+esc(w.t)+'</h3>'+tag+'</div><ul>'+its+'</ul></div><div class="zd"><i>'+(st==='done'?'&#10003;':w.n)+'</i></div><div class="zs"></div></div>';
   }).join('');
   root.innerHTML='<div class="tr"><div class="trb" aria-hidden="true"></div><div class="trw"><header class="trh">'+LOGO()+'<div class="hhr"><span class="hxp">'+xp+' XP</span>'+(CL&&CL.admin?'<button type="button" class="hbt pri" id="gbtn">Painel do gestor</button>':'')+'<button type="button" class="hbt" id="hap" title="Abrir a apostila, o material de apoio do curso">Apostila</button><button type="button" class="hbt" id="hvis" title="Trocar o visual da tela principal">Visual: Clássico</button><button type="button" class="hbt" id="hexit">Sair do curso</button></div></header>'+
    '<section class="trhero"><div class="trc"><p class="hey">Bem-vindo(a), '+esc(S.name)+'</p><h1>Você vai aprender n8n <em>fazendo</em>.</h1><p class="hp">Em cada missão você monta um workflow de verdade, passo a passo, com o mentor te mostrando onde clicar. Sem risco de estragar nada.</p>'+
-   goalBox()+'<div class="hbtns"><button class="btn big" type="button" id="hgo">'+(done?(m2perm()&&m2Next()?m2Label():((S.q2||m3perm())&&m3Which()?m3Label():((S.q3||m4perm())&&m4Which()?m4Label():(S.q4?'Ver meu certificado':'Rever o curso')))):(any?'Continuar de onde parei':'Começar o curso'))+'</button><button class="btn ghost" type="button" id="hsay">&#9654; Ouvir a apresentação</button>'+(S.cert?'<button class="btn ghost" type="button" id="hcert">Ver meu certificado</button>':'')+'</div>'+
+   goalBox()+'<div class="hbtns"><button class="btn big" type="button" id="hgo">'+(done?(m2perm()&&m2Next()?m2Label():(S.q2&&m3Which()?m3Label():(S.q3&&m4Which()?m4Label():(S.q4?'Ver meu certificado':'Rever o curso')))):(any?'Continuar de onde parei':'Começar o curso'))+'</button><button class="btn ghost" type="button" id="hsay">&#9654; Ouvir a apresentação</button>'+(S.cert?'<button class="btn ghost" type="button" id="hcert">Ver meu certificado</button>':'')+'</div>'+
    '<div class="trchips"><span><b>Nível '+L.n+'</b> '+esc(L.name)+'</span><span><b>'+m1+' de 4</b> no Mundo 1</span><span><b>'+esc(nm.k)+'</b> '+esc(nm.t)+'</span></div></div>'+
    '<div class="trv">'+homeShot()+'<div class="trav" title="'+esc(av.n)+'"><svg viewBox="0 0 120 120" aria-hidden="true">'+av.s+'</svg></div><div class="trxp"><b>'+L.pct+'%</b><span>'+(L.next?'rumo a '+esc(L.next):'nível máximo')+'</span><i><u style="width:'+L.pct+'%"></u></i></div></div></section>'+
    '<h2 class="hsum">O que você vai aprender</h2><section class="ztrail">'+stops+'</section></div></div>';
@@ -4765,16 +4755,9 @@ function cloudAfter(){
   CL.cfg=null;
   var cfgP=CL.db.doc('config/app').get().then(function(sn){CL.cfg=sn.exists?sn.data():null;},function(){});
   if(CL.uid&&!CL.admin){
-    try{CL.db.doc('students/'+(CL.sid||CL.uid)).onSnapshot(function(sn){
-      if(!sn.exists)return;
-      var sd=sn.data();
-      if(sd){
-        CL.st=Object.assign({},CL.st||{},sd);
-        applyStatus();
-      }
-    },function(){});}catch(e){}
+    try{CL.db.doc('students/'+CL.uid).onSnapshot(function(sn){if(CL.sid)return;CL.st=sn.exists?sn.data():null;applyStatus();},function(){});}catch(e){}
   }
-  if(CL.uid&&S.logged&&CL.sid)cloudSync(true);
+  if(CL.uid)cloudSync(true);
   var sess=null;try{sess=JSON.parse(localStorage.getItem(KEY0+'_sess'));}catch(e){}
   cfgP.then(function(){
     if(!CL.admin&&sess&&sess.u&&sess.h&&!S.logged){
@@ -4787,7 +4770,7 @@ function cloudAfter(){
 }
 function errKey(){if(V.view==='m21')return '2.1';if(V.view==='m3'&&V.m3)return V.m3.mis.charAt(0)+'.'+V.m3.mis.charAt(1);if(V.view==='m4'&&V.m4)return V.m4.mis.charAt(0)+'.'+V.m4.mis.charAt(1);if(V.view==='m2'&&V.m2)return V.m2.mis==='23'?'2.3':'2.2';var m=V.cur&&V.cur.mission;return m==='12'?'1.2':m==='13'?'1.3':'1.1';}
 function cloudSync(now){
-  if(!CL.db||!CL.uid||NOSAVE||!S.logged||!CL.sid)return;
+  if(!CL.db||!CL.uid||NOSAVE)return;
   clearTimeout(CL.t);
   CL.t=setTimeout(function(){
     var d={name:S.name||'',av:S.av,xp:S.xp||0,m11:!!S.m11,m12:!!S.m12,m13:!!S.m13,m21:!!S.m21,m22:!!S.m22,m23:!!S.m23,m24:!!S.m24,m31:!!S.m31,m32:!!S.m32,m33:!!S.m33,m41:!!S.m41,m42:!!S.m42,m43:!!S.m43,goal:S.goal||'',sk:(S.skips||[]).length,q1:!!S.q1,q2:!!S.q2,q3:!!S.q3,q4:!!S.q4,cert:!!S.cert,qbest:S.qbest||0,qtries:S.qtries||0,errs:S.errs||{},biz:(S.biz&&S.biz.n)?{n:String(S.biz.n).slice(0,80),t:String(S.biz.t||'').slice(0,120),d:String(S.biz.d||'').slice(0,120),k:String(S.biz.k||'').slice(0,120),c:String(S.biz.c||'').slice(0,120)}:null,last:Date.now(),sid:CL.sid||''};
@@ -4795,29 +4778,14 @@ function cloudSync(now){
     if(sig===CL.sig&&!now)return;
     CL.sig=sig;
     if(CL.sid){try{CL.db.doc('saves/'+CL.sid).set({st:JSON.stringify(S),at:S._at||Date.now(),sum:d}).catch(function(){CL.sig='';});}catch(e){}}
+    else{try{CL.db.doc('progress/'+CL.uid).set(d).catch(function(){CL.sig='';});}catch(e){}}
   },now?200:2000);
 }
-var _stSigLast=null;
+var _m2last=null;
 function applyStatus(){
   var st=CL.st,old=document.getElementById('blk');
   try{skBadge();}catch(e){}
-  var curSig=JSON.stringify([
-    st?st.status:'',
-    st?st.name:'',
-    m1perm(),
-    m2perm(),
-    m3perm(),
-    m4perm(),
-    skperm()
-  ]);
-  if(_stSigLast!==null&&curSig!==_stSigLast){
-    if(st&&st.name&&S.name!==st.name){
-      S.name=st.name;
-      try{save();}catch(e){}
-    }
-    try{route();}catch(e){}
-  }
-  _stSigLast=curSig;
+  var _m=m2perm();if(_m2last!==null&&_m!==_m2last&&V&&V.view==='home'){try{route();}catch(e){}}_m2last=_m;
   var blocked=!CL.admin&&st&&(st.status==='bloqueado'||(st.perms&&st.perms.m1===false));
   if(!blocked){if(old)old.remove();return;}
   if(old)return;
@@ -4842,70 +4810,201 @@ function relT(ts){
   if(s<90)return 'agora';if(s<3600)return 'há '+Math.round(s/60)+' min';if(s<86400)return 'há '+Math.round(s/3600)+' h';
   var d=Math.round(s/86400);return 'há '+d+(d===1?' dia':' dias');
 }
-var GD={pr:{},sv:{},dv:{},stu:{},pay:{},vnd:{},leads:{},vPend:[],liberar:'',pcfg:{},tab:'geral',q:'',unsub:[],names:{},loaded:false,msg:''};
+var GD_N8N={pr:{},sv:{},dv:{},stu:{},pay:{},vnd:{},vPend:[],liberar:'',pcfg:{},tab:'geral',q:'',unsub:[],names:{},loaded:false,msg:''};
+var GD_CW={pr:{},sv:{},dv:{},stu:{},pay:{},vnd:{},vPend:[],liberar:'',pcfg:{},tab:'geral',q:'',unsub:[],names:{},loaded:false,msg:''};
+var GD_COURSE='n8n'; // 'n8n' | 'chatwoot' | 'combo'
+var CW_HOST='http://localhost:8081';
+var CW_TOKEN='';
+var GD=GD_N8N;
+
+function getCwToken(){
+  var sess=null;try{sess=JSON.parse(sessionStorage.getItem('a3d_gadm'));}catch(e){}
+  var em=(sess&&sess.e)||'3digitos2023@gmail.com';
+  var h=(sess&&sess.h)||'X8FOHdQphxzxJoiA8FjsX6+tge205imJBNG5M1Ou9eU=';
+  return fetch(CW_HOST+'/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,h:h}),cache:'no-store'}).then(function(r){return r.json();}).then(function(j){if(j.token)CW_TOKEN=j.token;return CW_TOKEN;}).catch(function(){return '';});
+}
+function fetchCwCol(col){
+  var p=CW_TOKEN?Promise.resolve(CW_TOKEN):getCwToken();
+  return p.then(function(tok){return fetch(CW_HOST+'/api/col?name='+encodeURIComponent(col),{headers:{'X-Token':tok},cache:'no-store'}).then(function(r){return r.json();});});
+}
+function fetchCwDoc(path){
+  var p=CW_TOKEN?Promise.resolve(CW_TOKEN):getCwToken();
+  return p.then(function(tok){return fetch(CW_HOST+'/api/doc?path='+encodeURIComponent(path),{headers:{'X-Token':tok},cache:'no-store'}).then(function(r){return r.json();});});
+}
+function saveCwDoc(path, d){
+  var p=CW_TOKEN?Promise.resolve(CW_TOKEN):getCwToken();
+  return p.then(function(tok){return fetch(CW_HOST+'/api/doc?path='+encodeURIComponent(path),{method:'PUT',headers:{'Content-Type':'application/json','X-Token':tok},body:JSON.stringify(d),cache:'no-store'}).then(function(r){return r.json();});});
+}
+function loadChatwootData(cb){
+  Promise.all([
+    fetchCwCol('students').catch(function(){return {docs:[]};}),
+    fetchCwCol('progress').catch(function(){return {docs:[]};}),
+    fetchCwCol('saves').catch(function(){return {docs:[]};}),
+    fetchCwCol('duvidas').catch(function(){return {docs:[]};}),
+    fetchCwCol('payments').catch(function(){return {docs:[]};}),
+    fetchCwCol('vendas').catch(function(){return {docs:[]};}),
+    fetchCwDoc('config/pay').catch(function(){return {exists:false};})
+  ]).then(function(res){
+    var st=res[0].docs||[], pr=res[1].docs||[], sv=res[2].docs||[], dv=res[3].docs||[], pay=res[4].docs||[], vnd=res[5].docs||[], pcfg=res[6].data||{};
+    GD_CW.stu={};st.forEach(function(d){GD_CW.stu[d.id]=d.data;});
+    GD_CW.pr={};pr.forEach(function(d){GD_CW.pr[d.id]=d.data;});
+    GD_CW.sv={};sv.forEach(function(d){if(d.data&&d.data.sum)GD_CW.sv[d.id]=d.data.sum;});
+    GD_CW.dv={};dv.forEach(function(d){var x=d.data||{};Object.keys(x).forEach(function(k){if(x[k]&&typeof x[k]==='object')GD_CW.dv[d.id+'|'+k]=x[k];});});
+    GD_CW.pay={};pay.forEach(function(d){GD_CW.pay[d.id]=d.data;});
+    GD_CW.vnd={};vnd.forEach(function(d){GD_CW.vnd[d.id]=d.data;});
+    GD_CW.pcfg=pcfg;
+    GD_CW.loaded=true;
+    if(cb)cb();
+    else if(document.getElementById('gp'))gpaint();
+  }).catch(function(){});
+}
+function setCourse(c){
+  GD_COURSE=c;
+  if(c==='chatwoot'){GD=GD_CW;if(!GD_CW.loaded)loadChatwootData();}
+  else {GD=GD_N8N;}
+  gpaint();
+}
+function checkCoursePings(){
+  fetch('/api/ping',{cache:'no-store'}).then(function(r){return r.ok;}).catch(function(){return false;}).then(function(ok){
+    var el=document.getElementById('dot_n8n');if(el)el.style.background=ok?'#10b981':'#ef4444';
+  });
+  fetch(CW_HOST+'/api/ping',{cache:'no-store'}).then(function(r){return r.ok;}).catch(function(){return false;}).then(function(ok){
+    var el=document.getElementById('dot_cw');if(el)el.style.background=ok?'#10b981':'#ef4444';
+  });
+}
+
 function openGestor(){
   if(!CL.admin||!CL.db)return;
   var old=document.getElementById('gp');if(old){old.remove();}
   var w=document.createElement('div');w.id='gp';w.className='gp';
-  w.innerHTML='<div class="gph"><div><h1>Painel do gestor</h1><p>Só você enxerga esta tela. Os dados chegam em tempo real. <small style="opacity:.55">versão '+A3D_BUILD+'</small></p></div><div class="gpa"><button type="button" class="gpx" id="gpt">Testar como aluno</button><button type="button" class="gpx" id="gpx">Voltar ao curso</button><button type="button" class="gpx" id="gpl">Sair do painel</button></div></div><div class="gptabs" role="tablist"></div><div class="gpb" id="gpb"><p class="gpm">Carregando alunos...</p></div>';
+  w.innerHTML='<div id="cghub_wrap"></div><div id="cgind_wrap"></div><div class="gptabs" role="tablist"></div><div class="gpb" id="gpb"><p class="gpm">Carregando alunos...</p></div>';
   document.body.appendChild(w);
-  w.querySelector('#gpx').addEventListener('click',closeGestor);
-  w.querySelector('#gpl').addEventListener('click',gSair);
-  w.querySelector('#gpt').addEventListener('click',testAsStudent);
-  GD.tab=GD.tab||'geral';
-  if(!GD.unsub.length){
-    var err=function(){GD.msg='Não consegui ler os dados agora. Se o problema continuar, atualize a página.';gpaint();};
+  GD_N8N.tab=GD_N8N.tab||'geral';
+  GD=GD_COURSE==='chatwoot'?GD_CW:GD_N8N;
+  loadChatwootData();
+  if(!GD_N8N.unsub.length){
+    var err=function(){GD_N8N.msg='Não consegui ler os dados agora. Se o problema continuar, atualize a página.';gpaint();};
     try{
-      GD.unsub.push(CL.db.collection('progress').onSnapshot(function(sn){GD.pr={};sn.docs.forEach(function(d){GD.pr[d.id]=d.data();});GD.loaded=true;gpaint();},err));
-      GD.unsub.push(CL.db.collection('saves').onSnapshot(function(sn){GD.sv={};sn.docs.forEach(function(d){var x=d.data();if(x&&x.sum)GD.sv[d.id]=x.sum;});gpaint();},err));
-      GD.unsub.push(CL.db.collection('duvidas').onSnapshot(function(sn){GD.dv={};sn.docs.forEach(function(d){var x=d.data()||{};Object.keys(x).forEach(function(k){if(x[k]&&typeof x[k]==='object')GD.dv[d.id+'|'+k]=x[k];});});gpaint();},function(){}));
-      GD.unsub.push(CL.db.collection('payments').onSnapshot(function(sn){GD.pay={};sn.docs.forEach(function(d){GD.pay[d.id]=d.data();});gpaint();},function(){}));
-      GD.unsub.push(CL.db.collection('vendas').onSnapshot(function(sn){GD.vnd={};sn.docs.forEach(function(d){GD.vnd[d.id]=d.data();});gpaint();},function(){}));
-      GD.unsub.push(CL.db.doc('config/pay').onSnapshot(function(sn){GD.pcfg=sn.exists?sn.data():{};gpaint();},function(){}));
-      GD.unsub.push(CL.db.collection('students').onSnapshot(function(sn){GD.stu={};sn.docs.forEach(function(d){GD.stu[d.id]=d.data();});GD.loaded=true;gpaint();},err));
-      GD.unsub.push(CL.db.collection('leads').onSnapshot(function(sn){GD.leads={};sn.docs.forEach(function(d){GD.leads[d.id]=d.data();});gpaint();},function(){}));
+      GD_N8N.unsub.push(CL.db.collection('progress').onSnapshot(function(sn){GD_N8N.pr={};sn.docs.forEach(function(d){GD_N8N.pr[d.id]=d.data();});GD_N8N.loaded=true;gpaint();},err));
+      GD_N8N.unsub.push(CL.db.collection('saves').onSnapshot(function(sn){GD_N8N.sv={};sn.docs.forEach(function(d){var x=d.data();if(x&&x.sum)GD_N8N.sv[d.id]=x.sum;});gpaint();},err));
+      GD_N8N.unsub.push(CL.db.collection('duvidas').onSnapshot(function(sn){GD_N8N.dv={};sn.docs.forEach(function(d){var x=d.data()||{};Object.keys(x).forEach(function(k){if(x[k]&&typeof x[k]==='object')GD_N8N.dv[d.id+'|'+k]=x[k];});});gpaint();},function(){}));
+      GD_N8N.unsub.push(CL.db.collection('payments').onSnapshot(function(sn){GD_N8N.pay={};sn.docs.forEach(function(d){GD_N8N.pay[d.id]=d.data();});gpaint();},function(){}));
+      GD_N8N.unsub.push(CL.db.collection('vendas').onSnapshot(function(sn){GD_N8N.vnd={};sn.docs.forEach(function(d){GD_N8N.vnd[d.id]=d.data();});gpaint();},function(){}));
+      GD_N8N.unsub.push(CL.db.doc('config/pay').onSnapshot(function(sn){GD_N8N.pcfg=sn.exists?sn.data():{};gpaint();},function(){}));
+      GD_N8N.unsub.push(CL.db.collection('students').onSnapshot(function(sn){GD_N8N.stu={};sn.docs.forEach(function(d){GD_N8N.stu[d.id]=d.data();});GD_N8N.loaded=true;gpaint();},err));
     }catch(e){err();}
   }
-  setTimeout(function(){if(!GD.loaded&&document.getElementById('gp')){GD.loaded=true;gpaint();}},4000);
+  setTimeout(function(){if(!GD_N8N.loaded&&document.getElementById('gp')){GD_N8N.loaded=true;gpaint();}},4000);
   gpaint();
 }
-function closeGestor(){var w=document.getElementById('gp');if(w)w.remove();GD.unsub.forEach(function(u){try{u();}catch(e){}});GD.unsub=[];GD.loaded=false;}
-function gRows(){
-  var map={};
-  Object.keys(GD.sv).forEach(function(sid){map[sid]=GD.sv[sid];});
-  Object.keys(GD.pr).forEach(function(uid){
-    if(GD.stu[uid] || (GD.pr[uid] && (GD.pr[uid].name || GD.pr[uid].sid))){
-      if(!map[uid]) map[uid]=GD.pr[uid];
-    }
-  });
-  var ids={};
-  Object.keys(GD.stu).forEach(function(k){ids[k]=1;});
-  Object.keys(map).forEach(function(k){if(GD.stu[k] || (map[k] && (map[k].name || map[k].sid))) ids[k]=1;});
+function closeGestor(){var w=document.getElementById('gp');if(w)w.remove();GD_N8N.unsub.forEach(function(u){try{u();}catch(e){}});GD_N8N.unsub=[];GD_N8N.loaded=false;}
+
+function getRowsFrom(g, cname){
+  var map={};Object.keys(g.pr||{}).forEach(function(uid){map[uid]=g.pr[uid];});Object.keys(g.sv||{}).forEach(function(sid){map[sid]=g.sv[sid];});
+  var ids={};Object.keys(map).forEach(function(k){ids[k]=1;});Object.keys(g.stu||{}).forEach(function(k){ids[k]=1;});
   if(CL.admin&&CL.uid)delete ids[CL.uid];
   return Object.keys(ids).map(function(id){
-    var p=map[id]||null,s=GD.stu[id]||null;
-    return {id:id,p:p,s:s,nick:(p&&p.name)||'',blocked:!!(s&&s.status==='bloqueado'),reg:!!s,last:(p&&p.last)||0,nm:(s&&s.name)||'',contact:(s&&s.contact)||'',manual:!!(s&&s.manual),user:(s&&s.user)||''};
-  }).filter(function(r){
-    return r.reg || (r.p && (r.p.name || r.p.sid));
-  }).sort(function(a,b){return (b.last||0)-(a.last||0);});
+    var p=map[id]||null,s=(g.stu||{})[id]||null;
+    return {id:id,p:p,s:s,course:cname,nick:(p&&p.name)||'',blocked:!!(s&&s.status==='bloqueado'),reg:!!s,last:(p&&p.last)||0,nm:(s&&s.name)||'',contact:(s&&s.contact)||'',manual:!!(s&&s.manual),user:(s&&s.user)||''};
+  });
 }
-function gNm(r,fb){return r.nm?'<span>'+esc(r.nm)+'</span>':'<span data-nm="'+esc(r.id)+'">'+esc(r.nick||fb||'Aluno sem nome')+'</span>';}
+function gRows(){
+  if(GD_COURSE==='chatwoot') return getRowsFrom(GD_CW,'chatwoot').sort(function(a,b){return (b.last||0)-(a.last||0);});
+  if(GD_COURSE==='combo') return getRowsFrom(GD_N8N,'n8n').concat(getRowsFrom(GD_CW,'chatwoot')).sort(function(a,b){return (b.last||0)-(a.last||0);});
+  return getRowsFrom(GD_N8N,'n8n').sort(function(a,b){return (b.last||0)-(a.last||0);});
+}
+function gNm(r,fb){
+  var b=r.course==='chatwoot'?'<span class="cbadge cw">Chatwoot</span>':'<span class="cbadge n8n">n8n</span>';
+  return b+(r.nm?'<span>'+esc(r.nm)+'</span>':'<span data-nm="'+esc(r.id)+'">'+esc(r.nick||fb||'Aluno sem nome')+'</span>');
+}
 function gErrs(p){var n=0;if(p&&p.errs)Object.keys(p.errs).forEach(function(k){n+=+p.errs[k]||0;});return n;}
 function gpaint(){
   var w=document.getElementById('gp');if(!w)return;
+  var curGD = (GD_COURSE==='chatwoot')?GD_CW:GD_N8N;
+  GD = curGD;
+
+  var hub=w.querySelector('#cghub_wrap');
+  if(hub){
+    var nN8n=Object.keys(GD_N8N.stu||{}).length, nCw=Object.keys(GD_CW.stu||{}).length;
+    hub.innerHTML='<div class="cg-hub">'+
+      '<div class="cg-top">'+
+        '<div class="cg-brand">'+
+          '<div class="cg-badge">🎓 Central Multi-Cursos Agente3D</div>'+
+          '<h2>Painel do Gestor Consolidado</h2>'+
+          '<p>Controle todos os seus cursos, alunos, vendas e acessos em um único lugar.</p>'+
+        '</div>'+
+        '<div class="gpa">'+
+          '<button type="button" class="gpx" id="gpt">Testar como aluno</button>'+
+          '<button type="button" class="gpx" id="gpx">Voltar ao curso</button>'+
+          '<button type="button" class="gpx" id="gpl">Sair do painel</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="cg-selector">'+
+        '<button type="button" class="cg-pill '+(GD_COURSE==='n8n'?'active':'')+'" id="cgp_n8n">'+
+          '<span class="cg-status-dot" id="dot_n8n"></span>'+
+          '<span class="cg-icon">🟣</span>'+
+          '<div class="cg-pill-text">'+
+            '<b>Academia n8n</b>'+
+            '<small id="sub_n8n">Porta 8080 · '+nN8n+' aluno'+(nN8n===1?'':'s')+'</small>'+
+          '</div>'+
+        '</button>'+
+        '<button type="button" class="cg-pill '+(GD_COURSE==='chatwoot'?'active':'')+'" id="cgp_cw">'+
+          '<span class="cg-status-dot" id="dot_cw"></span>'+
+          '<span class="cg-icon">💬</span>'+
+          '<div class="cg-pill-text">'+
+            '<b>Academia Chatwoot</b>'+
+            '<small id="sub_cw">Porta 8081 · '+nCw+' aluno'+(nCw===1?'':'s')+'</small>'+
+          '</div>'+
+        '</button>'+
+        '<button type="button" class="cg-pill '+(GD_COURSE==='combo'?'active':'')+'" id="cgp_combo">'+
+          '<span class="cg-icon">⚡</span>'+
+          '<div class="cg-pill-text">'+
+            '<b>Visão Consolidada</b>'+
+            '<small>Total: '+(nN8n+nCw)+' aluno'+((nN8n+nCw)===1?'':'s')+' (Ambos)</small>'+
+          '</div>'+
+        '</button>'+
+      '</div>'+
+      '<div class="cg-quick">'+
+        '<div class="cg-quick-links">'+
+          '<span style="color:#b4b2d6;margin-right:6px">Simuladores do Aluno:</span>'+
+          '<a href="http://localhost:8080" target="_blank" class="cg-ext">Simulador n8n ↗</a>'+
+          '<a href="http://localhost:8081" target="_blank" class="cg-ext">Simulador Chatwoot ↗</a>'+
+          '<a href="https://curson8n.agente3d.net" target="_blank" class="cg-ext">n8n Online (Produção) ↗</a>'+
+        '</div>'+
+        '<div style="font-size:11.5px;color:#a5a3c2">Servidores: n8n (8080) | Chatwoot (8081)</div>'+
+      '</div>'+
+    '</div>';
+    hub.querySelector('#gpx').addEventListener('click',closeGestor);
+    hub.querySelector('#gpl').addEventListener('click',gSair);
+    hub.querySelector('#gpt').addEventListener('click',testAsStudent);
+    hub.querySelector('#cgp_n8n').addEventListener('click',function(){setCourse('n8n');});
+    hub.querySelector('#cgp_cw').addEventListener('click',function(){setCourse('chatwoot');});
+    hub.querySelector('#cgp_combo').addEventListener('click',function(){setCourse('combo');});
+    checkCoursePings();
+  }
+  var ind=w.querySelector('#cgind_wrap');
+  if(ind){
+    var label=GD_COURSE==='n8n'?'🟣 Academia n8n (Porta 8080 · curson8n.agente3d.net)':GD_COURSE==='chatwoot'?'💬 Academia Chatwoot (Porta 8081)':'⚡ Visão Consolidada (Ambos os Cursos)';
+    ind.innerHTML='<div class="cg-indicator"><span>Você está visualizando: <b>'+label+'</b></span><span style="font-size:11.5px;color:#6b7280">'+(GD_COURSE==='combo'?'Dados somados dos dois cursos em tempo real':'Clique nos botões acima para trocar de curso')+'</span></div>';
+  }
+
   var a0=document.activeElement;if((GD.tab==='cfg'||GD.tab==='add'||GD.tab==='vend')&&a0&&a0.closest&&a0.closest('#gacc,#gsnd,#gcad,#gbk,#gvnd')&&!(a0.tagName==='BUTTON'&&a0.closest('#gvnd')))return;
-  var nd=Object.keys(GD.dv).length;var nv=Object.keys(GD.vnd).filter(function(k){return (GD.vnd[k]||{}).status==='pago';}).length;var nl=Object.keys(GD.leads||{}).length;var tabs=[['geral','Visão geral'],['leads','Leads'+(nl?' ('+nl+')':'')],['vend','Vendas'+(nv?' ('+nv+')':'')],['alunos','Alunos'],['metas','Metas'],['rel','Relatórios'],['pag','Pagamentos'],['duv','Dúvidas'+(nd?' ('+nd+')':'')],['add','Adicionar aluno'],['cfg','Configurações']];
+  var nd=Object.keys(GD.dv||{}).length;var nv=Object.keys(GD.vnd||{}).filter(function(k){return (GD.vnd[k]||{}).status==='pago';}).length;
+  if(GD_COURSE==='combo'){
+    nd=Object.keys(GD_N8N.dv||{}).length+Object.keys(GD_CW.dv||{}).length;
+    nv=Object.keys(GD_N8N.vnd||{}).filter(function(k){return (GD_N8N.vnd[k]||{}).status==='pago';}).length+Object.keys(GD_CW.vnd||{}).filter(function(k){return (GD_CW.vnd[k]||{}).status==='pago';}).length;
+  }
+  var tabs=[['geral','Visão geral'],['vend','Vendas'+(nv?' ('+nv+')':'')],['alunos','Alunos'],['metas','Metas'],['rel','Relatórios'],['pag','Pagamentos'],['duv','Dúvidas'+(nd?' ('+nd+')':'')],['add','Adicionar aluno'],['cfg','Configurações']];
   var tb=w.querySelector('.gptabs');
   tb.innerHTML=tabs.map(function(t){return '<button type="button" role="tab" data-gt="'+t[0]+'" aria-selected="'+(GD.tab===t[0])+'">'+t[1]+'</button>';}).join('');
   tb.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){GD.tab=b.dataset.gt;GD.msg='';if(GD.tab!=='add')GD.liberar='';gpaint();});});
   var body=w.querySelector('#gpb'),keep=null;
   var act=document.activeElement;if(act&&act.id==='gq'){keep=[act.selectionStart];}
   var rows=gRows();
-  body.innerHTML=(CL.adm&&CL.adm.def&&GD.tab!=='cfg'?'<p class="gpm warn">Você ainda usa a senha padrão do painel. Troque agora, é rápido. <button type="button" class="gb pri" data-ga="gocfg" data-id="x">Trocar a senha</button></p>':'')+(GD.msg?'<p class="gpm warn">'+esc(GD.msg)+'</p>':'')+(GD.tab==='geral'?gGeral(rows):GD.tab==='leads'?gLeads():GD.tab==='alunos'?gAlunos(rows):GD.tab==='metas'?gMetas(rows):GD.tab==='rel'?gRelat(rows):GD.tab==='pag'?gPag(rows):GD.tab==='vend'?gVend():GD.tab==='duv'?gDuv():GD.tab==='cfg'?gCfg():gAdd(rows));
+  body.innerHTML=(CL.adm&&CL.adm.def&&GD.tab!=='cfg'?'<p class="gpm warn">Você ainda usa a senha padrão do painel. Troque agora, é rápido. <button type="button" class="gb pri" data-ga="gocfg" data-id="x">Trocar a senha</button></p>':'')+(GD.msg?'<p class="gpm warn">'+esc(GD.msg)+'</p>':'')+(GD.tab==='geral'?gGeral(rows):GD.tab==='alunos'?gAlunos(rows):GD.tab==='metas'?gMetas(rows):GD.tab==='rel'?gRelat(rows):GD.tab==='pag'?gPag(rows):GD.tab==='vend'?gVend():GD.tab==='duv'?gDuv():GD.tab==='cfg'?gCfg():gAdd(rows));
   if(GD.tab==='alunos'){var q=body.querySelector('#gq');if(q){q.addEventListener('input',function(){GD.q=q.value;gpaint();});if(keep){q.focus();try{q.setSelectionRange(keep[0],keep[0]);}catch(e){}}}}
   if(GD.tab==='add')gAddWire(body);
   if(GD.tab==='pag')gSimWire(body);
-  if(GD.tab==='leads')gLeadsWire(body);
   if(GD.tab==='vend')gVendWire(body);
   if(GD.tab==='cfg'){gBkWire(body);gBkLoad();}
   body.querySelectorAll('[data-ga]').forEach(function(b){b.addEventListener('click',function(){gAction(b.dataset.ga,b.dataset.id);});});
@@ -5035,7 +5134,7 @@ function gAlunos(rows){
     if(GD.stu[r.id]&&GD.stu[r.id].perms&&GD.stu[r.id].perms.sk)pill+=' <span class="gp-pill r" title="O aluno pode usar o atalho de conclusão">Atalho liberado</span>';
     if(r.p&&r.p.sk)pill+=' <span class="gp-pill w" title="O gestor concluiu etapas pelo atalho">Atalho: '+r.p.sk+'</span>';
     if(gReady(r))pill+=' <span class="gp-pill r">Pronto para o Mundo 2</span>';
-    var acts=!r.reg?'<button type="button" class="gb pri" data-ga="reg" data-id="'+esc(r.id)+'">Cadastrar</button><button type="button" class="gb bad" data-ga="delpr" data-id="'+esc(r.id)+'">Remover</button>':
+    var acts=!r.reg?'<button type="button" class="gb pri" data-ga="reg" data-id="'+esc(r.id)+'">Cadastrar</button>':
       '<button type="button" class="gb pri" data-ga="rep" data-id="'+esc(r.id)+'">Relatório</button>'+(r.user?'<button type="button" class="gb" data-ga="send" data-id="'+esc(r.id)+'">Enviar acesso</button>':'')+(function(){var on=!!(GD.stu[r.id]&&GD.stu[r.id].perms&&GD.stu[r.id].perms.sk);return '<button type="button" class="gb'+(on?' bad':'')+'" data-ga="sk" data-id="'+esc(r.id)+'" title="Libera ou retira o atalho de conclusão (Alt + Shift + S) só para este aluno">'+(on?'Retirar atalho':'Liberar atalho')+'</button>';})()+(gReady(r)?'<button type="button" class="gb pri" data-ga="rel2" data-id="'+esc(r.id)+'">Liberar Mundo 2</button>':'')+'<button type="button" class="gb" data-ga="perm" data-id="'+esc(r.id)+'">Editar</button><button type="button" class="gb '+(r.blocked?'pri':'bad')+'" data-ga="'+(r.blocked?'unblock':'block')+'" data-id="'+esc(r.id)+'">'+(r.blocked?'Reativar':'Bloquear')+'</button><button type="button" class="gb" data-ga="del" data-id="'+esc(r.id)+'">Remover</button>';
     h+='<tr><td><b>'+gNm(r)+'</b>'+(r.manual?' <em class="gman">cadastro manual</em>':'')+(r.user?' <em class="gman">login: '+esc(r.user)+'</em>':(r.manual?' <em class="gman" style="color:#b42318">sem usuário e senha, clique em Editar</em>':''))+'<small '+(r.nm||r.manual?'':'data-em="'+esc(r.id)+'"')+'>'+esc(r.contact||'')+'</small></td><td>'+pill+'</td><td>'+gProg(r.p)+'</td><td>'+((r.p&&r.p.xp)||0)+'</td><td>'+gErrs(r.p)+'</td><td>'+(r.reg?gPillPay(r):'—')+'</td><td>'+relT(r.last)+'</td><td><div class="gac">'+acts+'</div></td></tr>';
   });
@@ -5113,55 +5212,6 @@ function gCsvPag(){
   rows.forEach(function(r){var pay=gPayOf(r.id);((pay&&pay.hist)||[]).forEach(function(h){out.push([gName(r),gFmtTs(h.at),String(h.amt||0).replace('.',','),h.met||'',h.note||'']);});});
   gCsv('pagamentos-n8n-academia.csv',out);
 }
-/* ---------- Leads capturados na página de vendas ---------- */
-function gLeads(){
-  var all=Object.keys(GD.leads||{}).map(function(k){var o=GD.leads[k]||{};o.id=k;return o;}).sort(function(a,b){return (b.ts||0)-(a.ts||0);});
-  var zapUrl=function(fone,nome){
-    var clean=(fone||'').replace(/\D/g,'');
-    if(!clean)return '#';
-    if(!clean.startsWith('55')&&clean.length<=11)clean='55'+clean;
-    var msg=encodeURIComponent('Olá '+(nome||'')+'! Vi que você se cadastrou para receber o Módulo 1 da Apostila Inteligente do curso n8n.\n\n🚀 Entre na nossa Comunidade VIP exclusiva no WhatsApp para receber o material e tirar suas dúvidas:\nhttps://chat.whatsapp.com/CLUu662jFtvL9r2ahPaOJa\n\n🎁 Seu cupom exclusivo de 10% OFF para a turma completa é: VIP10\n\nQualquer dúvida estou por aqui!');
-    return 'https://wa.me/'+clean+'?text='+msg;
-  };
-  var rowsHtml=all.map(function(l){
-    var telClean=(l.phone||'').replace(/\D/g,'');
-    var dt=l.created_at||(l.ts?gFmtTs(l.ts*1000):'-');
-    return '<div class="gli"><span><b>'+esc(l.name||'Sem nome')+'</b> <em>WhatsApp: <b>'+esc(l.phone||'-')+'</b> &middot; E-mail: '+esc(l.email||'-')+'<br><small style="color:#888;">Cadastrado em: '+esc(dt)+' &middot; Origem: '+esc(l.origem||'Página de Vendas')+'</small></em></span>'
-      +'<span style="display:flex;gap:6px;align-items:center;">'
-      +(telClean?'<a class="gb pri" href="'+zapUrl(l.phone,l.name)+'" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px;">💬 Chamar no WhatsApp</a>':'')
-      +'<button type="button" class="gb" data-glead-to-student="'+esc(l.id)+'">➕ Tornar Aluno</button>'
-      +'</span></div>';
-  }).join('');
-  return '<div class="gcard"><h3>Leads Capturados na Página de Vendas ('+all.length+')</h3>'
-    +'<p class="gpm">Estes são os visitantes que preencheram o formulário para receber o <b>Módulo 1 da Apostila Inteligente</b> e o cupom de 10% OFF. Clique para conversar com eles no WhatsApp ou torná-los alunos.</p>'
-    +(all.length?rowsHtml:'<p class="gpm info">Nenhum lead capturado ainda. Quando os visitantes preencherem o formulário na página de vendas, eles aparecerão aqui em tempo real.</p>')
-    +(all.length?'<div style="margin-top:10px;"><button type="button" class="gb" id="gdlLeads">📥 Baixar Leads (CSV)</button></div>':'')
-    +'</div>';
-}
-function gLeadsWire(body){
-  body.querySelectorAll('[data-glead-to-student]').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var id=btn.dataset.gleadToStudent,l=(GD.leads||{})[id]||{};
-      GD.tab='add';gpaint();
-      setTimeout(function(){
-        var gp=document.getElementById('gp');if(!gp)return;
-        var inName=gp.querySelector('#gna'),inCont=gp.querySelector('#gco');
-        if(inName)inName.value=l.name||'';
-        if(inCont)inCont.value=l.phone||l.email||'';
-      },50);
-    });
-  });
-  var dlBtn=body.querySelector('#gdlLeads');
-  if(dlBtn){
-    dlBtn.addEventListener('click',function(){
-      var all=Object.keys(GD.leads||{}).map(function(k){return GD.leads[k]||{};});
-      var csvData=[['Nome','WhatsApp','Email','Data/Hora','Origem']];
-      all.forEach(function(l){csvData.push([l.name||'',l.phone||'',l.email||'',l.created_at||'',l.origem||'']);});
-      gCsv('leads-curso-n8n-'+gToday().replace(/-/g,'')+'.csv',csvData);
-    });
-  }
-}
-
 /* ---------- Vendas pelo site: pagamentos confirmados e liberação ---------- */
 function gMoneyBR(v){return 'R$ '+(+v||0).toFixed(2).replace('.',',');}
 function gVend(){
@@ -5343,7 +5393,23 @@ GNA.acc=function(){
 /* ---------- Envio dos dados de acesso (WhatsApp, e-mail e n8n) ---------- */
 function gLink(){var C=GD.pcfg||{};return C.link||location.href.split('#')[0].replace(/gestor\.html$/,'index.html');}
 function gWelcome(st){
-  var C=GD.pcfg||{},tpl=C.wtpl||'Olá, {nome}! Seu acesso ao curso N8N Academia Agente3d está liberado.\n\nEndereço: {link}\nUsuário: {usuario}\nSenha: {senha}\n\nÉ só entrar e começar pelo Mundo 1. Qualquer dúvida, é só me chamar.';
+  var C=GD.pcfg||{};
+  var cType = st.course || (GD_COURSE==='chatwoot'?'chatwoot':'n8n');
+  if(cType === 'combo'){
+    return 'Olá, '+((st.name||'').split(' ')[0])+'! Seu acesso aos cursos Agente3D está liberado!\n\n'
+      +'🚀 Curso n8n: http://localhost:8080/index.html\n'
+      +'💬 Curso Chatwoot: http://localhost:8081/index.html\n\n'
+      +'👤 Usuário: '+(st.user||'')+'\n'
+      +'🔑 Senha: '+(st.pass||'')+'\n\n'
+      +'O mesmo login e senha funcionam nos dois cursos. Qualquer dúvida, é só me chamar!';
+  } else if(cType === 'chatwoot'){
+    return 'Olá, '+((st.name||'').split(' ')[0])+'! Seu acesso ao curso Chatwoot Academia Agente3d está liberado.\n\n'
+      +'Endereço: http://localhost:8081/index.html\n'
+      +'Usuário: '+(st.user||'')+'\n'
+      +'Senha: '+(st.pass||'')+'\n\n'
+      +'É só entrar e começar. Qualquer dúvida, estou por aqui!';
+  }
+  var tpl=C.wtpl||'Olá, {nome}! Seu acesso ao curso N8N Academia Agente3d está liberado.\n\nEndereço: {link}\nUsuário: {usuario}\nSenha: {senha}\n\nÉ só entrar e começar pelo Mundo 1. Qualquer dúvida, é só me chamar.';
   return tpl.replace(/\{nome\}/g,(st.name||'').split(' ')[0]).replace(/\{link\}/g,gLink()).replace(/\{usuario\}/g,st.user||'').replace(/\{senha\}/g,st.pass||'');
 }
 function gHook(id,st){
@@ -5448,12 +5514,40 @@ function gDuv(){
 function gCfg(){
   var free=!CL.cfg||CL.cfg.free!==false,ad=CL.adm||{e:GDEF.e,def:true};
   var C2=GD.pcfg||{};
-  return gBkCard()+'<div class="gcard" id="gsnd"><h3>Envio de acesso ao aluno</h3><p class="gpm">Ao cadastrar um aluno, o painel monta a mensagem com o acesso dele. Você envia por WhatsApp e e-mail com um clique, ou liga o n8n para enviar sozinho.</p><label class="gnl">Endereço do curso que o aluno vai abrir<input id="snl" type="text" value="'+esc(C2.link||gLink())+'" placeholder="https://..."></label><label class="gnl">Mensagem de boas-vindas. Use {nome}, {link}, {usuario} e {senha}<textarea id="snt" rows="6" maxlength="700">'+esc(C2.wtpl||gWelcome({name:'{nome}',user:'{usuario}',pass:'{senha}'}).replace(gLink(),'{link}'))+'</textarea></label><label class="gnl">Webhook do n8n para envio automático (opcional)<input id="snh" type="text" value="'+esc(C2.hook||'')+'" placeholder="https://seu-n8n.com/webhook/novo-aluno"></label><div class="gform"><button type="button" class="gb pri" data-ga="snsave" data-id="x">Salvar</button><button type="button" class="gb" data-ga="sntest" data-id="x">Enviar teste ao n8n</button></div></div><div class="gcard" id="gacc"><h3>Acesso do gestor</h3><p class="gpm">Este é o e-mail e a senha que abrem o painel. Hoje: <b>'+esc(ad.e)+'</b>'+(ad.def?' · <span style="color:#b42318">senha padrão, troque agora</span>':'')+'.</p><div class="gform"><label class="gnl" style="flex:1 1 240px">Senha atual<input id="acp" type="password" autocomplete="current-password"></label><label class="gnl" style="flex:1 1 240px">E-mail do gestor<input id="ace" type="email" value="'+esc(ad.e)+'" autocomplete="off"></label><label class="gnl" style="flex:1 1 240px">Nova senha (mínimo 8 caracteres)<input id="acn" type="password" autocomplete="new-password"></label><label class="gnl" style="flex:1 1 240px">Repita a nova senha<input id="acr" type="password" autocomplete="new-password"></label></div><div class="gform"><button type="button" class="gb pri" data-ga="acc" data-id="x">Salvar novo acesso</button></div></div>'+'<div class="gcard"><h3>Tela de entrada dos alunos</h3><p class="gpm">Hoje, quem abre o curso vê a tela de usuário e senha. O botão abaixo controla se ela também mostra a opção "Entrar em modo de teste, sem usuário". Para valer só quem tem acesso criado por você, deixe desligado.</p><div class="gli"><span>Modo de teste sem usuário: <b>'+(free?'ligado':'desligado')+'</b></span><button type="button" class="gb '+(free?'bad':'pri')+'" data-ga="free" data-id="x">'+(free?'Desligar':'Ligar')+'</button></div></div><div class="gcard"><h3>Sobre a segurança deste login</h3><p class="gpm">Esta tela separa o ambiente de cada aluno e deixa você controlar quem entra. Ela serve muito bem para o piloto. Para vender ao público, o login passa para a sua VPS, onde fica protegido de verdade. A tela e o painel continuam os mesmos.</p></div>';
+  var hubCard='<div class="gcard" style="border:2px solid #5b4ee8;background:#fbfaff">'
+   +'<h3>🎓 Gestão Centralizada dos Cursos Agente3D</h3>'
+   +'<p class="gpm">Ambos os cursos estão sincronizados com este painel unificado:</p>'
+   +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:6px">'
+   +'<div style="background:#fff;border:1px solid #dcd5fb;border-radius:12px;padding:14px">'
+   +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span class="cg-status-dot" id="dot_n8n_cfg"></span><b style="font-size:15px;color:#4a3fd0">🟣 Academia n8n</b></div>'
+   +'<p style="font-size:12px;color:#666;margin:0 0 8px">Porta Local: <b>8080</b> · Banco: <code>n8n/dados/banco.json</code> ('+Object.keys(GD_N8N.stu||{}).length+' alunos)</p>'
+   +'<div style="font-size:12.5px;line-height:1.6">'
+   +'<div>💻 Local: <a href="http://localhost:8080/index.html" target="_blank" style="color:#5b4ee8;font-weight:600">http://localhost:8080</a></div>'
+   +'<div>🌐 Produção: <a href="https://curson8n.agente3d.net" target="_blank" style="color:#5b4ee8;font-weight:600">curson8n.agente3d.net</a></div>'
+   +'</div></div>'
+   +'<div style="background:#fff;border:1px solid #bae6fd;border-radius:12px;padding:14px">'
+   +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span class="cg-status-dot" id="dot_cw_cfg"></span><b style="font-size:15px;color:#0369a1">💬 Academia Chatwoot</b></div>'
+   +'<p style="font-size:12px;color:#666;margin:0 0 8px">Porta Local: <b>8081</b> · Banco: <code>chatwoot/dados/banco.json</code> ('+Object.keys(GD_CW.stu||{}).length+' alunos)</p>'
+   +'<div style="font-size:12.5px;line-height:1.6">'
+   +'<div>💻 Local: <a href="http://localhost:8081/index.html" target="_blank" style="color:#0284c7;font-weight:600">http://localhost:8081</a></div>'
+   +'<div>🛍️ Vendas: <a href="http://localhost:8081/pagina-de-vendas.html" target="_blank" style="color:#0284c7;font-weight:600">pagina-de-vendas.html</a></div>'
+   +'</div></div>'
+   +'</div></div>';
+
+  return hubCard+gBkCard()+'<div class="gcard" id="gsnd"><h3>Envio de acesso ao aluno</h3><p class="gpm">Ao cadastrar um aluno, o painel monta a mensagem com o acesso dele. Você envia por WhatsApp e e-mail com um clique, ou liga o n8n para enviar sozinho.</p><label class="gnl">Endereço do curso que o aluno vai abrir<input id="snl" type="text" value="'+esc(C2.link||gLink())+'" placeholder="https://..."></label><label class="gnl">Mensagem de boas-vindas. Use {nome}, {link}, {usuario} e {senha}<textarea id="snt" rows="6" maxlength="700">'+esc(C2.wtpl||gWelcome({name:'{nome}',user:'{usuario}',pass:'{senha}'}).replace(gLink(),'{link}'))+'</textarea></label><label class="gnl">Webhook do n8n para envio automático (opcional)<input id="snh" type="text" value="'+esc(C2.hook||'')+'" placeholder="https://seu-n8n.com/webhook/novo-aluno"></label><div class="gform"><button type="button" class="gb pri" data-ga="snsave" data-id="x">Salvar</button><button type="button" class="gb" data-ga="sntest" data-id="x">Enviar teste ao n8n</button></div></div><div class="gcard" id="gacc"><h3>Acesso do gestor</h3><p class="gpm">Este é o e-mail e a senha que abrem o painel. Hoje: <b>'+esc(ad.e)+'</b>'+(ad.def?' · <span style="color:#b42318">senha padrão, troque agora</span>':'')+'.</p><div class="gform"><label class="gnl" style="flex:1 1 240px">Senha atual<input id="acp" type="password" autocomplete="current-password"></label><label class="gnl" style="flex:1 1 240px">E-mail do gestor<input id="ace" type="email" value="'+esc(ad.e)+'" autocomplete="off"></label><label class="gnl" style="flex:1 1 240px">Nova senha (mínimo 8 caracteres)<input id="acn" type="password" autocomplete="new-password"></label><label class="gnl" style="flex:1 1 240px">Repita a nova senha<input id="acr" type="password" autocomplete="new-password"></label></div><div class="gform"><button type="button" class="gb pri" data-ga="acc" data-id="x">Salvar novo acesso</button></div></div>'+'<div class="gcard"><h3>Tela de entrada dos alunos</h3><p class="gpm">Hoje, quem abre o curso vê a tela de usuário e senha. O botão abaixo controla se ela também mostra a opção "Entrar em modo de teste, sem usuário". Para valer só quem tem acesso criado por você, deixe desligado.</p><div class="gli"><span>Modo de teste sem usuário: <b>'+(free?'ligado':'desligado')+'</b></span><button type="button" class="gb '+(free?'bad':'pri')+'" data-ga="free" data-id="x">'+(free?'Desligar':'Ligar')+'</button></div></div><div class="gcard"><h3>Sobre a segurança deste login</h3><p class="gpm">Esta tela separa o ambiente de cada aluno e deixa você controlar quem entra. Ela serve muito bem para o piloto. Para vender ao público, o login passa para a sua VPS, onde fica protegido de verdade. A tela e o painel continuam os mesmos.</p></div>';
 }
 function gAdd(rows){
   var pend=rows.filter(function(r){return !r.reg;}),plans=(GD.pcfg&&GD.pcfg.plans)||[];
   var f=function(id,l,t,ph,ex){return '<label class="gnl" style="flex:1 1 230px">'+l+'<input id="'+id+'" type="'+(t||'text')+'" maxlength="80" placeholder="'+(ph||'')+'" '+(ex||'')+'></label>';};
+  var curSel = GD_COURSE === 'chatwoot' ? 'chatwoot' : 'n8n';
   var h='<div class="gcard" id="gcad"><h3>Cadastro completo do aluno</h3><p class="gpm">Cria o aluno com usuário e senha automáticos. Depois de cadastrar, você envia os dados de acesso por WhatsApp e por e-mail, tudo numa tela só.</p>'
+   +'<div class="gform" style="background:#f4f3ff;border:1.5px solid #dcd5fb;border-radius:12px;padding:12px 16px;margin-bottom:12px">'
+   +'<div style="font-weight:700;color:#3f35b8;margin-bottom:6px">🎓 Em qual curso você quer matricular este aluno?</div>'
+   +'<div style="display:flex;gap:18px;flex-wrap:wrap">'
+   +'<label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="radio" name="gn_c" value="n8n" '+(curSel==='n8n'?'checked':'')+'> <b>🟣 Academia n8n</b> (Porta 8080)</label>'
+   +'<label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="radio" name="gn_c" value="chatwoot" '+(curSel==='chatwoot'?'checked':'')+'> <b>💬 Academia Chatwoot</b> (Porta 8081)</label>'
+   +'<label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="radio" name="gn_c" value="combo"> <b style="color:#7c3aed">⚡ COMBO: AMBOS OS CURSOS</b></label>'
+   +'</div></div>'
    +'<div class="gform">'+f('gnn','Nome completo *','text','Ex.: Maria Silva')+f('gne','E-mail','email','maria@email.com','autocomplete="off"')+f('gnw','WhatsApp com DDD','tel','(71) 99999-9999','autocomplete="off"')+'</div>'
    +'<div class="gform">'+f('gno','Empresa ou profissão (opcional)','text','')+f('gnci','Cidade (opcional)','text','')+f('gnm','Concluir o curso até (opcional)','date','')+'</div>'
    +'<h4 class="gh4">Cobrança (opcional, pode deixar para depois)</h4><div class="gform"><label class="gnl" style="flex:1 1 230px">Plano<select id="gnpl"><option value="">Sem cobrança por enquanto</option>'+plans.map(function(x){return '<option value="'+esc(x.id)+'">'+esc(x.name)+'</option>';}).join('')+'<option value="custom">Valor personalizado</option><option value="free">Cortesia (não paga)</option></select></label>'
@@ -5476,6 +5570,7 @@ function gAddWire(body){
     var g=function(i){return body.querySelector('#'+i).value.trim();},er=body.querySelector('#gnerr');
     var bad=function(t){er.textContent=t;er.hidden=false;er.scrollIntoView({block:'nearest'});};
     var n=g('gnn'),em=g('gne'),wa=g('gnw').replace(/[^\d+]/g,''),dg=wa.replace(/\D/g,'');
+    var selC = (body.querySelector('input[name="gn_c"]:checked') || {}).value || 'n8n';
     er.hidden=true;
     if(!n)return bad('Escreva o nome do aluno.');
     if(!em&&!dg)return bad('Informe pelo menos o e-mail ou o WhatsApp, para você conseguir enviar o acesso.');
@@ -5492,11 +5587,21 @@ function gAddWire(body){
     tryU(base,0).then(function(u){
       var salt=newSalt();
       return pwHash(pw,salt).then(function(h){
-        var st={name:n,email:em,phone:full,contact:full||em,company:g('gno'),city:g('gnci'),manual:true,status:'ativo',perms:pm,note:g('gnt'),user:u,pass:pw,createdAt:now,updatedAt:now};
+        var st={name:n,email:em,phone:full,contact:full||em,company:g('gno'),city:g('gnci'),manual:true,status:'ativo',perms:pm,note:g('gnt'),user:u,pass:pw,course:selC,createdAt:now,updatedAt:now};
         if(g('gnm'))st.meta={until:g('gnm')};
-        return CL.db.doc('students/'+id).set(st).then(function(){
-          return CL.db.doc('logins/'+u).set({sid:id,salt:salt,hash:h,name:n,status:'ativo',perms:pm,v:1});
-        }).then(function(){
+        var loginRec={sid:id,salt:salt,hash:h,name:n,status:'ativo',perms:pm,v:1};
+        var saveP;
+        if(selC==='chatwoot'){
+          saveP=saveCwDoc('students/'+id, st).then(function(){ return saveCwDoc('logins/'+u, loginRec); });
+        } else if(selC==='combo'){
+          saveP=Promise.all([
+            CL.db.doc('students/'+id).set(st).then(function(){ return CL.db.doc('logins/'+u).set(loginRec); }),
+            saveCwDoc('students/'+id, st).then(function(){ return saveCwDoc('logins/'+u, loginRec); })
+          ]);
+        } else {
+          saveP=CL.db.doc('students/'+id).set(st).then(function(){ return CL.db.doc('logins/'+u).set(loginRec); });
+        }
+        return saveP.then(function(){
           var vv=GD.liberar&&GD.vnd[GD.liberar];
           if(vv){var vid=GD.liberar,val2=+vv.valor||0;
             return CL.db.doc('payments/'+id).set({plan:'',amount:val2,cycle:'unico',due:'',exempt:false,hist:[{amt:val2,at:vv.pagoEm||now,met:vv.forma==='pix'?'Pix':'Cartão',note:'Venda pelo site'}],updatedAt:now})
@@ -5504,7 +5609,9 @@ function gAddWire(body){
               .then(function(){GD.liberar='';});}
           if(plan)return CL.db.doc('payments/'+id).set({plan:(plan==='custom'||ex)?'':plan,amount:ex?0:val,cycle:g('gnc2'),due:ex?'':due,exempt:ex,hist:[],updatedAt:now});
         }).then(function(){
-          GD.tab='alunos';GD.msg='Aluno cadastrado: '+n+'.';gpaint();
+          GD.tab='alunos';GD.msg='Aluno cadastrado: '+n+' ('+(selC==='combo'?'Combo Ambos':selC==='chatwoot'?'Chatwoot':'n8n')+').';
+          if(selC==='chatwoot'||selC==='combo') loadChatwootData();
+          gpaint();
           gSendModal(id,st,true);
         });
       });
@@ -5535,7 +5642,7 @@ function gAction(a,id){
     else if(a==='block'){res=ref.update({status:'bloqueado',updatedAt:now});if(GD.stu[id]&&GD.stu[id].user)CL.db.doc('logins/'+GD.stu[id].user).update({status:'bloqueado'}).catch(function(){});}
     else if(a==='unblock'){res=ref.update({status:'ativo',updatedAt:now});if(GD.stu[id]&&GD.stu[id].user)CL.db.doc('logins/'+GD.stu[id].user).update({status:'ativo'}).catch(function(){});}
     else if(a==='free'){res=CL.db.doc('config/app').set({free:!(!CL.cfg||CL.cfg.free!==false)}).then(function(){CL.cfg={free:!(!CL.cfg||CL.cfg.free!==false)};gpaint();});}
-    else if(a==='del'||a==='delpr'){if(!confirmDel(id))return;if(GD.stu[id]&&GD.stu[id].user)CL.db.doc('logins/'+GD.stu[id].user).delete().catch(function(){});if(GD.pr[id])CL.db.doc('progress/'+id).delete().catch(function(){});if(GD.sv[id])CL.db.doc('saves/'+id).delete().catch(function(){});res=ref.delete();}
+    else if(a==='del'){if(!confirmDel(id))return;if(GD.stu[id]&&GD.stu[id].user)CL.db.doc('logins/'+GD.stu[id].user).delete().catch(function(){});res=ref.delete();}
     else if(a==='sk'){var s1=GD.stu[id]||{},p1=Object.assign({m1:true,m2:false,m3:false,m4:false},s1.perms||{});p1.sk=!p1.sk;res=ref.update({perms:p1,updatedAt:now});if(s1.user)CL.db.doc('logins/'+s1.user).update({perms:p1}).catch(function(){});GD.msg=(p1.sk?'Atalho liberado para ':'Atalho retirado de ')+(s1.name||'o aluno')+'.'+(p1.sk?' Peça para ele apertar Alt + Shift + S quando precisar. Depois de resolver, volte aqui e retire.':'');}
     else if(a==='perm'){gPerm(id);return;}
     else if(a==='rel2'){var st0=GD.stu[id]||{},np=Object.assign({m1:true,m2:false,m3:false,m4:false},st0.perms||{});np.m2=true;res=ref.update({perms:np,updatedAt:now});if(st0.user)CL.db.doc('logins/'+st0.user).update({perms:np}).catch(function(){});GD.msg='Mundo 2 liberado para '+(st0.name||'o aluno')+'. Ele vê assim que atualizar a tela.';}
@@ -5590,20 +5697,17 @@ function blankS(){return {logged:false,name:'',av:-1,mine:0,won:false,tourDone:f
 function blankV(){return {view:'home',tab:'editor',panel:false,trig:false,sel:-1,q:'',ed:null,ed2:null,cur:null,nv:false,wfn:0};}
 function doLogin(user,pw,known){
   var u=uname(user);
-  var p=pw?String(pw).trim():'';
-  if(!u||(!p&&!known))return Promise.reject('empty');
+  if(!u||(!pw&&!known))return Promise.reject('empty');
   var A=window.claude&&window.claude.a3d;
-  if(location.protocol==='http:'||location.protocol==='https:'||(A&&A.remote)){
-    var saltP=A?A.salt(u):fetch('/api/salt?user='+encodeURIComponent(u),{cache:'no-store'}).then(function(r){return r.json();});
-    return saltP.then(function(j){if(!j||!j.salt)throw 'nouser';return known?known:pwHash(p,j.salt);},function(){throw 'read';}).then(function(h){
-      var logP=A?A.login(u,h):fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:u,h:h}),cache:'no-store'}).then(function(r){if(!r.ok)throw {code:r.status===401?'bad':'read'};return r.json();}).then(function(j){return j.d;});
-      return logP.then(function(d){if(A)A.remote=true;return {u:u,h:h,d:d};},function(e){throw (e&&e.code==='bad')?'bad':(e&&e.code==='nouser')?'nouser':(e&&e.code==='rate')?'rate':'read';});
+  if(A&&A.remote){
+    return A.salt(u).then(function(j){if(!j.salt)throw 'nouser';return known?known:pwHash(pw,j.salt);},function(){throw 'read';}).then(function(h){
+      return A.login(u,h).then(function(d){return {u:u,h:h,d:d};},function(e){throw (e&&e.code==='bad')?'bad':(e&&e.code==='nouser')?'nouser':(e&&e.code==='rate')?'rate':'read';});
     });
   }
   return CL.db.doc('logins/'+u).get().catch(function(){throw 'read';}).then(function(sn){
     if(!sn.exists)throw 'nouser';
     var d=sn.data();
-    return (known?Promise.resolve(known):pwHash(p,d.salt)).then(function(h){if(h!==d.hash)throw 'bad';return {u:u,h:h,d:d};});
+    return (known?Promise.resolve(known):pwHash(pw,d.salt)).then(function(h){if(h!==d.hash)throw 'bad';return {u:u,h:h,d:d};});
   });
 }
 function enterSession(r){
@@ -5618,26 +5722,17 @@ function enterSession(r){
     S=blankS();if(pick)loadS(pick);
     S.logged=true;if(!S.name)S.name=r.d.name||'';
     CL.st=r.d;CL.sig='';
-    if(CL.unS){try{CL.unS();}catch(e){}CL.unS=null;}
-    if(CL.sid){
-      try{
-        CL.unS=CL.db.doc('students/'+CL.sid).onSnapshot(function(sn){
-          if(!sn.exists){logout();return;}
-          var sd=sn.data();
-          if(sd){
-            CL.st=Object.assign({},CL.st||{},sd);
-            applyStatus();
-          }
-        },function(){});
-      }catch(e){}
-    }
+    if(CL.unL){try{CL.unL();}catch(e){}}
+    try{CL.unL=CL.db.doc('logins/'+r.u).onSnapshot(function(sn){
+      if(!sn.exists){logout();return;}
+      CL.st=sn.data();applyStatus();
+    },function(){});}catch(e){}
     V=blankV();save();cloudSync(true);applyStatus();route();
   });
 }
 function logout(){
   TQ.msgs=[];
   try{localStorage.removeItem(KEY0+'_sess');}catch(e){}
-  if(CL.unS){try{CL.unS();}catch(e){}CL.unS=null;}
   if(CL.unL){try{CL.unL();}catch(e){}CL.unL=null;}
   CL.sid=null;CL.login=null;CL.st=null;KEY=KEY0;
   S=blankS();V=blankV();
@@ -5783,51 +5878,10 @@ function backToAdmin(){
 }
 function cloudWait(){return !!(window.claude&&window.claude.use&&!CL.ready&&!CL.failed);}
 function splashView(){root.innerHTML='<div class="center"><div class="card"><p class="sub" style="margin:0">Conectando ao seu ambiente...</p></div></div>';mentorEl.classList.add('hidden');}
-
-function openChatwootSupport(){
-  if(window.$chatwoot){
-    window.$chatwoot.toggle('open');
-  } else {
-    var b = document.querySelector('.woot-widget-bubble') || document.querySelector('.woot--bubble-holder');
-    if(b) b.click();
-    else alert('O chat de atendimento está inicializando. Aguarde um instante...');
-  }
-}
-
-// Inicialização Oficial do Chatwoot (Caixa Curso N8N)
-(function(){
-  window.chatwootSettings = {
-    hideMessageBubble: false,
-    position: 'right',
-    locale: 'pt_BR',
-    type: 'standard'
-  };
-  var BASE_URL = 'https://chatwoot.agente3d.net';
-  var cs = document.createElement('script');
-  cs.async = true;
-  cs.defer = true;
-  cs.src = BASE_URL + '/packs/js/sdk.js';
-  cs.onload = function(){
-    try {
-      window.chatwootSDK.run({
-        websiteToken: 'Up6vxYCgp2VVMY3KgGMaLgKX',
-        baseUrl: BASE_URL
-      });
-    } catch(e){}
-  };
-  document.head.appendChild(cs);
-})();
-
 function realLoginView(){
-  
-  root.innerHTML='<div class="center"><div class="card">'+LOGO()+'<h1>Entrar</h1><p class="sub">Use o usuário e a senha que o seu gestor criou para você. Cada aluno tem o seu próprio ambiente e o seu progresso.</p><form id="f"><div class="field"><label for="lu">Usuário</label><input id="lu" type="text" autocomplete="username" autocapitalize="none" spellcheck="false"></div><div class="field"><label for="lp">Senha</label><div style="position:relative;display:flex;align-items:center"><input id="lp" type="password" autocomplete="current-password" style="padding-right:40px;width:100%"><button type="button" id="togglePw" style="position:absolute;right:8px;background:none;border:none;cursor:pointer;font-size:17px;color:#6b7280;padding:4px" aria-label="Mostrar senha" title="Mostrar/ocultar senha">👁️</button></div></div><p class="lerr" id="le" role="alert" hidden></p><button class="btn full" type="submit" id="go">Entrar</button></form><div class="login-support-box"><div><b>Esqueceu a senha ou precisa de ajuda?</b><span>Fale com o suporte ao vivo no chat.</span></div><button type="button" class="login-support-btn" onclick="openChatwootSupport()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Abrir Chat</button></div></div></div>';
-  var er=$('#le'),go=$('#go'),lp=$('#lp'),tp=$('#togglePw');
-  if(tp&&lp){
-    tp.addEventListener('click',function(){
-      if(lp.type==='password'){lp.type='text';tp.textContent='🙈';}
-      else{lp.type='password';tp.textContent='👁️';}
-    });
-  }
+  var free=!CL.cfg||CL.cfg.free!==false;
+  root.innerHTML='<div class="center"><div class="card">'+LOGO()+'<h1>Entrar</h1><p class="sub">Use o usuário e a senha que o seu gestor criou para você. Cada aluno tem o seu próprio ambiente e o seu progresso.</p><form id="f"><div class="field"><label for="lu">Usuário</label><input id="lu" type="text" autocomplete="username" autocapitalize="none" spellcheck="false"></div><div class="field"><label for="lp">Senha</label><input id="lp" type="password" autocomplete="current-password"></div><p class="lerr" id="le" role="alert" hidden></p><button class="btn full" type="submit" id="go">Entrar</button></form>'+(free?'<p class="note"><a href="#" id="free" style="color:inherit">Entrar em modo de teste, sem usuário</a>. Nesse modo o progresso fica só neste navegador e seu gestor não vê.</p>':'<p class="note">Esqueceu a senha ou ainda não tem acesso? Fale com o seu gestor.</p>')+'</div></div>';
+  var er=$('#le'),go=$('#go');
   function fail(t){er.textContent=t;er.hidden=false;go.disabled=false;go.textContent='Entrar';}
   $('#f').addEventListener('submit',function(e){
     e.preventDefault();er.hidden=true;go.disabled=true;go.textContent='Entrando...';
@@ -5835,6 +5889,7 @@ function realLoginView(){
       fail(x==='nocrypto'?'Este navegador não consegue validar a senha. Tente outro navegador.':x==='empty'?'Escreva o usuário e a senha.':x==='nouser'?'Não encontrei esse usuário. Digite o usuário que o gestor passou (sem espaços), não o nome.':x==='rate'?'Muitas tentativas. Aguarde alguns minutos e tente de novo.':x==='read'?'Não consegui consultar o cadastro agora. Confira a internet e tente de novo.':'Senha incorreta. Confira e tente de novo.');
     });
   });
+  var fr=$('#free');if(fr)fr.addEventListener('click',function(e){e.preventDefault();S.logged=true;save();route();});
   $('#lu').focus();mentorEl.classList.add('hidden');
 }
 function gSyncLogin(id){

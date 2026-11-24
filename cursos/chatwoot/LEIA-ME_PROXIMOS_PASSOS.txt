@@ -1,0 +1,4 @@
+CURSO CHATWOOT - Agente3D (base criada)
+Feito: mapa do curso (conteudo.js), servidor de dados, Docker, INICIAR.bat, gestor.
+Falta: simulador (index.html), apostila.html, pagina-de-vendas.html, quizzes e audios.
+Regra: nenhum dado de cliente real. Tudo fictício.

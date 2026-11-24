@@ -11,16 +11,10 @@ node_modules/
 FLUXO_PORTAL_3DIGITOS.json
 google_apps_script_agenda.js
 
-# Cursos: dados sensíveis, workflows n8n e scripts backend
+# Cursos: dados sensíveis e backups (preservados no volume do Docker, fora do git)
 cursos/**/dados/
 cursos/**/__pycache__/
-cursos/**/*.py
 cursos/**/*.pyc
 cursos/**/*.key
-cursos/**/*.bat
-cursos/**/*.ps1
-cursos/**/*.json
-cursos/**/Dockerfile
-cursos/**/docker-compose.yml
 cursos/**/.dockerignore
 cursos/**/.gitignore

@@ -1,0 +1,12 @@
+services:
+  curso-chatwoot:
+    build: .
+    container_name: curso-chatwoot
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./dados:/app/dados
+      - ./audio:/app/audio
+    environment:
+      - PORT=8080
