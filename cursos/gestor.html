@@ -1384,6 +1384,12 @@
       if (!tokN8N && !tokCW) {
         throw new Error('E-mail ou senha incorretos.');
       }
+      if (!tokN8N) {
+        showToast('Aviso: Servidor n8n não autenticou. Apenas Chatwoot conectado.', 'error');
+      }
+      if (!tokCW) {
+        showToast('Aviso: Servidor Chatwoot não autenticou. Apenas n8n conectado.', 'error');
+      }
 
       AUTH.email = email;
       AUTH.tokenN8N = tokN8N;
@@ -1803,6 +1809,15 @@
         return;
       }
 
+      if (wantN8N && !AUTH.tokenN8N) {
+        alert('Erro: Servidor da Academia n8n não está conectado! Não é possível atualizar o n8n agora.');
+        return;
+      }
+      if (wantCW && !AUTH.tokenCW) {
+        alert('Erro: Servidor da Academia Chatwoot não está conectado! Não é possível atualizar o Chatwoot agora.');
+        return;
+      }
+
       const salt = newSalt();
       const h = await hashPassword(pass || '1234', salt);
       const perms = { m1: true, m2: false, m3: false, m4: false };
@@ -1988,6 +2003,15 @@
       const id   = 'm_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
       const user = makeUsername(name);
       const pass = makeRandomPass();
+      if (wantN8N && !AUTH.tokenN8N) {
+        alert('Erro: Servidor da Academia n8n não está conectado! Não é possível atualizar o n8n agora.');
+        return;
+      }
+      if (wantCW && !AUTH.tokenCW) {
+        alert('Erro: Servidor da Academia Chatwoot não está conectado! Não é possível atualizar o Chatwoot agora.');
+        return;
+      }
+
       const salt = newSalt();
       const h    = await hashPassword(pass, salt);
 
@@ -2005,6 +2029,20 @@
       };
 
       const saves = [];
+
+      // Valida autenticação antes de tentar salvar
+      if ((selectedAddCourse === 'n8n' || selectedAddCourse === 'combo') && !AUTH.tokenN8N) {
+        btn.disabled = false;
+        btn.textContent = '✨ Cadastrar e Gerar Acesso';
+        alert('Erro: Servidor da Academia n8n não está autenticado! Verifique a conexão.');
+        return;
+      }
+      if ((selectedAddCourse === 'chatwoot' || selectedAddCourse === 'combo') && !AUTH.tokenCW) {
+        btn.disabled = false;
+        btn.textContent = '✨ Cadastrar e Gerar Acesso';
+        alert('Erro: Servidor da Academia Chatwoot não está autenticado! Verifique a conexão.');
+        return;
+      }
 
       // Salva no n8n se for n8n ou Combo
       if ((selectedAddCourse === 'n8n' || selectedAddCourse === 'combo') && AUTH.tokenN8N) {
