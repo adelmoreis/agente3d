@@ -94,11 +94,19 @@ const { exec } = require('child_process');
 
 // 4. Sincronização Instantânea com o GitHub
 app.all('/api/sync-github', (req, res) => {
-    exec('git fetch origin main && git reset --hard origin/main && (pkill -f servidor_dados.py || true)', { cwd: __dirname }, (err, stdout, stderr) => {
+    const cmd = `
+        git fetch origin main && git reset --hard origin/main
+        pkill -9 -f "servidor_dados.py" || true
+        sleep 1
+        nohup python3 cursos/n8n/servidor_dados.py 8080 > /dev/null 2>&1 &
+        nohup python3 cursos/chatwoot/servidor_dados.py 8081 > /dev/null 2>&1 &
+        ps aux | grep servidor_dados
+    `;
+    exec(cmd, { cwd: __dirname, shell: '/bin/bash' }, (err, stdout, stderr) => {
         if (err) {
-            return res.status(500).json({ success: false, error: err.message, stderr });
+            return res.status(500).json({ success: false, error: err.message, stderr, stdout });
         }
-        res.json({ success: true, message: 'Site sincronizado com o GitHub!', output: stdout.trim() });
+        res.json({ success: true, message: 'Site sincronizado e servidores reiniciados!', output: stdout.trim() });
     });
 });
 
