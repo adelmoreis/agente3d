@@ -4874,6 +4874,8 @@ function checkCoursePings(){
 }
 
 function openGestor(){
+  window.location.href = 'gestor.html';
+  return;
   if(!CL.admin||!CL.db)return;
   var old=document.getElementById('gp');if(old){old.remove();}
   var w=document.createElement('div');w.id='gp';w.className='gp';

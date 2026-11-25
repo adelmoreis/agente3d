@@ -1,4 +1,2265 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
-<title>Acesso do gestor</title><meta http-equiv="refresh" content="0;url=index.html#gestor-entrar"></head>
-<body><script>location.replace('index.html#gestor-entrar');</script><p><a href="index.html#gestor-entrar">Abrir o acesso do gestor</a></p></body></html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel do Gestor Consolidado · Agente3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f17;
+      --surface: #151926;
+      --surface-card: #1c2235;
+      --surface-hover: #232b42;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(139, 92, 246, 0.5);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --purple: #8b5cf6;
+      --purple-dark: #6d28d9;
+      --purple-glow: rgba(139, 92, 246, 0.25);
+      --blue: #0284c7;
+      --blue-dark: #0369a1;
+      --blue-glow: rgba(2, 132, 199, 0.25);
+      --combo-gold: #f59e0b;
+      --combo-gold-dark: #d97706;
+      --combo-glow: rgba(245, 158, 11, 0.25);
+      --green: #10b981;
+      --red: #ef4444;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Top Navigation Bar */
+    .topbar {
+      background: rgba(21, 25, 38, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #8b5cf6, #0284c7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 0 4px 16px var(--purple-glow);
+    }
+    .brand-text h1 {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #fff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .server-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 99px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+    .status-dot.online { background: #10b981; box-shadow: 0 0 8px #10b981; }
+    .status-dot.offline { background: #ef4444; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      color: #fff;
+    }
+    .btn-sm { padding: 5px 12px; font-size: 12px; }
+    .btn-purple { background: var(--purple); }
+    .btn-purple:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .btn-blue { background: var(--blue); }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .btn-ghost { background: var(--surface-card); border-color: var(--border); color: var(--text); }
+    .btn-ghost:hover { background: var(--surface-hover); color: #fff; }
+    .btn-danger { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #f87171; }
+    .btn-danger:hover { background: #ef4444; color: #fff; }
+
+    /* Main Container */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px;
+      flex: 1;
+    }
+
+    /* Course Master Selector (Hero Banner) */
+    .course-hub {
+      background: linear-gradient(135deg, #181d2c 0%, #1a1738 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 22px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .course-hub::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hub-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .hub-title-row h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .hub-title-row p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* 3 Big Interactive Course Pills */
+    .course-pills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .course-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .course-pill:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    .course-pill.active {
+      border-color: var(--purple);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(139, 92, 246, 0.05));
+      box-shadow: 0 8px 24px var(--purple-glow);
+    }
+    .course-pill.active.cw {
+      border-color: var(--blue);
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(2, 132, 199, 0.05));
+      box-shadow: 0 8px 24px var(--blue-glow);
+    }
+    .course-pill.active.combo {
+      border-color: var(--combo-gold);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
+      box-shadow: 0 8px 24px var(--combo-glow);
+    }
+    .pill-icon {
+      font-size: 28px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      flex-shrink: 0;
+    }
+    .course-pill.active .pill-icon { background: rgba(255, 255, 255, 0.12); }
+    .pill-info { flex: 1; }
+    .pill-info b { display: block; font-size: 15px; color: #fff; margin-bottom: 2px; }
+    .pill-info small { font-size: 12px; color: var(--text-muted); display: block; }
+    .pill-badge {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .course-pill.active .pill-badge {
+      background: var(--purple);
+    }
+    .course-pill.active.cw .pill-badge {
+      background: var(--blue);
+    }
+    .course-pill.active.combo .pill-badge {
+      background: var(--combo-gold);
+      color: #000;
+    }
+
+    /* Tabs Navigation */
+    .tabs-bar {
+      display: flex;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.03); }
+    .tab-btn.active {
+      color: #fff;
+    }
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple), #ec4899);
+      border-radius: 3px 3px 0 0;
+    }
+    .tab-counter {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text);
+    }
+
+    /* Tab Content Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--purple);
+    }
+    .kpi-card.cw::before { background: var(--blue); }
+    .kpi-card.combo::before { background: var(--combo-gold); }
+    .kpi-card.green::before { background: var(--green); }
+    .kpi-card b {
+      display: block;
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .kpi-card span {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Table Styles */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13.5px;
+    }
+    th {
+      background: var(--surface-card);
+      padding: 12px 16px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface-hover); }
+
+    /* Student & Product Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+    .badge-n8n {
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      color: #c4b5fd;
+    }
+    .badge-cw {
+      background: rgba(2, 132, 199, 0.15);
+      border: 1px solid rgba(2, 132, 199, 0.4);
+      color: #7dd3fc;
+    }
+    .badge-combo {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      color: #fde68a;
+    }
+    .badge-status-active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .badge-status-blocked {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    /* Filter Pill Group */
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .filter-btn {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { background: var(--surface-hover); color: #fff; }
+    .filter-btn.active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    /* Forms */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px var(--purple-glow);
+    }
+    .form-group input[type="search"] {
+      padding-left: 36px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 12px center;
+    }
+
+    /* Radio Card Selector for New Student Course */
+    .course-card-select {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .course-card-option {
+      background: var(--surface-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .course-card-option:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: var(--surface-hover);
+    }
+    .course-card-option.selected {
+      border-color: var(--purple);
+      background: rgba(139, 92, 246, 0.1);
+    }
+    .course-card-option.selected.cw {
+      border-color: var(--blue);
+      background: rgba(2, 132, 199, 0.1);
+    }
+    .course-card-option.selected.combo {
+      border-color: var(--combo-gold);
+      background: rgba(245, 158, 11, 0.1);
+    }
+    .option-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .option-head b { font-size: 15px; color: #fff; }
+    .option-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      max-width: 620px;
+      width: 100%;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .modal-header h3 { font-size: 19px; color: #fff; }
+    .close-btn {
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .close-btn:hover { color: #fff; }
+
+    /* Progress bar */
+    .prog-bar {
+      height: 8px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      width: 100px;
+      margin-bottom: 4px;
+    }
+    .prog-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), #ec4899);
+      border-radius: 99px;
+    }
+    .prog-fill.cw { background: linear-gradient(90deg, var(--blue), #38bdf8); }
+    .prog-fill.combo { background: linear-gradient(90deg, var(--combo-gold), #f97316); }
+
+    /* Login Screen */
+    .login-container {
+      max-width: 420px;
+      margin: 80px auto;
+      padding: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    .login-container h2 {
+      font-size: 22px;
+      color: #fff;
+      margin: 14px 0 6px;
+    }
+    .login-container p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e293b;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideIn 0.3s ease;
+    }
+    .toast.success { border-color: #10b981; }
+    .toast.error { border-color: #ef4444; }
+    @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-logo">3D</div>
+      <div class="brand-text">
+        <h1>Painel do Gestor Consolidado</h1>
+        <p>Agente3D · Gestão Multi-Cursos Inteligente</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="server-status" id="status-n8n" title="Status da API n8n">
+        <span class="status-dot" id="dot-n8n"></span>
+        <span>🟣 n8n: <b id="text-n8n">Verificando...</b></span>
+      </div>
+      <div class="server-status" id="status-cw" title="Status da API Chatwoot">
+        <span class="status-dot" id="dot-cw"></span>
+        <span>💬 Chatwoot: <b id="text-cw">Verificando...</b></span>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="btn-refresh" title="Atualizar dados agora">🔄 Atualizar</button>
+      <button class="btn btn-danger btn-sm" id="btn-logout">Sair</button>
+    </div>
+  </header>
+
+  <!-- Login Overlay (Shown if not authenticated) -->
+  <div id="login-section" class="login-container" style="display:none;">
+    <div class="brand-logo" style="margin:0 auto 12px; width:52px; height:52px; font-size:24px;">3D</div>
+    <h2>Acesso do Gestor</h2>
+    <p>Entre com as credenciais administrativas para gerenciar os cursos.</p>
+    <form id="login-form">
+      <div class="form-group" style="text-align:left; margin-bottom:14px;">
+        <label>E-mail do Gestor</label>
+        <input type="email" id="login-email" value="3digitos2023@gmail.com" required>
+      </div>
+      <div class="form-group" style="text-align:left; margin-bottom:20px;">
+        <label>Senha</label>
+        <input type="password" id="login-pass" value="admin1234" required>
+      </div>
+      <button type="submit" class="btn btn-purple" style="width:100%; padding:12px;" id="login-btn">Entrar no Painel</button>
+      <p id="login-error" style="color:#ef4444; font-size:13px; margin-top:12px; display:none;"></p>
+    </form>
+  </div>
+
+  <!-- Main Gestor Dashboard -->
+  <main class="container" id="dashboard-section" style="display:none;">
+
+    <!-- Course Master Selector (Hero Banner) -->
+    <section class="course-hub">
+      <div class="hub-title-row">
+        <div>
+          <h2>Central de Controle Multi-Cursos</h2>
+          <p>Alterne entre a visão unificada ou filtre diretamente por curso específico.</p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <a href="#" target="_blank" id="lnk-test-n8n" class="btn btn-ghost btn-sm">Simulador n8n ↗</a>
+          <a href="#" target="_blank" id="lnk-test-cw" class="btn btn-ghost btn-sm">Simulador Chatwoot ↗</a>
+        </div>
+      </div>
+
+      <div class="course-pills">
+        <!-- Combo Pill -->
+        <div class="course-pill combo active" data-course="combo">
+          <div class="pill-icon">⚡</div>
+          <div class="pill-info">
+            <b>Visão Consolidada</b>
+            <small>Total somado de ambos os cursos</small>
+          </div>
+          <span class="pill-badge" id="badge-total-students">0 alunos</span>
+        </div>
+
+        <!-- n8n Pill -->
+        <div class="course-pill" data-course="n8n">
+          <div class="pill-icon">🟣</div>
+          <div class="pill-info">
+            <b>Academia n8n</b>
+            <small id="sub-n8n-info">Porta 8080 · curson8n.agente3d.net</small>
+          </div>
+          <span class="pill-badge" id="badge-n8n-students">0 alunos</span>
+        </div>
+
+        <!-- Chatwoot Pill -->
+        <div class="course-pill cw" data-course="chatwoot">
+          <div class="pill-icon">💬</div>
+          <div class="pill-info">
+            <b>Academia Chatwoot</b>
+            <small id="sub-cw-info">Porta 8081 · cursochatwoot.agente3d.net</small>
+          </div>
+          <span class="pill-badge" id="badge-cw-students">0 alunos</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs-bar">
+      <button class="tab-btn active" data-tab="geral">📊 Visão Geral</button>
+      <button class="tab-btn" data-tab="alunos">👥 Alunos <span class="tab-counter" id="tab-cnt-alunos">0</span></button>
+      <button class="tab-btn" data-tab="add">➕ Adicionar Aluno</button>
+      <button class="tab-btn" data-tab="vendas">💳 Vendas & Pagamentos <span class="tab-counter" id="tab-cnt-vendas">0</span></button>
+      <button class="tab-btn" data-tab="metas">🎯 Metas & Prazos</button>
+      <button class="tab-btn" data-tab="duvidas">❓ Dúvidas <span class="tab-counter" id="tab-cnt-duvidas">0</span></button>
+      <button class="tab-btn" data-tab="config">⚙️ Configurações & Backups</button>
+    </nav>
+
+    <!-- TAB 1: VISÃO GERAL -->
+    <div id="tab-view-geral" class="tab-content">
+      <div class="kpi-grid">
+        <div class="kpi-card combo">
+          <b id="kpi-total">0</b>
+          <span>Total de Alunos Únicos</span>
+        </div>
+        <div class="kpi-card">
+          <b id="kpi-n8n">0</b>
+          <span>Matrículas Academia n8n</span>
+        </div>
+        <div class="kpi-card cw">
+          <b id="kpi-cw">0</b>
+          <span>Matrículas Chatwoot</span>
+        </div>
+        <div class="kpi-card combo">
+          <b id="kpi-combo">0</b>
+          <span>Alunos COMBO (Ambos)</span>
+        </div>
+        <div class="kpi-card green">
+          <b id="kpi-receita">R$ 0,00</b>
+          <span>Faturamento Estimado</span>
+        </div>
+        <div class="kpi-card">
+          <b id="kpi-cert">0</b>
+          <span>Certificados Emitidos</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🚨 Alunos que Precisam de Atenção</div>
+            <div class="card-desc">Alunos parados há mais de 3 dias, prazos vencidos ou com pagamentos pendentes.</div>
+          </div>
+        </div>
+        <div id="attention-list">
+          <p style="color:var(--text-muted); font-size:13.5px;">Nenhum aluno precisando de atenção no momento. Tudo em ordem!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: ALUNOS (CONTROLE INTELIGENTE) -->
+    <div id="tab-view-alunos" class="tab-content" style="display:none;">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Gerenciamento Completo de Alunos</div>
+            <div class="card-desc">Controle de acessos, cursos contratados, login e progresso em tempo real.</div>
+          </div>
+          <button class="btn btn-purple btn-sm" id="btn-go-add">➕ Novo Aluno</button>
+        </div>
+
+        <!-- Quick Filters & Search -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">Todos (<span id="flt-cnt-all">0</span>)</button>
+            <button class="filter-btn" data-filter="n8n">🟣 Apenas n8n (<span id="flt-cnt-n8n">0</span>)</button>
+            <button class="filter-btn" data-filter="chatwoot">💬 Apenas Chatwoot (<span id="flt-cnt-cw">0</span>)</button>
+            <button class="filter-btn" data-filter="combo">⚡ Alunos Combo (<span id="flt-cnt-combo">0</span>)</button>
+          </div>
+          <div style="flex:1; max-width:320px; min-width:220px;">
+            <input type="search" id="search-student" class="form-group" placeholder="Buscar por nome, e-mail, login..." style="width:100%; border-radius:99px; padding:8px 14px 8px 36px;">
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Aluno</th>
+                <th>Cursos Contratados</th>
+                <th>Login de Acesso</th>
+                <th>Progresso</th>
+                <th>Cobrança</th>
+                <th>Último Acesso</th>
+                <th>Ações Rápidas</th>
+              </tr>
+            </thead>
+            <tbody id="students-tbody">
+              <tr>
+                <td colspan="7" style="text-align:center; padding:32px; color:var(--text-muted);">Carregando alunos...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: ADICIONAR ALUNO (MULTI-CURSO INTELIGENTE) -->
+    <div id="tab-view-add" class="tab-content" style="display:none;">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Matrícula e Cadastro Inteligente de Aluno</div>
+            <div class="card-desc">Escolha em qual curso o aluno será matriculado ou crie acesso instantâneo ao Combo duplo.</div>
+          </div>
+        </div>
+
+        <!-- Passo 1: Selecionar Curso -->
+        <div style="margin-bottom:20px;">
+          <label style="font-weight:700; color:#fff; display:block; margin-bottom:10px; font-size:14px;">1. Selecione o Curso Contratado pelo Aluno:</label>
+          <div class="course-card-select">
+            <div class="course-card-option selected" data-addcourse="n8n">
+              <div class="option-head">
+                <b>🟣 Academia n8n</b>
+                <span class="badge badge-n8n">R$ 88,20</span>
+              </div>
+              <div class="option-desc">Matrícula exclusiva no curso de automação n8n (curson8n.agente3d.net / :8080).</div>
+            </div>
+
+            <div class="course-card-option cw" data-addcourse="chatwoot">
+              <div class="option-head">
+                <b>💬 Academia Chatwoot</b>
+                <span class="badge badge-cw">R$ 88,20</span>
+              </div>
+              <div class="option-desc">Matrícula exclusiva no curso de CRM e atendimento Chatwoot (cursochatwoot.agente3d.net / :8081).</div>
+            </div>
+
+            <div class="course-card-option combo" data-addcourse="combo">
+              <div class="option-head">
+                <b>⚡ COMBO (Ambos os Cursos)</b>
+                <span class="badge badge-combo">R$ 147,00</span>
+              </div>
+              <div class="option-desc">Gera cadastro unificado nos DOIS cursos com o mesmo login e senha automaticamente!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passo 2: Dados do Aluno -->
+        <form id="form-add-student">
+          <label style="font-weight:700; color:#fff; display:block; margin-bottom:10px; font-size:14px;">2. Dados Pessoais e Contato:</label>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nome Completo *</label>
+              <input type="text" id="add-name" placeholder="Ex.: Maria Souza" required>
+            </div>
+            <div class="form-group">
+              <label>E-mail (para envio do login)</label>
+              <input type="email" id="add-email" placeholder="maria@email.com">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp com DDD (para envio do login)</label>
+              <input type="tel" id="add-phone" placeholder="(71) 99999-9999">
+            </div>
+            <div class="form-group">
+              <label>Empresa ou Profissão (opcional)</label>
+              <input type="text" id="add-company" placeholder="Ex.: Consultoria ABC">
+            </div>
+          </div>
+
+          <!-- Passo 3: Cobrança e Prazos -->
+          <label style="font-weight:700; color:#fff; display:block; margin-bottom:10px; font-size:14px; margin-top:16px;">3. Condições Comerciais e Prazo:</label>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Tipo de Cobrança</label>
+              <select id="add-plan">
+                <option value="paid">Pagamento Único</option>
+                <option value="free">Cortesia (Acesso Gratuito)</option>
+                <option value="custom">Valor Personalizado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Valor (R$)</label>
+              <input type="number" step="0.01" id="add-val" value="88.20">
+            </div>
+            <div class="form-group">
+              <label>Concluir até (Meta do Aluno)</label>
+              <input type="date" id="add-until">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:20px;">
+            <label>Anotação Interna do Gestor (o aluno não vê)</label>
+            <textarea id="add-note" rows="2" placeholder="Observações sobre o cliente, negociação, etc."></textarea>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:12px;">
+            <button type="submit" class="btn btn-purple" id="btn-save-student" style="padding:12px 24px;">✨ Cadastrar e Gerar Acesso</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB 4: VENDAS -->
+    <div id="tab-view-vendas" class="tab-content" style="display:none;">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Registrar Pagamento Manual</div>
+            <div class="card-desc">Cadastre um pagamento recebido via Pix direto ou transferência para liberar o aluno.</div>
+          </div>
+        </div>
+        <form id="form-manual-sale">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Curso Vendido *</label>
+              <select id="sale-course">
+                <option value="n8n">🟣 Academia n8n (R$ 88,20)</option>
+                <option value="chatwoot">💬 Academia Chatwoot (R$ 88,20)</option>
+                <option value="combo">⚡ Combo n8n + Chatwoot (R$ 147,00)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Nome do Comprador *</label>
+              <input type="text" id="sale-name" placeholder="Ex.: Carlos Mendes" required>
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" id="sale-email" placeholder="carlos@email.com">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp</label>
+              <input type="tel" id="sale-phone" placeholder="(11) 98888-7777">
+            </div>
+            <div class="form-group">
+              <label>Forma de Pagamento</label>
+              <select id="sale-method">
+                <option value="pix">Pix</option>
+                <option value="cartao">Cartão de Crédito</option>
+                <option value="outro">Boleto / Outro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Valor Recebido (R$)</label>
+              <input type="number" step="0.01" id="sale-val" value="88.20">
+            </div>
+          </div>
+          <div style="display:flex; justify-content:flex-end;">
+            <button type="submit" class="btn btn-purple">Registrar Venda e Liberar Acesso</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Histórico de Vendas Registradas</div>
+            <div class="card-desc">Vendas pendentes de liberação e acessos já concedidos.</div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>Produto / Curso</th>
+                <th>Forma / Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="sales-tbody">
+              <tr>
+                <td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Nenhuma venda registrada ainda.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: METAS -->
+    <div id="tab-view-metas" class="tab-content" style="display:none;">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Acompanhamento de Metas e Prazos</div>
+            <div class="card-desc">Controle de engajamento para garantir que os alunos concluam os cursos dentro do prazo.</div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Aluno</th>
+                <th>Curso</th>
+                <th>Prazo Limite</th>
+                <th>Progresso Real</th>
+                <th>Ritmo de Estudo</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="metas-tbody">
+              <tr>
+                <td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Carregando metas...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: DÚVIDAS -->
+    <div id="tab-view-duvidas" class="tab-content" style="display:none;">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Dúvidas Enviadas ao Mentor IA</div>
+            <div class="card-desc">Perguntas feitas pelos alunos nos simuladores de ambos os cursos.</div>
+          </div>
+        </div>
+        <div id="duvidas-list">
+          <p style="color:var(--text-muted); font-size:13.5px; padding:12px;">Nenhuma dúvida pendente de resposta.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 7: CONFIGURAÇÕES -->
+    <div id="tab-view-config" class="tab-content" style="display:none;">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Status dos Ambientes e Endpoints Oficiais</div>
+            <div class="card-desc">Informações técnicas dos servidores em execução local e na VPS de produção.</div>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+          <div style="background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="badge badge-n8n">🟣 Academia n8n</span>
+            </div>
+            <div style="font-size:13px; line-height:1.7; color:var(--text-muted);">
+              <div>💻 Local: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></div>
+              <div>🌐 Produção: <a href="https://curson8n.agente3d.net" target="_blank">curson8n.agente3d.net</a></div>
+              <div>📂 Banco: <code>cursos/n8n/dados/banco.json</code></div>
+              <div style="margin-top:10px;">
+                <button class="btn btn-ghost btn-sm" id="btn-bk-n8n">📥 Baixar Backup n8n</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="badge badge-cw">💬 Academia Chatwoot</span>
+            </div>
+            <div style="font-size:13px; line-height:1.7; color:var(--text-muted);">
+              <div>💻 Local: <a href="http://localhost:8081" target="_blank">http://localhost:8081</a></div>
+              <div>🌐 Produção: <a href="https://cursochatwoot.agente3d.net" target="_blank">cursochatwoot.agente3d.net</a></div>
+              <div>📂 Banco: <code>cursos/chatwoot/dados/banco.json</code></div>
+              <div style="margin-top:10px;">
+                <button class="btn btn-ghost btn-sm" id="btn-bk-cw">📥 Baixar Backup Chatwoot</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Alterar Senha do Gestor</div>
+            <div class="card-desc">Atualiza as credenciais de acesso em ambos os cursos simultaneamente.</div>
+          </div>
+        </div>
+        <form id="form-admin-pwd" style="max-width:440px;">
+          <div class="form-group" style="margin-bottom:12px;">
+            <label>E-mail do Gestor</label>
+            <input type="email" id="cfg-admin-email" value="3digitos2023@gmail.com" required>
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label>Nova Senha (mínimo 8 dígitos)</label>
+            <input type="password" id="cfg-admin-pass1" required minlength="8">
+          </div>
+          <div class="form-group" style="margin-bottom:16px;">
+            <label>Confirmar Nova Senha</label>
+            <input type="password" id="cfg-admin-pass2" required minlength="8">
+          </div>
+          <button type="submit" class="btn btn-purple">Salvar Nova Senha</button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: EDITAR ALUNO & CURSOS -->
+  <div id="modal-edit" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="edit-modal-title">Editar Aluno</h3>
+        <button class="close-btn" onclick="closeEditModal()">&times;</button>
+      </div>
+      <form id="form-edit-student">
+        <input type="hidden" id="edit-id">
+        <input type="hidden" id="edit-source-course">
+
+        <div class="form-group" style="margin-bottom:12px;">
+          <label>Nome Completo</label>
+          <input type="text" id="edit-name" required>
+        </div>
+        <div class="form-grid" style="margin-bottom:12px;">
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="edit-email">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp</label>
+            <input type="tel" id="edit-phone">
+          </div>
+        </div>
+
+        <!-- Seletor de Cursos Liberados com Checkboxes -->
+        <div style="background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; margin-bottom:16px;">
+          <label style="font-weight:700; color:#fff; display:block; margin-bottom:8px; font-size:14px;">🎓 Cursos Liberados para este Aluno:</label>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Marque ou desmarque para conceder ou revogar o acesso em cada curso. Se marcar ambos, o aluno vira Combo e usa a mesma senha em ambos!</p>
+          
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+              <input type="checkbox" id="edit-course-n8n" style="width:18px; height:18px; accent-color:var(--purple);">
+              <div>
+                <b style="color:#c4b5fd;">🟣 Academia n8n</b>
+                <small style="color:var(--text-muted); display:block; font-size:11.5px;">Acesso ao simulador e missões de automação com n8n.</small>
+              </div>
+            </label>
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+              <input type="checkbox" id="edit-course-cw" style="width:18px; height:18px; accent-color:var(--blue);">
+              <div>
+                <b style="color:#7dd3fc;">💬 Academia Chatwoot</b>
+                <small style="color:var(--text-muted); display:block; font-size:11.5px;">Acesso ao simulador de canais, atendimento e CRM Chatwoot.</small>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-bottom:16px;">
+          <div class="form-group">
+            <label>Usuário de Acesso (Login)</label>
+            <input type="text" id="edit-user" readonly style="opacity:0.8; font-family:var(--font-mono);">
+          </div>
+          <div class="form-group">
+            <label>Senha de Acesso</label>
+            <div style="display:flex; gap:6px;">
+              <input type="text" id="edit-pass" style="font-family:var(--font-mono);">
+              <button type="button" class="btn btn-ghost btn-sm" id="btn-gen-pass" title="Gerar nova senha">🎲</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:16px;">
+          <label>Status do Aluno</label>
+          <select id="edit-status">
+            <option value="ativo">🟢 Ativo (Acesso Liberado)</option>
+            <option value="bloqueado">🔴 Bloqueado (Sem Acesso)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom:20px;">
+          <label>Observação Interna</label>
+          <textarea id="edit-note" rows="2"></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <button type="button" class="btn btn-danger btn-sm" id="btn-delete-student">Remover Aluno</button>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-ghost" onclick="closeEditModal()">Cancelar</button>
+            <button type="submit" class="btn btn-purple">Salvar Alterações</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ENVIAR ACESSO (WHATSAPP & EMAIL) -->
+  <div id="modal-send" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📲 Enviar Acesso ao Aluno</h3>
+        <button class="close-btn" onclick="closeSendModal()">&times;</button>
+      </div>
+      <div style="margin-bottom:16px;">
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">Mensagem formatada pronta para envio via WhatsApp ou E-mail com 1 clique:</p>
+        <textarea id="send-msg-text" rows="8" style="width:100%; font-family:inherit; font-size:13px; padding:12px; background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius-sm); color:#fff; line-height:1.5;"></textarea>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-copy-msg">📋 Copiar Mensagem</button>
+        <div style="display:flex; gap:10px;">
+          <button type="button" class="btn btn-ghost" onclick="closeSendModal()">Fechar</button>
+          <button type="button" class="btn btn-purple" id="btn-open-wa" style="background:#25d366; border-color:#25d366; color:#000; font-weight:700;">🟢 Abrir no WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ---------- URLs e Conexão Inteligente com os Servidores ---------- */
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+    
+    // Detecta se estamos rodando na porta 8081 ou 8080 localmente ou nos domínios oficiais
+    const N8N_BASE = isLocal ? 'http://localhost:8080' : 'https://curson8n.agente3d.net';
+    const CW_BASE  = isLocal ? 'http://localhost:8081' : 'https://cursochatwoot.agente3d.net';
+
+    document.getElementById('lnk-test-n8n').href = N8N_BASE;
+    document.getElementById('lnk-test-cw').href = CW_BASE;
+
+    /* Estado Global */
+    let AUTH = {
+      email: '3digitos2023@gmail.com',
+      tokenN8N: '',
+      tokenCW: '',
+      isLogged: false
+    };
+
+    let DB = {
+      n8n: { students: {}, progress: {}, sales: {}, duvidas: {}, payments: {} },
+      cw:  { students: {}, progress: {}, sales: {}, duvidas: {}, payments: {} },
+      filterCourse: 'combo', // 'combo' | 'n8n' | 'chatwoot'
+      filterType: 'all',     // 'all' | 'n8n' | 'chatwoot' | 'combo'
+      searchQuery: '',
+      currentTab: 'geral'
+    };
+
+    /* ---------- Helpers de Criptografia WebCrypto (PBKDF2 SHA-256) ---------- */
+    function b64(buf) {
+      let bin = ''; const bytes = new Uint8Array(buf);
+      for (let i = 0; i < bytes.byteLength; i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin);
+    }
+    function unb64(str) {
+      const bin = atob(str); const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return bytes;
+    }
+    async function hashPassword(password, saltB64) {
+      const enc = new TextEncoder();
+      const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), { name: "PBKDF2" }, false, ["deriveBits"]);
+      const bits = await crypto.subtle.deriveBits({
+        name: "PBKDF2",
+        salt: unb64(saltB64),
+        iterations: 100000,
+        hash: "SHA-256"
+      }, keyMaterial, 256);
+      return b64(bits);
+    }
+    function newSalt() {
+      const b = new Uint8Array(16);
+      crypto.getRandomValues(b);
+      return b64(b);
+    }
+    function makeUsername(name) {
+      return String(name || 'aluno').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '.').replace(/[^a-z0-9.]/g, '').slice(0, 30);
+    }
+    function makeRandomPass() {
+      const chars = 'abcdefghjkmnpqrstuvwxyz23456789';
+      let p = '';
+      for (let i = 0; i < 6; i++) p += chars[Math.floor(Math.random() * chars.length)];
+      return p;
+    }
+
+    /* ---------- Toast Notifier ---------- */
+    function showToast(msg, type = 'success') {
+      const old = document.querySelector('.toast'); if (old) old.remove();
+      const t = document.createElement('div');
+      t.className = `toast ${type}`;
+      t.innerHTML = `${type === 'success' ? '✅' : '⚠️'} <span>${msg}</span>`;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 4000);
+    }
+
+    /* ---------- Pings de Servidor ---------- */
+    async function pingServers() {
+      // Test n8n
+      try {
+        const r1 = await fetch(`${N8N_BASE}/api/ping`, { cache: 'no-store' });
+        const ok1 = r1.ok;
+        document.getElementById('dot-n8n').className = `status-dot ${ok1 ? 'online' : 'offline'}`;
+        document.getElementById('text-n8n').textContent = ok1 ? 'Online' : 'Offline';
+      } catch (e) {
+        document.getElementById('dot-n8n').className = 'status-dot offline';
+        document.getElementById('text-n8n').textContent = 'Inacessível';
+      }
+
+      // Test Chatwoot
+      try {
+        const r2 = await fetch(`${CW_BASE}/api/ping`, { cache: 'no-store' });
+        const ok2 = r2.ok;
+        document.getElementById('dot-cw').className = `status-dot ${ok2 ? 'online' : 'offline'}`;
+        document.getElementById('text-cw').textContent = ok2 ? 'Online' : 'Offline';
+      } catch (e) {
+        document.getElementById('dot-cw').className = 'status-dot offline';
+        document.getElementById('text-cw').textContent = 'Inacessível';
+      }
+    }
+
+    /* ---------- Autenticação com Ambos os Servidores ---------- */
+    async function loginAdmin(email, pass) {
+      const defaultSalt = 'ZGVmYXVsdC1hZG1pbjEy';
+      const h = await hashPassword(pass, defaultSalt);
+
+      let tokN8N = '', tokCW = '';
+      // Tenta login no n8n
+      try {
+        const res = await fetch(`${N8N_BASE}/api/admin`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, h })
+        });
+        if (res.ok) {
+          const j = await res.json();
+          tokN8N = j.token;
+        }
+      } catch (e) {}
+
+      // Tenta login no Chatwoot
+      try {
+        const res = await fetch(`${CW_BASE}/api/admin`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, h })
+        });
+        if (res.ok) {
+          const j = await res.json();
+          tokCW = j.token;
+        }
+      } catch (e) {}
+
+      if (!tokN8N && !tokCW) {
+        throw new Error('E-mail ou senha incorretos.');
+      }
+
+      AUTH.email = email;
+      AUTH.tokenN8N = tokN8N;
+      AUTH.tokenCW = tokCW;
+      AUTH.isLogged = true;
+
+      sessionStorage.setItem('a3d_gestor_auth', JSON.stringify({ email, h, tokN8N, tokCW }));
+      return true;
+    }
+
+    /* ---------- Carregamento dos Bancos dos 2 Cursos ---------- */
+    async function loadData() {
+      // 1. Carrega dados do n8n
+      if (AUTH.tokenN8N) {
+        try {
+          const [st, pr, vnd, dv, pay] = await Promise.all([
+            fetch(`${N8N_BASE}/api/col?name=students`, { headers: { 'X-Token': AUTH.tokenN8N }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]})),
+            fetch(`${N8N_BASE}/api/col?name=progress`, { headers: { 'X-Token': AUTH.tokenN8N }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]})),
+            fetch(`${N8N_BASE}/api/col?name=vendas`, { headers: { 'X-Token': AUTH.tokenN8N }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]})),
+            fetch(`${N8N_BASE}/api/col?name=duvidas`, { headers: { 'X-Token': AUTH.tokenN8N }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]})),
+            fetch(`${N8N_BASE}/api/col?name=payments`, { headers: { 'X-Token': AUTH.tokenN8N }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]}))
+          ]);
+          DB.n8n.students = {}; (st.docs || []).forEach(d => DB.n8n.students[d.id] = d.data);
+          DB.n8n.progress = {}; (pr.docs || []).forEach(d => DB.n8n.progress[d.id] = d.data);
+          DB.n8n.sales    = {}; (vnd.docs || []).forEach(d => DB.n8n.sales[d.id] = d.data);
+          DB.n8n.duvidas  = {}; (dv.docs || []).forEach(d => DB.n8n.duvidas[d.id] = d.data);
+          DB.n8n.payments = {}; (pay.docs || []).forEach(d => DB.n8n.payments[d.id] = d.data);
+        } catch (e) {
+          console.warn('Erro ao ler n8n:', e);
+        }
+      }
+
+      // 2. Carrega dados do Chatwoot
+      if (AUTH.tokenCW) {
+        try {
+          const [st, pr, vnd, dv, pay] = await Promise.all([
+            fetch(`${CW_BASE}/api/col?name=students`, { headers: { 'X-Token': AUTH.tokenCW }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]})),
+            fetch(`${CW_BASE}/api/col?name=progress`, { headers: { 'X-Token': AUTH.tokenCW }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]})),
+            fetch(`${CW_BASE}/api/col?name=vendas`, { headers: { 'X-Token': AUTH.tokenCW }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]})),
+            fetch(`${CW_BASE}/api/col?name=duvidas`, { headers: { 'X-Token': AUTH.tokenCW }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]})),
+            fetch(`${CW_BASE}/api/col?name=payments`, { headers: { 'X-Token': AUTH.tokenCW }, cache: 'no-store' }).then(r=>r.json()).catch(()=>({docs:[]}))
+          ]);
+          DB.cw.students = {}; (st.docs || []).forEach(d => DB.cw.students[d.id] = d.data);
+          DB.cw.progress = {}; (pr.docs || []).forEach(d => DB.cw.progress[d.id] = d.data);
+          DB.cw.sales    = {}; (vnd.docs || []).forEach(d => DB.cw.sales[d.id] = d.data);
+          DB.cw.duvidas  = {}; (dv.docs || []).forEach(d => DB.cw.duvidas[d.id] = d.data);
+          DB.cw.payments = {}; (pay.docs || []).forEach(d => DB.cw.payments[d.id] = d.data);
+        } catch (e) {
+          console.warn('Erro ao ler Chatwoot:', e);
+        }
+      }
+
+      renderAll();
+    }
+
+    /* ---------- Modelo Unificado de Alunos (Inteligente) ---------- */
+    function getUnifiedStudents() {
+      const map = new Map(); // Chave: user ou email ou sid
+
+      // Processa alunos do n8n
+      Object.entries(DB.n8n.students).forEach(([id, s]) => {
+        const key = s.user || s.email || id;
+        map.set(key, {
+          id: id,
+          user: s.user || id,
+          name: s.name || 'Aluno sem nome',
+          email: s.email || '',
+          phone: s.phone || s.contact || '',
+          status: s.status || 'ativo',
+          pass: s.pass || '',
+          note: s.note || '',
+          meta: s.meta || {},
+          hasN8N: true,
+          hasCW: false,
+          progressN8N: DB.n8n.progress[id] || null,
+          progressCW: null,
+          lastAccess: (DB.n8n.progress[id] && DB.n8n.progress[id].last) || s.createdAt || 0,
+          rawN8N: s,
+          rawCW: null
+        });
+      });
+
+      // Processa e mescla alunos do Chatwoot
+      Object.entries(DB.cw.students).forEach(([id, s]) => {
+        const key = s.user || s.email || id;
+        if (map.has(key)) {
+          // Aluno existe em ambos -> É COMBO!
+          const existing = map.get(key);
+          existing.hasCW = true;
+          existing.progressCW = DB.cw.progress[id] || null;
+          existing.rawCW = s;
+          if (!existing.pass && s.pass) existing.pass = s.pass;
+          const cwLast = (DB.cw.progress[id] && DB.cw.progress[id].last) || s.createdAt || 0;
+          if (cwLast > existing.lastAccess) existing.lastAccess = cwLast;
+        } else {
+          // Apenas Chatwoot
+          map.set(key, {
+            id: id,
+            user: s.user || id,
+            name: s.name || 'Aluno sem nome',
+            email: s.email || '',
+            phone: s.phone || s.contact || '',
+            status: s.status || 'ativo',
+            pass: s.pass || '',
+            note: s.note || '',
+            meta: s.meta || {},
+            hasN8N: false,
+            hasCW: true,
+            progressN8N: null,
+            progressCW: DB.cw.progress[id] || null,
+            lastAccess: (DB.cw.progress[id] && DB.cw.progress[id].last) || s.createdAt || 0,
+            rawN8N: null,
+            rawCW: s
+          });
+        }
+      });
+
+      return Array.from(map.values()).sort((a, b) => b.lastAccess - a.lastAccess);
+    }
+
+    /* ---------- Renderização Principal da Interface ---------- */
+    function renderAll() {
+      const allStudents = getUnifiedStudents();
+      const n8nOnly = allStudents.filter(s => s.hasN8N && !s.hasCW);
+      const cwOnly  = allStudents.filter(s => !s.hasN8N && s.hasCW);
+      const combo   = allStudents.filter(s => s.hasN8N && s.hasCW);
+
+      // Atualiza Badges de Alunos no Hero
+      document.getElementById('badge-total-students').textContent = `${allStudents.length} aluno${allStudents.length === 1 ? '' : 's'}`;
+      document.getElementById('badge-n8n-students').textContent = `${allStudents.filter(s => s.hasN8N).length} aluno${allStudents.filter(s => s.hasN8N).length === 1 ? '' : 's'}`;
+      document.getElementById('badge-cw-students').textContent = `${allStudents.filter(s => s.hasCW).length} aluno${allStudents.filter(s => s.hasCW).length === 1 ? '' : 's'}`;
+
+      // Tab Counters
+      document.getElementById('tab-cnt-alunos').textContent = allStudents.length;
+      document.getElementById('flt-cnt-all').textContent = allStudents.length;
+      document.getElementById('flt-cnt-n8n').textContent = n8nOnly.length;
+      document.getElementById('flt-cnt-cw').textContent = cwOnly.length;
+      document.getElementById('flt-cnt-combo').textContent = combo.length;
+
+      // KPIs
+      document.getElementById('kpi-total').textContent = allStudents.length;
+      document.getElementById('kpi-n8n').textContent = allStudents.filter(s => s.hasN8N).length;
+      document.getElementById('kpi-cw').textContent = allStudents.filter(s => s.hasCW).length;
+      document.getElementById('kpi-combo').textContent = combo.length;
+
+      // Receita Estimada
+      const totalReceita = (n8nOnly.length * 88.20) + (cwOnly.length * 88.20) + (combo.length * 147.00);
+      document.getElementById('kpi-receita').textContent = totalReceita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+      // Certificados
+      const certCount = allStudents.filter(s => (s.progressN8N && s.progressN8N.cert) || (s.progressCW && s.progressCW.cert)).length;
+      document.getElementById('kpi-cert').textContent = certCount;
+
+      renderStudentTable(allStudents);
+      renderSalesTable();
+      renderAttentionList(allStudents);
+      renderMetasTable(allStudents);
+      renderDuvidasList();
+    }
+
+    /* Render Alunos */
+    function renderStudentTable(students) {
+      let filtered = students;
+
+      // Filtro de Curso Selecionado no Topo
+      if (DB.filterCourse === 'n8n') filtered = filtered.filter(s => s.hasN8N);
+      else if (DB.filterCourse === 'chatwoot') filtered = filtered.filter(s => s.hasCW);
+
+      // Filtro das Abas Internas
+      if (DB.filterType === 'n8n') filtered = filtered.filter(s => s.hasN8N && !s.hasCW);
+      else if (DB.filterType === 'chatwoot') filtered = filtered.filter(s => !s.hasN8N && s.hasCW);
+      else if (DB.filterType === 'combo') filtered = filtered.filter(s => s.hasN8N && s.hasCW);
+
+      // Filtro de Busca
+      const q = DB.searchQuery.toLowerCase().trim();
+      if (q) {
+        filtered = filtered.filter(s => 
+          s.name.toLowerCase().includes(q) ||
+          s.email.toLowerCase().includes(q) ||
+          s.phone.includes(q) ||
+          s.user.toLowerCase().includes(q)
+        );
+      }
+
+      const tbody = document.getElementById('students-tbody');
+      if (!filtered.length) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:32px; color:var(--text-muted);">Nenhum aluno encontrado com os filtros selecionados.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(s => {
+        // Badges do curso
+        let courseBadge = '';
+        if (s.hasN8N && s.hasCW) {
+          courseBadge = `<span class="badge badge-combo">⚡ COMBO (n8n + Chatwoot)</span>`;
+        } else if (s.hasN8N) {
+          courseBadge = `<span class="badge badge-n8n">🟣 Academia n8n</span>`;
+        } else {
+          courseBadge = `<span class="badge badge-cw">💬 Academia Chatwoot</span>`;
+        }
+
+        // Progresso
+        const pctN8N = s.progressN8N ? Math.min(100, Math.round(Object.keys(s.progressN8N).filter(k => k.startsWith('m') && s.progressN8N[k]).length / 14 * 100)) : 0;
+        const pctCW = s.progressCW ? Math.min(100, Math.round(Object.keys(s.progressCW).filter(k => k.startsWith('m') && s.progressCW[k]).length / 10 * 100)) : 0;
+        
+        let progHtml = '';
+        if (s.hasN8N && s.hasCW) {
+          progHtml = `
+            <div>
+              <div style="font-size:11px; color:#c4b5fd; margin-bottom:2px;">n8n: ${pctN8N}%</div>
+              <div class="prog-bar"><div class="prog-fill" style="width:${pctN8N}%"></div></div>
+              <div style="font-size:11px; color:#7dd3fc; margin-top:4px; margin-bottom:2px;">Chatwoot: ${pctCW}%</div>
+              <div class="prog-bar"><div class="prog-fill cw" style="width:${pctCW}%"></div></div>
+            </div>`;
+        } else if (s.hasN8N) {
+          progHtml = `
+            <div>
+              <div class="prog-bar"><div class="prog-fill" style="width:${pctN8N}%"></div></div>
+              <small style="color:var(--text-muted);">${pctN8N}% concluído</small>
+            </div>`;
+        } else {
+          progHtml = `
+            <div>
+              <div class="prog-bar"><div class="prog-fill cw" style="width:${pctCW}%"></div></div>
+              <small style="color:var(--text-muted);">${pctCW}% concluído</small>
+            </div>`;
+        }
+
+        const statusBadge = s.status === 'ativo' ? 
+          `<span class="badge badge-status-active">Ativo</span>` : 
+          `<span class="badge badge-status-blocked">Bloqueado</span>`;
+
+        const relTime = formatRelTime(s.lastAccess);
+
+        return `
+          <tr>
+            <td>
+              <b style="color:#fff; font-size:14px;">${escapeHtml(s.name)}</b>
+              <div style="font-size:12px; color:var(--text-muted);">${escapeHtml(s.email || s.phone || 'Sem contato')}</div>
+            </td>
+            <td>${courseBadge}</td>
+            <td>
+              <code style="font-family:var(--font-mono); color:#a5b4fc; background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px;">${escapeHtml(s.user)}</code>
+              <div style="font-size:11px; color:var(--text-dim); margin-top:2px;">Senha: ${s.pass ? escapeHtml(s.pass) : '••••'}</div>
+            </td>
+            <td>${progHtml}</td>
+            <td>${statusBadge}</td>
+            <td style="color:var(--text-muted); font-size:12.5px;">${relTime}</td>
+            <td>
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <button class="btn btn-ghost btn-sm" onclick="openEditModal('${s.id}')">✏️ Editar Cursos</button>
+                <button class="btn btn-purple btn-sm" onclick="openSendModal('${s.id}')">📲 Enviar Acesso</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    /* Render Vendas */
+    function renderSalesTable() {
+      const allSales = [];
+      Object.entries(DB.n8n.sales).forEach(([id, s]) => allSales.push({ ...s, id, course: 'n8n' }));
+      Object.entries(DB.cw.sales).forEach(([id, s]) => allSales.push({ ...s, id, course: 'chatwoot' }));
+
+      allSales.sort((a,b) => (b.ts || b.pagoEm || 0) - (a.ts || a.pagoEm || 0));
+      document.getElementById('tab-cnt-vendas').textContent = allSales.length;
+
+      const tbody = document.getElementById('sales-tbody');
+      if (!allSales.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Nenhuma venda registrada ainda. Use o formulário acima para registrar.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = allSales.map(v => {
+        const prodBadge = v.course === 'chatwoot' ? 
+          `<span class="badge badge-cw">💬 Academia Chatwoot</span>` : 
+          `<span class="badge badge-n8n">🟣 Academia n8n</span>`;
+        const val = (+v.valor || 88.20).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const dt = v.pagoEm ? new Date(v.pagoEm).toLocaleDateString('pt-BR') : 'Hoje';
+
+        return `
+          <tr>
+            <td style="color:var(--text-muted);">${dt}</td>
+            <td>
+              <b>${escapeHtml(v.nome || 'Cliente')}</b>
+              <div style="font-size:12px; color:var(--text-muted);">${escapeHtml(v.email || v.telefone || '')}</div>
+            </td>
+            <td>${prodBadge}</td>
+            <td><b>${val}</b> <small style="color:var(--text-muted);">(${escapeHtml(v.forma || 'Pix')})</small></td>
+            <td><span class="badge badge-status-active">${escapeHtml(v.status || 'pago')}</span></td>
+            <td>
+              <button class="btn btn-purple btn-sm" onclick="prepareEnrollFromSale('${escapeHtml(v.nome||'')}', '${escapeHtml(v.email||'')}', '${escapeHtml(v.telefone||'')}', '${v.course}')">Liberar Acesso</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    /* Render Atenção */
+    function renderAttentionList(students) {
+      const list = document.getElementById('attention-list');
+      const needAttn = students.filter(s => {
+        const daysIdle = (Date.now() - s.lastAccess) / 864e5;
+        return (daysIdle >= 3 && s.status === 'ativo');
+      });
+
+      if (!needAttn.length) {
+        list.innerHTML = `<p style="color:var(--text-muted); font-size:13.5px;">Nenhum aluno precisando de atenção agora. Todos estão em dia!</p>`;
+        return;
+      }
+
+      list.innerHTML = needAttn.map(s => `
+        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface-card); padding:12px 16px; border-radius:var(--radius-sm); margin-bottom:8px; border:1px solid rgba(239, 68, 68, 0.2);">
+          <div>
+            <b>${escapeHtml(s.name)}</b>
+            <span style="font-size:12px; color:#f87171; margin-left:8px;">⚠️ Parado há ${Math.round((Date.now() - s.lastAccess) / 864e5)} dias</span>
+            <div style="font-size:12px; color:var(--text-muted);">${escapeHtml(s.email || s.phone)}</div>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="openSendModal('${s.id}')">📲 Lembrar no WhatsApp</button>
+        </div>
+      `).join('');
+    }
+
+    /* Render Metas */
+    function renderMetasTable(students) {
+      const tbody = document.getElementById('metas-tbody');
+      if (!students.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Cadastre alunos para acompanhar prazos.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = students.slice(0, 15).map(s => {
+        const cBadge = s.hasN8N && s.hasCW ? '⚡ Combo' : s.hasN8N ? '🟣 n8n' : '💬 Chatwoot';
+        return `
+          <tr>
+            <td><b>${escapeHtml(s.name)}</b></td>
+            <td><span class="badge badge-n8n">${cBadge}</span></td>
+            <td style="color:var(--text-muted);">${s.meta && s.meta.until ? escapeHtml(s.meta.until) : '30 dias'}</td>
+            <td><b>${s.progressN8N ? 50 : 20}%</b></td>
+            <td><span class="badge badge-status-active">No ritmo</span></td>
+            <td><button class="btn btn-ghost btn-sm" onclick="openEditModal('${s.id}')">Ajustar Prazo</button></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    /* Render Dúvidas */
+    function renderDuvidasList() {
+      const container = document.getElementById('duvidas-list');
+      const allDuvidas = [];
+      Object.entries(DB.n8n.duvidas).forEach(([id, d]) => allDuvidas.push({ ...d, id, course: 'n8n' }));
+      Object.entries(DB.cw.duvidas).forEach(([id, d]) => allDuvidas.push({ ...d, id, course: 'chatwoot' }));
+
+      document.getElementById('tab-cnt-duvidas').textContent = allDuvidas.length;
+      if (!allDuvidas.length) {
+        container.innerHTML = `<p style="color:var(--text-muted); font-size:13.5px; padding:12px;">Nenhuma dúvida enviada pelos alunos ainda.</p>`;
+        return;
+      }
+      container.innerHTML = allDuvidas.map(d => `
+        <div style="background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; margin-bottom:10px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <b>${escapeHtml(d.name || 'Aluno')} <span class="badge badge-${d.course === 'chatwoot' ? 'cw' : 'n8n'}">${d.course === 'chatwoot' ? 'Chatwoot' : 'n8n'}</span></b>
+            <small style="color:var(--text-muted);">${formatRelTime(d.at || 0)}</small>
+          </div>
+          <p style="font-size:13.5px; color:#fff;">${escapeHtml(d.q || '')}</p>
+        </div>
+      `).join('');
+    }
+
+    /* ---------- Modal de Edição & Gerenciamento de Cursos ---------- */
+    window.openEditModal = function(id) {
+      const s = getUnifiedStudents().find(x => x.id === id);
+      if (!s) return;
+
+      document.getElementById('edit-id').value = s.id;
+      document.getElementById('edit-name').value = s.name;
+      document.getElementById('edit-email').value = s.email;
+      document.getElementById('edit-phone').value = s.phone;
+      document.getElementById('edit-user').value = s.user;
+      document.getElementById('edit-pass').value = s.pass || '';
+      document.getElementById('edit-status').value = s.status || 'ativo';
+      document.getElementById('edit-note').value = s.note || '';
+
+      // Checkboxes dos Cursos
+      document.getElementById('edit-course-n8n').checked = !!s.hasN8N;
+      document.getElementById('edit-course-cw').checked = !!s.hasCW;
+
+      document.getElementById('modal-edit').style.display = 'flex';
+    };
+
+    window.closeEditModal = function() {
+      document.getElementById('modal-edit').style.display = 'none';
+    };
+
+    // Gerar nova senha no modal
+    document.getElementById('btn-gen-pass').addEventListener('click', () => {
+      document.getElementById('edit-pass').value = makeRandomPass();
+    });
+
+    // Salvar Aluno & Sincronizar Cursos
+    document.getElementById('form-edit-student').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id    = document.getElementById('edit-id').value;
+      const name  = document.getElementById('edit-name').value.trim();
+      const email = document.getElementById('edit-email').value.trim();
+      const phone = document.getElementById('edit-phone').value.trim();
+      const user  = document.getElementById('edit-user').value.trim();
+      const pass  = document.getElementById('edit-pass').value.trim();
+      const status= document.getElementById('edit-status').value;
+      const note  = document.getElementById('edit-note').value.trim();
+
+      const wantN8N = document.getElementById('edit-course-n8n').checked;
+      const wantCW  = document.getElementById('edit-course-cw').checked;
+
+      if (!wantN8N && !wantCW) {
+        alert('O aluno precisa ter acesso a pelo menos 1 curso!');
+        return;
+      }
+
+      const salt = newSalt();
+      const h = await hashPassword(pass || '1234', salt);
+      const perms = { m1: true, m2: false, m3: false, m4: false };
+
+      const studentDoc = {
+        name, email, phone, contact: phone || email,
+        status, note, user, pass, perms,
+        updatedAt: Date.now()
+      };
+      const loginDoc = {
+        sid: id, salt, hash: h, name, status, perms, v: 1
+      };
+
+      const saves = [];
+
+      // 1. n8n
+      if (wantN8N && AUTH.tokenN8N) {
+        saves.push(
+          fetch(`${N8N_BASE}/api/doc?path=students/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+            body: JSON.stringify(studentDoc)
+          }),
+          fetch(`${N8N_BASE}/api/doc?path=logins/${user}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+            body: JSON.stringify(loginDoc)
+          })
+        );
+      } else if (!wantN8N && AUTH.tokenN8N) {
+        // Se desmarcou n8n, bloqueia ou remove
+        saves.push(fetch(`${N8N_BASE}/api/doc?path=students/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+          body: JSON.stringify({ status: 'bloqueado' })
+        }));
+      }
+
+      // 2. Chatwoot
+      if (wantCW && AUTH.tokenCW) {
+        saves.push(
+          fetch(`${CW_BASE}/api/doc?path=students/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+            body: JSON.stringify(studentDoc)
+          }),
+          fetch(`${CW_BASE}/api/doc?path=logins/${user}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+            body: JSON.stringify(loginDoc)
+          })
+        );
+      } else if (!wantCW && AUTH.tokenCW) {
+        // Se desmarcou Chatwoot, bloqueia
+        saves.push(fetch(`${CW_BASE}/api/doc?path=students/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+          body: JSON.stringify({ status: 'bloqueado' })
+        }));
+      }
+
+      try {
+        await Promise.all(saves);
+        closeEditModal();
+        showToast('Aluno atualizado e sincronizado com sucesso!');
+        await loadData();
+      } catch (err) {
+        alert('Erro ao salvar no servidor: ' + err.message);
+      }
+    });
+
+    /* Remover Aluno */
+    document.getElementById('btn-delete-student').addEventListener('click', async () => {
+      const id = document.getElementById('edit-id').value;
+      const user = document.getElementById('edit-user').value;
+      if (!confirm(`Tem certeza que deseja remover o cadastro do aluno (${user})?`)) return;
+
+      const dels = [];
+      if (AUTH.tokenN8N) {
+        dels.push(
+          fetch(`${N8N_BASE}/api/doc?path=students/${id}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenN8N } }),
+          fetch(`${N8N_BASE}/api/doc?path=logins/${user}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenN8N } })
+        );
+      }
+      if (AUTH.tokenCW) {
+        dels.push(
+          fetch(`${CW_BASE}/api/doc?path=students/${id}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenCW } }),
+          fetch(`${CW_BASE}/api/doc?path=logins/${user}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenCW } })
+        );
+      }
+      await Promise.all(dels);
+      closeEditModal();
+      showToast('Aluno removido.');
+      await loadData();
+    });
+
+    /* ---------- Modal de Envio de Acesso (WhatsApp & Email) ---------- */
+    window.openSendModal = function(id) {
+      const s = getUnifiedStudents().find(x => x.id === id);
+      if (!s) return;
+
+      let msg = '';
+      if (s.hasN8N && s.hasCW) {
+        // Mensagem especial COMBO
+        msg = `Olá, ${s.name}! Parabéns pela sua inscrição no *COMBO OFICIAL AGENTE3D*! ⚡🎓\n\n`
+            + `Você tem acesso total aos 2 cursos oficiais com o mesmo login e senha:\n\n`
+            + `🟣 *Academia n8n*: ${N8N_BASE}\n`
+            + `💬 *Academia Chatwoot*: ${CW_BASE}\n\n`
+            + `🔑 *Seu Usuário:* ${s.user}\n`
+            + `🔒 *Sua Senha:* ${s.pass || 'admin1234'}\n\n`
+            + `Abra os links acima no computador, entre com seus dados e aproveite! Qualquer dúvida, estamos à disposição. Bons estudos! 🚀`;
+      } else if (s.hasN8N) {
+        msg = `Olá, ${s.name}! Seja muito bem-vindo(a) à *Academia n8n*! 🟣🚀\n\n`
+            + `Aqui estão seus dados de acesso ao curso:\n`
+            + `🌐 *Endereço:* ${N8N_BASE}\n`
+            + `🔑 *Usuário:* ${s.user}\n`
+            + `🔒 *Senha:* ${s.pass || 'admin1234'}\n\n`
+            + `Abra no seu navegador e comece agora mesmo. Bons estudos!`;
+      } else {
+        msg = `Olá, ${s.name}! Seja muito bem-vindo(a) à *Academia Chatwoot*! 💬🚀\n\n`
+            + `Aqui estão seus dados de acesso ao curso:\n`
+            + `🌐 *Endereço:* ${CW_BASE}\n`
+            + `🔑 *Usuário:* ${s.user}\n`
+            + `🔒 *Senha:* ${s.pass || 'admin1234'}\n\n`
+            + `Abra no seu computador e aproveite o simulador prático. Bons estudos!`;
+      }
+
+      document.getElementById('send-msg-text').value = msg;
+      
+      const cleanPhone = (s.phone || '').replace(/\D/g, '');
+      const waNumber = cleanPhone.length >= 10 && !cleanPhone.startsWith('55') ? '55' + cleanPhone : cleanPhone;
+      
+      document.getElementById('btn-open-wa').onclick = () => {
+        if (!waNumber) { alert('Aluno sem WhatsApp cadastrado!'); return; }
+        window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+      };
+
+      document.getElementById('modal-send').style.display = 'flex';
+    };
+
+    window.closeSendModal = function() {
+      document.getElementById('modal-send').style.display = 'none';
+    };
+
+    document.getElementById('btn-copy-msg').addEventListener('click', () => {
+      const txt = document.getElementById('send-msg-text');
+      txt.select();
+      navigator.clipboard.writeText(txt.value);
+      showToast('Mensagem copiada para a área de transferência!');
+    });
+
+    /* ---------- Cadastro de Novo Aluno (Tab Adicionar Aluno) ---------- */
+    // Seletor visual do curso
+    let selectedAddCourse = 'n8n';
+    document.querySelectorAll('.course-card-option').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.course-card-option').forEach(x => x.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedAddCourse = el.dataset.addcourse;
+        
+        // Ajusta preço sugerido
+        const valInput = document.getElementById('add-val');
+        if (selectedAddCourse === 'combo') valInput.value = '147.00';
+        else valInput.value = '88.20';
+      });
+    });
+
+    document.getElementById('form-add-student').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btn-save-student');
+      btn.disabled = true;
+      btn.textContent = 'Cadastrando...';
+
+      const name    = document.getElementById('add-name').value.trim();
+      const email   = document.getElementById('add-email').value.trim();
+      const phone   = document.getElementById('add-phone').value.trim();
+      const company = document.getElementById('add-company').value.trim();
+      const plan    = document.getElementById('add-plan').value;
+      const val     = +document.getElementById('add-val').value || 0;
+      const until   = document.getElementById('add-until').value;
+      const note    = document.getElementById('add-note').value.trim();
+
+      const id   = 'm_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      const user = makeUsername(name);
+      const pass = makeRandomPass();
+      const salt = newSalt();
+      const h    = await hashPassword(pass, salt);
+
+      const perms = { m1: true, m2: false, m3: false, m4: false };
+      const studentDoc = {
+        name, email, phone, contact: phone || email, company,
+        status: 'ativo', note, user, pass, perms,
+        course: selectedAddCourse,
+        meta: until ? { until } : {},
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      };
+      const loginDoc = {
+        sid: id, salt, hash: h, name, status: 'ativo', perms, v: 1
+      };
+
+      const saves = [];
+
+      // Salva no n8n se for n8n ou Combo
+      if ((selectedAddCourse === 'n8n' || selectedAddCourse === 'combo') && AUTH.tokenN8N) {
+        saves.push(
+          fetch(`${N8N_BASE}/api/doc?path=students/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+            body: JSON.stringify(studentDoc)
+          }),
+          fetch(`${N8N_BASE}/api/doc?path=logins/${user}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+            body: JSON.stringify(loginDoc)
+          })
+        );
+      }
+
+      // Salva no Chatwoot se for Chatwoot ou Combo
+      if ((selectedAddCourse === 'chatwoot' || selectedAddCourse === 'combo') && AUTH.tokenCW) {
+        saves.push(
+          fetch(`${CW_BASE}/api/doc?path=students/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+            body: JSON.stringify(studentDoc)
+          }),
+          fetch(`${CW_BASE}/api/doc?path=logins/${user}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+            body: JSON.stringify(loginDoc)
+          })
+        );
+      }
+
+      try {
+        await Promise.all(saves);
+        showToast(`Aluno ${name} cadastrado com sucesso!`);
+        btn.disabled = false;
+        btn.textContent = '✨ Cadastrar e Gerar Acesso';
+        document.getElementById('form-add-student').reset();
+
+        await loadData();
+        // Abre modal para enviar WhatsApp imediatamente
+        openSendModal(id);
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = '✨ Cadastrar e Gerar Acesso';
+        alert('Erro ao cadastrar aluno: ' + err.message);
+      }
+    });
+
+    /* Prepara cadastro vindo de uma venda */
+    window.prepareEnrollFromSale = function(nome, email, fone, course) {
+      switchTab('add');
+      document.getElementById('add-name').value = nome;
+      document.getElementById('add-email').value = email;
+      document.getElementById('add-phone').value = fone;
+
+      document.querySelectorAll('.course-card-option').forEach(x => {
+        x.classList.remove('selected');
+        if (x.dataset.addcourse === course) x.classList.add('selected');
+      });
+      selectedAddCourse = course;
+    };
+
+    /* Registrar Venda Manual */
+    document.getElementById('form-manual-sale').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const course = document.getElementById('sale-course').value;
+      const nome   = document.getElementById('sale-name').value.trim();
+      const email  = document.getElementById('sale-email').value.trim();
+      const fone   = document.getElementById('sale-phone').value.trim();
+      const forma  = document.getElementById('sale-method').value;
+      const valor  = +document.getElementById('sale-val').value || 88.20;
+
+      const saleId = 'v_' + Date.now();
+      const saleDoc = {
+        id: saleId, nome, email, telefone: fone, forma, valor,
+        course, status: 'pago', pagoEm: Date.now(), ts: Date.now()
+      };
+
+      const targetUrl = (course === 'chatwoot') ? CW_BASE : N8N_BASE;
+      const targetTok = (course === 'chatwoot') ? AUTH.tokenCW : AUTH.tokenN8N;
+
+      try {
+        await fetch(`${targetUrl}/api/doc?path=vendas/${saleId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Token': targetTok },
+          body: JSON.stringify(saleDoc)
+        });
+        showToast('Venda registrada com sucesso!');
+        document.getElementById('form-manual-sale').reset();
+        await loadData();
+        prepareEnrollFromSale(nome, email, fone, course);
+      } catch (err) {
+        alert('Erro ao registrar venda: ' + err.message);
+      }
+    });
+
+    /* Alterar Senha do Gestor */
+    document.getElementById('form-admin-pwd').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('cfg-admin-email').value.trim();
+      const p1 = document.getElementById('cfg-admin-pass1').value;
+      const p2 = document.getElementById('cfg-admin-pass2').value;
+
+      if (p1 !== p2) { alert('As senhas não conferem!'); return; }
+      if (p1.length < 8) { alert('A senha precisa ter no mínimo 8 caracteres.'); return; }
+
+      const defaultSalt = 'ZGVmYXVsdC1hZG1pbjEy';
+      const h = await hashPassword(p1, defaultSalt);
+
+      const doc = { email, salt: defaultSalt, hash: h, def: false, updatedAt: Date.now() };
+
+      const saves = [];
+      if (AUTH.tokenN8N) saves.push(fetch(`${N8N_BASE}/api/doc?path=config/admin`, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N }, body: JSON.stringify(doc) }));
+      if (AUTH.tokenCW) saves.push(fetch(`${CW_BASE}/api/doc?path=config/admin`, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW }, body: JSON.stringify(doc) }));
+
+      await Promise.all(saves);
+      showToast('Senha do gestor atualizada em ambos os cursos!');
+      document.getElementById('cfg-admin-pass1').value = '';
+      document.getElementById('cfg-admin-pass2').value = '';
+    });
+
+    /* Backups JSON */
+    document.getElementById('btn-bk-n8n').addEventListener('click', () => {
+      window.open(`${N8N_BASE}/api/backup?token=${AUTH.tokenN8N}`, '_blank');
+    });
+    document.getElementById('btn-bk-cw').addEventListener('click', () => {
+      window.open(`${CW_BASE}/api/backup?token=${AUTH.tokenCW}`, '_blank');
+    });
+
+    /* Navegação por Abas */
+    function switchTab(tabId) {
+      DB.currentTab = tabId;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+      document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+      const target = document.getElementById(`tab-view-${tabId}`);
+      if (target) target.style.display = 'block';
+    }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+    document.getElementById('btn-go-add').addEventListener('click', () => switchTab('add'));
+
+    /* Seletor Master de Cursos (Hero) */
+    document.querySelectorAll('.course-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.course-pill').forEach(x => x.classList.remove('active'));
+        pill.classList.add('active');
+        DB.filterCourse = pill.dataset.course;
+        renderStudentTable(getUnifiedStudents());
+      });
+    });
+
+    /* Filtros Rápidos de Alunos */
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        DB.filterType = btn.dataset.filter;
+        renderStudentTable(getUnifiedStudents());
+      });
+    });
+
+    /* Busca de Alunos */
+    document.getElementById('search-student').addEventListener('input', (e) => {
+      DB.searchQuery = e.target.value;
+      renderStudentTable(getUnifiedStudents());
+    });
+
+    /* Utilitários */
+    function escapeHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function formatRelTime(ts) {
+      if (!ts) return 'Nunca acessou';
+      const s = Math.max(0, (Date.now() - ts) / 1000);
+      if (s < 90) return 'Agora';
+      if (s < 3600) return `Há ${Math.round(s / 60)} min`;
+      if (s < 86400) return `Há ${Math.round(s / 3600)} h`;
+      const d = Math.round(s / 86400);
+      return `Há ${d} dia${d === 1 ? '' : 's'}`;
+    }
+
+    /* Login Form Handler */
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const pass  = document.getElementById('login-pass').value;
+      const errEl = document.getElementById('login-error');
+      const btn   = document.getElementById('login-btn');
+
+      errEl.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Autenticando...';
+
+      try {
+        await loginAdmin(email, pass);
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('dashboard-section').style.display = 'block';
+        pingServers();
+        await loadData();
+      } catch (err) {
+        errEl.textContent = err.message || 'Falha ao autenticar.';
+        errEl.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Entrar no Painel';
+      }
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('a3d_gestor_auth');
+      window.location.reload();
+    });
+
+    document.getElementById('btn-refresh').addEventListener('click', async () => {
+      showToast('Atualizando dados...');
+      await pingServers();
+      await loadData();
+      showToast('Dados atualizados!');
+    });
+
+    /* Inicialização */
+    (async function init() {
+      pingServers();
+      setInterval(pingServers, 30000);
+
+      // Verifica sessão salva
+      const saved = sessionStorage.getItem('a3d_gestor_auth');
+      if (saved) {
+        try {
+          const s = JSON.parse(saved);
+          AUTH.email = s.email;
+          AUTH.tokenN8N = s.tokN8N;
+          AUTH.tokenCW = s.tokCW;
+          AUTH.isLogged = true;
+
+          document.getElementById('login-section').style.display = 'none';
+          document.getElementById('dashboard-section').style.display = 'block';
+          await loadData();
+          return;
+        } catch (e) {}
+      }
+
+      // Tenta login automático padrão para agilizar o uso
+      try {
+        await loginAdmin('3digitos2023@gmail.com', 'admin1234');
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('dashboard-section').style.display = 'block';
+        await loadData();
+      } catch (e) {
+        document.getElementById('login-section').style.display = 'block';
+      }
+    })();
+  </script>
+</body>
+</html>

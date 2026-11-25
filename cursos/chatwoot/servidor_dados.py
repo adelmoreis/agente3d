@@ -177,6 +177,7 @@ class H(BaseHTTPRequestHandler):
         return False
 
     def do_GET(self): self.route('GET')
+    def do_HEAD(self): self.route('GET')
     def do_POST(self): self.route('POST')
     def do_PUT(self): self.route('PUT')
     def do_PATCH(self): self.route('PATCH')
