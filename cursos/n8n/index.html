@@ -5660,12 +5660,13 @@ function doLogin(user,pw,known){
   var A=window.claude&&window.claude.a3d;
   if(A&&A.remote){
     return A.salt(u).then(function(j){if(!j.salt)throw 'nouser';return known?known:pwHash(pw,j.salt);},function(){throw 'read';}).then(function(h){
-      return A.login(u,h).then(function(d){return {u:u,h:h,d:d};},function(e){throw (e&&e.code==='bad')?'bad':(e&&e.code==='nouser')?'nouser':(e&&e.code==='rate')?'rate':'read';});
+      return A.login(u,h).then(function(d){return {u:u,h:h,d:d};},function(e){throw (e&&e.code==='bad')?'bad':(e&&e.code==='nouser')?'nouser':(e&&e.code==='rate')?'rate':(e&&(e.code==='bloqueado'||e.status===403))?'bloqueado':'read';});
     });
   }
   return CL.db.doc('logins/'+u).get().catch(function(){throw 'read';}).then(function(sn){
     if(!sn.exists)throw 'nouser';
     var d=sn.data();
+    if(d.status==='bloqueado'||(d.perms&&d.perms.m1===false))throw 'bloqueado';
     return (known?Promise.resolve(known):pwHash(pw,d.salt)).then(function(h){if(h!==d.hash)throw 'bad';return {u:u,h:h,d:d};});
   });
 }
@@ -5845,7 +5846,7 @@ function realLoginView(){
   $('#f').addEventListener('submit',function(e){
     e.preventDefault();er.hidden=true;go.disabled=true;go.textContent='Entrando...';
     doLogin($('#lu').value,$('#lp').value).then(enterSession).catch(function(x){
-      fail(x==='nocrypto'?'Este navegador não consegue validar a senha. Tente outro navegador.':x==='empty'?'Escreva o usuário e a senha.':x==='nouser'?'Não encontrei esse usuário. Digite o usuário que o gestor passou (sem espaços), não o nome.':x==='rate'?'Muitas tentativas. Aguarde alguns minutos e tente de novo.':x==='read'?'Não consegui consultar o cadastro agora. Confira a internet e tente de novo.':'Senha incorreta. Confira e tente de novo.');
+      fail(x==='nocrypto'?'Este navegador não consegue validar a senha. Tente outro navegador.':x==='empty'?'Escreva o usuário e a senha.':x==='nouser'?'Não encontrei esse usuário. Digite o usuário que o gestor passou (sem espaços), não o nome.':x==='rate'?'Muitas tentativas. Aguarde alguns minutos e tente de novo.':x==='bloqueado'?'Seu acesso a este curso está pausado ou não liberado. Fale com o seu gestor.':x==='read'?'Não consegui consultar o cadastro agora. Confira a internet e tente de novo.':'Senha incorreta. Confira e tente de novo.');
     });
   });
   var fr=$('#free');if(fr)fr.addEventListener('click',function(e){e.preventDefault();S.logged=true;save();route();});

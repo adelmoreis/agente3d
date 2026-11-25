@@ -11,6 +11,11 @@ button{font:inherit;cursor:pointer;color:inherit}.hidden{display:none!important}
 .logo{display:flex;gap:10px;align-items:center;font-weight:800;font-size:20px;margin-bottom:16px}.logo i{width:30px;height:30px;border-radius:50%;background:var(--b);display:inline-grid;place-items:center}.logo i:after{content:"";width:13px;height:13px;border-radius:50%;background:#fff}
 input.t{width:100%;padding:11px 12px;border:1px solid #d5dde7;border-radius:8px;font:inherit;margin-bottom:12px}input.t:focus,textarea:focus{outline:2px solid var(--b);border-color:transparent}
 .btn{background:var(--b);color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:600}.btn:hover{background:var(--bd)}.btn.g{background:#fff;color:var(--fg);border:1px solid #d5dde7}.btn.ok{background:var(--ok)}.btn:disabled{background:#cbd5e1;cursor:not-allowed}
+.blk{position:fixed;inset:0;z-index:900;background:linear-gradient(160deg,#0f172a,#1e293b);display:grid;place-items:center;padding:20px}
+.blkc{background:#fff;border-radius:20px;padding:34px 30px;max-width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.blki{font-size:44px;line-height:1;margin-bottom:10px}.blkc h2{margin:0 0 8px;font-size:22px;color:#1e293b}.blkc p{margin:0;color:#64748b;line-height:1.5}
+.lerr{color:#ef4444;font-size:13px;margin:8px 0 14px;padding:8px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;text-align:left}
+.field{margin-bottom:12px;text-align:left}.field label{display:block;font-size:12.5px;font-weight:600;color:var(--fg);margin-bottom:4px}
 .feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}.feats div{background:var(--bs);border-radius:10px;padding:10px 12px;font-size:13px}.feats b{display:block}
 .mundo{margin:16px 0}.mundo h3{margin:0 0 8px;font-size:15px;display:flex;justify-content:space-between}
 .mis{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;background:#fff;width:100%;text-align:left}
@@ -169,6 +174,192 @@ textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;f
 </style></head><body><div id="app"></div>
 <script>
 const KEY='chatwootAcademiaAgente3d_sim_v2';
+
+/* ---------- Camada de Autenticação e Sincronização em Tempo Real (Agente3D Multi-Cursos) ---------- */
+function uname(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim().replace(/\s+/g,'.').replace(/[^a-z0-9_.@+-]/g,'').slice(0,40);}
+function b64(buf){var a=new Uint8Array(buf),s='';for(var i=0;i<a.length;i++)s+=String.fromCharCode(a[i]);return btoa(s);}
+function unb64(s){var b=atob(s),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a;}
+function pwHash(pw,salt){
+  if(!window.crypto||!crypto.subtle)return Promise.reject('nocrypto');
+  return crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveBits']).then(function(k){
+    return crypto.subtle.deriveBits({name:'PBKDF2',salt:unb64(salt),iterations:100000,hash:'SHA-256'},k,256);
+  }).then(b64);
+}
+
+let CL_TOK = '', CL_LOGIN = null, CL_SID = null, CL_UNL = null, CL_STATUS = null;
+
+function api(method, path, body) {
+  return fetch('/api/' + path, {
+    method: method,
+    headers: { 'Content-Type': 'application/json', 'X-Token': CL_TOK },
+    body: body == null ? undefined : JSON.stringify(body),
+    cache: 'no-store'
+  }).then(function(r) {
+    return r.json().catch(function() { return {}; }).then(function(j) {
+      if (!r.ok) {
+        var e = new Error(j.err || ('http' + r.status));
+        e.code = j.err || r.status;
+        e.status = r.status;
+        throw e;
+      }
+      return j;
+    });
+  });
+}
+
+function doLogin(user, pw, known) {
+  var u = uname(user);
+  if (!u || (!pw && !known)) return Promise.reject('empty');
+  return api('GET', 'salt?user=' + encodeURIComponent(u)).then(function(j) {
+    if (!j.salt) throw 'nouser';
+    return known ? known : pwHash(pw, j.salt);
+  }).then(function(h) {
+    return api('POST', 'login', { user: u, h: h }).then(function(res) {
+      CL_TOK = res.token;
+      return { u: u, h: h, d: res.d };
+    }, function(e) {
+      throw (e && (e.code === 'bloqueado' || e.status === 403)) ? 'bloqueado' :
+            (e && e.code === 'bad') ? 'bad' :
+            (e && e.code === 'nouser') ? 'nouser' :
+            (e && e.code === 'rate') ? 'rate' : 'read';
+    });
+  });
+}
+
+function applyStatus() {
+  var st = CL_STATUS, old = document.getElementById('blk');
+  var blocked = st && st.status === 'bloqueado';
+  if (!blocked) {
+    if (old) old.remove();
+    return;
+  }
+  if (old) return;
+  try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {}
+  var w = document.createElement('div');
+  w.id = 'blk';
+  w.className = 'blk';
+  w.innerHTML = `
+    <div class="blkc">
+      <div class="blki">&#9208;</div>
+      <h2>Seu acesso está pausado</h2>
+      <p>Fale com o seu gestor para voltar a estudar na Academia Chatwoot. Seu progresso está guardado e nada foi perdido.</p>
+    </div>`;
+  document.body.appendChild(w);
+}
+
+function enterSession(r) {
+  CL_SID = r.d.sid;
+  CL_LOGIN = r.u;
+  CL_STATUS = r.d;
+  try { localStorage.setItem(KEY + '_sess', JSON.stringify({ u: r.u, h: r.h })); } catch (e) {}
+  S.logged = true;
+  if (!S.name && r.d.name) S.name = r.d.name;
+  save();
+
+  // Escuta status de login em tempo real
+  if (CL_UNL) { try { clearInterval(CL_UNL); } catch (e) {} }
+  var lastK = '';
+  CL_UNL = setInterval(function() {
+    api('GET', 'doc?path=logins/' + encodeURIComponent(r.u)).then(function(j) {
+      if (j && j.data) {
+        var str = JSON.stringify(j.data);
+        if (str !== lastK) {
+          lastK = str;
+          CL_STATUS = j.data;
+          applyStatus();
+        }
+      } else {
+        logout();
+      }
+    }).catch(function() {});
+  }, 3000);
+
+  applyStatus();
+  if (S.name && S.av >= 0) home(); else welcome();
+}
+
+function logout() {
+  if (CL_UNL) { try { clearInterval(CL_UNL); } catch (e) {} CL_UNL = null; }
+  try { localStorage.removeItem(KEY + '_sess'); } catch (e) {}
+  CL_TOK = ''; CL_LOGIN = null; CL_SID = null; CL_STATUS = null;
+  S.logged = false;
+  var b = document.getElementById('blk'); if (b) b.remove();
+  loginView();
+}
+
+function loginView(errType) {
+  limpaDock();
+  CUR = { view: 'login', k: null };
+  app.innerHTML = `
+    <div class="center">
+      <div class="card" style="max-width:440px;">
+        <div class="logo"><i></i>Chatwoot Academia Agente3d</div>
+        <h1 style="font-size:24px;">Entrar</h1>
+        <p class="sub">Use o usuário e a senha que o seu gestor criou para você. Seu progresso fica salvo na sua conta.</p>
+        <form id="f-login">
+          <div class="field">
+            <label for="lu">Usuário</label>
+            <input class="t" id="lu" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required style="margin-bottom:12px;">
+          </div>
+          <div class="field">
+            <label for="lp">Senha</label>
+            <input class="t" id="lp" type="password" autocomplete="current-password" required style="margin-bottom:8px;">
+          </div>
+          <p class="lerr" id="le" role="alert" style="display:${errType ? 'block' : 'none'};">${errType || ''}</p>
+          <button class="btn" type="submit" id="go-login" style="width:100%; padding:12px; font-size:15px; margin-top:6px;">Entrar no Curso</button>
+        </form>
+        <p style="margin-top:16px; font-size:13px; color:var(--mut); text-align:center;">
+          <a href="#" id="free-mode" style="color:var(--b); text-decoration:none;">Entrar em modo de teste, sem usuário</a>
+        </p>
+        <p style="margin-top:12px; font-size:12px; color:var(--mut); text-align:center;">
+          Esqueceu a senha ou ainda não tem acesso? Fale com o seu gestor.
+        </p>
+      </div>
+    </div>`;
+
+  const er = document.getElementById('le');
+  const btn = document.getElementById('go-login');
+  function fail(msg) {
+    er.textContent = msg;
+    er.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Entrar no Curso';
+  }
+
+  document.getElementById('f-login').onsubmit = function(e) {
+    e.preventDefault();
+    er.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Entrando...';
+    const u = document.getElementById('lu').value.trim();
+    const p = document.getElementById('lp').value.trim();
+
+    doLogin(u, p).then(enterSession).catch(function(x) {
+      fail(
+        x === 'nocrypto' ? 'Este navegador não consegue validar a senha. Tente outro navegador.' :
+        x === 'empty' ? 'Escreva o usuário e a senha.' :
+        x === 'nouser' ? 'Não encontrei esse usuário. Digite o usuário que o gestor passou (sem espaços), não o nome.' :
+        x === 'rate' ? 'Muitas tentativas. Aguarde alguns minutos e tente de novo.' :
+        x === 'bloqueado' ? 'Seu acesso a este curso está pausado ou não liberado. Fale com o seu gestor.' :
+        x === 'read' ? 'Não consegui consultar o cadastro agora. Confira a internet e tente de novo.' :
+        'Senha incorreta. Confira e tente de novo.'
+      );
+    });
+  };
+
+  document.getElementById('free-mode').onclick = function(e) {
+    e.preventDefault();
+    S.logged = true;
+    save();
+    if (S.name && S.av >= 0) home(); else welcome();
+  };
+
+  setTimeout(function() {
+    const el = document.getElementById('lu');
+    if (el) el.focus();
+  }, 50);
+}
+
 const MUNDOS=[
  {n:1,t:'Primeiros passos',it:[['m10','1.0','Tour pelo Chatwoot'],['m11','1.1','Conhecendo o painel'],['m12','1.2','Atendendo uma conversa'],['m13','1.3','Organizando: agente, etiqueta e prioridade'],['m14','1.4','Contatos: a ficha do cliente'],['q1','Quiz','5 perguntas do Mundo 1']]},
  {n:2,t:'Canais e equipe',it:[['m21','2.1','Criando uma caixa de entrada'],['m22','2.2','Adicionando um agente'],['m23','2.3','Criando um time'],['q2','Quiz','5 perguntas do Mundo 2']]},
@@ -176,7 +367,7 @@ const MUNDOS=[
  {n:4,t:'Integrações e IA',it:[['m41','4.1','Webhooks e token de acesso'],['m42','4.2','Chatwoot + n8n: o agente de IA que responde'],['m43','4.3','Relatórios e campanhas'],['m44','4.4','Projeto final: o atendimento completo'],['q4','Quiz final','15 perguntas. Quem passa recebe o certificado']]}];
 const N8N_CURSO='../n8n/index.html';/* caminho do curso de n8n: pasta irmã. Mude se hospedar em outro lugar */
 const ALL=MUNDOS.flatMap(m=>m.it);
-let S={name:'',done:{},xp:0,voz:true,av:-1,goal:'',mao:true};try{S=Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+let S={name:'',logged:false,done:{},xp:0,voz:true,av:-1,goal:'',mao:true};try{S=Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const $=s=>document.querySelector(s),app=$('#app');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -574,7 +765,7 @@ function home(){
  app.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>QUIZ[b.dataset.m]?quiz(b.dataset.m):lab(b.dataset.m));
  app.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{S.goal=b.dataset.g;save();home()});
  $('#cont').onclick=()=>{const n=proximaMissao();if(!n)cert();else QUIZ[n[0]]?quiz(n[0]):lab(n[0])};
- $('#sair').onclick=()=>{S.name='';S.av=-1;save();welcome()};
+ $('#sair').onclick=logout;
  $('#reset').onclick=()=>{S={name:S.name,av:S.av,goal:S.goal,done:{},xp:0,voz:S.voz};save();home()};
  dockSync();mentorBalao(true);
 }
@@ -860,6 +1051,29 @@ function atalhos(abrir){let p=document.getElementById('atl');if(p){p.remove();if
  p.querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>{const h=b.dataset.h;if(h==='capa'){limpaDock();CUR={view:'capa'};welcome()}else if(h==='home'){if(!S.name){S.name='Aluna';S.av=S.av<0?3:S.av;save()}home()}else if(confirm('Apagar o progresso deste navegador?')){S.done={};S.xp=0;save();home()}})}
 document.addEventListener('keydown',e=>{if(e.altKey&&e.shiftKey&&(e.key==='A'||e.key==='a')){e.preventDefault();atalhos()}});
 const _h=location.hash.match(/^#(m\d{2}|q\d)(?:\/(\d+))?$/);
-welcome();
-if(_h&&(MIS[_h[1]]||QUIZ[_h[1]]))setTimeout(()=>irPara(_h[1],+(_h[2]||0)),60);else if(location.hash==='#atalhos')setTimeout(()=>atalhos(true),60);
+
+// Redireciona #gestor diretamente para gestor.html
+if (location.hash === '#gestor' || location.hash === '#gestor-entrar') {
+  location.replace('gestor.html');
+}
+
+// Inicialização com revalidação de sessão no servidor
+var sess = null;
+try { sess = JSON.parse(localStorage.getItem(KEY + '_sess')); } catch (e) {}
+
+if (sess && sess.u && sess.h) {
+  doLogin(sess.u, null, sess.h).then(enterSession).catch(function(err) {
+    try { localStorage.removeItem(KEY + '_sess'); } catch (e) {}
+    if (err === 'bloqueado') {
+      loginView('Seu acesso a este curso está pausado ou não liberado. Fale com o seu gestor.');
+    } else {
+      loginView();
+    }
+  });
+} else if (!S.logged) {
+  loginView();
+} else {
+  welcome();
+  if(_h&&(MIS[_h[1]]||QUIZ[_h[1]]))setTimeout(()=>irPara(_h[1],+(_h[2]||0)),60);else if(location.hash==='#atalhos')setTimeout(()=>atalhos(true),60);
+}
 </script></body></html>

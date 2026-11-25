@@ -94,7 +94,7 @@ const { exec } = require('child_process');
 
 // 4. Sincronização Instantânea com o GitHub
 app.all('/api/sync-github', (req, res) => {
-    exec('git fetch origin main && git reset --hard origin/main', { cwd: __dirname }, (err, stdout, stderr) => {
+    exec('git fetch origin main && git reset --hard origin/main && (pkill -f servidor_dados.py || true)', { cwd: __dirname }, (err, stdout, stderr) => {
         if (err) {
             return res.status(500).json({ success: false, error: err.message, stderr });
         }

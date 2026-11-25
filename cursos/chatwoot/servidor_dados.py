@@ -238,6 +238,10 @@ class H(BaseHTTPRequestHandler):
             if not d: return self.send_json(401, {'err': 'nouser'})
             if not hmac.compare_digest(h, d.get('hash') or ''):
                 self.fail(); return self.send_json(401, {'err': 'bad'})
+            sid = d.get('sid')
+            s_doc = DOCS.get('students/' + sid) if sid else None
+            if d.get('status') == 'bloqueado' or (s_doc and s_doc.get('status') == 'bloqueado'):
+                return self.send_json(403, {'err': 'bloqueado', 'msg': 'Seu acesso está pausado. Fale com o seu gestor.'})
             tok = sign({'r': 's', 'sid': d.get('sid'), 'exp': time.time() + 30 * 86400})
             return self.send_json(200, {'token': tok, 'd': {k: d.get(k) for k in ('sid', 'name', 'status', 'perms')}})
         if ep == 'admin' and method == 'POST':

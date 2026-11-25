@@ -1352,7 +1352,20 @@
     /* ---------- Autenticação com Ambos os Servidores ---------- */
     async function loginAdmin(email, pass) {
       const defaultSalt = 'ZGVmYXVsdC1hZG1pbjEy';
-      const h = await hashPassword(pass, defaultSalt);
+      
+      // Busca salts oficiais de cada servidor
+      let saltN8N = defaultSalt, saltCW = defaultSalt;
+      try {
+        const s1 = await fetch(`${N8N_BASE}/api/adminsalt`, { cache: 'no-store' }).then(r=>r.json());
+        if (s1 && s1.salt) saltN8N = s1.salt;
+      } catch (e) {}
+      try {
+        const s2 = await fetch(`${CW_BASE}/api/adminsalt`, { cache: 'no-store' }).then(r=>r.json());
+        if (s2 && s2.salt) saltCW = s2.salt;
+      } catch (e) {}
+
+      const hN8N = await hashPassword(pass, saltN8N);
+      const hCW  = (saltCW === saltN8N) ? hN8N : await hashPassword(pass, saltCW);
 
       let tokN8N = '', tokCW = '';
       // Tenta login no n8n
@@ -1360,7 +1373,7 @@
         const res = await fetch(`${N8N_BASE}/api/admin`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, h })
+          body: JSON.stringify({ email, h: hN8N })
         });
         if (res.ok) {
           const j = await res.json();
@@ -1373,7 +1386,7 @@
         const res = await fetch(`${CW_BASE}/api/admin`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, h })
+          body: JSON.stringify({ email, h: hCW })
         });
         if (res.ok) {
           const j = await res.json();
@@ -1396,7 +1409,7 @@
       AUTH.tokenCW = tokCW;
       AUTH.isLogged = true;
 
-      sessionStorage.setItem('a3d_gestor_auth', JSON.stringify({ email, h, tokN8N, tokCW }));
+      sessionStorage.setItem('a3d_gestor_auth', JSON.stringify({ email, tokN8N, tokCW }));
       return true;
     }
 
@@ -1445,13 +1458,15 @@
       renderAll();
     }
 
-    /* ---------- Modelo Unificado de Alunos (Inteligente) ---------- */
+    /* ---------- Modelo Unificado de Alunos (Inteligente Multi-Cursos) ---------- */
     function getUnifiedStudents() {
       const map = new Map(); // Chave: user ou email ou sid
 
       // Processa alunos do n8n
       Object.entries(DB.n8n.students).forEach(([id, s]) => {
         const key = s.user || s.email || id;
+        const hasN8N = s.courses ? !!s.courses.n8n : (s.status !== 'bloqueado' || s.course === 'n8n' || s.course === 'combo');
+        const hasCW  = s.courses ? !!s.courses.chatwoot : (s.course === 'chatwoot' || s.course === 'combo');
         map.set(key, {
           id: id,
           user: s.user || id,
@@ -1462,8 +1477,11 @@
           pass: s.pass || '',
           note: s.note || '',
           meta: s.meta || {},
-          hasN8N: true,
-          hasCW: false,
+          courses: s.courses || { n8n: hasN8N, chatwoot: hasCW },
+          hasN8N: hasN8N,
+          hasCW: hasCW,
+          statusN8N: s.status || 'ativo',
+          statusCW: 'bloqueado',
           progressN8N: DB.n8n.progress[id] || null,
           progressCW: null,
           lastAccess: (DB.n8n.progress[id] && DB.n8n.progress[id].last) || s.createdAt || 0,
@@ -1475,13 +1493,37 @@
       // Processa e mescla alunos do Chatwoot
       Object.entries(DB.cw.students).forEach(([id, s]) => {
         const key = s.user || s.email || id;
+        const sHasCW = s.courses ? !!s.courses.chatwoot : (s.status !== 'bloqueado' || s.course === 'chatwoot' || s.course === 'combo');
+        const sHasN8N = s.courses ? !!s.courses.n8n : (s.course === 'n8n' || s.course === 'combo');
+
         if (map.has(key)) {
-          // Aluno existe em ambos -> É COMBO!
+          // Aluno existe em ambos os bancos
           const existing = map.get(key);
-          existing.hasCW = true;
-          existing.progressCW = DB.cw.progress[id] || null;
           existing.rawCW = s;
+          existing.statusCW = s.status || 'ativo';
+          existing.progressCW = DB.cw.progress[id] || null;
           if (!existing.pass && s.pass) existing.pass = s.pass;
+          if (!existing.phone && (s.phone || s.contact)) existing.phone = s.phone || s.contact;
+          if (!existing.email && s.email) existing.email = s.email;
+
+          // Se tiver campo courses explícito em qualquer um, prioriza
+          if (s.courses) {
+            existing.hasN8N = !!s.courses.n8n;
+            existing.hasCW  = !!s.courses.chatwoot;
+            existing.courses = s.courses;
+          } else {
+            existing.hasCW = existing.hasCW || sHasCW;
+          }
+
+          // Se em ambos os cursos atribuídos estiver bloqueado, status unificado é bloqueado
+          const n8nBlocked = !existing.hasN8N || existing.statusN8N === 'bloqueado';
+          const cwBlocked  = !existing.hasCW  || existing.statusCW === 'bloqueado';
+          if (n8nBlocked && cwBlocked) {
+            existing.status = 'bloqueado';
+          } else {
+            existing.status = 'ativo';
+          }
+
           const cwLast = (DB.cw.progress[id] && DB.cw.progress[id].last) || s.createdAt || 0;
           if (cwLast > existing.lastAccess) existing.lastAccess = cwLast;
         } else {
@@ -1496,8 +1538,11 @@
             pass: s.pass || '',
             note: s.note || '',
             meta: s.meta || {},
-            hasN8N: false,
-            hasCW: true,
+            courses: s.courses || { n8n: sHasN8N, chatwoot: sHasCW },
+            hasN8N: sHasN8N,
+            hasCW: sHasCW,
+            statusN8N: 'bloqueado',
+            statusCW: s.status || 'ativo',
             progressN8N: null,
             progressCW: DB.cw.progress[id] || null,
             lastAccess: (DB.cw.progress[id] && DB.cw.progress[id].last) || s.createdAt || 0,
@@ -1804,85 +1849,83 @@
       const wantN8N = document.getElementById('edit-course-n8n').checked;
       const wantCW  = document.getElementById('edit-course-cw').checked;
 
-      if (!wantN8N && !wantCW) {
-        alert('O aluno precisa ter acesso a pelo menos 1 curso!');
+      if (status === 'ativo' && !wantN8N && !wantCW) {
+        alert('Para manter o aluno Ativo, selecione pelo menos um curso liberado (Academia n8n ou Academia Chatwoot). Se deseja suspender o acesso, altere o status para "Bloqueado (Sem Acesso)".');
         return;
       }
 
-      if (wantN8N && !AUTH.tokenN8N) {
-        alert('Erro: Servidor da Academia n8n não está conectado! Não é possível atualizar o n8n agora.');
-        return;
-      }
-      if (wantCW && !AUTH.tokenCW) {
-        alert('Erro: Servidor da Academia Chatwoot não está conectado! Não é possível atualizar o Chatwoot agora.');
-        return;
-      }
+      // Calcula o status específico para cada ambiente
+      const statusN8N = (status === 'bloqueado' || !wantN8N) ? 'bloqueado' : 'ativo';
+      const statusCW  = (status === 'bloqueado' || !wantCW)  ? 'bloqueado' : 'ativo';
 
+      // Identifica o perfil de cursos
+      const coursesObj = { n8n: wantN8N, chatwoot: wantCW };
+      const courseLabel = (wantN8N && wantCW) ? 'combo' : (wantN8N ? 'n8n' : 'chatwoot');
+
+      // Gera ou reaproveita senha
+      const sExisting = getUnifiedStudents().find(x => x.id === id);
+      const finalPass = pass || (sExisting ? sExisting.pass : '') || '123456';
       const salt = newSalt();
-      const h = await hashPassword(pass || '1234', salt);
+      const h = await hashPassword(finalPass, salt);
       const perms = { m1: true, m2: false, m3: false, m4: false };
 
-      const studentDoc = {
-        name, email, phone, contact: phone || email,
-        status, note, user, pass, perms,
+      const studentBase = {
+        id, name, email, phone, contact: phone || email,
+        note, user, pass: finalPass, perms,
+        courses: coursesObj,
+        course: courseLabel,
         updatedAt: Date.now()
       };
-      const loginDoc = {
-        sid: id, salt, hash: h, name, status, perms, v: 1
+
+      const loginBase = {
+        sid: id, salt, hash: h, name, perms, v: 1,
+        courses: coursesObj
       };
+
+      const studentDocN8N = { ...studentBase, status: statusN8N };
+      const loginDocN8N   = { ...loginBase, status: statusN8N };
+
+      const studentDocCW  = { ...studentBase, status: statusCW };
+      const loginDocCW    = { ...loginBase, status: statusCW };
 
       const saves = [];
 
-      // 1. n8n
-      if (wantN8N && AUTH.tokenN8N) {
+      // 1. n8n - sempre grava students e logins com o status correto do curso
+      if (AUTH.tokenN8N) {
         saves.push(
           fetch(`${N8N_BASE}/api/doc?path=students/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
-            body: JSON.stringify(studentDoc)
+            body: JSON.stringify(studentDocN8N)
           }),
           fetch(`${N8N_BASE}/api/doc?path=logins/${user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
-            body: JSON.stringify(loginDoc)
+            body: JSON.stringify(loginDocN8N)
           })
         );
-      } else if (!wantN8N && AUTH.tokenN8N) {
-        // Se desmarcou n8n, bloqueia ou remove
-        saves.push(fetch(`${N8N_BASE}/api/doc?path=students/${id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
-          body: JSON.stringify({ status: 'bloqueado' })
-        }));
       }
 
-      // 2. Chatwoot
-      if (wantCW && AUTH.tokenCW) {
+      // 2. Chatwoot - sempre grava students e logins com o status correto do curso
+      if (AUTH.tokenCW) {
         saves.push(
           fetch(`${CW_BASE}/api/doc?path=students/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
-            body: JSON.stringify(studentDoc)
+            body: JSON.stringify(studentDocCW)
           }),
           fetch(`${CW_BASE}/api/doc?path=logins/${user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
-            body: JSON.stringify(loginDoc)
+            body: JSON.stringify(loginDocCW)
           })
         );
-      } else if (!wantCW && AUTH.tokenCW) {
-        // Se desmarcou Chatwoot, bloqueia
-        saves.push(fetch(`${CW_BASE}/api/doc?path=students/${id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
-          body: JSON.stringify({ status: 'bloqueado' })
-        }));
       }
 
       try {
         await Promise.all(saves);
         closeEditModal();
-        showToast('Aluno atualizado e sincronizado com sucesso!');
+        showToast('Aluno atualizado e sincronizado em ambos os cursos!');
         await loadData();
       } catch (err) {
         alert('Erro ao salvar no servidor: ' + err.message);
@@ -2000,78 +2043,87 @@
       const until   = document.getElementById('add-until').value;
       const note    = document.getElementById('add-note').value.trim();
 
-      const id   = 'm_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-      const user = makeUsername(name);
-      const pass = makeRandomPass();
+      const wantN8N = (selectedAddCourse === 'n8n' || selectedAddCourse === 'combo');
+      const wantCW  = (selectedAddCourse === 'chatwoot' || selectedAddCourse === 'combo');
+
       if (wantN8N && !AUTH.tokenN8N) {
-        alert('Erro: Servidor da Academia n8n não está conectado! Não é possível atualizar o n8n agora.');
+        btn.disabled = false;
+        btn.textContent = '✨ Cadastrar e Gerar Acesso';
+        alert('Erro: Servidor da Academia n8n não está conectado! Não é possível cadastrar agora.');
         return;
       }
       if (wantCW && !AUTH.tokenCW) {
-        alert('Erro: Servidor da Academia Chatwoot não está conectado! Não é possível atualizar o Chatwoot agora.');
+        btn.disabled = false;
+        btn.textContent = '✨ Cadastrar e Gerar Acesso';
+        alert('Erro: Servidor da Academia Chatwoot não está conectado! Não é possível cadastrar agora.');
         return;
       }
+
+      const id   = 'm_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      const user = makeUsername(name);
+      const pass = makeRandomPass();
 
       const salt = newSalt();
       const h    = await hashPassword(pass, salt);
 
       const perms = { m1: true, m2: false, m3: false, m4: false };
-      const studentDoc = {
-        name, email, phone, contact: phone || email, company,
-        status: 'ativo', note, user, pass, perms,
+      const coursesObj = { n8n: wantN8N, chatwoot: wantCW };
+
+      const statusN8N = wantN8N ? 'ativo' : 'bloqueado';
+      const statusCW  = wantCW  ? 'ativo' : 'bloqueado';
+
+      const studentBase = {
+        id, name, email, phone, contact: phone || email, company,
+        note, user, pass, perms,
         course: selectedAddCourse,
+        courses: coursesObj,
+        plan, val,
         meta: until ? { until } : {},
         createdAt: Date.now(),
         updatedAt: Date.now()
       };
-      const loginDoc = {
-        sid: id, salt, hash: h, name, status: 'ativo', perms, v: 1
+
+      const loginBase = {
+        sid: id, salt, hash: h, name, perms, v: 1,
+        courses: coursesObj
       };
+
+      const studentDocN8N = { ...studentBase, status: statusN8N };
+      const loginDocN8N   = { ...loginBase, status: statusN8N };
+
+      const studentDocCW  = { ...studentBase, status: statusCW };
+      const loginDocCW    = { ...loginBase, status: statusCW };
 
       const saves = [];
 
-      // Valida autenticação antes de tentar salvar
-      if ((selectedAddCourse === 'n8n' || selectedAddCourse === 'combo') && !AUTH.tokenN8N) {
-        btn.disabled = false;
-        btn.textContent = '✨ Cadastrar e Gerar Acesso';
-        alert('Erro: Servidor da Academia n8n não está autenticado! Verifique a conexão.');
-        return;
-      }
-      if ((selectedAddCourse === 'chatwoot' || selectedAddCourse === 'combo') && !AUTH.tokenCW) {
-        btn.disabled = false;
-        btn.textContent = '✨ Cadastrar e Gerar Acesso';
-        alert('Erro: Servidor da Academia Chatwoot não está autenticado! Verifique a conexão.');
-        return;
-      }
-
-      // Salva no n8n se for n8n ou Combo
-      if ((selectedAddCourse === 'n8n' || selectedAddCourse === 'combo') && AUTH.tokenN8N) {
+      // 1. Grava no n8n (ativo se tem n8n, bloqueado se é só Chatwoot)
+      if (AUTH.tokenN8N) {
         saves.push(
           fetch(`${N8N_BASE}/api/doc?path=students/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
-            body: JSON.stringify(studentDoc)
+            body: JSON.stringify(studentDocN8N)
           }),
           fetch(`${N8N_BASE}/api/doc?path=logins/${user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
-            body: JSON.stringify(loginDoc)
+            body: JSON.stringify(loginDocN8N)
           })
         );
       }
 
-      // Salva no Chatwoot se for Chatwoot ou Combo
-      if ((selectedAddCourse === 'chatwoot' || selectedAddCourse === 'combo') && AUTH.tokenCW) {
+      // 2. Grava no Chatwoot (ativo se tem Chatwoot, bloqueado se é só n8n)
+      if (AUTH.tokenCW) {
         saves.push(
           fetch(`${CW_BASE}/api/doc?path=students/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
-            body: JSON.stringify(studentDoc)
+            body: JSON.stringify(studentDocCW)
           }),
           fetch(`${CW_BASE}/api/doc?path=logins/${user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
-            body: JSON.stringify(loginDoc)
+            body: JSON.stringify(loginDocCW)
           })
         );
       }
