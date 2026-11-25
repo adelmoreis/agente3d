@@ -6,6 +6,8 @@ node_modules/
 .env.local
 .git_backup
 **/.git_backup/
+tmp_n8n_pub/
+tmp_*/
 
 # Fluxos e scripts com credenciais
 FLUXO_PORTAL_3DIGITOS.json

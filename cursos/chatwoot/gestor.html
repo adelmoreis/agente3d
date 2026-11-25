@@ -658,6 +658,244 @@
     .toast.success { border-color: #10b981; }
     .toast.error { border-color: #ef4444; }
     @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    /* Vendas & Dashboard Analytics */
+    .sales-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .sales-kpi-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sales-kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      background: var(--purple);
+    }
+    .sales-kpi-card.pix::before { background: #10b981; }
+    .sales-kpi-card.cartao-parc::before { background: #8b5cf6; }
+    .sales-kpi-card.cartao-vista::before { background: #0284c7; }
+    .sales-kpi-card.boleto::before { background: #f59e0b; }
+    .sales-kpi-card.champion {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(139, 92, 246, 0.12));
+      border: 1px solid rgba(245, 158, 11, 0.45);
+    }
+    .sales-kpi-card.champion::before { background: linear-gradient(180deg, #f59e0b, #ec4899); width: 5px; }
+    .sales-kpi-val {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .sales-kpi-lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 5px;
+      font-weight: 600;
+    }
+    .sales-kpi-sub {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      margin-top: 4px;
+    }
+
+    /* Charts Layout */
+    .sales-charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .chart-box {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .chart-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chart-box-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chart-canvas-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Notice Banners para Form de Pagamento */
+    .pay-notice-box {
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      margin-top: 10px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+    }
+    .pay-notice-pix {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+    }
+    .pay-notice-cartao {
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      color: #c4b5fd;
+    }
+    .pay-notice-boleto {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fde68a;
+    }
+    .pay-calc-preview {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 5px;
+    }
+
+    /* Sales Filters */
+    .sales-filters-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+    .sales-filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sales-filter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .sales-filter-btn.active {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff;
+    }
+    .sales-filter-btn.active.pix { background: #10b981; border-color: #10b981; }
+    .sales-filter-btn.active.cartao-parc { background: #8b5cf6; border-color: #8b5cf6; }
+    .sales-filter-btn.active.cartao-vista { background: #0284c7; border-color: #0284c7; }
+    .sales-filter-btn.active.boleto { background: #f59e0b; border-color: #f59e0b; color: #000; }
+
+    /* Controle de Prazos e Metas */
+    .prazo-preset-bar {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    .prazo-preset-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .prazo-preset-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .prazo-preset-btn.active {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff;
+    }
+    .prazo-preview-box {
+      font-size: 12.5px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prazo-preview-ok {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #6ee7b7;
+    }
+    .prazo-preview-warn {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fde68a;
+    }
+    .prazo-preview-expired {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+    .prazo-preview-lifetime {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(139, 92, 246, 0.12));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fde68a;
+    }
+    .badge-prazo-ok {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .badge-prazo-warn {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fde68a;
+      border: 1px solid rgba(245, 158, 11, 0.45);
+    }
+    .badge-prazo-expired {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      font-weight: 700;
+    }
+    .badge-prazo-lifetime {
+      background: rgba(139, 92, 246, 0.18);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.45);
+    }
   </style>
 </head>
 <body>
@@ -917,8 +1155,8 @@
           </div>
 
           <!-- Passo 3: Cobrança e Prazos -->
-          <label style="font-weight:700; color:#fff; display:block; margin-bottom:10px; font-size:14px; margin-top:16px;">3. Condições Comerciais e Prazo:</label>
-          <div class="form-grid">
+          <label style="font-weight:700; color:#fff; display:block; margin-bottom:10px; font-size:14px; margin-top:16px;">3. Condições Comerciais, Prazo de Acesso & Metas:</label>
+          <div class="form-grid" style="margin-bottom:12px;">
             <div class="form-group">
               <label>Tipo de Cobrança</label>
               <select id="add-plan">
@@ -931,9 +1169,44 @@
               <label>Valor (R$)</label>
               <input type="number" step="0.01" id="add-val" value="88.20">
             </div>
-            <div class="form-group">
-              <label>Concluir até (Meta do Aluno)</label>
-              <input type="date" id="add-until">
+          </div>
+
+          <!-- Controle Inteligente de Prazo -->
+          <div style="background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label style="font-weight:700; color:#fff; font-size:13.5px; margin:0;">⏱️ Duração do Acesso & Prazo Limite:</label>
+              <span id="add-prazo-badge" class="badge badge-prazo-ok">90 dias padrão</span>
+            </div>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+              Clique num atalho para calcular a data automaticamente ou selecione uma data específica no calendário:
+            </p>
+
+            <div class="prazo-preset-bar" id="add-prazo-presets">
+              <button type="button" class="prazo-preset-btn" onclick="setAddPrazoDays(30)">⚡ 30 dias (1 mês)</button>
+              <button type="button" class="prazo-preset-btn" onclick="setAddPrazoDays(60)">⚡ 60 dias (2 meses)</button>
+              <button type="button" class="prazo-preset-btn active" onclick="setAddPrazoDays(90)">⚡ 90 dias (Recomendado)</button>
+              <button type="button" class="prazo-preset-btn" onclick="setAddPrazoDays(180)">⚡ 180 dias (6 meses)</button>
+              <button type="button" class="prazo-preset-btn" onclick="setAddPrazoDays(365)">⚡ 1 ano (365 dias)</button>
+              <button type="button" class="prazo-preset-btn" onclick="setAddPrazoLifetime()">♾️ Sem Prazo (Vitalício)</button>
+            </div>
+
+            <div class="form-grid" style="margin-top:12px; margin-bottom:6px;">
+              <div class="form-group" style="margin-bottom:0;">
+                <label style="font-size:12px;">Data Limite (ou escolha no calendário):</label>
+                <input type="date" id="add-until" onchange="onAddPrazoDateChange()">
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label style="font-size:12px;">Comportamento ao Expirar:</label>
+                <select id="add-expire-action">
+                  <option value="warn">Apenas alertar no painel (meta pedagógica de estudo)</option>
+                  <option value="block">Bloquear acesso automaticamente ao expirar o prazo</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="add-prazo-preview" class="prazo-preview-box prazo-preview-ok">
+              <span>📅</span>
+              <span id="add-prazo-preview-text">Prazo definido: 90 dias de acesso</span>
             </div>
           </div>
 
@@ -951,21 +1224,148 @@
 
     <!-- TAB 4: VENDAS -->
     <div id="tab-view-vendas" class="tab-content" style="display:none;">
-      <div class="card">
+      
+      <!-- Top Action Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+        <div>
+          <h2 style="font-size:20px; font-weight:800; color:#fff; display:flex; align-items:center; gap:8px;">
+            💳 Gestão de Vendas, Receita & Pagamentos
+          </h2>
+          <p style="font-size:13px; color:var(--text-muted); margin-top:2px;">
+            Controle detalhado de PIX imediato, Cartão Parcelado (2x a 12x), Boletos bancários e inteligência de vendas.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-ghost btn-sm" onclick="exportSalesReportCSV()">
+            📥 Baixar Relatório (CSV)
+          </button>
+          <a href="#form-manual-sale-card" class="btn btn-purple btn-sm" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+            ➕ Registrar Nova Venda
+          </a>
+        </div>
+      </div>
+
+      <!-- KPI Grid Analítico -->
+      <div class="sales-kpi-grid">
+        <div class="sales-kpi-card" style="border-color:rgba(139, 92, 246, 0.3);">
+          <div class="sales-kpi-val" id="kpi-sales-revenue">R$ 0,00</div>
+          <div class="sales-kpi-lbl">💰 Faturamento Total Bruto</div>
+          <div class="sales-kpi-sub" id="kpi-sales-count">0 vendas confirmadas</div>
+        </div>
+
+        <div class="sales-kpi-card champion" id="kpi-sales-champion-card">
+          <div class="sales-kpi-val" id="kpi-sales-champion" style="color:#fde68a; font-size:20px;">Analisando...</div>
+          <div class="sales-kpi-lbl">🏆 Método Mais Vendido</div>
+          <div class="sales-kpi-sub" id="kpi-sales-champion-sub">Maior volume de clientes</div>
+        </div>
+
+        <div class="sales-kpi-card pix">
+          <div class="sales-kpi-val" id="kpi-sales-pix-val" style="color:#6ee7b7;">R$ 0,00</div>
+          <div class="sales-kpi-lbl">⚡ PIX (À Vista · Instantâneo)</div>
+          <div class="sales-kpi-sub" id="kpi-sales-pix-sub">0 vendas (0%)</div>
+        </div>
+
+        <div class="sales-kpi-card cartao-parc">
+          <div class="sales-kpi-val" id="kpi-sales-card-parc-val" style="color:#c4b5fd;">R$ 0,00</div>
+          <div class="sales-kpi-lbl">💳 Cartão Parcelado (2x a 12x)</div>
+          <div class="sales-kpi-sub" id="kpi-sales-card-parc-sub">0 vendas (0%)</div>
+        </div>
+
+        <div class="sales-kpi-card cartao-vista">
+          <div class="sales-kpi-val" id="kpi-sales-card-vista-val" style="color:#7dd3fc;">R$ 0,00</div>
+          <div class="sales-kpi-lbl">💳 Cartão à Vista (1x)</div>
+          <div class="sales-kpi-sub" id="kpi-sales-card-vista-sub">0 vendas (0%)</div>
+        </div>
+
+        <div class="sales-kpi-card boleto">
+          <div class="sales-kpi-val" id="kpi-sales-boleto-val" style="color:#fde68a;">R$ 0,00</div>
+          <div class="sales-kpi-lbl">📄 Boletos Bancários</div>
+          <div class="sales-kpi-sub" id="kpi-sales-boleto-sub">0 compensados</div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD GRÁFICO (Canvas Nativo) -->
+      <div class="sales-charts-grid">
+        <!-- Gráfico 1: Rosca/Donut de Métodos de Pagamento -->
+        <div class="chart-box">
+          <div class="chart-box-header">
+            <div class="chart-box-title">
+              <span>🎯</span> Divisão de Vendas por Forma de Pagamento
+            </div>
+            <span style="font-size:11.5px; color:var(--text-muted);">Volume e Participação</span>
+          </div>
+          <div class="chart-canvas-wrap">
+            <canvas id="canvas-chart-methods" width="400" height="220" style="max-width:100%; height:auto;"></canvas>
+          </div>
+          <div id="chart-methods-legend" style="display:flex; flex-wrap:wrap; gap:10px; font-size:12px; justify-content:center; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.06); padding-top:10px;">
+            <!-- Preenchido via JS -->
+          </div>
+        </div>
+
+        <!-- Gráfico 2: Barras de Faturamento por Curso -->
+        <div class="chart-box">
+          <div class="chart-box-header">
+            <div class="chart-box-title">
+              <span>📊</span> Receita Comparativa por Curso / Produto
+            </div>
+            <span style="font-size:11.5px; color:var(--text-muted);">Faturamento em R$</span>
+          </div>
+          <div class="chart-canvas-wrap">
+            <canvas id="canvas-chart-courses" width="400" height="220" style="max-width:100%; height:auto;"></canvas>
+          </div>
+          <div id="chart-courses-legend" style="display:flex; flex-wrap:wrap; gap:12px; font-size:12px; justify-content:center; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.06); padding-top:10px;">
+            <!-- Preenchido via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- RELATÓRIO ANALÍTICO COMPARATIVO -->
+      <div class="card" style="margin-bottom:24px;">
         <div class="card-header">
           <div>
-            <div class="card-title">Registrar Pagamento Manual</div>
-            <div class="card-desc">Cadastre um pagamento recebido via Pix direto ou transferência para liberar o aluno.</div>
+            <div class="card-title">📊 Relatório Analítico: Qual Método Vende Mais?</div>
+            <div class="card-desc">Análise quantitativa de conversão, faturamento e ticket médio por meio de pagamento.</div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Forma de Pagamento</th>
+                <th style="text-align:center;">Qtd. Vendas</th>
+                <th style="text-align:center;">% Volume</th>
+                <th style="text-align:right;">Faturamento Total</th>
+                <th style="text-align:center;">% Receita</th>
+                <th style="text-align:right;">Ticket Médio</th>
+                <th style="text-align:center;">Compensação</th>
+                <th style="text-align:center;">Status / Desempenho</th>
+              </tr>
+            </thead>
+            <tbody id="sales-report-tbody">
+              <tr>
+                <td colspan="8" style="text-align:center; padding:20px; color:var(--text-muted);">Calculando relatório analítico...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- FORMULÁRIO DE REGISTRO DE PAGAMENTO MANUAL -->
+      <div class="card" id="form-manual-sale-card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">📝 Registrar Pagamento & Venda Manual</div>
+            <div class="card-desc">Cadastre vendas recebidas via PIX instantâneo, Cartão Parcelado ou Boleto Bancário.</div>
           </div>
         </div>
         <form id="form-manual-sale">
           <div class="form-grid">
             <div class="form-group">
               <label>Curso Vendido *</label>
-              <select id="sale-course">
+              <select id="sale-course" onchange="onSaleCourseChange()">
                 <option value="n8n">🟣 Academia n8n (R$ 88,20)</option>
                 <option value="chatwoot">💬 Academia Chatwoot (R$ 88,20)</option>
-                <option value="combo">⚡ Combo n8n + Chatwoot (R$ 147,00)</option>
+                <option value="combo" selected>⚡ Combo n8n + Chatwoot (R$ 147,00)</option>
               </select>
             </div>
             <div class="form-group">
@@ -973,39 +1373,196 @@
               <input type="text" id="sale-name" placeholder="Ex.: Carlos Mendes" required>
             </div>
             <div class="form-group">
-              <label>E-mail</label>
+              <label>E-mail (para envio do login)</label>
               <input type="email" id="sale-email" placeholder="carlos@email.com">
             </div>
             <div class="form-group">
-              <label>WhatsApp</label>
+              <label>WhatsApp com DDD (para envio do login)</label>
               <input type="tel" id="sale-phone" placeholder="(11) 98888-7777">
             </div>
             <div class="form-group">
-              <label>Forma de Pagamento</label>
-              <select id="sale-method">
-                <option value="pix">Pix</option>
-                <option value="cartao">Cartão de Crédito</option>
-                <option value="outro">Boleto / Outro</option>
+              <label>Forma de Pagamento *</label>
+              <select id="sale-method" onchange="onSaleMethodChange()">
+                <option value="pix">🟢 PIX (À vista · Aprovação Imediata)</option>
+                <option value="cartao_parcelado" selected>💳 Cartão de Crédito (Parcelado · 2x a 12x)</option>
+                <option value="cartao_vista">💳 Cartão de Crédito (À Vista · 1x)</option>
+                <option value="boleto">📄 Boleto Bancário (Compensação 1 a 3 dias úteis)</option>
+                <option value="outro">💵 Outro / Dinheiro / Transferência</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Valor Recebido (R$)</label>
-              <input type="number" step="0.01" id="sale-val" value="88.20">
+              <label>Valor Total Cobrado (R$) *</label>
+              <input type="number" step="0.01" id="sale-val" value="147.00" oninput="recalcInstallmentsPreview()">
             </div>
           </div>
-          <div style="display:flex; justify-content:flex-end;">
-            <button type="submit" class="btn btn-purple">Registrar Venda e Liberar Acesso</button>
+
+          <!-- CONTAINER CONDICIONAL: PIX -->
+          <div id="box-cond-pix" style="display:none;">
+            <div class="pay-notice-box pay-notice-pix">
+              <span style="font-size:18px;">⚡</span>
+              <div>
+                <b>Aviso PIX:</b> Pagamento instantâneo. O banco confirma em segundos e o aluno já pode ter seu login ativado imediatamente!
+              </div>
+            </div>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+              <div class="form-group">
+                <label>Identificador / Chave Pix / E2E (Opcional)</label>
+                <input type="text" id="sale-pix-id" placeholder="Ex.: E2E... ou celular/email da chave">
+              </div>
+              <div class="form-group">
+                <label>Status da Transação Pix</label>
+                <select id="sale-pix-status">
+                  <option value="pago">✅ Aprovado / Recebido Imediato</option>
+                  <option value="pendente">⏳ Aguardando Comprovante</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTAINER CONDICIONAL: CARTÃO PARCELADO -->
+          <div id="box-cond-cartao-parc">
+            <div class="pay-notice-box pay-notice-cartao">
+              <span style="font-size:18px;">💳</span>
+              <div>
+                <b>Aviso Cartão Parcelado:</b> Pagamento dividido no cartão de crédito. Informe o número de parcelas para controle contábil.
+                <div class="pay-calc-preview" id="card-installments-preview">
+                  Plano: 3x de R$ 49,00
+                </div>
+              </div>
+            </div>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+              <div class="form-group">
+                <label>Quantidade de Parcelas *</label>
+                <select id="sale-card-installments" onchange="recalcInstallmentsPreview()">
+                  <option value="2">2x (Parcelado)</option>
+                  <option value="3" selected>3x (Parcelado)</option>
+                  <option value="4">4x (Parcelado)</option>
+                  <option value="5">5x (Parcelado)</option>
+                  <option value="6">6x (Parcelado)</option>
+                  <option value="7">7x (Parcelado)</option>
+                  <option value="8">8x (Parcelado)</option>
+                  <option value="9">9x (Parcelado)</option>
+                  <option value="10">10x (Parcelado)</option>
+                  <option value="11">11x (Parcelado)</option>
+                  <option value="12">12x (Parcelado)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Bandeira do Cartão (Opcional)</label>
+                <select id="sale-card-brand">
+                  <option value="Mastercard">Mastercard</option>
+                  <option value="Visa">Visa</option>
+                  <option value="Elo">Elo</option>
+                  <option value="Hipercard">Hipercard</option>
+                  <option value="Amex">American Express</option>
+                  <option value="Outra">Outra</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Últimos 4 Dígitos do Cartão (Opcional)</label>
+                <input type="text" id="sale-card-last4" placeholder="Ex.: 4589" maxlength="4">
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTAINER CONDICIONAL: CARTÃO À VISTA -->
+          <div id="box-cond-cartao-vista" style="display:none;">
+            <div class="pay-notice-box pay-notice-cartao">
+              <span style="font-size:18px;">💳</span>
+              <div>
+                <b>Aviso Cartão à Vista (1x):</b> Cobrança integral única no cartão de crédito. Aprovação em tempo real.
+              </div>
+            </div>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+              <div class="form-group">
+                <label>Bandeira do Cartão (Opcional)</label>
+                <select id="sale-card-vista-brand">
+                  <option value="Mastercard">Mastercard</option>
+                  <option value="Visa">Visa</option>
+                  <option value="Elo">Elo</option>
+                  <option value="Hipercard">Hipercard</option>
+                  <option value="Amex">American Express</option>
+                  <option value="Outra">Outra</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Últimos 4 Dígitos do Cartão (Opcional)</label>
+                <input type="text" id="sale-card-vista-last4" placeholder="Ex.: 4589" maxlength="4">
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTAINER CONDICIONAL: BOLETO -->
+          <div id="box-cond-boleto" style="display:none;">
+            <div class="pay-notice-box pay-notice-boleto">
+              <span style="font-size:18px;">⏳</span>
+              <div>
+                <b>Aviso Boleto Bancário:</b> A rede bancária leva de <b>1 a 3 dias úteis</b> para liquidar o boleto.
+                Você pode registrar a venda como <i>Aguardando Compensação</i> e liberar o aluno quando o banco confirmar o pagamento.
+              </div>
+            </div>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+              <div class="form-group">
+                <label>Status do Boleto *</label>
+                <select id="sale-boleto-status">
+                  <option value="aguardando_compensacao">⏳ Aguardando Compensação Bancária (1 a 3 dias)</option>
+                  <option value="pago">✅ Compensado e Confirmado pelo Banco</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Data de Vencimento do Boleto</label>
+                <input type="date" id="sale-boleto-due">
+              </div>
+              <div class="form-group">
+                <label>Linha Digitável / Código de Barras (Opcional)</label>
+                <input type="text" id="sale-boleto-barcode" placeholder="Ex.: 34191.79001...">
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo Observação Interna -->
+          <div class="form-group" style="margin-top:10px;">
+            <label>Anotação Interna da Venda (Opcional)</label>
+            <input type="text" id="sale-note" placeholder="Ex.: Pagou no link do WhatsApp, desconto especial, etc.">
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-ghost" onclick="submitSaleRecord(false)">
+              💾 Apenas Registrar Venda
+            </button>
+            <button type="submit" class="btn btn-purple" id="btn-submit-sale">
+              ✨ Registrar Venda e Liberar Acesso do Aluno
+            </button>
           </div>
         </form>
       </div>
 
+      <!-- HISTÓRICO DE VENDAS -->
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Histórico de Vendas Registradas</div>
-            <div class="card-desc">Vendas pendentes de liberação e acessos já concedidos.</div>
+            <div class="card-title">📋 Histórico de Vendas Registradas</div>
+            <div class="card-desc">Histórico completo de transações com filtros dinâmicos por método e curso.</div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <input type="text" id="sales-search-input" placeholder="🔍 Buscar por cliente, email ou fone..." 
+                   oninput="filterSalesTable()" 
+                   style="background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:var(--radius-sm); color:#fff; padding:8px 12px; font-size:13px; width:260px;">
           </div>
         </div>
+
+        <!-- Filtros Rápidos de Venda -->
+        <div class="sales-filters-bar" id="sales-filter-buttons">
+          <button type="button" class="sales-filter-btn active" data-filter="all" onclick="setSalesFilter('all')">Todos (<span id="flt-cnt-all">0</span>)</button>
+          <button type="button" class="sales-filter-btn pix" data-filter="pix" onclick="setSalesFilter('pix')">🟢 PIX (<span id="flt-cnt-pix">0</span>)</button>
+          <button type="button" class="sales-filter-btn cartao-parc" data-filter="cartao_parcelado" onclick="setSalesFilter('cartao_parcelado')">💳 Cartão Parcelado (<span id="flt-cnt-cartao-parc">0</span>)</button>
+          <button type="button" class="sales-filter-btn cartao-vista" data-filter="cartao_vista" onclick="setSalesFilter('cartao_vista')">💳 Cartão 1x (<span id="flt-cnt-cartao-vista">0</span>)</button>
+          <button type="button" class="sales-filter-btn boleto" data-filter="boleto" onclick="setSalesFilter('boleto')">📄 Boleto (<span id="flt-cnt-boleto">0</span>)</button>
+          <button type="button" class="sales-filter-btn" data-filter="course_n8n" onclick="setSalesFilter('course_n8n')">🟣 n8n</button>
+          <button type="button" class="sales-filter-btn" data-filter="course_cw" onclick="setSalesFilter('course_cw')">💬 Chatwoot</button>
+          <button type="button" class="sales-filter-btn" data-filter="course_combo" onclick="setSalesFilter('course_combo')">⚡ Combo</button>
+        </div>
+
         <div class="table-responsive">
           <table>
             <thead>
@@ -1013,14 +1570,15 @@
                 <th>Data</th>
                 <th>Cliente</th>
                 <th>Produto / Curso</th>
-                <th>Forma / Valor</th>
-                <th>Status</th>
-                <th>Ações</th>
+                <th>Forma / Parcelamento</th>
+                <th style="text-align:right;">Valor</th>
+                <th style="text-align:center;">Status</th>
+                <th style="text-align:center;">Ações</th>
               </tr>
             </thead>
             <tbody id="sales-tbody">
               <tr>
-                <td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Nenhuma venda registrada ainda.</td>
+                <td colspan="7" style="text-align:center; padding:24px; color:var(--text-muted);">Nenhuma venda registrada ainda. Use o formulário acima para registrar.</td>
               </tr>
             </tbody>
           </table>
@@ -1030,13 +1588,68 @@
 
     <!-- TAB 5: METAS -->
     <div id="tab-view-metas" class="tab-content" style="display:none;">
+      
+      <!-- Top Action Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+        <div>
+          <h2 style="font-size:20px; font-weight:800; color:#fff; display:flex; align-items:center; gap:8px;">
+            🎯 Gestão de Metas & Prazos de Acesso
+          </h2>
+          <p style="font-size:13px; color:var(--text-muted); margin-top:2px;">
+            Acompanhe o tempo de estudo, monitore alunos com prazos vencendo ou expirados e renove acessos com 1 clique.
+          </p>
+        </div>
+      </div>
+
+      <!-- KPI Grid de Prazos -->
+      <div class="sales-kpi-grid">
+        <div class="sales-kpi-card" style="border-color:rgba(16, 185, 129, 0.4);">
+          <div class="sales-kpi-val" id="kpi-metas-ok-val" style="color:#6ee7b7;">0</div>
+          <div class="sales-kpi-lbl">🟢 Alunos Dentro do Prazo</div>
+          <div class="sales-kpi-sub" id="kpi-metas-ok-sub">Estudo ativo e regular</div>
+        </div>
+
+        <div class="sales-kpi-card" style="border-color:rgba(245, 158, 11, 0.4);">
+          <div class="sales-kpi-val" id="kpi-metas-warn-val" style="color:#fde68a;">0</div>
+          <div class="sales-kpi-lbl">⚠️ Vencendo em Breve (&le; 7 dias)</div>
+          <div class="sales-kpi-sub" id="kpi-metas-warn-sub">Precisam de atenção ou prorrogação</div>
+        </div>
+
+        <div class="sales-kpi-card" style="border-color:rgba(239, 68, 68, 0.4);">
+          <div class="sales-kpi-val" id="kpi-metas-expired-val" style="color:#fca5a5;">0</div>
+          <div class="sales-kpi-lbl">🚨 Prazos Expirados / Vencidos</div>
+          <div class="sales-kpi-sub" id="kpi-metas-expired-sub">Acesso terminado · Requer ampliação</div>
+        </div>
+
+        <div class="sales-kpi-card" style="border-color:rgba(139, 92, 246, 0.4);">
+          <div class="sales-kpi-val" id="kpi-metas-lifetime-val" style="color:#c4b5fd;">0</div>
+          <div class="sales-kpi-lbl">♾️ Acesso Vitalício</div>
+          <div class="sales-kpi-sub" id="kpi-metas-lifetime-sub">Sem data limite de expiração</div>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Acompanhamento de Metas e Prazos</div>
-            <div class="card-desc">Controle de engajamento para garantir que os alunos concluam os cursos dentro do prazo.</div>
+            <div class="card-title">📋 Acompanhamento de Prazos & Progresso</div>
+            <div class="card-desc">Controle de engajamento para garantir que os alunos concluam os cursos dentro do prazo contratado.</div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <input type="text" id="metas-search-input" placeholder="🔍 Buscar por aluno, email ou fone..." 
+                   oninput="filterMetasTable()" 
+                   style="background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:var(--radius-sm); color:#fff; padding:8px 12px; font-size:13px; width:260px;">
           </div>
         </div>
+
+        <!-- Filtros de Prazos -->
+        <div class="sales-filters-bar" id="metas-filter-buttons">
+          <button type="button" class="sales-filter-btn active" data-mfilter="all" onclick="setMetasFilter('all')">Todos (<span id="mflt-cnt-all">0</span>)</button>
+          <button type="button" class="sales-filter-btn" style="color:#fca5a5; border-color:rgba(239,68,68,0.3);" data-mfilter="expired" onclick="setMetasFilter('expired')">🚨 Expirados (<span id="mflt-cnt-expired">0</span>)</button>
+          <button type="button" class="sales-filter-btn" style="color:#fde68a; border-color:rgba(245,158,11,0.3);" data-mfilter="warning" onclick="setMetasFilter('warning')">⚠️ Vencendo em Breve (<span id="mflt-cnt-warn">0</span>)</button>
+          <button type="button" class="sales-filter-btn" style="color:#6ee7b7; border-color:rgba(16,185,129,0.3);" data-mfilter="ok" onclick="setMetasFilter('ok')">🟢 Em Dia (<span id="mflt-cnt-ok">0</span>)</button>
+          <button type="button" class="sales-filter-btn" style="color:#c4b5fd; border-color:rgba(139,92,246,0.3);" data-mfilter="lifetime" onclick="setMetasFilter('lifetime')">♾️ Vitalício (<span id="mflt-cnt-lifetime">0</span>)</button>
+        </div>
+
         <div class="table-responsive">
           <table>
             <thead>
@@ -1044,14 +1657,14 @@
                 <th>Aluno</th>
                 <th>Curso</th>
                 <th>Prazo Limite</th>
+                <th style="text-align:center;">Situação do Prazo</th>
                 <th>Progresso Real</th>
-                <th>Ritmo de Estudo</th>
-                <th>Ação</th>
+                <th style="text-align:center;">Ações de Acesso</th>
               </tr>
             </thead>
             <tbody id="metas-tbody">
               <tr>
-                <td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Carregando metas...</td>
+                <td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Carregando prazos e metas dos alunos...</td>
               </tr>
             </tbody>
           </table>
@@ -1204,6 +1817,53 @@
           </div>
         </div>
 
+        <!-- CONTROLE E AMPLIAÇÃO DE PRAZO DO ALUNO -->
+        <div style="background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+            <label style="font-weight:700; color:#fff; font-size:14px; margin:0;">⏱️ Prazo de Acesso & Expiração:</label>
+            <span id="edit-prazo-badge" class="badge badge-prazo-ok">Calculando...</span>
+          </div>
+
+          <div id="edit-prazo-info-box" class="prazo-preview-box prazo-preview-ok" style="margin-bottom:12px;">
+            <span id="edit-prazo-info-icon">🟢</span>
+            <div id="edit-prazo-info-text">Carregando prazo...</div>
+          </div>
+
+          <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:6px;">
+            ⚡ <b>Ampliar / Estender Prazo com 1 clique</b> (prorroga a partir de hoje ou soma ao prazo atual):
+          </label>
+          <div class="prazo-preset-bar">
+            <button type="button" class="prazo-preset-btn" onclick="addDaysToEditPrazo(15)">+15 dias</button>
+            <button type="button" class="prazo-preset-btn" onclick="addDaysToEditPrazo(30)">+30 dias</button>
+            <button type="button" class="prazo-preset-btn" onclick="addDaysToEditPrazo(60)">+60 dias</button>
+            <button type="button" class="prazo-preset-btn" onclick="addDaysToEditPrazo(90)">+90 dias</button>
+            <button type="button" class="prazo-preset-btn" onclick="addDaysToEditPrazo(180)">+6 meses</button>
+            <button type="button" class="prazo-preset-btn" onclick="addDaysToEditPrazo(365)">+1 ano</button>
+            <button type="button" class="prazo-preset-btn" onclick="setEditPrazoLifetime()">♾️ Tornar Vitalício</button>
+          </div>
+
+          <div class="form-grid" style="margin-top:10px; margin-bottom:0;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:12px;">Data Limite (ou escolha no calendário):</label>
+              <input type="date" id="edit-until" onchange="onEditPrazoDateChange()">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:12px;">Ação ao Expirar:</label>
+              <select id="edit-expire-action">
+                <option value="warn">Apenas alertar no painel (meta de estudo)</option>
+                <option value="block">Bloquear acesso após expirar prazo</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="edit-unblock-prompt" style="display:none; margin-top:12px; padding:10px 14px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.35); border-radius:6px;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:#6ee7b7; cursor:pointer;">
+              <input type="checkbox" id="edit-auto-unblock" checked style="accent-color:#10b981; width:16px; height:16px;">
+              <b>Desbloquear e reativar acesso do aluno imediatamente ao salvar novo prazo</b>
+            </label>
+          </div>
+        </div>
+
         <div class="form-group" style="margin-bottom:16px;">
           <label>Status do Aluno</label>
           <select id="edit-status">
@@ -1225,6 +1885,71 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- MODAL: AMPLIAR / PRORROGAR PRAZO RÁPIDO -->
+  <div id="modal-extend-prazo" class="modal-overlay" style="display:none;">
+    <div class="modal-box" style="max-width:540px;">
+      <div class="modal-header">
+        <h3 id="ext-modal-title">⏱️ Ampliar Prazo de Acesso</h3>
+        <button class="close-btn" onclick="closeExtendModal()">&times;</button>
+      </div>
+      <div>
+        <input type="hidden" id="ext-student-id">
+        
+        <div style="background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+            <div>
+              <b style="font-size:15px; color:#fff;" id="ext-student-name">Aluno</b>
+              <div style="font-size:12px; color:var(--text-muted);" id="ext-student-info">Curso: Combo</div>
+            </div>
+            <span id="ext-prazo-current-badge" class="badge badge-prazo-ok">Prazo Atual</span>
+          </div>
+          <div id="ext-prazo-status-desc" style="font-size:12.5px; margin-top:8px; color:#cbd5e1;">
+            Situação atual do prazo.
+          </div>
+        </div>
+
+        <label style="font-weight:700; color:#fff; font-size:13px; display:block; margin-bottom:8px;">
+          Escolha o tempo de ampliação para prorrogar:
+        </label>
+        <div class="prazo-preset-bar" style="margin-bottom:14px;">
+          <button type="button" class="prazo-preset-btn" onclick="applyQuickExtensionDays(15)">+15 dias</button>
+          <button type="button" class="prazo-preset-btn active" onclick="applyQuickExtensionDays(30)">+30 dias (1 mês)</button>
+          <button type="button" class="prazo-preset-btn" onclick="applyQuickExtensionDays(60)">+60 dias (2 meses)</button>
+          <button type="button" class="prazo-preset-btn" onclick="applyQuickExtensionDays(90)">+90 dias (3 meses)</button>
+          <button type="button" class="prazo-preset-btn" onclick="applyQuickExtensionDays(180)">+6 meses</button>
+          <button type="button" class="prazo-preset-btn" onclick="applyQuickExtensionDays(365)">+1 ano</button>
+          <button type="button" class="prazo-preset-btn" onclick="applyQuickExtensionLifetime()">♾️ Vitalício</button>
+        </div>
+
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-size:12px;">Nova Data Limite de Acesso:</label>
+          <input type="date" id="ext-new-date" onchange="onExtDateChange()">
+        </div>
+
+        <div id="ext-unblock-box" style="margin-bottom:14px; padding:10px 14px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:6px;">
+          <label style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:#6ee7b7; cursor:pointer;">
+            <input type="checkbox" id="ext-auto-unblock" checked style="accent-color:#10b981; width:16px; height:16px;">
+            <b>Garantir que o aluno fique Ativo (acesso liberado) imediatamente</b>
+          </label>
+        </div>
+
+        <div style="margin-bottom:18px;">
+          <label style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:#cbd5e1; cursor:pointer;">
+            <input type="checkbox" id="ext-send-wa" checked style="accent-color:var(--purple); width:16px; height:16px;">
+            <span>Abrir WhatsApp com mensagem confirmando a prorrogação do prazo</span>
+          </label>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <button type="button" class="btn btn-ghost" onclick="closeExtendModal()">Cancelar</button>
+          <button type="button" class="btn btn-purple" id="btn-confirm-extend" onclick="confirmQuickExtension()">
+            ✨ Confirmar e Salvar Novo Prazo
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1467,6 +2192,7 @@
         const key = s.user || s.email || id;
         const hasN8N = s.courses ? !!s.courses.n8n : (s.status !== 'bloqueado' || s.course === 'n8n' || s.course === 'combo');
         const hasCW  = s.courses ? !!s.courses.chatwoot : (s.course === 'chatwoot' || s.course === 'combo');
+        const untilVal = (s.meta && s.meta.until) || s.until || '';
         map.set(key, {
           id: id,
           user: s.user || id,
@@ -1476,7 +2202,8 @@
           status: s.status || 'ativo',
           pass: s.pass || '',
           note: s.note || '',
-          meta: s.meta || {},
+          until: untilVal,
+          meta: s.meta || (untilVal ? { until: untilVal } : {}),
           courses: s.courses || { n8n: hasN8N, chatwoot: hasCW },
           hasN8N: hasN8N,
           hasCW: hasCW,
@@ -1505,6 +2232,10 @@
           if (!existing.pass && s.pass) existing.pass = s.pass;
           if (!existing.phone && (s.phone || s.contact)) existing.phone = s.phone || s.contact;
           if (!existing.email && s.email) existing.email = s.email;
+          if (!existing.until && (s.until || (s.meta && s.meta.until))) {
+            existing.until = s.until || s.meta.until;
+            existing.meta = s.meta || { until: existing.until };
+          }
 
           // Se tiver campo courses explícito em qualquer um, prioriza
           if (s.courses) {
@@ -1528,6 +2259,7 @@
           if (cwLast > existing.lastAccess) existing.lastAccess = cwLast;
         } else {
           // Apenas Chatwoot
+          const untilVal = (s.meta && s.meta.until) || s.until || '';
           map.set(key, {
             id: id,
             user: s.user || id,
@@ -1537,7 +2269,8 @@
             status: s.status || 'ativo',
             pass: s.pass || '',
             note: s.note || '',
-            meta: s.meta || {},
+            until: untilVal,
+            meta: s.meta || (untilVal ? { until: untilVal } : {}),
             courses: s.courses || { n8n: sHasN8N, chatwoot: sHasCW },
             hasN8N: sHasN8N,
             hasCW: sHasCW,
@@ -1694,91 +2427,1318 @@
       }).join('');
     }
 
-    /* Render Vendas */
-    function renderSalesTable() {
-      const allSales = [];
-      Object.entries(DB.n8n.sales).forEach(([id, s]) => allSales.push({ ...s, id, course: 'n8n' }));
-      Object.entries(DB.cw.sales).forEach(([id, s]) => allSales.push({ ...s, id, course: 'chatwoot' }));
+    /* =========================================================================
+       MÓDULO DE VENDAS, RELATÓRIO ANALÍTICO & DASHBOARD GRÁFICO
+       ========================================================================= */
+    let currentSalesList = [];
+    let activeSalesFilter = 'all';
 
-      allSales.sort((a,b) => (b.ts || b.pagoEm || 0) - (a.ts || a.pagoEm || 0));
-      document.getElementById('tab-cnt-vendas').textContent = allSales.length;
+    // Seletor de Curso no Form de Vendas
+    window.onSaleCourseChange = function() {
+      const c = document.getElementById('sale-course').value;
+      const valInput = document.getElementById('sale-val');
+      if (c === 'combo') {
+        valInput.value = '147.00';
+      } else {
+        valInput.value = '88.20';
+      }
+      recalcInstallmentsPreview();
+    };
+
+    // Alternar Containers Condicionais da Forma de Pagamento
+    window.onSaleMethodChange = function() {
+      const m = document.getElementById('sale-method').value;
+      const bPix   = document.getElementById('box-cond-pix');
+      const bParc  = document.getElementById('box-cond-cartao-parc');
+      const bVista = document.getElementById('box-cond-cartao-vista');
+      const bBol   = document.getElementById('box-cond-boleto');
+
+      if (bPix) bPix.style.display = (m === 'pix') ? 'block' : 'none';
+      if (bParc) bParc.style.display = (m === 'cartao_parcelado') ? 'block' : 'none';
+      if (bVista) bVista.style.display = (m === 'cartao_vista') ? 'block' : 'none';
+      if (bBol) bBol.style.display = (m === 'boleto') ? 'block' : 'none';
+
+      recalcInstallmentsPreview();
+    };
+
+    // Cálculo em tempo real do Parcelamento do Cartão
+    window.recalcInstallmentsPreview = function() {
+      const val = parseFloat(document.getElementById('sale-val').value) || 0;
+      const nParc = parseInt(document.getElementById('sale-card-installments')?.value || '3', 10);
+      const prevEl = document.getElementById('card-installments-preview');
+      if (!prevEl) return;
+
+      if (val <= 0) {
+        prevEl.textContent = 'Informe um valor válido';
+        return;
+      }
+      const valorParc = (val / nParc).toFixed(2);
+      prevEl.textContent = `Plano: ${nParc}x de R$ ${valorParc.replace('.', ',')} (Total: R$ ${val.toFixed(2).replace('.', ',')})`;
+    };
+
+    // Filtros de Vendas
+    window.setSalesFilter = function(filterName) {
+      activeSalesFilter = filterName;
+      document.querySelectorAll('#sales-filter-buttons .sales-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filterName);
+      });
+      filterSalesTable();
+    };
+
+    // Filtrar e Renderizar Linhas da Tabela de Vendas
+    window.filterSalesTable = function() {
+      const q = (document.getElementById('sales-search-input')?.value || '').toLowerCase().trim();
+      let list = currentSalesList.slice();
+
+      if (activeSalesFilter === 'pix') {
+        list = list.filter(v => v.forma === 'pix');
+      } else if (activeSalesFilter === 'cartao_parcelado') {
+        list = list.filter(v => v.forma === 'cartao_parcelado' || (v.forma === 'cartao' && v.parcelas > 1));
+      } else if (activeSalesFilter === 'cartao_vista') {
+        list = list.filter(v => v.forma === 'cartao_vista' || (v.forma === 'cartao' && (!v.parcelas || v.parcelas === 1)));
+      } else if (activeSalesFilter === 'boleto') {
+        list = list.filter(v => v.forma === 'boleto');
+      } else if (activeSalesFilter === 'course_n8n') {
+        list = list.filter(v => v.course === 'n8n');
+      } else if (activeSalesFilter === 'course_cw') {
+        list = list.filter(v => v.course === 'chatwoot');
+      } else if (activeSalesFilter === 'course_combo') {
+        list = list.filter(v => v.course === 'combo');
+      }
+
+      if (q) {
+        list = list.filter(v => 
+          (v.nome || '').toLowerCase().includes(q) ||
+          (v.email || '').toLowerCase().includes(q) ||
+          (v.telefone || '').includes(q) ||
+          (v.id || '').toLowerCase().includes(q)
+        );
+      }
 
       const tbody = document.getElementById('sales-tbody');
-      if (!allSales.length) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Nenhuma venda registrada ainda. Use o formulário acima para registrar.</td></tr>`;
+      if (!tbody) return;
+
+      if (!list.length) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:28px; color:var(--text-muted);">Nenhuma venda encontrada com os filtros atuais.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = allSales.map(v => {
-        const prodBadge = v.course === 'chatwoot' ? 
-          `<span class="badge badge-cw">💬 Academia Chatwoot</span>` : 
-          `<span class="badge badge-n8n">🟣 Academia n8n</span>`;
+      tbody.innerHTML = list.map(v => {
+        let prodBadge = `<span class="badge badge-combo">⚡ Combo n8n + CW</span>`;
+        if (v.course === 'chatwoot') prodBadge = `<span class="badge badge-cw">💬 Academia Chatwoot</span>`;
+        else if (v.course === 'n8n') prodBadge = `<span class="badge badge-n8n">🟣 Academia n8n</span>`;
+
         const val = (+v.valor || 88.20).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        const dt = v.pagoEm ? new Date(v.pagoEm).toLocaleDateString('pt-BR') : 'Hoje';
+        const dt = (v.pagoEm || v.ts) ? new Date(v.pagoEm || v.ts).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : 'Hoje';
+
+        // Detalhe rico da forma de pagamento
+        let formaDesc = '';
+        if (v.forma === 'pix') {
+          formaDesc = `<span style="color:#6ee7b7; font-weight:700;">🟢 PIX</span> <small style="color:var(--text-muted);">(Instantâneo)</small>`;
+          if (v.pixId) formaDesc += `<div style="font-size:11px; color:var(--text-dim);">Chave: ${escapeHtml(v.pixId)}</div>`;
+        } else if (v.forma === 'cartao_parcelado' || (v.forma === 'cartao' && v.parcelas > 1)) {
+          const parc = v.parcelas || 2;
+          const vParc = ((+v.valor || 0) / parc).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          formaDesc = `<span style="color:#c4b5fd; font-weight:700;">💳 Cartão ${parc}x</span> <small style="color:var(--text-muted);">de ${vParc}</small>`;
+          if (v.bandeira || v.cartaoFinal) formaDesc += `<div style="font-size:11px; color:var(--text-dim);">${escapeHtml(v.bandeira||'Cartão')} final ${escapeHtml(v.cartaoFinal||'••••')}</div>`;
+        } else if (v.forma === 'cartao_vista' || v.forma === 'cartao') {
+          formaDesc = `<span style="color:#7dd3fc; font-weight:700;">💳 Cartão 1x</span> <small style="color:var(--text-muted);">(À vista)</small>`;
+          if (v.bandeira) formaDesc += `<div style="font-size:11px; color:var(--text-dim);">${escapeHtml(v.bandeira)}</div>`;
+        } else if (v.forma === 'boleto') {
+          formaDesc = `<span style="color:#fde68a; font-weight:700;">📄 Boleto</span> <small style="color:var(--text-muted);">(1-3 dias úteis)</small>`;
+          if (v.boletoVencimento) formaDesc += `<div style="font-size:11px; color:var(--text-dim);">Venc: ${escapeHtml(v.boletoVencimento)}</div>`;
+        } else {
+          formaDesc = `<span style="color:var(--text-muted); font-weight:600;">💵 ${escapeHtml(v.forma || 'Outro')}</span>`;
+        }
+
+        // Status Badge
+        let statusBadge = `<span class="badge badge-status-active">✅ Pago</span>`;
+        if (v.status === 'aguardando_compensacao' || v.status === 'pendente') {
+          statusBadge = `<span class="badge" style="background:rgba(245,158,11,0.2); color:#fde68a; border:1px solid rgba(245,158,11,0.5);">⏳ Aguardando Boleto</span>`;
+        }
+
+        // Ações
+        let actionBtns = `
+          <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+            <button class="btn btn-purple btn-sm" onclick="prepareEnrollFromSale('${escapeHtml(v.nome||'')}', '${escapeHtml(v.email||'')}', '${escapeHtml(v.telefone||'')}', '${v.course}')" title="Liberar acesso do aluno">
+              ✨ Liberar Acesso
+            </button>
+        `;
+
+        if (v.status === 'aguardando_compensacao') {
+          actionBtns += `
+            <button class="btn btn-ghost btn-sm" style="color:#6ee7b7; border-color:#10b981;" onclick="confirmBoletoCleared('${v.id}', '${v.course}')" title="Confirmar que o boleto compensou no banco">
+              ✅ Compensou
+            </button>
+          `;
+        }
+
+        actionBtns += `
+            <button class="btn btn-ghost btn-sm" style="color:#f87171;" onclick="deleteSaleRecord('${v.id}', '${v.course}')" title="Excluir registro de venda">
+              🗑️
+            </button>
+          </div>
+        `;
+
+        // Link de WhatsApp direto
+        const cleanPhone = (v.telefone || '').replace(/\D/g, '');
+        const waLink = cleanPhone ? `<a href="https://wa.me/55${cleanPhone}" target="_blank" style="color:#6ee7b7; text-decoration:none; margin-left:6px;" title="Conversar no WhatsApp">📲</a>` : '';
 
         return `
           <tr>
-            <td style="color:var(--text-muted);">${dt}</td>
+            <td style="color:var(--text-muted); font-size:12.5px;">${dt}</td>
             <td>
-              <b>${escapeHtml(v.nome || 'Cliente')}</b>
-              <div style="font-size:12px; color:var(--text-muted);">${escapeHtml(v.email || v.telefone || '')}</div>
+              <b style="color:#fff;">${escapeHtml(v.nome || 'Cliente')}</b>
+              <div style="font-size:12px; color:var(--text-muted);">
+                ${escapeHtml(v.email || '')} ${v.telefone ? `· ${escapeHtml(v.telefone)}` : ''} ${waLink}
+              </div>
             </td>
             <td>${prodBadge}</td>
-            <td><b>${val}</b> <small style="color:var(--text-muted);">(${escapeHtml(v.forma || 'Pix')})</small></td>
-            <td><span class="badge badge-status-active">${escapeHtml(v.status || 'pago')}</span></td>
+            <td>${formaDesc}</td>
+            <td style="text-align:right;"><b style="color:#fff; font-size:14px;">${val}</b></td>
+            <td style="text-align:center;">${statusBadge}</td>
+            <td style="text-align:center;">${actionBtns}</td>
+          </tr>
+        `;
+      }).join('');
+    };
+
+    /* Render Principal de Vendas com Relatório e Dashboard Gráfico */
+    function renderSalesTable() {
+      const salesMap = new Map();
+      Object.entries(DB.n8n.sales || {}).forEach(([id, s]) => {
+        salesMap.set(id, { ...s, id, course: s.course || 'n8n' });
+      });
+      Object.entries(DB.cw.sales || {}).forEach(([id, s]) => {
+        if (!salesMap.has(id)) {
+          salesMap.set(id, { ...s, id, course: s.course || 'chatwoot' });
+        }
+      });
+
+      currentSalesList = Array.from(salesMap.values());
+      currentSalesList.sort((a,b) => (b.pagoEm || b.ts || 0) - (a.pagoEm || a.ts || 0));
+
+      const totalCount = currentSalesList.length;
+      document.getElementById('tab-cnt-vendas').textContent = totalCount;
+
+      // Métricas Analíticas
+      let totalRevenue = 0;
+      const stats = {
+        pix: { count: 0, rev: 0 },
+        cartao_parcelado: { count: 0, rev: 0 },
+        cartao_vista: { count: 0, rev: 0 },
+        boleto: { count: 0, rev: 0, pending: 0 },
+        outro: { count: 0, rev: 0 }
+      };
+
+      const courseRev = {
+        n8n: 0,
+        chatwoot: 0,
+        combo: 0
+      };
+
+      currentSalesList.forEach(v => {
+        const val = (+v.valor || 0);
+        totalRevenue += val;
+
+        // Curso
+        if (v.course === 'chatwoot') courseRev.chatwoot += val;
+        else if (v.course === 'combo') courseRev.combo += val;
+        else courseRev.n8n += val;
+
+        // Método
+        if (v.forma === 'pix') {
+          stats.pix.count++;
+          stats.pix.rev += val;
+        } else if (v.forma === 'cartao_parcelado' || (v.forma === 'cartao' && v.parcelas > 1)) {
+          stats.cartao_parcelado.count++;
+          stats.cartao_parcelado.rev += val;
+        } else if (v.forma === 'cartao_vista' || v.forma === 'cartao') {
+          stats.cartao_vista.count++;
+          stats.cartao_vista.rev += val;
+        } else if (v.forma === 'boleto') {
+          stats.boleto.count++;
+          stats.boleto.rev += val;
+          if (v.status === 'aguardando_compensacao') stats.boleto.pending++;
+        } else {
+          stats.outro.count++;
+          stats.outro.rev += val;
+        }
+      });
+
+      // Atualiza Cards de KPIs
+      document.getElementById('kpi-sales-revenue').textContent = totalRevenue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('kpi-sales-count').textContent = `${totalCount} venda${totalCount === 1 ? '' : 's'} registrada${totalCount === 1 ? '' : 's'}`;
+
+      const pctPix = totalCount ? Math.round((stats.pix.count / totalCount) * 100) : 0;
+      document.getElementById('kpi-sales-pix-val').textContent = stats.pix.rev.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('kpi-sales-pix-sub').textContent = `${stats.pix.count} vendas (${pctPix}%)`;
+
+      const pctParc = totalCount ? Math.round((stats.cartao_parcelado.count / totalCount) * 100) : 0;
+      document.getElementById('kpi-sales-card-parc-val').textContent = stats.cartao_parcelado.rev.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('kpi-sales-card-parc-sub').textContent = `${stats.cartao_parcelado.count} vendas (${pctParc}%)`;
+
+      const pctVista = totalCount ? Math.round((stats.cartao_vista.count / totalCount) * 100) : 0;
+      document.getElementById('kpi-sales-card-vista-val').textContent = stats.cartao_vista.rev.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('kpi-sales-card-vista-sub').textContent = `${stats.cartao_vista.count} vendas (${pctVista}%)`;
+
+      document.getElementById('kpi-sales-boleto-val').textContent = stats.boleto.rev.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('kpi-sales-boleto-sub').textContent = stats.boleto.pending ? 
+        `${stats.boleto.count} vendas (${stats.boleto.pending} pendente${stats.boleto.pending > 1 ? 's' : ''})` : 
+        `${stats.boleto.count} compensado${stats.boleto.count === 1 ? '' : 's'}`;
+
+      // Determinar Método Campeão em Vendas
+      const methodRank = [
+        { key: 'PIX', name: '🟢 PIX Instantâneo', count: stats.pix.count, rev: stats.pix.rev },
+        { key: 'Cartão Parcelado', name: '💳 Cartão Parcelado', count: stats.cartao_parcelado.count, rev: stats.cartao_parcelado.rev },
+        { key: 'Cartão 1x', name: '💳 Cartão à Vista', count: stats.cartao_vista.count, rev: stats.cartao_vista.rev },
+        { key: 'Boleto', name: '📄 Boleto Bancário', count: stats.boleto.count, rev: stats.boleto.rev },
+        { key: 'Outro', name: '💵 Outro / Transferência', count: stats.outro.count, rev: stats.outro.rev }
+      ].sort((a,b) => b.count - a.count || b.rev - a.rev);
+
+      const champion = methodRank[0];
+      if (totalCount > 0 && champion && champion.count > 0) {
+        const champPct = Math.round((champion.count / totalCount) * 100);
+        document.getElementById('kpi-sales-champion').textContent = champion.name;
+        document.getElementById('kpi-sales-champion-sub').textContent = `${champion.count} vendas (${champPct}% de preferência) · ${champion.rev.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+      } else {
+        document.getElementById('kpi-sales-champion').textContent = 'Nenhuma venda';
+        document.getElementById('kpi-sales-champion-sub').textContent = 'Cadastre vendas para apurar o líder';
+      }
+
+      // Atualiza Contadores dos Filtros
+      document.getElementById('flt-cnt-all').textContent = totalCount;
+      document.getElementById('flt-cnt-pix').textContent = stats.pix.count;
+      document.getElementById('flt-cnt-cartao-parc').textContent = stats.cartao_parcelado.count;
+      document.getElementById('flt-cnt-cartao-vista').textContent = stats.cartao_vista.count;
+      document.getElementById('flt-cnt-boleto').textContent = stats.boleto.count;
+
+      // Renderiza Tabela de Relatório Analítico
+      renderSalesReportTable(stats, totalCount, totalRevenue);
+
+      // Renderiza os Gráficos no Canvas
+      drawMethodsDonutChart(stats, totalCount);
+      drawCoursesBarChart(courseRev);
+
+      // Renderiza a lista de histórico filtrada
+      filterSalesTable();
+    }
+
+    // Tabela do Relatório Analítico Comparativo
+    function renderSalesReportTable(stats, totalCount, totalRevenue) {
+      const tbody = document.getElementById('sales-report-tbody');
+      if (!tbody) return;
+
+      const methods = [
+        {
+          name: '🟢 PIX (À Vista · Instantâneo)',
+          count: stats.pix.count,
+          rev: stats.pix.rev,
+          liquidity: '⚡ Imediato (0 seg)',
+          badgeColor: '#10b981'
+        },
+        {
+          name: '💳 Cartão de Crédito Parcelado (2x a 12x)',
+          count: stats.cartao_parcelado.count,
+          rev: stats.cartao_parcelado.rev,
+          liquidity: '⚡ D+1 a D+30 (conforme adiantamento)',
+          badgeColor: '#8b5cf6'
+        },
+        {
+          name: '💳 Cartão de Crédito à Vista (1x)',
+          count: stats.cartao_vista.count,
+          rev: stats.cartao_vista.rev,
+          liquidity: '⚡ D+1 a D+14',
+          badgeColor: '#0284c7'
+        },
+        {
+          name: '📄 Boleto Bancário (1 a 3 dias úteis)',
+          count: stats.boleto.count,
+          rev: stats.boleto.rev,
+          liquidity: '⏳ 1 a 3 dias úteis para compensar',
+          badgeColor: '#f59e0b'
+        },
+        {
+          name: '💵 Outro / Transferência Direta',
+          count: stats.outro.count,
+          rev: stats.outro.rev,
+          liquidity: 'Acordo manual direto',
+          badgeColor: '#64748b'
+        }
+      ];
+
+      // Determinar maior volume e maior receita
+      const maxCount = Math.max(...methods.map(m => m.count));
+      const maxRev   = Math.max(...methods.map(m => m.rev));
+
+      tbody.innerHTML = methods.map(m => {
+        const pctCount = totalCount ? ((m.count / totalCount) * 100).toFixed(1) + '%' : '0%';
+        const pctRev = totalRevenue ? ((m.rev / totalRevenue) * 100).toFixed(1) + '%' : '0%';
+        const ticketMedio = m.count ? (m.rev / m.count).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'R$ 0,00';
+        const revFormatted = m.rev.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        let badgeStatus = `<span style="color:var(--text-muted); font-size:12px;">Padrão</span>`;
+        if (totalCount > 0) {
+          if (m.count === maxCount && m.rev === maxRev && m.count > 0) {
+            badgeStatus = `<span class="badge" style="background:rgba(245,158,11,0.25); color:#fde68a; border:1px solid #f59e0b;">🏆 Líder Absoluto</span>`;
+          } else if (m.count === maxCount && m.count > 0) {
+            badgeStatus = `<span class="badge" style="background:rgba(16,185,129,0.2); color:#6ee7b7; border:1px solid #10b981;">🔥 Mais Vendido</span>`;
+          } else if (m.rev === maxRev && m.rev > 0) {
+            badgeStatus = `<span class="badge" style="background:rgba(139,92,246,0.25); color:#c4b5fd; border:1px solid #8b5cf6;">💎 Maior Faturamento</span>`;
+          }
+        }
+
+        return `
+          <tr>
             <td>
-              <button class="btn btn-purple btn-sm" onclick="prepareEnrollFromSale('${escapeHtml(v.nome||'')}', '${escapeHtml(v.email||'')}', '${escapeHtml(v.telefone||'')}', '${v.course}')">Liberar Acesso</button>
+              <b style="color:#fff;">${m.name}</b>
+            </td>
+            <td style="text-align:center;"><b style="font-size:14.5px; color:#fff;">${m.count}</b></td>
+            <td style="text-align:center; color:#cbd5e1;">${pctCount}</td>
+            <td style="text-align:right;"><b style="color:#fff;">${revFormatted}</b></td>
+            <td style="text-align:center; color:#cbd5e1;">${pctRev}</td>
+            <td style="text-align:right; color:#a5b4fc;">${ticketMedio}</td>
+            <td style="text-align:center; font-size:12px; color:var(--text-muted);">${m.liquidity}</td>
+            <td style="text-align:center;">${badgeStatus}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Gráfico 1: Rosca/Donut Chart em Canvas HTML5
+    function drawMethodsDonutChart(stats, total) {
+      const canvas = document.getElementById('canvas-chart-methods');
+      const legendEl = document.getElementById('chart-methods-legend');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const w = 400;
+      const h = 220;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
+
+      ctx.clearRect(0, 0, w, h);
+
+      const items = [
+        { label: 'PIX', count: stats.pix.count, color: '#10b981' },
+        { label: 'Cartão Parc.', count: stats.cartao_parcelado.count, color: '#8b5cf6' },
+        { label: 'Cartão 1x', count: stats.cartao_vista.count, color: '#0284c7' },
+        { label: 'Boleto', count: stats.boleto.count, color: '#f59e0b' },
+        { label: 'Outro', count: stats.outro.count, color: '#64748b' }
+      ];
+
+      const centerX = w / 2;
+      const centerY = h / 2;
+      const radius = 78;
+      const cutout = 48;
+
+      if (!total || total === 0) {
+        // Círculo vazio elegante
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.arc(centerX, centerY, cutout, 2 * Math.PI, 0, true);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.fill();
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '13px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Nenhuma venda', centerX, centerY - 6);
+        ctx.font = '11px sans-serif';
+        ctx.fillStyle = '#64748b';
+        ctx.fillText('registrada', centerX, centerY + 12);
+
+        if (legendEl) {
+          legendEl.innerHTML = `<span style="color:var(--text-muted); font-size:12px;">Registre vendas no formulário abaixo para visualizar a divisão percentual.</span>`;
+        }
+        return;
+      }
+
+      let startAngle = -Math.PI / 2;
+
+      items.forEach(it => {
+        if (it.count <= 0) return;
+        const sliceAngle = (it.count / total) * (2 * Math.PI);
+        const endAngle = startAngle + sliceAngle;
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.arc(centerX, centerY, cutout, endAngle, startAngle, true);
+        ctx.closePath();
+        ctx.fillStyle = it.color;
+        ctx.fill();
+
+        startAngle = endAngle;
+      });
+
+      // Texto no Centro da Rosca
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 22px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(total.toString(), centerX, centerY - 6);
+      ctx.font = '11px sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText('VENDAS', centerX, centerY + 12);
+
+      // Legenda HTML abaixo do Canvas
+      if (legendEl) {
+        legendEl.innerHTML = items.filter(it => it.count > 0).map(it => {
+          const pct = Math.round((it.count / total) * 100);
+          return `
+            <span style="display:inline-flex; align-items:center; gap:6px;">
+              <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${it.color};"></span>
+              <b>${it.label}</b>: ${it.count} (${pct}%)
+            </span>
+          `;
+        }).join('');
+      }
+    }
+
+    // Gráfico 2: Barras de Faturamento por Curso em Canvas HTML5
+    function drawCoursesBarChart(courseRev) {
+      const canvas = document.getElementById('canvas-chart-courses');
+      const legendEl = document.getElementById('chart-courses-legend');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const w = 400;
+      const h = 220;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
+
+      ctx.clearRect(0, 0, w, h);
+
+      const courses = [
+        { name: 'Academia n8n', key: 'n8n', rev: courseRev.n8n, color: '#8b5cf6' },
+        { name: 'Academia CW', key: 'chatwoot', rev: courseRev.chatwoot, color: '#0284c7' },
+        { name: 'Combo (Ambos)', key: 'combo', rev: courseRev.combo, color: '#f59e0b' }
+      ];
+
+      const maxRev = Math.max(...courses.map(c => c.rev), 100);
+      const chartBottom = h - 35;
+      const chartTop = 30;
+      const chartHeight = chartBottom - chartTop;
+      const barWidth = 60;
+      const spacing = (w - (courses.length * barWidth)) / (courses.length + 1);
+
+      courses.forEach((c, i) => {
+        const x = spacing + i * (barWidth + spacing);
+        const barH = (c.rev / maxRev) * chartHeight;
+        const y = chartBottom - Math.max(barH, 4);
+
+        // Barra de fundo (background track)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.beginPath();
+        ctx.roundRect(x, chartTop, barWidth, chartHeight, [6, 6, 0, 0]);
+        ctx.fill();
+
+        // Barra preenchida
+        ctx.fillStyle = c.color;
+        ctx.beginPath();
+        ctx.roundRect(x, y, barWidth, Math.max(barH, 4), [6, 6, 0, 0]);
+        ctx.fill();
+
+        // Valor no topo da barra
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        const revShort = (c.rev >= 1000) ? 'R$ ' + (c.rev / 1000).toFixed(1) + 'k' : 'R$ ' + c.rev.toFixed(0);
+        ctx.fillText(revShort, x + barWidth / 2, y - 6);
+
+        // Label do curso abaixo da barra
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px sans-serif';
+        ctx.fillText(c.name, x + barWidth / 2, chartBottom + 18);
+      });
+
+      // Legenda HTML abaixo do Canvas
+      if (legendEl) {
+        legendEl.innerHTML = courses.map(c => `
+          <span style="display:inline-flex; align-items:center; gap:6px;">
+            <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${c.color};"></span>
+            <b>${c.name}</b>: ${c.rev.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+          </span>
+        `).join('');
+      }
+    }
+
+    // Exportar Relatório em CSV
+    window.exportSalesReportCSV = function() {
+      if (!currentSalesList.length) {
+        alert('Nenhuma venda registrada para exportar.');
+        return;
+      }
+      const headers = ['ID Venda', 'Data', 'Cliente', 'Email', 'WhatsApp', 'Curso', 'Forma de Pagamento', 'Parcelas', 'Valor Total (R$)', 'Status', 'Obs'];
+      const rows = currentSalesList.map(v => [
+        `"${v.id || ''}"`,
+        `"${new Date(v.pagoEm || v.ts || Date.now()).toLocaleDateString('pt-BR')}"`,
+        `"${(v.nome || '').replace(/"/g, '""')}"`,
+        `"${(v.email || '').replace(/"/g, '""')}"`,
+        `"${(v.telefone || '').replace(/"/g, '""')}"`,
+        `"${v.course || ''}"`,
+        `"${v.forma || ''}"`,
+        `"${v.parcelas || 1}"`,
+        `"${(+v.valor || 0).toFixed(2)}"`,
+        `"${v.status || 'pago'}"`,
+        `"${(v.note || '').replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `relatorio_vendas_3digitos_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('Relatório CSV baixado com sucesso!');
+    };
+
+    // Confirmar compensação bancária de boleto
+    window.confirmBoletoCleared = async function(saleId, course) {
+      if (!confirm('Deseja confirmar que este boleto foi compensado pelo banco?')) return;
+      const targetUrl = (course === 'chatwoot') ? CW_BASE : N8N_BASE;
+      const targetTok = (course === 'chatwoot') ? AUTH.tokenCW : AUTH.tokenN8N;
+
+      try {
+        const sale = currentSalesList.find(s => s.id === saleId);
+        if (!sale) return;
+        sale.status = 'pago';
+        sale.compensadoEm = Date.now();
+
+        await fetch(`${targetUrl}/api/doc?path=vendas/${saleId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Token': targetTok },
+          body: JSON.stringify(sale)
+        });
+
+        showToast('Boleto marcado como Compensado e Pago! ✅');
+        await loadData();
+      } catch (err) {
+        alert('Erro ao atualizar status do boleto: ' + err.message);
+      }
+    };
+
+    // Excluir registro de venda
+    window.deleteSaleRecord = async function(saleId, course) {
+      if (!confirm('Tem certeza que deseja excluir este registro de venda?')) return;
+      const dels = [];
+      if (AUTH.tokenN8N) dels.push(fetch(`${N8N_BASE}/api/doc?path=vendas/${saleId}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenN8N } }));
+      if (AUTH.tokenCW)  dels.push(fetch(`${CW_BASE}/api/doc?path=vendas/${saleId}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenCW } }));
+
+      try {
+        await Promise.all(dels);
+        showToast('Registro de venda excluído.');
+        await loadData();
+      } catch (err) {
+        alert('Erro ao excluir venda: ' + err.message);
+      }
+    };
+
+    // Submissão do Form de Venda Manual
+    window.submitSaleRecord = async function(redirectEnroll = true) {
+      const course = document.getElementById('sale-course').value;
+      const nome   = document.getElementById('sale-name').value.trim();
+      const email  = document.getElementById('sale-email').value.trim();
+      const fone   = document.getElementById('sale-phone').value.trim();
+      const forma  = document.getElementById('sale-method').value;
+      const valor  = parseFloat(document.getElementById('sale-val').value) || (course === 'combo' ? 147.00 : 88.20);
+      const note   = document.getElementById('sale-note')?.value.trim() || '';
+
+      if (!nome) {
+        alert('Por favor, informe o nome do comprador.');
+        document.getElementById('sale-name').focus();
+        return;
+      }
+
+      const saleId = 'v_' + Date.now();
+      let status = 'pago';
+      let parcelas = 1;
+      let valorParcela = valor;
+      let pixId = '';
+      let bandeira = '';
+      let cartaoFinal = '';
+      let boletoVencimento = '';
+      let boletoCodigo = '';
+
+      if (forma === 'pix') {
+        pixId = document.getElementById('sale-pix-id')?.value.trim() || '';
+        const stPix = document.getElementById('sale-pix-status')?.value || 'pago';
+        status = stPix;
+      } else if (forma === 'cartao_parcelado') {
+        parcelas = parseInt(document.getElementById('sale-card-installments')?.value || '3', 10);
+        valorParcela = +(valor / parcelas).toFixed(2);
+        bandeira = document.getElementById('sale-card-brand')?.value || '';
+        cartaoFinal = document.getElementById('sale-card-last4')?.value.trim() || '';
+        status = 'pago';
+      } else if (forma === 'cartao_vista') {
+        parcelas = 1;
+        valorParcela = valor;
+        bandeira = document.getElementById('sale-card-vista-brand')?.value || '';
+        cartaoFinal = document.getElementById('sale-card-vista-last4')?.value.trim() || '';
+        status = 'pago';
+      } else if (forma === 'boleto') {
+        status = document.getElementById('sale-boleto-status')?.value || 'aguardando_compensacao';
+        boletoVencimento = document.getElementById('sale-boleto-due')?.value || '';
+        boletoCodigo = document.getElementById('sale-boleto-barcode')?.value.trim() || '';
+      }
+
+      const saleDoc = {
+        id: saleId,
+        nome,
+        email,
+        telefone: fone,
+        course,
+        forma,
+        parcelas,
+        valor,
+        valorParcela,
+        status,
+        pixId,
+        bandeira,
+        cartaoFinal,
+        boletoVencimento,
+        boletoCodigo,
+        note,
+        pagoEm: (status === 'pago') ? Date.now() : null,
+        ts: Date.now()
+      };
+
+      const saves = [];
+      if (course === 'chatwoot' && AUTH.tokenCW) {
+        saves.push(fetch(`${CW_BASE}/api/doc?path=vendas/${saleId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+          body: JSON.stringify(saleDoc)
+        }));
+      } else if (course === 'combo') {
+        // Grava no n8n e no chatwoot
+        if (AUTH.tokenN8N) {
+          saves.push(fetch(`${N8N_BASE}/api/doc?path=vendas/${saleId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+            body: JSON.stringify(saleDoc)
+          }));
+        }
+        if (AUTH.tokenCW) {
+          saves.push(fetch(`${CW_BASE}/api/doc?path=vendas/${saleId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+            body: JSON.stringify(saleDoc)
+          }));
+        }
+      } else if (AUTH.tokenN8N) {
+        saves.push(fetch(`${N8N_BASE}/api/doc?path=vendas/${saleId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+          body: JSON.stringify(saleDoc)
+        }));
+      }
+
+      try {
+        await Promise.all(saves);
+        showToast('Venda registrada com sucesso!');
+        document.getElementById('form-manual-sale').reset();
+        onSaleCourseChange();
+        onSaleMethodChange();
+        await loadData();
+
+        if (redirectEnroll && status === 'pago') {
+          prepareEnrollFromSale(nome, email, fone, course);
+        } else if (status === 'aguardando_compensacao') {
+          alert('Boleto registrado como "Aguardando Compensação Bancária". Acompanhe no histórico de vendas e clique em "Compensou" assim que o pagamento for liquidado.');
+        }
+      } catch (err) {
+        alert('Erro ao registrar venda: ' + err.message);
+      }
+    };
+
+    /* =========================================================================
+       MÓDULO DE CONTROLE DE METAS, PRAZOS & PRORROGAÇÃO DE ACESSO
+       ========================================================================= */
+    let activeMetasFilter = 'all';
+
+    // Helper: Formata data YYYY-MM-DD para DD/MM/AAAA
+    function formatPrazoDate(rawDate) {
+      if (!rawDate) return 'Acesso Permanente (Vitalício)';
+      const parts = rawDate.split('-');
+      if (parts.length !== 3) return rawDate;
+      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+
+    // Helper: Calcula YYYY-MM-DD a partir de hoje + N dias
+    function calcDateFromToday(days) {
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    // Helper: Calcula Situação do Prazo de um Aluno
+    function getStudentPrazoInfo(student) {
+      const rawUntil = (student.meta && student.meta.until) || student.until || '';
+      if (!rawUntil) {
+        return {
+          type: 'lifetime',
+          label: '♾️ Vitalício (Sem Expiração)',
+          badgeClass: 'badge-prazo-lifetime',
+          daysLeft: Infinity,
+          isExpired: false,
+          isWarning: false,
+          dateFormatted: 'Acesso Permanente',
+          rawUntil: ''
+        };
+      }
+
+      const parts = rawUntil.split('-');
+      if (parts.length !== 3) {
+        return {
+          type: 'custom',
+          label: rawUntil,
+          badgeClass: 'badge-prazo-ok',
+          daysLeft: 30,
+          isExpired: false,
+          isWarning: false,
+          dateFormatted: rawUntil,
+          rawUntil
+        };
+      }
+
+      const dueDate = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10), 23, 59, 59);
+      const now = new Date();
+      const diffMs = dueDate.getTime() - now.getTime();
+      const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      const dateFormatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+      if (diffDays < 0) {
+        const expiredDays = Math.abs(diffDays);
+        return {
+          type: 'expired',
+          label: `🚨 Expirado há ${expiredDays} dia${expiredDays === 1 ? '' : 's'}`,
+          badgeClass: 'badge-prazo-expired',
+          daysLeft: diffDays,
+          isExpired: true,
+          isWarning: false,
+          dateFormatted,
+          rawUntil
+        };
+      } else if (diffDays <= 7) {
+        return {
+          type: 'warning',
+          label: `⚠️ Vence em ${diffDays} dia${diffDays === 1 ? '' : 's'}`,
+          badgeClass: 'badge-prazo-warn',
+          daysLeft: diffDays,
+          isExpired: false,
+          isWarning: true,
+          dateFormatted,
+          rawUntil
+        };
+      } else {
+        return {
+          type: 'ok',
+          label: `🟢 Restam ${diffDays} dias`,
+          badgeClass: 'badge-prazo-ok',
+          daysLeft: diffDays,
+          isExpired: false,
+          isWarning: false,
+          dateFormatted,
+          rawUntil
+        };
+      }
+    }
+
+    // Handlers para o Form de Adição de Aluno
+    window.setAddPrazoDays = function(days) {
+      document.querySelectorAll('#add-prazo-presets .prazo-preset-btn').forEach(btn => btn.classList.remove('active'));
+      const found = Array.from(document.querySelectorAll('#add-prazo-presets .prazo-preset-btn')).find(b => b.textContent.includes(`${days} dias`) || b.textContent.includes(`${days === 365 ? '1 ano' : ''}`));
+      if (found) found.classList.add('active');
+
+      const newDate = calcDateFromToday(days);
+      document.getElementById('add-until').value = newDate;
+      onAddPrazoDateChange();
+    };
+
+    window.setAddPrazoLifetime = function() {
+      document.querySelectorAll('#add-prazo-presets .prazo-preset-btn').forEach(btn => btn.classList.remove('active'));
+      const found = Array.from(document.querySelectorAll('#add-prazo-presets .prazo-preset-btn')).find(b => b.textContent.includes('Vitalício'));
+      if (found) found.classList.add('active');
+
+      document.getElementById('add-until').value = '';
+      onAddPrazoDateChange();
+    };
+
+    window.onAddPrazoDateChange = function() {
+      const val = document.getElementById('add-until').value;
+      const prevBox = document.getElementById('add-prazo-preview');
+      const prevText = document.getElementById('add-prazo-preview-text');
+      const badge = document.getElementById('add-prazo-badge');
+      if (!prevBox || !prevText) return;
+
+      if (!val) {
+        prevBox.className = 'prazo-preview-box prazo-preview-lifetime';
+        prevText.textContent = '♾️ Acesso Vitalício (Sem data limite de expiração)';
+        if (badge) {
+          badge.className = 'badge badge-prazo-lifetime';
+          badge.textContent = 'Acesso Vitalício';
+        }
+        return;
+      }
+
+      const info = getStudentPrazoInfo({ until: val });
+      if (info.isExpired) {
+        prevBox.className = 'prazo-preview-box prazo-preview-expired';
+        prevText.textContent = `🚨 Data anterior a hoje! O prazo já constará como vencido em ${info.dateFormatted}.`;
+        if (badge) {
+          badge.className = 'badge badge-prazo-expired';
+          badge.textContent = 'Data no Passado';
+        }
+      } else {
+        prevBox.className = 'prazo-preview-box prazo-preview-ok';
+        prevText.textContent = `📅 Vencimento do Prazo: ${info.dateFormatted} (Restam ${info.daysLeft} dias de acesso)`;
+        if (badge) {
+          badge.className = 'badge badge-prazo-ok';
+          badge.textContent = `${info.daysLeft} dias de acesso`;
+        }
+      }
+    };
+
+    // Handlers para o Modal de Edição de Aluno
+    window.addDaysToEditPrazo = function(days) {
+      const curDateVal = document.getElementById('edit-until').value;
+      let baseDate = new Date();
+      if (curDateVal) {
+        const parts = curDateVal.split('-');
+        if (parts.length === 3) {
+          const parsed = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+          // Se a data atual ainda estiver no futuro, prorroga a partir dela!
+          if (parsed.getTime() > baseDate.getTime()) {
+            baseDate = parsed;
+          }
+        }
+      }
+      baseDate.setDate(baseDate.getDate() + days);
+      const y = baseDate.getFullYear();
+      const m = String(baseDate.getMonth() + 1).padStart(2, '0');
+      const d = String(baseDate.getDate()).padStart(2, '0');
+      document.getElementById('edit-until').value = `${y}-${m}-${d}`;
+      onEditPrazoDateChange();
+    };
+
+    window.setEditPrazoLifetime = function() {
+      document.getElementById('edit-until').value = '';
+      onEditPrazoDateChange();
+    };
+
+    window.onEditPrazoDateChange = function() {
+      const val = document.getElementById('edit-until').value;
+      const info = getStudentPrazoInfo({ until: val });
+      const badge = document.getElementById('edit-prazo-badge');
+      const infoBox = document.getElementById('edit-prazo-info-box');
+      const infoIcon = document.getElementById('edit-prazo-info-icon');
+      const infoText = document.getElementById('edit-prazo-info-text');
+      const unblockPrompt = document.getElementById('edit-unblock-prompt');
+
+      if (!val) {
+        if (badge) { badge.className = 'badge badge-prazo-lifetime'; badge.textContent = 'Acesso Vitalício'; }
+        if (infoBox) infoBox.className = 'prazo-preview-box prazo-preview-lifetime';
+        if (infoIcon) infoIcon.textContent = '♾️';
+        if (infoText) infoText.innerHTML = '<b>Acesso Vitalício:</b> Este aluno não possui data de expiração.';
+        if (unblockPrompt) unblockPrompt.style.display = 'block';
+        return;
+      }
+
+      if (info.isExpired) {
+        if (badge) { badge.className = 'badge badge-prazo-expired'; badge.textContent = info.label; }
+        if (infoBox) infoBox.className = 'prazo-preview-box prazo-preview-expired';
+        if (infoIcon) infoIcon.textContent = '🚨';
+        if (infoText) infoText.innerHTML = `<b>Prazo Vencido em ${info.dateFormatted}:</b> ${info.label}. Escolha um dos botões acima para prorrogar.`;
+        if (unblockPrompt) unblockPrompt.style.display = 'none';
+      } else if (info.isWarning) {
+        if (badge) { badge.className = 'badge badge-prazo-warn'; badge.textContent = info.label; }
+        if (infoBox) infoBox.className = 'prazo-preview-box prazo-preview-warn';
+        if (infoIcon) infoIcon.textContent = '⚠️';
+        if (infoText) infoText.innerHTML = `<b>Vencendo em Breve:</b> Vence em ${info.dateFormatted} (${info.label}).`;
+        if (unblockPrompt) unblockPrompt.style.display = 'block';
+      } else {
+        if (badge) { badge.className = 'badge badge-prazo-ok'; badge.textContent = info.label; }
+        if (infoBox) infoBox.className = 'prazo-preview-box prazo-preview-ok';
+        if (infoIcon) infoIcon.textContent = '🟢';
+        if (infoText) infoText.innerHTML = `<b>Prazo Ativo:</b> Vence em ${info.dateFormatted} (${info.label}).`;
+        if (unblockPrompt) unblockPrompt.style.display = 'block';
+      }
+    };
+
+    // Modal Rápido de Ampliação de Prazo (Dedicado)
+    let currentExtStudent = null;
+
+    window.openExtendModal = function(studentId) {
+      const s = getUnifiedStudents().find(x => x.id === studentId);
+      if (!s) return;
+      currentExtStudent = s;
+
+      document.getElementById('ext-student-id').value = s.id;
+      document.getElementById('ext-student-name').textContent = s.name;
+      const cLabel = s.hasN8N && s.hasCW ? 'Combo (n8n + Chatwoot)' : (s.hasN8N ? 'Academia n8n' : 'Academia Chatwoot');
+      document.getElementById('ext-student-info').textContent = `Curso: ${cLabel} · Login: ${s.user}`;
+
+      const pInfo = getStudentPrazoInfo(s);
+      const bEl = document.getElementById('ext-prazo-current-badge');
+      bEl.className = `badge ${pInfo.badgeClass}`;
+      bEl.textContent = pInfo.label;
+
+      const descEl = document.getElementById('ext-prazo-status-desc');
+      if (pInfo.isExpired) {
+        descEl.innerHTML = `<span style="color:#fca5a5;">⚠️ O prazo deste aluno expirou em <b>${pInfo.dateFormatted}</b>. Escolha abaixo quantos dias deseja prorrogar para restabelecer o acesso.</span>`;
+      } else if (pInfo.type === 'lifetime') {
+        descEl.innerHTML = `<span style="color:#c4b5fd;">♾️ Este aluno já possui acesso permanente/vitalício.</span>`;
+      } else {
+        descEl.innerHTML = `<span style="color:#6ee7b7;">🟢 Prazo atual válido até <b>${pInfo.dateFormatted}</b> (${pInfo.label}).</span>`;
+      }
+
+      // Sugere prorrogação de +30 dias por padrão
+      applyQuickExtensionDays(30);
+
+      document.getElementById('modal-extend-prazo').style.display = 'flex';
+    };
+
+    window.closeExtendModal = function() {
+      document.getElementById('modal-extend-prazo').style.display = 'none';
+      currentExtStudent = null;
+    };
+
+    window.applyQuickExtensionDays = function(days) {
+      if (!currentExtStudent) return;
+      let base = new Date();
+      const raw = currentExtStudent.until || (currentExtStudent.meta && currentExtStudent.meta.until);
+      if (raw) {
+        const parts = raw.split('-');
+        if (parts.length === 3) {
+          const parsed = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+          if (parsed.getTime() > base.getTime()) {
+            base = parsed;
+          }
+        }
+      }
+      base.setDate(base.getDate() + days);
+      const y = base.getFullYear();
+      const m = String(base.getMonth() + 1).padStart(2, '0');
+      const d = String(base.getDate()).padStart(2, '0');
+      document.getElementById('ext-new-date').value = `${y}-${m}-${d}`;
+    };
+
+    window.applyQuickExtensionLifetime = function() {
+      document.getElementById('ext-new-date').value = '';
+    };
+
+    window.onExtDateChange = function() {
+      // Data alterada manualmente no input date
+    };
+
+    window.confirmQuickExtension = async function() {
+      if (!currentExtStudent) return;
+      const s = currentExtStudent;
+      const newDate = document.getElementById('ext-new-date').value;
+      const autoUnblock = document.getElementById('ext-auto-unblock').checked;
+      const sendWa = document.getElementById('ext-send-wa').checked;
+
+      const btn = document.getElementById('btn-confirm-extend');
+      btn.disabled = true;
+      btn.textContent = 'Salvando...';
+
+      let newStatus = s.status;
+      if (autoUnblock) {
+        newStatus = 'ativo';
+      }
+
+      const statusN8N = (newStatus === 'bloqueado' || !s.hasN8N) ? 'bloqueado' : 'ativo';
+      const statusCW  = (newStatus === 'bloqueado' || !s.hasCW)  ? 'bloqueado' : 'ativo';
+
+      const meta = {
+        ...(s.meta || {}),
+        until: newDate,
+        updatedPrazoAt: Date.now()
+      };
+
+      const updatedBase = {
+        id: s.id,
+        name: s.name,
+        email: s.email,
+        phone: s.phone,
+        contact: s.phone || s.email,
+        user: s.user,
+        pass: s.pass || '123456',
+        courses: s.courses || { n8n: s.hasN8N, chatwoot: s.hasCW },
+        course: (s.hasN8N && s.hasCW) ? 'combo' : (s.hasN8N ? 'n8n' : 'chatwoot'),
+        until: newDate,
+        meta,
+        status: newStatus,
+        updatedAt: Date.now()
+      };
+
+      const saves = [];
+      if (AUTH.tokenN8N && s.hasN8N) {
+        saves.push(
+          fetch(`${N8N_BASE}/api/doc?path=students/${s.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+            body: JSON.stringify({ ...updatedBase, status: statusN8N })
+          }),
+          fetch(`${N8N_BASE}/api/doc?path=logins/${s.user}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenN8N },
+            body: JSON.stringify({ status: statusN8N })
+          })
+        );
+      }
+      if (AUTH.tokenCW && s.hasCW) {
+        saves.push(
+          fetch(`${CW_BASE}/api/doc?path=students/${s.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+            body: JSON.stringify({ ...updatedBase, status: statusCW })
+          }),
+          fetch(`${CW_BASE}/api/doc?path=logins/${s.user}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json', 'X-Token': AUTH.tokenCW },
+            body: JSON.stringify({ status: statusCW })
+          })
+        );
+      }
+
+      try {
+        await Promise.all(saves);
+        btn.disabled = false;
+        btn.textContent = '✨ Confirmar e Salvar Novo Prazo';
+        closeExtendModal();
+        showToast(`Prazo do aluno ${s.name} ampliado com sucesso! 🎉`);
+        await loadData();
+
+        if (sendWa) {
+          const dateFmt = formatPrazoDate(newDate);
+          const cleanPhone = (s.phone || '').replace(/\D/g, '');
+          const waNum = cleanPhone.length >= 10 && !cleanPhone.startsWith('55') ? '55' + cleanPhone : cleanPhone;
+          if (waNum) {
+            const waMsg = `Olá, ${s.name}! 🚀\n\n`
+              + `Seu prazo de acesso ao curso foi ampliado com sucesso!\n`
+              + `📅 *Novo Prazo:* ${dateFmt}\n`
+              + `🔑 *Usuário:* ${s.user}\n\n`
+              + `Aproveite para continuar suas missões e estudos. Bons estudos! 🎓`;
+            window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(waMsg)}`, '_blank');
+          }
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = '✨ Confirmar e Salvar Novo Prazo';
+        alert('Erro ao ampliar prazo: ' + err.message);
+      }
+    };
+
+    // Filtros e Renderização da Tabela de Metas & Prazos
+    window.setMetasFilter = function(filterName) {
+      activeMetasFilter = filterName;
+      document.querySelectorAll('#metas-filter-buttons .sales-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mfilter === filterName);
+      });
+      filterMetasTable();
+    };
+
+    window.filterMetasTable = function() {
+      const q = (document.getElementById('metas-search-input')?.value || '').toLowerCase().trim();
+      const allStudents = getUnifiedStudents();
+
+      let list = allStudents.slice();
+
+      if (activeMetasFilter === 'expired') {
+        list = list.filter(s => getStudentPrazoInfo(s).isExpired);
+      } else if (activeMetasFilter === 'warning') {
+        list = list.filter(s => getStudentPrazoInfo(s).isWarning);
+      } else if (activeMetasFilter === 'ok') {
+        list = list.filter(s => {
+          const p = getStudentPrazoInfo(s);
+          return !p.isExpired && !p.isWarning && p.type !== 'lifetime';
+        });
+      } else if (activeMetasFilter === 'lifetime') {
+        list = list.filter(s => getStudentPrazoInfo(s).type === 'lifetime');
+      }
+
+      if (q) {
+        list = list.filter(s =>
+          s.name.toLowerCase().includes(q) ||
+          s.email.toLowerCase().includes(q) ||
+          s.phone.includes(q) ||
+          s.user.toLowerCase().includes(q)
+        );
+      }
+
+      const tbody = document.getElementById('metas-tbody');
+      if (!tbody) return;
+
+      if (!list.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:28px; color:var(--text-muted);">Nenhum aluno encontrado com este filtro de prazo.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(s => {
+        let cBadge = `<span class="badge badge-combo">⚡ Combo</span>`;
+        if (s.hasN8N && !s.hasCW) cBadge = `<span class="badge badge-n8n">🟣 n8n</span>`;
+        else if (!s.hasN8N && s.hasCW) cBadge = `<span class="badge badge-cw">💬 Chatwoot</span>`;
+
+        const pInfo = getStudentPrazoInfo(s);
+
+        // Progresso real das missões
+        let pct = 0;
+        if (s.progressN8N && s.progressN8N.xp) pct = Math.min(100, Math.round(s.progressN8N.xp / 10));
+        else if (s.progressCW && s.progressCW.xp) pct = Math.min(100, Math.round(s.progressCW.xp / 10));
+        else if (s.progressN8N || s.progressCW) pct = 25;
+
+        const cleanPhone = (s.phone || '').replace(/\D/g, '');
+        const waLink = cleanPhone ? `<a href="https://wa.me/55${cleanPhone}" target="_blank" style="color:#6ee7b7; text-decoration:none; margin-left:6px;" title="Conversar no WhatsApp">📲</a>` : '';
+
+        return `
+          <tr>
+            <td>
+              <b style="color:#fff;">${escapeHtml(s.name)}</b>
+              <div style="font-size:12px; color:var(--text-muted);">
+                ${escapeHtml(s.email || '')} ${s.phone ? `· ${escapeHtml(s.phone)}` : ''} ${waLink}
+              </div>
+            </td>
+            <td>${cBadge}</td>
+            <td style="color:var(--text-muted); font-size:13px;">${pInfo.dateFormatted}</td>
+            <td style="text-align:center;">
+              <span class="badge ${pInfo.badgeClass}">${pInfo.label}</span>
+            </td>
+            <td>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div class="prog-bar" style="width:70px; margin:0;"><div class="prog-fill" style="width:${pct}%"></div></div>
+                <small style="color:var(--text-muted);">${pct}%</small>
+              </div>
+            </td>
+            <td style="text-align:center;">
+              <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+                <button class="btn btn-purple btn-sm" onclick="openExtendModal('${s.id}')" title="Ampliar ou prorrogar prazo">
+                  ⏱️ Ampliar Prazo
+                </button>
+                <button class="btn btn-ghost btn-sm" onclick="openEditModal('${s.id}')" title="Editar cursos e dados completos">
+                  ✏️
+                </button>
+              </div>
             </td>
           </tr>
         `;
       }).join('');
-    }
+    };
 
-    /* Render Atenção */
-    function renderAttentionList(students) {
-      const list = document.getElementById('attention-list');
-      const needAttn = students.filter(s => {
-        const daysIdle = (Date.now() - s.lastAccess) / 864e5;
-        return (daysIdle >= 3 && s.status === 'ativo');
+    /* Render Principal de Metas & Prazos */
+    function renderMetasTable(students) {
+      // Contabiliza KPIs de Prazos
+      let cntOk = 0, cntWarn = 0, cntExpired = 0, cntLifetime = 0;
+
+      students.forEach(s => {
+        const p = getStudentPrazoInfo(s);
+        if (p.type === 'lifetime') cntLifetime++;
+        else if (p.isExpired) cntExpired++;
+        else if (p.isWarning) cntWarn++;
+        else cntOk++;
       });
 
-      if (!needAttn.length) {
-        list.innerHTML = `<p style="color:var(--text-muted); font-size:13.5px;">Nenhum aluno precisando de atenção agora. Todos estão em dia!</p>`;
-        return;
-      }
+      // Atualiza Cards de KPIs no DOM
+      const elOkVal = document.getElementById('kpi-metas-ok-val');
+      if (elOkVal) elOkVal.textContent = cntOk;
+      const elWarnVal = document.getElementById('kpi-metas-warn-val');
+      if (elWarnVal) elWarnVal.textContent = cntWarn;
+      const elExpVal = document.getElementById('kpi-metas-expired-val');
+      if (elExpVal) elExpVal.textContent = cntExpired;
+      const elLifeVal = document.getElementById('kpi-metas-lifetime-val');
+      if (elLifeVal) elLifeVal.textContent = cntLifetime;
 
-      list.innerHTML = needAttn.map(s => `
-        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface-card); padding:12px 16px; border-radius:var(--radius-sm); margin-bottom:8px; border:1px solid rgba(239, 68, 68, 0.2);">
-          <div>
-            <b>${escapeHtml(s.name)}</b>
-            <span style="font-size:12px; color:#f87171; margin-left:8px;">⚠️ Parado há ${Math.round((Date.now() - s.lastAccess) / 864e5)} dias</span>
-            <div style="font-size:12px; color:var(--text-muted);">${escapeHtml(s.email || s.phone)}</div>
-          </div>
-          <button class="btn btn-ghost btn-sm" onclick="openSendModal('${s.id}')">📲 Lembrar no WhatsApp</button>
-        </div>
-      `).join('');
+      // Atualiza contadores dos filtros
+      const elFltAll = document.getElementById('mflt-cnt-all');
+      if (elFltAll) elFltAll.textContent = students.length;
+      const elFltExp = document.getElementById('mflt-cnt-expired');
+      if (elFltExp) elFltExp.textContent = cntExpired;
+      const elFltWarn = document.getElementById('mflt-cnt-warn');
+      if (elFltWarn) elFltWarn.textContent = cntWarn;
+      const elFltOk = document.getElementById('mflt-cnt-ok');
+      if (elFltOk) elFltOk.textContent = cntOk;
+      const elFltLife = document.getElementById('mflt-cnt-lifetime');
+      if (elFltLife) elFltLife.textContent = cntLifetime;
+
+      filterMetasTable();
     }
 
-    /* Render Metas */
-    function renderMetasTable(students) {
-      const tbody = document.getElementById('metas-tbody');
-      if (!students.length) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">Cadastre alunos para acompanhar prazos.</td></tr>`;
+    /* Render Atenção (com Alerta de Parados e Prazos Vencidos) */
+    function renderAttentionList(students) {
+      const list = document.getElementById('attention-list');
+      if (!list) return;
+
+      const items = [];
+
+      students.forEach(s => {
+        const p = getStudentPrazoInfo(s);
+        const daysIdle = (Date.now() - s.lastAccess) / 864e5;
+
+        // 1. Aluno com prazo expirado
+        if (p.isExpired) {
+          items.push({
+            student: s,
+            type: 'expired',
+            text: `🚨 Prazo de acesso EXPIRADO em ${p.dateFormatted} (${p.label})`,
+            color: '#f87171',
+            actionText: '⏱️ Ampliar Prazo',
+            actionFn: `openExtendModal('${s.id}')`
+          });
+        }
+        // 2. Aluno com prazo vencendo nos próximos 5 dias
+        else if (p.isWarning && p.daysLeft <= 5) {
+          items.push({
+            student: s,
+            type: 'warning',
+            text: `⚠️ Prazo vencendo em breve! Restam ${p.daysLeft} dias (vence em ${p.dateFormatted})`,
+            color: '#fbbf24',
+            actionText: '⏱️ Prorrogar',
+            actionFn: `openExtendModal('${s.id}')`
+          });
+        }
+        // 3. Aluno inativo há 3 dias ou mais
+        else if (daysIdle >= 3 && s.status === 'ativo') {
+          items.push({
+            student: s,
+            type: 'idle',
+            text: `⚠️ Parado há ${Math.round(daysIdle)} dias sem atividade no simulador`,
+            color: '#f87171',
+            actionText: '📲 WhatsApp',
+            actionFn: `openSendModal('${s.id}')`
+          });
+        }
+      });
+
+      if (!items.length) {
+        list.innerHTML = `<p style="color:var(--text-muted); font-size:13.5px;">Nenhum aluno precisando de atenção agora. Todos estão em dia e com prazos regulares!</p>`;
         return;
       }
-      tbody.innerHTML = students.slice(0, 15).map(s => {
-        const cBadge = s.hasN8N && s.hasCW ? '⚡ Combo' : s.hasN8N ? '🟣 n8n' : '💬 Chatwoot';
-        return `
-          <tr>
-            <td><b>${escapeHtml(s.name)}</b></td>
-            <td><span class="badge badge-n8n">${cBadge}</span></td>
-            <td style="color:var(--text-muted);">${s.meta && s.meta.until ? escapeHtml(s.meta.until) : '30 dias'}</td>
-            <td><b>${s.progressN8N ? 50 : 20}%</b></td>
-            <td><span class="badge badge-status-active">No ritmo</span></td>
-            <td><button class="btn btn-ghost btn-sm" onclick="openEditModal('${s.id}')">Ajustar Prazo</button></td>
-          </tr>
-        `;
-      }).join('');
+
+      list.innerHTML = items.map(it => `
+        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface-card); padding:12px 16px; border-radius:var(--radius-sm); margin-bottom:8px; border:1px solid rgba(239, 68, 68, 0.25);">
+          <div>
+            <b style="color:#fff;">${escapeHtml(it.student.name)}</b>
+            <span style="font-size:12px; color:${it.color}; margin-left:8px; font-weight:600;">${it.text}</span>
+            <div style="font-size:12px; color:var(--text-muted);">${escapeHtml(it.student.email || it.student.phone)}</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="btn btn-purple btn-sm" onclick="${it.actionFn}">${it.actionText}</button>
+            <button class="btn btn-ghost btn-sm" onclick="openSendModal('${it.student.id}')">📲</button>
+          </div>
+        </div>
+      `).join('');
     }
 
     /* Render Dúvidas */
@@ -1822,6 +3782,13 @@
       document.getElementById('edit-course-n8n').checked = !!s.hasN8N;
       document.getElementById('edit-course-cw').checked = !!s.hasCW;
 
+      // Prazos no Modal de Edição
+      const curUntil = s.until || (s.meta && s.meta.until) || '';
+      document.getElementById('edit-until').value = curUntil;
+      document.getElementById('edit-expire-action').value = (s.meta && s.meta.expireAction) || 'warn';
+      document.getElementById('edit-auto-unblock').checked = (s.status === 'bloqueado');
+      onEditPrazoDateChange();
+
       document.getElementById('modal-edit').style.display = 'flex';
     };
 
@@ -1863,9 +3830,22 @@
         return;
       }
 
+      // Lê campos de prazo
+      const until = document.getElementById('edit-until').value;
+      const expireAction = document.getElementById('edit-expire-action').value;
+      const autoUnblock = document.getElementById('edit-auto-unblock').checked;
+
+      let finalStatus = status;
+      if (autoUnblock && status === 'bloqueado') {
+        const pInfo = getStudentPrazoInfo({ until });
+        if (!pInfo.isExpired) {
+          finalStatus = 'ativo';
+        }
+      }
+
       // Calcula o status específico para cada ambiente
-      const statusN8N = (status === 'bloqueado' || !wantN8N) ? 'bloqueado' : 'ativo';
-      const statusCW  = (status === 'bloqueado' || !wantCW)  ? 'bloqueado' : 'ativo';
+      const statusN8N = (finalStatus === 'bloqueado' || !wantN8N) ? 'bloqueado' : 'ativo';
+      const statusCW  = (finalStatus === 'bloqueado' || !wantCW)  ? 'bloqueado' : 'ativo';
 
       // Identifica o perfil de cursos
       const coursesObj = { n8n: wantN8N, chatwoot: wantCW };
@@ -1878,11 +3858,21 @@
       const h = await hashPassword(finalPass, salt);
       const perms = { m1: true, m2: false, m3: false, m4: false };
 
+      const meta = {
+        ...(sExisting ? (sExisting.meta || {}) : {}),
+        until: until || '',
+        expireAction: expireAction || 'warn',
+        updatedPrazoAt: Date.now()
+      };
+
       const studentBase = {
         id, name, email, phone, contact: phone || email,
         note, user, pass: finalPass, perms,
         courses: coursesObj,
         course: courseLabel,
+        until: until || '',
+        meta,
+        status: finalStatus,
         updatedAt: Date.now()
       };
 
@@ -2072,6 +4062,7 @@
       const plan    = document.getElementById('add-plan').value;
       const val     = +document.getElementById('add-val').value || 0;
       const until   = document.getElementById('add-until').value;
+      const expireAction = document.getElementById('add-expire-action')?.value || 'warn';
       const note    = document.getElementById('add-note').value.trim();
 
       const wantN8N = (selectedAddCourse === 'n8n' || selectedAddCourse === 'combo');
@@ -2109,7 +4100,8 @@
         course: selectedAddCourse,
         courses: coursesObj,
         plan, val,
-        meta: until ? { until } : {},
+        until: until || '',
+        meta: { until: until || '', expireAction },
         createdAt: Date.now(),
         updatedAt: Date.now()
       };
@@ -2165,6 +4157,7 @@
         btn.disabled = false;
         btn.textContent = '✨ Cadastrar e Gerar Acesso';
         document.getElementById('form-add-student').reset();
+        setAddPrazoDays(90);
 
         await loadData();
         // Abre modal para enviar WhatsApp imediatamente
@@ -2193,35 +4186,7 @@
     /* Registrar Venda Manual */
     document.getElementById('form-manual-sale').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const course = document.getElementById('sale-course').value;
-      const nome   = document.getElementById('sale-name').value.trim();
-      const email  = document.getElementById('sale-email').value.trim();
-      const fone   = document.getElementById('sale-phone').value.trim();
-      const forma  = document.getElementById('sale-method').value;
-      const valor  = +document.getElementById('sale-val').value || 88.20;
-
-      const saleId = 'v_' + Date.now();
-      const saleDoc = {
-        id: saleId, nome, email, telefone: fone, forma, valor,
-        course, status: 'pago', pagoEm: Date.now(), ts: Date.now()
-      };
-
-      const targetUrl = (course === 'chatwoot') ? CW_BASE : N8N_BASE;
-      const targetTok = (course === 'chatwoot') ? AUTH.tokenCW : AUTH.tokenN8N;
-
-      try {
-        await fetch(`${targetUrl}/api/doc?path=vendas/${saleId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json', 'X-Token': targetTok },
-          body: JSON.stringify(saleDoc)
-        });
-        showToast('Venda registrada com sucesso!');
-        document.getElementById('form-manual-sale').reset();
-        await loadData();
-        prepareEnrollFromSale(nome, email, fone, course);
-      } catch (err) {
-        alert('Erro ao registrar venda: ' + err.message);
-      }
+      await submitSaleRecord(true);
     });
 
     /* Alterar Senha do Gestor */
@@ -2264,6 +4229,11 @@
       document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
       const target = document.getElementById(`tab-view-${tabId}`);
       if (target) target.style.display = 'block';
+      if (tabId === 'vendas') {
+        renderSalesTable();
+      } else if (tabId === 'metas') {
+        renderMetasTable(getUnifiedStudents());
+      }
     }
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
@@ -2351,6 +4321,7 @@
 
     /* Inicialização */
     (async function init() {
+      setAddPrazoDays(90);
       pingServers();
       setInterval(pingServers, 30000);
 
