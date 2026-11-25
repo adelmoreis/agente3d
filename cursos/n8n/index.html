@@ -1424,7 +1424,7 @@ function navBtns(){
 setInterval(function(){if(document.getElementById('navb'))navBtns();},400);
 function route(){route0();navAfter();}
 function route0(){
-  if(GLOGIN){if(CL.admChecked||CL.failed)gLoginView();else splashView();return;}
+  if(GLOGIN){window.location.replace('gestor.html');return;}
   tbtnSync();
   if(S.logged){var gp=document.getElementById('gpill');if(gp)gp.remove();}
   if(!S.logged){if(!V.capa){capaView();return;}if(cloudWait()){splashView();return;}loginView();return;}
@@ -4680,62 +4680,19 @@ atalho();
 route();
 if(QZ)startQuiz();else if(QZW===5){certWin();}else if(QZW)startWorldQuiz(QZW);
 
-/* ---------- Acesso do gestor (e-mail e senha) ---------- */
-var A3D_BUILD='13/11 11:00';
-var GLOGIN=/^#(gestor|painel)/.test(location.hash),GDEF={e:'3digitos2023@gmail.com',p:'admin1234',s:'ZGVmYXVsdC1hZG1pbjEy'};
+/* ---------- Acesso do gestor (Redirecionado para gestor.html) ---------- */
+var GLOGIN=/^#(gestor|painel)/.test(location.hash);
+if(GLOGIN){window.location.replace('gestor.html');}
 function gAdminRec(){
-  return CL.db.doc('config/admin').get().then(function(sn){return sn.exists?sn.data():null;},function(){return null;}).then(function(d){
-    if(d&&d.hash&&d.salt&&d.email)return {e:d.email,salt:d.salt,hash:d.hash,def:false};
-    return pwHash(GDEF.p,GDEF.s).then(function(h){return {e:GDEF.e,salt:GDEF.s,hash:h,def:true};});
-  });
+  return CL.db.doc('config/admin').get().then(function(sn){return sn.exists?sn.data():null;},function(){return null;});
 }
 function gAdminCheck(){
-  var sess=null;try{sess=JSON.parse(sessionStorage.getItem('a3d_gadm'));}catch(e){}
-  if(!sess||!sess.h)return Promise.resolve(false);
-  var A=window.claude&&window.claude.a3d;
-  if(A&&A.remote)return A.admin(sess.e,sess.h).then(function(r){CL.adm={e:r.e,def:!!r.def};return true;},function(){return false;});
-  return gAdminRec().then(function(rec){CL.adm={e:rec.e,def:rec.def};return rec.hash===sess.h&&rec.e===sess.e;}).catch(function(){return false;});
+  var sess=null;try{sess=JSON.parse(sessionStorage.getItem('a3d_gestor_auth'));}catch(e){}
+  if(!sess||!sess.tokN8N)return Promise.resolve(false);
+  return Promise.resolve(true);
 }
-function gSair(){try{sessionStorage.removeItem('a3d_gadm');}catch(e){}location.hash='#gestor-entrar';location.reload();}
-function gLoginView(){
-  document.querySelectorAll('.win,.blk').forEach(function(x){x.remove();});
-  mentorEl.classList.add('hidden');
-  var old=document.getElementById('gpill');if(old)old.remove();
-  root.innerHTML='<div class="center"><div class="card">'+LOGO()+'<h1>Acesso do gestor</h1><p class="sub">Área restrita. Entre com o e-mail e a senha do gestor.</p><form id="gf" novalidate><div class="field"><label for="gle">E-mail</label><input id="gle" type="email" autocomplete="username" autocapitalize="none" spellcheck="false"></div><div class="field"><label for="glp">Senha</label><input id="glp" type="password" autocomplete="current-password"></div><p class="lerr" id="gle2" role="alert" hidden></p><button class="btn full" type="submit" id="glgo">Entrar</button></form><p class="note"><a href="'+location.pathname+'" style="color:inherit">Voltar ao curso dos alunos</a></p><p class="note" style="opacity:.6">versão '+A3D_BUILD+'</p></div></div>';
-  var er=document.getElementById('gle2'),go=document.getElementById('glgo');
-  function fail(t){er.textContent=t;er.hidden=false;go.disabled=false;go.textContent='Entrar';}
-  document.getElementById('gf').addEventListener('submit',function(e){
-    e.preventDefault();er.hidden=true;
-    var em=document.getElementById('gle').value.trim().toLowerCase(),pw=document.getElementById('glp').value;
-    if(!em||!pw){fail('Escreva o e-mail e a senha.');return;}
-    if(!CL.db){fail('Não consegui conectar ao banco de dados agora. Atualize a página e tente de novo.');return;}
-    var ff=null;try{ff=JSON.parse(sessionStorage.getItem('a3d_gfail'));}catch(x){}
-    if(ff&&ff.n>=5&&Date.now()-ff.t<60000){fail('Muitas tentativas. Aguarde 1 minuto e tente de novo.');return;}
-    go.disabled=true;go.textContent='Entrando...';
-    var A=window.claude&&window.claude.a3d;
-    if(A&&A.remote){
-      A.adminSalt().then(function(j){return pwHash(pw,j.salt);}).then(function(h){return A.admin(em,h).then(function(r){
-        try{sessionStorage.setItem('a3d_gadm',JSON.stringify({e:r.e,h:h}));sessionStorage.removeItem('a3d_gfail');}catch(x){}
-        GLOGIN=false;location.hash='#gestor';location.reload();
-      },function(e){
-        if(e&&e.code==='rate'){fail('Muitas tentativas. Aguarde alguns minutos e tente de novo.');return;}
-        var n=((ff&&Date.now()-ff.t<60000?ff.n:0)||0)+1;try{sessionStorage.setItem('a3d_gfail',JSON.stringify({n:n,t:Date.now()}));}catch(x){}
-        fail('E-mail ou senha incorretos.');
-      });}).catch(function(x){fail(x==='nocrypto'?'Este navegador não consegue validar a senha. Tente outro navegador.':'Não foi possível entrar agora. Tente de novo.');});
-      return;
-    }
-    gAdminRec().then(function(rec){return pwHash(pw,rec.salt).then(function(h){
-      if(em===String(rec.e).toLowerCase()&&h===rec.hash){
-        try{sessionStorage.setItem('a3d_gadm',JSON.stringify({e:rec.e,h:h}));sessionStorage.removeItem('a3d_gfail');}catch(x){}
-        GLOGIN=false;location.hash='#gestor';location.reload();
-      }else{
-        var n=((ff&&Date.now()-ff.t<60000?ff.n:0)||0)+1;try{sessionStorage.setItem('a3d_gfail',JSON.stringify({n:n,t:Date.now()}));}catch(x){}
-        fail('E-mail ou senha incorretos.');
-      }
-    });}).catch(function(x){fail(x==='nocrypto'?'Este navegador não consegue validar a senha. Tente outro navegador.':'Não foi possível entrar agora. Tente de novo.');});
-  });
-  document.getElementById('gle').focus();
-}
+function gSair(){try{sessionStorage.removeItem('a3d_gestor_auth');sessionStorage.removeItem('a3d_gadm');}catch(e){}window.location.replace('gestor.html');}
+function gLoginView(){window.location.replace('gestor.html');}
 /* ---------- Nuvem: progresso dos alunos e Painel do gestor ---------- */
 var CL={db:null,user:null,uid:null,admin:false,st:null,t:null,sig:'',ready:false};
 function cloudInit(){
