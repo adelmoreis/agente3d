@@ -1854,6 +1854,15 @@
         return;
       }
 
+      if (wantN8N && !AUTH.tokenN8N) {
+        alert('⚠️ Erro de Conexão: O servidor da Academia n8n não está conectado no painel! Aguarde a bolinha ficar verde no topo antes de salvar.');
+        return;
+      }
+      if (wantCW && !AUTH.tokenCW) {
+        alert('⚠️ Erro de Conexão: O servidor da Academia Chatwoot não está conectado no painel! Aguarde a bolinha ficar verde no topo antes de salvar.');
+        return;
+      }
+
       // Calcula o status específico para cada ambiente
       const statusN8N = (status === 'bloqueado' || !wantN8N) ? 'bloqueado' : 'ativo';
       const statusCW  = (status === 'bloqueado' || !wantCW)  ? 'bloqueado' : 'ativo';
