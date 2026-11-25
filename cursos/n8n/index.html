@@ -5660,7 +5660,10 @@ function doLogin(user,pw,known){
   var A=window.claude&&window.claude.a3d;
   if(A&&A.remote){
     return A.salt(u).then(function(j){if(!j.salt)throw 'nouser';return known?known:pwHash(pw,j.salt);},function(){throw 'read';}).then(function(h){
-      return A.login(u,h).then(function(d){return {u:u,h:h,d:d};},function(e){throw (e&&e.code==='bad')?'bad':(e&&e.code==='nouser')?'nouser':(e&&e.code==='rate')?'rate':(e&&(e.code==='bloqueado'||e.status===403))?'bloqueado':'read';});
+      return A.login(u,h).then(function(d){
+        if(d && (d.status==='bloqueado'||(d.perms&&d.perms.m1===false))) throw 'bloqueado';
+        return {u:u,h:h,d:d};
+      },function(e){throw (e&&(e.code==='bloqueado'||e.status===403))?'bloqueado':(e&&e.code==='bad')?'bad':(e&&e.code==='nouser')?'nouser':(e&&e.code==='rate')?'rate':'read';});
     });
   }
   return CL.db.doc('logins/'+u).get().catch(function(){throw 'read';}).then(function(sn){
@@ -5671,6 +5674,11 @@ function doLogin(user,pw,known){
   });
 }
 function enterSession(r){
+  if(r.d && (r.d.status==='bloqueado'||(r.d.perms&&r.d.perms.m1===false))){
+    logout();
+    realLoginView('Seu acesso a este curso está pausado ou não liberado. Fale com o seu gestor.');
+    return;
+  }
   CL.sid=r.d.sid;CL.login=r.u;
   try{localStorage.setItem(KEY0+'_sess',JSON.stringify({u:r.u,h:r.h}));}catch(e){}
   KEY=KEY0+'_'+CL.sid;
@@ -5685,7 +5693,9 @@ function enterSession(r){
     if(CL.unL){try{CL.unL();}catch(e){}}
     try{CL.unL=CL.db.doc('logins/'+r.u).onSnapshot(function(sn){
       if(!sn.exists){logout();return;}
-      CL.st=sn.data();applyStatus();
+      var nd=sn.data();
+      CL.st=nd;
+      applyStatus();
     },function(){});}catch(e){}
     V=blankV();save();cloudSync(true);applyStatus();route();
   });
@@ -5806,9 +5816,18 @@ function skBadge(){
 function cloudPoll(){
   if(!CL.db||CL.admin||TEST||!S.logged)return;
   var ref=CL.login?CL.db.doc('logins/'+CL.login):(CL.uid?CL.db.doc('students/'+CL.uid):null);if(!ref)return;
-  ref.get().then(function(sn){if(!sn.exists)return;var d=sn.data();if(JSON.stringify(d)!==JSON.stringify(CL.st)){CL.st=d;applyStatus();if(V&&V.view==='home')try{route();}catch(e){}}}).catch(function(){});
+  ref.get().then(function(sn){
+    if(!sn.exists){logout();return;}
+    var d=sn.data();
+    if(d.status==='bloqueado'||(d.perms&&d.perms.m1===false)){
+      CL.st=d;applyStatus();return;
+    }
+    if(JSON.stringify(d)!==JSON.stringify(CL.st)){
+      CL.st=d;applyStatus();if(V&&V.view==='home')try{route();}catch(e){}
+    }
+  }).catch(function(){});
 }
-setInterval(cloudPoll,15000);
+setInterval(cloudPoll,2500);
 window.addEventListener('focus',cloudPoll);
 document.addEventListener('visibilitychange',function(){if(!document.hidden)cloudPoll();});
 setInterval(function(){try{skBadge();}catch(e){}},1500);

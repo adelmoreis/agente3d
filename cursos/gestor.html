@@ -1904,6 +1904,12 @@
             body: JSON.stringify(loginDocN8N)
           })
         );
+        // Limpa possíveis registros duplicados ou antigos com mesmo usuário
+        Object.entries(DB.n8n.students).forEach(([sid, st]) => {
+          if (st.user === user && sid !== id) {
+            saves.push(fetch(`${N8N_BASE}/api/doc?path=students/${sid}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenN8N } }));
+          }
+        });
       }
 
       // 2. Chatwoot - sempre grava students e logins com o status correto do curso
@@ -1920,6 +1926,12 @@
             body: JSON.stringify(loginDocCW)
           })
         );
+        // Limpa possíveis registros duplicados ou antigos com mesmo usuário
+        Object.entries(DB.cw.students).forEach(([sid, st]) => {
+          if (st.user === user && sid !== id) {
+            saves.push(fetch(`${CW_BASE}/api/doc?path=students/${sid}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenCW } }));
+          }
+        });
       }
 
       try {
@@ -1944,12 +1956,22 @@
           fetch(`${N8N_BASE}/api/doc?path=students/${id}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenN8N } }),
           fetch(`${N8N_BASE}/api/doc?path=logins/${user}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenN8N } })
         );
+        Object.entries(DB.n8n.students).forEach(([sid, st]) => {
+          if (st.user === user && sid !== id) {
+            dels.push(fetch(`${N8N_BASE}/api/doc?path=students/${sid}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenN8N } }));
+          }
+        });
       }
       if (AUTH.tokenCW) {
         dels.push(
           fetch(`${CW_BASE}/api/doc?path=students/${id}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenCW } }),
           fetch(`${CW_BASE}/api/doc?path=logins/${user}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenCW } })
         );
+        Object.entries(DB.cw.students).forEach(([sid, st]) => {
+          if (st.user === user && sid !== id) {
+            dels.push(fetch(`${CW_BASE}/api/doc?path=students/${sid}`, { method: 'DELETE', headers: { 'X-Token': AUTH.tokenCW } }));
+          }
+        });
       }
       await Promise.all(dels);
       closeEditModal();

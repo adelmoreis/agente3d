@@ -8,6 +8,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
+      - ./n8n:/app
       - n8n_dados:/app/dados
     environment:
       - PORT=8080
@@ -21,6 +22,7 @@ services:
     ports:
       - "8081:8080"
     volumes:
+      - ./chatwoot:/app
       - chatwoot_dados:/app/dados
       - chatwoot_audio:/app/audio
     environment:

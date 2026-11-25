@@ -96,17 +96,19 @@ const { exec } = require('child_process');
 app.all('/api/sync-github', (req, res) => {
     const cmd = `
         git fetch origin main && git reset --hard origin/main
-        pkill -9 -f "servidor_dados.py" || true
-        sleep 1
-        nohup python3 cursos/n8n/servidor_dados.py 8080 > /dev/null 2>&1 &
-        nohup python3 cursos/chatwoot/servidor_dados.py 8081 > /dev/null 2>&1 &
-        ps aux | grep servidor_dados
+        (docker cp cursos/n8n/gestor.html curso-n8n:/app/gestor.html || true)
+        (docker cp cursos/n8n/index.html curso-n8n:/app/index.html || true)
+        (docker cp cursos/n8n/servidor_dados.py curso-n8n:/app/servidor_dados.py || true)
+        (docker cp cursos/chatwoot/gestor.html curso-chatwoot:/app/gestor.html || true)
+        (docker cp cursos/chatwoot/index.html curso-chatwoot:/app/index.html || true)
+        (docker cp cursos/chatwoot/servidor_dados.py curso-chatwoot:/app/servidor_dados.py || true)
+        (docker restart curso-n8n curso-chatwoot || true)
     `;
     exec(cmd, { cwd: __dirname, shell: '/bin/bash' }, (err, stdout, stderr) => {
         if (err) {
             return res.status(500).json({ success: false, error: err.message, stderr, stdout });
         }
-        res.json({ success: true, message: 'Site sincronizado e servidores reiniciados!', output: stdout.trim() });
+        res.json({ success: true, message: 'Site sincronizado e containers atualizados!', output: stdout.trim() });
     });
 });
 

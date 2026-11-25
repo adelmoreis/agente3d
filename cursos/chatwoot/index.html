@@ -215,10 +215,11 @@ function doLogin(user, pw, known) {
     return known ? known : pwHash(pw, j.salt);
   }).then(function(h) {
     return api('POST', 'login', { user: u, h: h }).then(function(res) {
+      if (res.d && res.d.status === 'bloqueado') throw 'bloqueado';
       CL_TOK = res.token;
       return { u: u, h: h, d: res.d };
     }, function(e) {
-      throw (e && (e.code === 'bloqueado' || e.status === 403)) ? 'bloqueado' :
+      throw (e === 'bloqueado' || (e && (e.code === 'bloqueado' || e.status === 403))) ? 'bloqueado' :
             (e && e.code === 'bad') ? 'bad' :
             (e && e.code === 'nouser') ? 'nouser' :
             (e && e.code === 'rate') ? 'rate' : 'read';
@@ -248,6 +249,11 @@ function applyStatus() {
 }
 
 function enterSession(r) {
+  if (r.d && r.d.status === 'bloqueado') {
+    logout();
+    loginView('Seu acesso a este curso está pausado ou não liberado. Fale com o seu gestor.');
+    return;
+  }
   CL_SID = r.d.sid;
   CL_LOGIN = r.u;
   CL_STATUS = r.d;
@@ -262,17 +268,13 @@ function enterSession(r) {
   CL_UNL = setInterval(function() {
     api('GET', 'doc?path=logins/' + encodeURIComponent(r.u)).then(function(j) {
       if (j && j.data) {
-        var str = JSON.stringify(j.data);
-        if (str !== lastK) {
-          lastK = str;
-          CL_STATUS = j.data;
-          applyStatus();
-        }
+        CL_STATUS = j.data;
+        applyStatus();
       } else {
         logout();
       }
     }).catch(function() {});
-  }, 3000);
+  }, 2000);
 
   applyStatus();
   if (S.name && S.av >= 0) home(); else welcome();
