@@ -314,7 +314,7 @@ html_content = """<!DOCTYPE html>
     </div>
     <div class="cred-item">
       <span>Senha Padrão:</span>
-      <b>admin1234</b>
+      <b>2683233d</b>
     </div>
     <div class="cred-item">
       <span>Segurança:</span>
