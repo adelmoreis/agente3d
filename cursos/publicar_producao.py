@@ -94,7 +94,7 @@ def main():
         # Ignorando a pasta de dados e caches locais
         ignorar = {".git", "dados", "__pycache__", ".venv"}
         for item in os.listdir(n8n_dir):
-            if item in ignorar:
+            if item in ignorar or (item.startswith("n8n-") and item.endswith(".json")):
                 continue
             src = os.path.join(n8n_dir, item)
             dst = os.path.join(tmp_dir, item)

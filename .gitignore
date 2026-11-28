@@ -12,6 +12,9 @@ tmp_*/
 # Fluxos e scripts com credenciais
 FLUXO_PORTAL_3DIGITOS.json
 google_apps_script_agenda.js
+n8n-*.json
+cursos/**/n8n-*.json
+*.key
 
 # Cursos: dados sensíveis e backups (preservados no volume do Docker, fora do git)
 cursos/**/dados/

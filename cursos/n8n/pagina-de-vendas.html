@@ -460,6 +460,14 @@ footer{padding-block:32px 96px;color:var(--muted);font-size:14px;display:flex;fl
 }
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
 </style>
+<!-- Meta Pixel (curso n8n) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1081462419751895');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1081462419751895&ev=PageView&noscript=1"></noscript>
+<!-- /Meta Pixel -->
 </head>
 <body>
 
@@ -989,5 +997,26 @@ var CFG = {
 })();
 </script>
 
+<script>
+/* Eventos do Pixel: cliques nos botões da página (não altera o funcionamento dela) */
+(function(){
+  function ev(){try{if(window.fbq)fbq.apply(null,arguments);}catch(e){}}
+  document.addEventListener('click',function(e){
+    var t=e.target&&e.target.closest?e.target.closest('a,button'):null; if(!t)return;
+    var href=t.getAttribute('href')||'', txt=(t.textContent||'').toLowerCase();
+    if(href.indexOf('pag.ae')>-1||t.id==='payPix'||t.id==='payCard'){
+      var pix=t.id==='payPix'||txt.indexOf('pix')>-1;
+      ev('track','InitiateCheckout',{value:pix?88.20:98.00,currency:'BRL',content_name:pix?'Curso n8n - Pix':'Curso n8n - Cartao'});
+      ev('trackCustom',pix?'ClicouPagarPix':'ClicouPagarCartao');
+    }else if(t.id==='go'){
+      ev('trackCustom','IniciouAulaGratis');
+    }else if(t.hasAttribute&&t.hasAttribute('data-wa')){
+      ev('track','Contact');
+    }else if(href==='#comprar'){
+      ev('trackCustom','ClicouQueroVaga');
+    }
+  },true);
+})();
+</script>
 </body>
 </html>
