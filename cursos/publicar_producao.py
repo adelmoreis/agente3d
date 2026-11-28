@@ -106,12 +106,15 @@ def main():
                 shutil.copy2(src, dst)
 
         # Checar se há alterações para commitar
+        run("git add -A", cwd=tmp_dir)
         res = run("git status --porcelain", cwd=tmp_dir, check=False)
         if res.stdout.strip():
-            run("git add -A", cwd=tmp_dir)
-            run('git commit -m "feat: sincronizacao aprovada do localhost (n8n fix e atualizacoes)"', cwd=tmp_dir)
-            run("git push origin main", cwd=tmp_dir)
-            print("  ✓ Repositório adelmoreis/curso-n8n atualizado no GitHub com sucesso!")
+            commit_res = run('git commit -m "feat: sincronizacao aprovada do localhost (n8n fix e atualizacoes)"', cwd=tmp_dir, check=False)
+            if commit_res.returncode == 0:
+                run("git push origin main", cwd=tmp_dir)
+                print("  ✓ Repositório adelmoreis/curso-n8n atualizado no GitHub com sucesso!")
+            else:
+                print("  ✓ Repositório adelmoreis/curso-n8n já estava atualizado.")
         else:
             print("  ✓ Repositório adelmoreis/curso-n8n já estava 100% atualizado.")
 
